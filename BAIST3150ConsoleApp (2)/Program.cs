@@ -4,6 +4,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;*/
 using Microsoft.IdentityModel.Tokens;
 using BAIST3150ConsoleApp.Domain;
+using BAIST3150ConsoleApp.Techenical_Services;
 
 namespace BAIS3150ConsoleApp
 {
@@ -580,20 +581,43 @@ namespace BAIS3150ConsoleApp
 
             // Test Domain.BCS
             //---------------
-            bool Confirmation;
-            Student AcceptedStudent = new()
+            /* bool Confirmation;
+             Student AcceptedStudent = new()
+             {
+                 StudentId = "Test",
+                 FirstName = "TestFirstName",
+                 LastName = "TestLastName",
+                 Email = "Test@nait.ca",
+             };
+
+             BCS RequestDirector = new();
+
+             Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, "DEMO");
+             Console.WriteLine(Confirmation);
+ */
+
+            ///. Test AddProgram
+            ///
+            /*Course course = new Course()
             {
-                StudentId = "Test",
-                FirstName = "TestFirstName",
-                LastName = "TestLastName",
-                Email = "Test@nait.ca",
+                Id = "BOND",
+                Description = "BOND Test Course"
             };
 
-            BCS RequestDirector = new();
+            Courses courses = new Courses();
+            courses.AddProgram(course.Id, course.Description);
+            Console.WriteLine("done");*/
 
-            Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, "DEMO");
-            Console.WriteLine(Confirmation);
 
+            // Test GetStudent
+
+            Student student = new()
+            {
+                StudentId = "1230",
+            };
+
+            Students students = new Students();
+            students.FindStudent(student.StudentId);
         }
     }
 }

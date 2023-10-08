@@ -84,5 +84,58 @@ namespace BAIST3150ConsoleApp.Techenical_Services
         }
 
 
+        public bool FindStudent(string studentID)
+        {
+            bool Success = false;
+
+            SqlConnection conn = new();
+            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            conn.Open();
+            SqlCommand FindStudent = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                Connection = conn,
+                CommandText= "GetStudent"
+            };
+
+            SqlParameter StudendID = new()
+            {
+                ParameterName = "@StudentID",
+                SqlDbType = SqlDbType.VarChar,
+                SqlValue = studentID,
+                Direction = ParameterDirection.Input,
+            };
+
+            FindStudent.Parameters.Add(StudendID);
+
+            SqlDataReader studentReader = FindStudent.ExecuteReader();
+             if(studentReader.HasRows)
+            {
+                Console.WriteLine("The data for the Sudent");
+                Console.WriteLine("Collumns");
+                Console.WriteLine("----------");
+                for (int i = 0; i < studentReader.FieldCount; i++)
+                {
+                    Console.Write($"{studentReader.GetName(i)}, ");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("The Student data");
+                Console.WriteLine("-----------------");
+                while (studentReader.Read()) {
+                    for (int Index = 0; Index < studentReader.FieldCount; Index++)
+                    {
+                        
+                        Console.Write($"{studentReader[Index].ToString()}; ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            studentReader.Close();
+            conn.Close();
+            Success = true;
+            return Success;
+        }
+
     }
 }

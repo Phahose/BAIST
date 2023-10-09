@@ -610,14 +610,26 @@ namespace BAIS3150ConsoleApp
 
 
             // Test GetStudent
-
-            Student student = new()
+/*            Student student = new()
             {
                 StudentId = "1230",
             };
 
             Students students = new Students();
-            students.FindStudent(student.StudentId);
+            students.FindStudent(student.StudentId);*/
+
+            // Test The Modify Student Class
+
+            BCS bCS = new BCS();
+            Student student = new Student()
+            {
+                StudentId = "1230",
+                FirstName = "Christine",
+                LastName = "Ginkia",
+                Email = "giinin@gmaull.com"
+            };
+            Console.WriteLine("Success");
+            bCS.ModifyStudent(student);
         }
     }
 }

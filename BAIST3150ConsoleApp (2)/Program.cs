@@ -610,17 +610,17 @@ namespace BAIS3150ConsoleApp
 
 
             // Test GetStudent
-/*            Student student = new()
+            Student student = new()
             {
                 StudentId = "1230",
             };
 
-            Students students = new Students();
-            students.FindStudent(student.StudentId);*/
+            BCS students = new BCS();
+            students.FindStudent(student.StudentId);
 
             // Test The Modify Student Class
 
-            BCS bCS = new BCS();
+            /*BCS bCS = new BCS();
             Student student = new Student()
             {
                 StudentId = "1230",
@@ -629,7 +629,27 @@ namespace BAIS3150ConsoleApp
                 Email = "giinin@gmaull.com"
             };
             Console.WriteLine("Success");
-            bCS.ModifyStudent(student);
+            bCS.ModifyStudent(student);*/
+
+
+            //Test The Remove Student
+            /*  BCS bCS = new BCS();
+              Student student = new()
+              {
+                  StudentId = "Test",
+              };
+              Console.WriteLine("Remove Completed");
+              bCS.RemoveStudent(student.StudentId);*/
+
+
+            // Test For The Find Program 
+
+            Course course = new Course()
+            {
+                Id = "BOND"
+            };
+            BCS bCS = new BCS();
+            bCS.FindProgram(course.Id);
         }
     }
 }

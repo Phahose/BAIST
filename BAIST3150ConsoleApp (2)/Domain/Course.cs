@@ -8,9 +8,9 @@ namespace BAIST3150ConsoleApp.Domain
 {
     internal class Course
     {
-        private string _id;
-        private string _description;
-        public Student _enrolledStudents;
+        private string _id ="";
+        private string _description="";
+        private readonly Student[] _enrolledStudents =Array.Empty<Student>();
 
         public string Id
         {
@@ -25,8 +25,7 @@ namespace BAIST3150ConsoleApp.Domain
 
         public Student Student
         {
-            get { return _enrolledStudents; }
-            set { _enrolledStudents = value;}
+            get { return _enrolledStudents[0]; }
         }
 
         public Course()

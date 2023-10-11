@@ -581,12 +581,110 @@ namespace BAIS3150ConsoleApp
 
             // Test Domain.BCS Enroll Student
             //---------------
-            bool Confirmation;
+            /*            bool Confirmation;
+                        string StudentID = string.Empty;
+                        string FirstName = string.Empty;
+                        string LastName = string.Empty;
+                        string Email = string.Empty;
+                        string ProgramCode = string.Empty;
+
+                        string? ConsoleLine = string.Empty;
+                        Console.WriteLine("Enter The StudentID");
+                        if ((ConsoleLine = Console.ReadLine()) != null)
+                        {
+                            StudentID = ConsoleLine;
+                        }
+                        Console.WriteLine("Enter The First Name");
+                        if ((ConsoleLine = Console.ReadLine()) != null)
+                        {
+                            FirstName = ConsoleLine;
+                        }
+                        Console.WriteLine("Enter The Last Name");
+                        if ((ConsoleLine = Console.ReadLine()) != null)
+                        {
+                            LastName = ConsoleLine;
+                        }
+                        Console.WriteLine("Enter The Email");
+                        if ((ConsoleLine = Console.ReadLine()) != null)
+                        {
+                            Email = ConsoleLine;
+                        }
+                        Console.WriteLine("Enter The ProgramCode");
+                        if ((ConsoleLine = Console.ReadLine()) != null)
+                        {
+                            ProgramCode = ConsoleLine;
+                        }
+
+
+                        Student AcceptedStudent = new()
+                        {
+                            StudentId = StudentID,
+                            FirstName = FirstName,
+                            LastName = LastName,
+                            Email = Email,
+                        };
+
+                        BCS RequestDirector = new();
+
+                        Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
+                        Console.WriteLine(Confirmation);*/
+
+
+            ///. Test AddProgram
+
+            /*string programID = string.Empty;
+            string description = string.Empty;
+
+            string? consoleLine = string.Empty;
+
+            Console.WriteLine("Enter the ProgramCode");
+            if ((consoleLine = Console.ReadLine()) != null){
+                programID = consoleLine;
+            }
+            Console.WriteLine("Enter the Description");
+            if ((consoleLine = Console.ReadLine()) != null){
+                description = consoleLine;
+            }
+
+            Course course = new Course()
+            {
+                Id = programID,
+                Description = description
+            };
+
+            Courses courses = new Courses();
+            courses.AddProgram(course.Id, course.Description);
+            Console.WriteLine("The Program Has Been Added");*/
+
+
+            // Test GetStudent
             string StudentID = string.Empty;
+            string? ConsoleLine = string.Empty;
+
+            Console.WriteLine("Enter The StudentID");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                StudentID = ConsoleLine;
+            }
+
+
+            Student student = new();
+        
+
+            BCS RequestDirector = new BCS();
+            student = RequestDirector.FindStudent(StudentID);
+            Console.Clear();
+            Console.WriteLine("Student ID, FirstName, LastName");
+            Console.WriteLine("--------------------------------");
+            Console.Write($"{student.StudentId}, {student.FirstName}, {student.LastName}");
+            Console.WriteLine();
+
+
+            // Test The Modify Student Class
+            /*string StudentID = string.Empty;
             string FirstName = string.Empty;
             string LastName = string.Empty;
             string Email = string.Empty;
-            string ProgramCode = string.Empty;
 
             string? ConsoleLine = string.Empty;
             Console.WriteLine("Enter The StudentID");
@@ -609,84 +707,54 @@ namespace BAIS3150ConsoleApp
             {
                 Email = ConsoleLine;
             }
-            Console.WriteLine("Enter The ProgramCode");
-            if ((ConsoleLine = Console.ReadLine()) != null)
-            {
-                ProgramCode = ConsoleLine;
-            }
-
-
-            Student AcceptedStudent = new()
+           
+            BCS bCS = new BCS();
+            Student student = new Student()
             {
                 StudentId = StudentID,
                 FirstName = FirstName,
                 LastName = LastName,
-                Email = Email,
+                Email = Email
             };
-
-            BCS RequestDirector = new();
-
-            Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
-            Console.WriteLine(Confirmation);
-
-
-            ///. Test AddProgram
-            ///
-            /*Course course = new Course()
-            {
-                Id = "BOND",
-                Description = "BOND Test Course"
-            };
-
-            Courses courses = new Courses();
-            courses.AddProgram(course.Id, course.Description);
-            Console.WriteLine("done");*/
-
-
-            // Test GetStudent
-
-          /*  Student student = new()
-            {
-                StudentId = "1230",
-            };
-
-            BCS students = new BCS();
-            students.FindStudent(student.StudentId);*/
-
-
-
-            // Test The Modify Student Class
-
-            /*BCS bCS = new BCS();
-            Student student = new Student()
-            {
-                StudentId = "1230",
-                FirstName = "Christine",
-                LastName = "Ginkia",
-                Email = "giinin@gmaull.com"
-            };
-            Console.WriteLine("Success");
-            bCS.ModifyStudent(student);*/
-
+            bCS.ModifyStudent(student);
+            Console.WriteLine();
+            Console.WriteLine("Success: The Student Has been Modified");*/
 
             //Test The Remove Student
+            /* string StudentID = string.Empty;
+             string? ConsoleLine = string.Empty;
 
-            /*  BCS bCS = new BCS();
-              Student student = new()
-              {
-                  StudentId = "Test",
-              };
-              Console.WriteLine("Remove Completed");
-              bCS.RemoveStudent(student.StudentId);*/
+             Console.WriteLine("Enter The StudentID");
+             if ((ConsoleLine = Console.ReadLine()) != null)
+             {
+                 StudentID = ConsoleLine;
+             }
+
+             BCS bCS = new BCS();
+             Student student = new()
+             {
+                 StudentId = StudentID,
+             };
+
+             Console.WriteLine("Remove Completed");
+             bCS.RemoveStudent(student.StudentId);*/
 
 
             // Test For The Find Program 
+            /*string programID = string.Empty;
+            string? ConsoleLine = string.Empty;
+
+            Console.WriteLine("Enter The programID");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                programID = ConsoleLine;
+            }
             Course course = new Course()
             {
-                Id = "BOND"
+                Id = programID
             };
             BCS bCS = new BCS();
-            bCS.FindProgram(course.Id);
+            bCS.FindProgram(course.Id);*/
         }
     }
 }

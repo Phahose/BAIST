@@ -579,22 +579,56 @@ namespace BAIS3150ConsoleApp
              Succcess = StudentManager.AddStudent(AcceptedStudent, "DEMO");
              Console.WriteLine(Succcess);*/
 
-            // Test Domain.BCS
+            // Test Domain.BCS Enroll Student
             //---------------
-            /* bool Confirmation;
-             Student AcceptedStudent = new()
-             {
-                 StudentId = "Test",
-                 FirstName = "TestFirstName",
-                 LastName = "TestLastName",
-                 Email = "Test@nait.ca",
-             };
+            bool Confirmation;
+            string StudentID = string.Empty;
+            string FirstName = string.Empty;
+            string LastName = string.Empty;
+            string Email = string.Empty;
+            string ProgramCode = string.Empty;
 
-             BCS RequestDirector = new();
+            string? ConsoleLine = string.Empty;
+            Console.WriteLine("Enter The StudentID");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                StudentID = ConsoleLine;
+            }
+            Console.WriteLine("Enter The First Name");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                FirstName = ConsoleLine;
+            }
+            Console.WriteLine("Enter The Last Name");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                LastName = ConsoleLine;
+            }
+            Console.WriteLine("Enter The Email");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                Email = ConsoleLine;
+            }
+            Console.WriteLine("Enter The ProgramCode");
+            if ((ConsoleLine = Console.ReadLine()) != null)
+            {
+                ProgramCode = ConsoleLine;
+            }
 
-             Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, "DEMO");
-             Console.WriteLine(Confirmation);
- */
+
+            Student AcceptedStudent = new()
+            {
+                StudentId = StudentID,
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+            };
+
+            BCS RequestDirector = new();
+
+            Confirmation = RequestDirector.EnrollStudent(AcceptedStudent, ProgramCode);
+            Console.WriteLine(Confirmation);
+
 
             ///. Test AddProgram
             ///
@@ -610,13 +644,16 @@ namespace BAIS3150ConsoleApp
 
 
             // Test GetStudent
-            Student student = new()
+
+          /*  Student student = new()
             {
                 StudentId = "1230",
             };
 
             BCS students = new BCS();
-            students.FindStudent(student.StudentId);
+            students.FindStudent(student.StudentId);*/
+
+
 
             // Test The Modify Student Class
 
@@ -633,6 +670,7 @@ namespace BAIS3150ConsoleApp
 
 
             //Test The Remove Student
+
             /*  BCS bCS = new BCS();
               Student student = new()
               {
@@ -643,7 +681,6 @@ namespace BAIS3150ConsoleApp
 
 
             // Test For The Find Program 
-
             Course course = new Course()
             {
                 Id = "BOND"

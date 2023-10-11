@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BAIST3150ConsoleApp.Domain;
 using Microsoft.Data.SqlClient;
 
 namespace BAIST3150ConsoleApp.Techenical_Services
 {
-    internal class Courses
+    internal class Programs
     {
         public bool AddProgram(string programCode, string programName)
         {
@@ -44,6 +45,43 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             AddProgramCommand.ExecuteNonQuery();
             connection.Close();
             return result;
+        }
+
+        public Program GetProgram(string programCode)
+        {
+            Program ActiveProgram = new();
+            SqlConnection nekwom1connection = new SqlConnection();
+            nekwom1connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1connection.Open();
+
+            SqlCommand GetProgramCommand = new()
+            {
+                Connection = nekwom1connection,
+                CommandType = System.Data.CommandType.StoredProcedure,
+                CommandText = "GetProgram"
+            };
+
+            SqlParameter ProgramCode = new();
+            ProgramCode = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                SqlValue = programCode,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+
+            GetProgramCommand.Parameters.Add(ProgramCode);
+            SqlDataReader programReader = GetProgramCommand.ExecuteReader();
+
+            if (programReader.HasRows)
+            {
+                programReader.Read();
+                ActiveProgram.Id = (string)programReader["ProgramCode"];
+                ActiveProgram.Description = (string)programReader["Description"];
+            }
+            programReader.Close();
+            nekwom1connection.Close();
+            return ActiveProgram;
         }
     }
 }

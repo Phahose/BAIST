@@ -125,14 +125,14 @@ namespace BAIST3150ConsoleApp.Techenical_Services
         public bool UpdateStudent(Student EnrolledStudent)
         {
             bool Success =false;
-            SqlConnection conn = new();
+            SqlConnection nekwom1Connection = new();
 
-            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
-            conn.Open();
+            nekwom1Connection.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
 
-            SqlCommand ModifyStdent = new()
+            SqlCommand ModifyStudent = new()
             {
-                Connection = conn,
+                Connection = nekwom1Connection,
                 CommandText = "UpdateStudent",
                 CommandType = System.Data.CommandType.StoredProcedure,
             };
@@ -145,7 +145,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 Direction = System.Data.ParameterDirection.Input,
             };
 
-            ModifyStdent.Parameters.Add(StudentID);
+            ModifyStudent.Parameters.Add(StudentID);
 
             SqlParameter FirstName = new()
             {
@@ -154,7 +154,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 SqlValue = EnrolledStudent.FirstName,
                 Direction = System.Data.ParameterDirection.Input,
             };
-            ModifyStdent.Parameters.Add(FirstName);
+            ModifyStudent.Parameters.Add(FirstName);
 
             SqlParameter LastName = new()
             {
@@ -163,7 +163,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 SqlDbType = System.Data.SqlDbType.VarChar,
                 Direction = System.Data.ParameterDirection.Input,
             };
-            ModifyStdent.Parameters.Add(LastName);
+            ModifyStudent.Parameters.Add(LastName);
 
             SqlParameter ProgramCode = new()
             {
@@ -172,7 +172,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 SqlValue = "NICK",
                 Direction = System.Data.ParameterDirection.Input,
             };
-            ModifyStdent.Parameters.Add(ProgramCode);
+            ModifyStudent.Parameters.Add(ProgramCode);
 
             SqlParameter Email = new()
             {
@@ -181,36 +181,10 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 SqlDbType = System.Data.SqlDbType.VarChar,
                 Direction = System.Data.ParameterDirection.Input,
             };
-            ModifyStdent.Parameters.Add(Email);
+            ModifyStudent.Parameters.Add(Email);
 
-            ModifyStdent.ExecuteNonQuery();
-
-            SqlDataReader studentReader;
-
-            studentReader = ModifyStdent.ExecuteReader();
-
-            if (studentReader.HasRows)
-            {
-                Console.WriteLine("Columns For the Student");
-                Console.WriteLine("-------------------------");
-                for (int i = 0; i < studentReader.FieldCount; i++)
-                {
-                    Console.Write($"{studentReader.GetName(i)}, ");
-                }
-                Console.WriteLine();
-                while (studentReader.Read())
-                {
-                    Console.WriteLine("This is the Data ");
-                    Console.WriteLine("-------------------");
-                    for (int i = 0; i < studentReader.FieldCount; i++)
-                    {
-                        Console.Write($"{studentReader[i].ToString}, ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-            studentReader.Close();
-            conn.Close();
+            ModifyStudent.ExecuteNonQuery();
+            nekwom1Connection.Close();
             return Success;
         }
 
@@ -254,7 +228,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             SqlCommand FindProgram = new()
             {
                 Connection = conn,
-                CommandText = "GetProgram",
+                CommandText = "GetStudentByProgram",
                 CommandType = System.Data.CommandType.StoredProcedure,
             };
             SqlParameter ProgramID = new()
@@ -269,22 +243,15 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             programReader = FindProgram.ExecuteReader();
             if (programReader.HasRows)
             {
-                Console.WriteLine("These Are the Collumns For the Programs");
-                Console.WriteLine("-----------------------------------------");
-                for (int i = 0; i < programReader.FieldCount; i++)
+                programReader.Read();
+                for (int i = 0; i < students.Count; i++)
                 {
-                    Console.Write($"{programReader.GetName(i)}, ");
-                }
-                Console.WriteLine();
+                    students[i].StudentId = (string)programReader["StudentID"];
+                    students[i].FirstName = (string)programReader["FirstName"];
+                    students[i].LastName = (string)programReader["LastName"];
+                    students[i].Email = (string)programReader["Email"];
 
-                while (programReader.Read())
-                {
-                    Console.WriteLine("These Are the Data For the Programs");
-                    Console.WriteLine("-----------------------------------------");
-                    for (int i = 0; i < programReader.FieldCount; i++)
-                    {
-                        Console.Write($"{programReader[i].ToString()}, ");
-                    }
+                    students.Add(students[i]);  
                 }
             }
             programReader.Close();

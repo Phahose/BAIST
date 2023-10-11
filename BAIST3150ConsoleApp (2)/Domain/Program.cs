@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BAIST3150ConsoleApp.Domain
 {
-    internal class Course
+    internal class Program
     {
         private string _id ="";
         private string _description="";
@@ -28,7 +28,7 @@ namespace BAIST3150ConsoleApp.Domain
             get { return _enrolledStudents[0]; }
         }
 
-        public Course()
+        public Program()
         {
 
         }

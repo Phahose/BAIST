@@ -50,14 +50,12 @@ namespace BAIST3150ConsoleApp.Domain
             return confirmation;
        }
 
-      /*  public Program FindProgram (string ProgramCode) 
+        public Program FindProgram(string ProgramCode)
         {
-
-            Program program = new();
-            Students StudentManager = new();
-
-            program = StudentManager.GetStudents(ProgramCode);
-            return program;
-        }*/
+            Program ActiveProgram = new();            
+            Programs ProgramManager = new();
+            ProgramManager.GetProgram(ProgramCode);
+            return ActiveProgram;
+        }
     }
 }

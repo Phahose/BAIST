@@ -10,7 +10,7 @@ namespace BAIST3150ConsoleApp.Domain
     {
         private string _id ="";
         private string _description="";
-        private readonly List<Student> _enrolledStudents = new List<Student>();
+        private readonly List<Student> _enrolledStudents= new List<Student>();
 
         public string Id
         {
@@ -23,7 +23,7 @@ namespace BAIST3150ConsoleApp.Domain
             set { _description = value; }
         }
 
-        public List<Student> Student
+        public List<Student> EnrolledStudents
         {
             get
             {
@@ -33,7 +33,7 @@ namespace BAIST3150ConsoleApp.Domain
 
         public Program()
         {
-
+            
         }
     }
 }

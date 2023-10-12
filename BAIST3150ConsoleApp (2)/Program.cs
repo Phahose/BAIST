@@ -777,11 +777,15 @@ namespace BAIS3150ConsoleApp
             Programs ProgramManager = new();
             BCS RequestDirector = new BCS();
             BAIST3150ConsoleApp.Domain.Program ActiveProgram = RequestDirector.FindProgram(programID);
-            Console.WriteLine("Program Code, Description");
-            Console.WriteLine("---------------------------------------");
-            Console.Write($"{ActiveProgram.Id}, {ActiveProgram.Description},");
+            foreach (var student in ActiveProgram.EnrolledStudents)
+            {
+                Console.WriteLine("Program Code, Description, StudentID, FirstName, LastName, Email");
+                Console.WriteLine("-------------------------------------------------------------------");
+                Console.Write($"{ActiveProgram.Id}, {ActiveProgram.Description}, {student.StudentId},{student.FirstName},{student.LastName},{student.Email}");
 
-            Console.WriteLine();
+                Console.WriteLine();
+            }
+            
         }
     }
 }

@@ -85,15 +85,23 @@ namespace BAIST3150ConsoleApp.Techenical_Services
   
                 foreach (Student EnrolledStudent in EnrolledStudents)
                 {
-                    ActiveProgram.Student.Add(EnrolledStudent);
+                    Student ActiveProgramStduent = new()
+                    {
+                        StudentId = EnrolledStudent.StudentId,
+                        FirstName = EnrolledStudent.FirstName,
+                        LastName = EnrolledStudent.LastName,
+                        Email = EnrolledStudent.Email,
+                    };        
+                    ActiveProgram.EnrolledStudents.Add(ActiveProgramStduent);
+                   
                 }
 
-                for (int i = 0; i < ActiveProgram.Student.Count; i++)
+                for (int i = 0; i < ActiveProgram.EnrolledStudents.Count; i++)
                 {
-                    ActiveProgram.Student[i].StudentId = EnrolledStudents[i].StudentId;
-                    ActiveProgram.Student[i].FirstName = EnrolledStudents[i].FirstName;
-                    ActiveProgram.Student[i].LastName = EnrolledStudents[i].LastName;
-                    ActiveProgram.Student[i].Email = EnrolledStudents[i].Email;
+                    ActiveProgram.EnrolledStudents[i].StudentId = EnrolledStudents[i].StudentId;
+                    ActiveProgram.EnrolledStudents[i].FirstName = EnrolledStudents[i].FirstName;
+                    ActiveProgram.EnrolledStudents[i].LastName = EnrolledStudents[i].LastName;
+                    ActiveProgram.EnrolledStudents[i].Email = EnrolledStudents[i].Email;
                     ActiveProgram.Id = (string)programReader["ProgramCode"];
                     ActiveProgram.Description = (string)programReader["Description"];
                 }

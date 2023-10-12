@@ -102,7 +102,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                     ActiveProgram.EnrolledStudents[i].FirstName = EnrolledStudents[i].FirstName;
                     ActiveProgram.EnrolledStudents[i].LastName = EnrolledStudents[i].LastName;
                     ActiveProgram.EnrolledStudents[i].Email = EnrolledStudents[i].Email;
-                    ActiveProgram.Id = (string)programReader["ProgramCode"];
+                    ActiveProgram.ProgramCode = (string)programReader["ProgramCode"];
                     ActiveProgram.Description = (string)programReader["Description"];
                 }
 

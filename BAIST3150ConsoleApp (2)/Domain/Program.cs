@@ -8,14 +8,14 @@ namespace BAIST3150ConsoleApp.Domain
 {
     internal class Program
     {
-        private string _id ="";
+        private string _programCode ="";
         private string _description="";
-        private readonly List<Student> _enrolledStudents= new List<Student>();
+        private  List<Student> _enrolledStudents = new List<Student>();
 
-        public string Id
+        public string ProgramCode
         {
-            get { return _id; } 
-            set { _id = value; } 
+            get { return _programCode; } 
+            set { _programCode = value; } 
         } 
         public string Description
         {
@@ -27,8 +27,9 @@ namespace BAIST3150ConsoleApp.Domain
         {
             get
             {
-                return _enrolledStudents.ToList();
+                return _enrolledStudents;
             }
+            set { _enrolledStudents = value; }
         }
 
         public Program()

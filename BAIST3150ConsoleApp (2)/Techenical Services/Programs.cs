@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using BAIST3150ConsoleApp.Domain;
@@ -71,13 +72,33 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             };
 
             GetProgramCommand.Parameters.Add(ProgramCode);
-            SqlDataReader programReader = GetProgramCommand.ExecuteReader();
+           
+            Students StudentManager = new Students();
 
+            List<Student> EnrolledStudents;
+            EnrolledStudents = StudentManager.GetStudents(programCode);
+            SqlDataReader programReader = GetProgramCommand.ExecuteReader();
+            
             if (programReader.HasRows)
             {
                 programReader.Read();
-                ActiveProgram.Id = (string)programReader["ProgramCode"];
-                ActiveProgram.Description = (string)programReader["Description"];
+  
+                foreach (Student EnrolledStudent in EnrolledStudents)
+                {
+                    ActiveProgram.Student.Add(EnrolledStudent);
+                }
+
+                for (int i = 0; i < ActiveProgram.Student.Count; i++)
+                {
+                    ActiveProgram.Student[i].StudentId = EnrolledStudents[i].StudentId;
+                    ActiveProgram.Student[i].FirstName = EnrolledStudents[i].FirstName;
+                    ActiveProgram.Student[i].LastName = EnrolledStudents[i].LastName;
+                    ActiveProgram.Student[i].Email = EnrolledStudents[i].Email;
+                    ActiveProgram.Id = (string)programReader["ProgramCode"];
+                    ActiveProgram.Description = (string)programReader["Description"];
+                }
+
+   
             }
             programReader.Close();
             nekwom1connection.Close();

@@ -219,7 +219,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
 
         public List<Student> GetStudents(string ProgramCode)
         {
-            List<Student> students = new();
+            List<Student> students = new List<Student>();
             SqlConnection conn = new();
 
             conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
@@ -243,16 +243,18 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             programReader = FindProgram.ExecuteReader();
             if (programReader.HasRows)
             {
-                programReader.Read();
-                for (int i = 0; i < students.Count; i++)
+                while (programReader.Read())
                 {
-                    students[i].StudentId = (string)programReader["StudentID"];
-                    students[i].FirstName = (string)programReader["FirstName"];
-                    students[i].LastName = (string)programReader["LastName"];
-                    students[i].Email = (string)programReader["Email"];
-
-                    students.Add(students[i]);  
+                    Student student = new Student()
+                    {
+                        StudentId = (string)programReader["StudentID"],
+                        FirstName = (string)programReader["FirstName"],
+                        LastName = (string)programReader["LastName"],
+                        Email = (string)programReader["Email"],
+                    };
+                   students.Add(student);
                 }
+                              
             }
             programReader.Close();
             conn.Close();

@@ -775,12 +775,13 @@ namespace BAIS3150ConsoleApp
                 programID = ConsoleLine;
             }
             Programs ProgramManager = new();
-            BAIST3150ConsoleApp.Domain.Program ActiveProgram = ProgramManager.GetProgram("BAIST");
+            BCS RequestDirector = new BCS();
+            BAIST3150ConsoleApp.Domain.Program ActiveProgram = RequestDirector.FindProgram(programID);
             Console.WriteLine("Program Code, Description");
             Console.WriteLine("---------------------------------------");
             Console.Write($"{ActiveProgram.Id}, {ActiveProgram.Description},");
 
-            
+            Console.WriteLine();
         }
     }
 }

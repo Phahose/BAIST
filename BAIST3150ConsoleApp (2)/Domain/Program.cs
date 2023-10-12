@@ -10,22 +10,25 @@ namespace BAIST3150ConsoleApp.Domain
     {
         private string _id ="";
         private string _description="";
-        private readonly Student[] _enrolledStudents =Array.Empty<Student>();
+        private readonly List<Student> _enrolledStudents = new List<Student>();
 
         public string Id
         {
             get { return _id; } 
             set { _id = value; } 
-        }
+        } 
         public string Description
         {
             get { return _description; }
             set { _description = value; }
         }
 
-        public Student Student
+        public List<Student> Student
         {
-            get { return _enrolledStudents[0]; }
+            get
+            {
+                return _enrolledStudents.ToList();
+            }
         }
 
         public Program()

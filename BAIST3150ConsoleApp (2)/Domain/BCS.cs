@@ -52,9 +52,9 @@ namespace BAIST3150ConsoleApp.Domain
 
         public Program FindProgram(string ProgramCode)
         {
-            Program ActiveProgram = new();            
+            Program ActiveProgram;            
             Programs ProgramManager = new();
-            ProgramManager.GetProgram(ProgramCode);
+            ActiveProgram = ProgramManager.GetProgram(ProgramCode);
             return ActiveProgram;
         }
     }

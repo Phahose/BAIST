@@ -616,8 +616,8 @@ namespace BAIS3150ConsoleApp
                 Description = description
             };
 
-            Programs programs = new Programs();
-            programs.AddProgram(program.ProgramCode, program.Description);
+            BCS RequestDirector = new();
+            RequestDirector.CreateProgram(program.ProgramCode, program.Description);
             Console.WriteLine("The Program Has Been Added");
         }
         static void GetStudents()
@@ -659,7 +659,7 @@ namespace BAIS3150ConsoleApp
             }
 
             BCS RequestDirector = new BCS();
-            Student EnrolledStudent = new();
+            Student EnrolledStudent;
             EnrolledStudent = RequestDirector.FindStudent(StudentID);
             Console.Clear();
             Console.WriteLine("Student ID, FirstName, LastName, Email");
@@ -683,16 +683,13 @@ namespace BAIS3150ConsoleApp
                 Email = ConsoleLine;
             }
 
-            Student student = new Student()
-            {
-                StudentId = StudentID,
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email
-            };
+       
+            EnrolledStudent.FirstName = FirstName;
+            EnrolledStudent.LastName = LastName;
+            EnrolledStudent.Email = Email;
 
           
-            confirmation =  RequestDirector.ModifyStudent(student);
+            confirmation =  RequestDirector.ModifyStudent(EnrolledStudent);
             if (confirmation == true)
             {
                 Console.WriteLine();
@@ -723,7 +720,7 @@ namespace BAIS3150ConsoleApp
             }
 
             BCS RequestDirector = new BCS();
-            Student EnrolledStudent = new Student();
+            Student EnrolledStudent;
             EnrolledStudent = RequestDirector.FindStudent(StudentID);
             Console.WriteLine("Student ID, FirstName, LastName, Email");
             Console.WriteLine("---------------------------------------");
@@ -747,15 +744,14 @@ namespace BAIS3150ConsoleApp
             {
                 programID = ConsoleLine;
             }
-            Programs ProgramManager = new();
             BCS RequestDirector = new BCS();
             BAIST3150ConsoleApp.Domain.Program ActiveProgram = RequestDirector.FindProgram(programID);
             Console.Clear();
             Console.WriteLine("Program Code, Description, StudentID, FirstName, LastName, Email");
             Console.WriteLine("-------------------------------------------------------------------");
-            foreach (var student in ActiveProgram.EnrolledStudents)
+            foreach (Student EnrolledStudent in ActiveProgram.EnrolledStudents)
             {            
-                Console.Write($"{ActiveProgram.ProgramCode}, {ActiveProgram.Description}, {student.StudentId}, {student.FirstName}, {student.LastName}, {student.Email}");
+                Console.Write($"{ActiveProgram.ProgramCode}, {ActiveProgram.Description}, {EnrolledStudent.StudentId}, {EnrolledStudent.FirstName}, {EnrolledStudent.LastName}, {EnrolledStudent.Email}");
 
                 Console.WriteLine();
             }
@@ -808,8 +804,8 @@ namespace BAIS3150ConsoleApp
             //EnrollStudents();
             //GetStudents();
             //ModifyStudent();
-            RemoveStudent();
-            //FindProgram();
+            //RemoveStudent();
+            FindProgram();
             
         }
     }

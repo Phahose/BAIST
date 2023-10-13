@@ -165,15 +165,6 @@ namespace BAIST3150ConsoleApp.Techenical_Services
             };
             ModifyStudent.Parameters.Add(LastName);
 
-            SqlParameter ProgramCode = new()
-            {
-                ParameterName = "@ProgramCode",
-                SqlDbType = System.Data.SqlDbType.VarChar,
-                SqlValue = "NICK",
-                Direction = System.Data.ParameterDirection.Input,
-            };
-            ModifyStudent.Parameters.Add(ProgramCode);
-
             SqlParameter Email = new()
             {
                 ParameterName = "@StudentEmail",

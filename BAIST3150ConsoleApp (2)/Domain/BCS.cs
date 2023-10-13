@@ -56,5 +56,14 @@ namespace BAIST3150ConsoleApp.Domain
             ActiveProgram = ProgramManager.GetProgram(ProgramCode);
             return ActiveProgram;
         }
+
+        public bool CreateProgram(string  programCode, string description)
+        {
+            bool confirmation;
+
+            Programs programs = new Programs();
+            confirmation = programs.AddProgram(programCode, description);
+            return confirmation;
+        }
     }
 }

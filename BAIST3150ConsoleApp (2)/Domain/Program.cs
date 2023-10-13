@@ -10,7 +10,7 @@ namespace BAIST3150ConsoleApp.Domain
     {
         private string _programCode ="";
         private string _description="";
-        private  List<Student> _enrolledStudents = new List<Student>();
+        private List<Student> _enrolledStudents = new List<Student>();
 
         public string ProgramCode
         {
@@ -29,7 +29,6 @@ namespace BAIST3150ConsoleApp.Domain
             {
                 return _enrolledStudents;
             }
-            set { _enrolledStudents = value; }
         }
 
         public Program()

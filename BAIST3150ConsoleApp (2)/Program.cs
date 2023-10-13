@@ -645,6 +645,7 @@ namespace BAIS3150ConsoleApp
         }
         static void ModifyStudent()
         {
+            bool confirmation = false;
             string StudentID = string.Empty;
             string FirstName = string.Empty;
             string LastName = string.Empty;
@@ -690,16 +691,25 @@ namespace BAIS3150ConsoleApp
                 Email = Email
             };
 
-
-            RequestDirector.ModifyStudent(student);
-            Console.WriteLine();
-            EnrolledStudent = RequestDirector.FindStudent(StudentID);
-            Console.WriteLine("Success: The Student Has been Modified");
-            Console.WriteLine();
-            Console.WriteLine("Student ID, FirstName, LastName, Email");
-            Console.WriteLine("---------------------------------------");
-            Console.Write($"{EnrolledStudent.StudentId}, {EnrolledStudent.FirstName}, {EnrolledStudent.LastName}, {EnrolledStudent.Email}");
-            Console.WriteLine();
+          
+            confirmation =  RequestDirector.ModifyStudent(student);
+            if (confirmation == true)
+            {
+                Console.WriteLine();
+                EnrolledStudent = RequestDirector.FindStudent(StudentID);
+                Console.WriteLine("Success: The Student Has been Modified");
+                Console.WriteLine();
+                Console.WriteLine("Student ID, FirstName, LastName, Email");
+                Console.WriteLine("---------------------------------------");
+                Console.Write($"{EnrolledStudent.StudentId}, {EnrolledStudent.FirstName}, {EnrolledStudent.LastName}, {EnrolledStudent.Email}");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Update Failed: The Student Most likely Dosent Exist");
+            }
+            
         }
         static void RemoveStudent()
         {
@@ -798,8 +808,8 @@ namespace BAIS3150ConsoleApp
             //EnrollStudents();
             //GetStudents();
             //ModifyStudent();
-            //RemoveStudent();
-            FindProgram();
+            RemoveStudent();
+            //FindProgram();
             
         }
     }

@@ -32,11 +32,10 @@ namespace BAIST3150ConsoleApp.Domain
 
         public bool ModifyStudent(Student EnrolledStudent)
         {
-            bool confirmation = false;
+            bool confirmation;
             Students StudentManager = new();
 
             confirmation = StudentManager.UpdateStudent(EnrolledStudent);
-            confirmation = true;
             return confirmation;
         }
 

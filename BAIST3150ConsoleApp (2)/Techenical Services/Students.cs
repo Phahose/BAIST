@@ -182,9 +182,19 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                 Direction = System.Data.ParameterDirection.Input,
             };
             ModifyStudent.Parameters.Add(Email);
-
-            ModifyStudent.ExecuteNonQuery();
-            nekwom1Connection.Close();
+            try
+            {
+                
+                ModifyStudent.ExecuteNonQuery();
+                Success = true;
+                nekwom1Connection.Close();
+            }
+          
+            catch (SqlException)
+            {
+                Success = false;
+            }
+            
             return Success;
         }
 
@@ -219,7 +229,7 @@ namespace BAIST3150ConsoleApp.Techenical_Services
 
         public List<Student> GetStudents(string ProgramCode)
         {
-            List<Student> students = new List<Student>();
+            List<Student> enrolledStudents = new List<Student>();
             SqlConnection conn = new();
 
             conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
@@ -252,13 +262,13 @@ namespace BAIST3150ConsoleApp.Techenical_Services
                         LastName = (string)programReader["LastName"],
                         Email = (string)programReader["Email"],
                     };
-                   students.Add(student);
+                   enrolledStudents.Add(student);
                 }
                               
             }
             programReader.Close();
             conn.Close();
-            return students;
+            return enrolledStudents;
         }
     }
 }

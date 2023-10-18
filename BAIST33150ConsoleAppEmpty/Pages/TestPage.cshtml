@@ -29,12 +29,12 @@
         <div>
             Division Area <br />
             A generic structoral area on webpae as a block display with empty space above and below 
-            <form name="TestPageForm" action="/Helloworld.html">
+            <form name="TestPageForm" method="post">
                 <table border="0">
                     <tr>
                         <td>Field:</td>
                         <td>
-                            <input type="text" name="Field"/>
+                            <input type="text" name="Field" value="@Model.Field"/>
 
                         </td>
                     </tr>
@@ -45,6 +45,24 @@
                     </tr>
                 </table>
             </form>
+            @Model.Message
+            @Model.Field
+            <!-- HTTp Error 400
+                missing antiforgery token (request verification tokens)
+                security measure put in place by ASP.NEt, enabled by default in Razor Pages
+                to avoid cross-site request forgery (CSRF) attacks
+
+                tokens prove that the request comes from a site which the for originated from 
+                (cookie form data)
+
+                use the namespace, Microsoft.Application.Mvc.Taghelpers, to get token 
+                top of file, add taghelper attribute below the page attribute 
+
+                place in _ViewImports.cshtml to make namespace availaible for all affected pages 
+                will generate the aniforgery token in the HTML form (view source in the browser)
+
+                addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+            -->
         </div>
         <hr />
     </main>

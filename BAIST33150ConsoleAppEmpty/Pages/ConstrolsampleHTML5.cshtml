@@ -1,0 +1,117 @@
+﻿@page
+@model BAIST33150ConsoleAppEmpty.Pages.ConstrolsampleHTML5Model
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+</head>
+<body>
+   <form name="ControlSampleHTML5form" method="post" action="~/ViewHTTPRequest">
+       <table>
+           <tr>
+               <td>Email Address</td>
+               <td><input type="email" name="Email" /></td>
+           </tr>
+
+           <tr>
+               <td>URL</td>
+               <td><input type="url" name="URL" /></td>
+           </tr>
+
+           <tr>
+               <td>Telephone Number</td>
+               <td><input type="tel" name="TelephoneNumber" /></td>
+           </tr>
+
+           <tr>
+               <td>Search</td>
+               <td><input type="search" name="Search" /></td>
+           </tr>
+
+           <tr>
+               <td>DataList</td>
+               <td>
+                   <input type="text" name="Datalistentry" list="Datalist"/>
+                   <datalist id="Datalist">
+                       <option>Read</option>
+                       <option>Write</option>
+                       <option value="Blue">Blue</option>
+                   </datalist>
+               </td>
+           </tr>
+
+           <tr>
+               <td>Slider</td>
+               <td>
+                   Low(1)<input type="range" name="Slider" min="1" max="200" step="1" />High(200)
+               </td>
+           </tr>
+
+           <tr>
+               <td>Spinner</td>
+               <td>
+                   <input type="number" name="Spinner" min="1" max="200" step="1" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Calender Date Only</td>
+               <td>
+                   <input type="date" name="Date"/>
+               </td>
+           </tr>
+
+           <tr>
+               <td>Calender(dateTime)</td>
+               <td>
+                    <input type="datetime" name="DateTime" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Time</td>
+               <td>
+                    <input type="time" name="Time" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Month</td>
+               <td>
+                    <input type="month" name="Month" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Weeks</td>
+               <td>
+                    <input type="week" name="Week" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Color Wheel</td>
+               <td>
+                    <input type="color" name="Color" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>Local Date Time</td>
+               <td>
+                    <input type="datetime-local" name="DateTimeLocal" />
+               </td>
+           </tr>
+
+           <tr>
+               <td>
+                    <input type="submit" name="Submit" value="Submit"/>
+               </td>
+           </tr>
+       </table>
+   </form>
+</body>
+</html>

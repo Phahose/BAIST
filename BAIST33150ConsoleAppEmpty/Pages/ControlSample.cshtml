@@ -1,0 +1,106 @@
+﻿@page
+@model BAIST33150ConsoleAppEmpty.Pages.ControlSampleModel
+@{
+
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Index</title>
+    </head>
+    <body>
+        <form name="ControlSampleForm" method="post" action="~/ViewHTTPRequest">
+            <table>
+                <tr>
+                    <td>Text Box</td>
+                    <td><input type="text" name="TextBox" /></td>
+                </tr>
+
+                <tr>
+                    <td>Check Box:</td>
+                    <td>
+                        <input type="checkbox" name="CheckBoxItem1" value="1" />Item 1<br />
+                        <input type="checkbox" name="CheckBoxItem2" value="2" />Item 2<br />
+                        <input type="checkbox" name="CheckBoxItem3" value="3" />Item 3<br />
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td>Radio Button:</td>
+                    <td>
+                        <input type="radio" name="RadioButton" value="1" />Item 1<br />
+                        <input type="radio" name="RadioButton" value="2" />Item 2<br />
+                        <input type="radio" name="RadioButton" value="3" />Item 3<br />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label> A Text Box control label
+                            <input type="text" name="ATextboxLabel"/>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="AnotherTextBox"> A Text Box control label</label>
+                        <input type="text" name="AnotherTextBox" id="AnotherTextBox"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Fieldset Element Legend element
+                    </td>
+                    <td>
+                        <fieldset name="Fieldset">
+                            <legend>Legend</legend>
+                            <label>Group Item 1 <input type="text" name="GroupItem1" /></label>
+                            <br/>
+                            <label>Group Item 2 <input type="text" name="GroupItem2" /></label>
+                            <br/>
+                            <label>Group Item 3 <input type="text" name="GroupItem3" /></label>
+                            <br/>
+                        </fieldset>
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td>Hidden field</td>
+                    <td><input type="hidden" name="HidddenField" value="This is a hidden field" /></td>
+                </tr>
+
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="Password" /></td>
+                </tr>
+
+                <tr>
+                    <td>Text Field</td>
+                    <td><textarea name="TextArea" cols="20" rows="5"></textarea></td>
+                </tr>
+
+
+                <tr>
+                    <td>Select Menu:</td>
+                    <td>
+                        <select name="Select Menu">
+                            <option value="Nicholas">Best</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td><input type="submit" name="Submit" value="Submit" /></td>
+                    <td><input type="reset" name="Reset" value="Reset"/></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

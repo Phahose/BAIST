@@ -1,0 +1,58 @@
+﻿@page
+@model BAIST33150ConsoleAppEmpty.Pages.JavascriptSampleModel
+@{
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Test Javasript Page</title>
+
+        <script type="text/javascript">
+            function isNumeric(aValue)
+            {
+                alert("Thds isands")
+                let length = aValue.length;
+                var index = 0;
+                var isvalid = length > 0;
+
+                for (index = 0; (index < length) && isvalid; index++) {
+                    var aCharacter = aValue.charAt(index)
+                    if (aCharacter < '0' || aCharacter '9') {
+                        isvalid = false;
+                    }
+                }
+                return isvalid;
+            }
+
+            function addOneToField(aField)  {
+                alert("Thds isands")
+                if (isNumeric(aField.value)) {
+                    aField.value = parseInt(aField.value) + 1;
+                }
+                else 
+                {
+                    alert('Field value must be a numeric value');
+                    aField.focus();
+                    aField.select();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <form name="SampleForm">
+            <p>
+                Click This 
+                <!--This is a way of referencing the field name from the inout field the second way is the
+                    one used we are referencing downwards
+                addOneToField(window.document.SampleForm.Field)
+                -->
+                <!--window.document.forms['SampleForm'].elements['Field']-->
+            <input type="button" value="Button" onclick="addOneToField(window.document.SampleForm.Field);" />
+                to increment this 
+                <input type="text" name="Field" size="5" value="0"/>
+            </p>
+        </form>
+    </body>
+</html>
+

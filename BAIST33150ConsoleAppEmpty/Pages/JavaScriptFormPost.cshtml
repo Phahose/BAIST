@@ -1,0 +1,43 @@
+﻿@page
+@model BAIST33150ConsoleAppEmpty.Pages.JavaScriptFormPostModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JavaaScript Form Post</title>
+    <script type="text/javascript">
+        function isFormValidViaOnSubmit(aForm) {
+            alert("Via Onsubmit is Called" + aForm.InputField.value)
+            // if valid return true else return false
+
+            return true;
+            //return false;
+        }
+        function isFormValidViaButton(aForm) {
+            alert('Via Button - Input Field' + aForm.InputField.value)
+        }
+    </script>
+</head>
+<body>
+    <form name="SampleForm" method="post" onsubmit="return isFormValidViaOnSubmit(window.document.SampleForm);" action="~/ViewHTTPRequest">
+        <table>
+            <tr>
+                <td>    
+                    Input Field
+                </td>
+                <td>
+                    <input type="text" name="InputField"/>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="Submit" value="Submit" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" name="Button" value="Button" onclick="isFormValidViaButton(window.document.SampleForm);" /></td>
+            </tr>
+        </table>    
+    </form>
+</body>
+</html>

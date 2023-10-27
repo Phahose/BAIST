@@ -6,9 +6,41 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Index</title>
+    <title>Links Sample</title>
 </head>
 <body>
-    Index Razor Page
+    <table>
+        <tr>
+            <td>
+                <a href="https://dev1.baist.ca">Absolute Hyperlink</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://dev1.baist.ca" target="_blank">Targeting Hyperlink</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="~/images/fancy.jpg" target="_blank">Relative Hyperlink</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="~/images/fancy.jpg" height="100" width="150" alt="Image of a computer and a code"/>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <a href="https://dev1.baist.ca" target="_blank"><img src="~/images/fancy.jpg" height="100" width="150" alt="Image of a computer and a code"/></a>             
+            </td>
+        </tr>
+         <tr>
+             <!-- Thumbnail Imae Link -->
+            <td>
+                <a href="~/images/apeture.jpg"><img src="~/images/apeture.jpg" height="50" width="50" alt="Image of a computer and a code"/></a>             
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="css/styles.css" /> 
+        <link rel="stylesheet" type="text/css" href="~/css/styles.css" /> 
         <title>Validation Client Server</title>
         <script type="text/javascript">
             function isFormValid(aForm) { 
@@ -19,6 +19,7 @@
 
                 }
                 else {
+                    document.getElementById('error').classList.remove("hide")
                     document.getElementById('error').innerHTML += "<p> Your Value is Invalid </p>"
                     alert('Your Value is Invalid')
                 }
@@ -26,10 +27,11 @@
             }
         // (window.document.SampleForm)
         // return true
+        // return isFormValid(window.document.SampleForm)
         </script>
     </head>
     <body>
-    <form name="SampleForm" method="post" onsubmit="return isFormValid(window.document.SampleForm)">
+    <form name="SampleForm" method="post" onsubmit="return true">
             <table>
                 <tr>
                     <td>Input Field</td>
@@ -45,7 +47,7 @@
                 </tr>
                 <tr>
                     <td>
-                    <div class="alert" id="error">
+                    <div class="alert hide" id="error">
                         </div>
                         @Model.Message;
                     </td>         

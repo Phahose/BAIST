@@ -8,54 +8,53 @@
     <meta charset="utf-8" />
     <title>Welcome To Nicholas App</title>
      <script type="text/javascript">
+
          function isFormValid(newStudent) {
-             var isValid = false
-             var firstNameValue = document.getElementById("firstname")
-             var lastNameValue = document.getElementById("lastname")
-             var emailValue = document.getElementById("email")
-             var passwordValue = document.getElementById("password")
-             var userIDValue = document.getElementById("userID")
-             var confirmPasswordValue = document.getElementById("confirmpassword")
+            var isValid = false;
+            var firstNameValue = newStudent.FirstName.value;
+            var lastNameValue = newStudent.LastName.value;
+            var emailValue = newStudent.Email.value;
+            var passwordValue = newStudent.Password.value;
+            var userIDValue = newStudent.UserID.value;
+            var confirmPasswordValue = newStudent.ConfirmPassword.value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const userIDPattern = /^[A-Za-z]{4}[0-9]{4}$/
 
-             // Pattern validation
-             var userIdpattern = userIDValue.getAttribute("pattern")
-             var re = new RegExp(userIdpattern)
-             if (firstNameValue == null) {
-                 alert("First Name is Required")
+             if (firstNameValue.length < 1) {
+                 alert('First Name is Required');
              }
-             else if(lastNameValue = null){
-
-                alert("Last Name is Required")
-
-             }else if(emailValue = null){
-
-                alert("Email is Required")
-
-             }else if(userIDValue = null){
-
-                alert("UserID is Required")
-
-             } else if (re.test(userIDValue.value)){
-                alert("valid User ID, 4 letters followed by 4 digits")
+             else if (lastNameValue.length < 1) {
+                 alert("Last Name is Required");
              }
-             else if(passwordValue = null){
-
-                alert("Password is Required")
-
-             } else if (passwordValue.length < 6) {
-                alert("Password must be at least 6 charcters")
+             else if (emailValue.length < 1) {
+                 alert("Email is Required");
              }
-             else if(confirmPasswordValue = null){
-
-                alert("Must Confirm Password")
-
-             }else if(confirmPasswordValue != passwordValue){
-
-                alert("Passwords Must Match")
-
+             else if (!emailPattern.test(emailValue)) {
+                alert("Enter a Valid Email");
              }
-             else{
-                 isValid = true
+             else if (userIDValue.length < 1) {
+                alert("UserID is Required");
+             }
+             else if (!userIDPattern.test(userIDValue)){
+                 alert("Invalid UserName")
+             }
+            else if (passwordValue.length < 1) {
+                alert("Password is Required");
+            }
+            else if (passwordValue.length < 6) {
+                alert("Password must be at least 6 charcters");
+            }
+            else if (confirmPasswordValue.length < 1) {
+
+                alert("Must Confirm Password");
+
+            } else if (confirmPasswordValue != passwordValue) {
+
+                alert("Passwords Must Match");
+
+            }
+            else{
+                 isValid = true;
              }
              return isValid
          }
@@ -64,19 +63,19 @@
 <body>
     <div class="text-center">
         <h1 class="display-4">New Student</h1>
-        <form name="SignUp" method="post" onsubmit="return isFormValid(window.document.SignUp)">
+        <form name="SignUp" method="post" onsubmit="return isFormValid(window.document.SignUp);">
             <table>
                 <tr>
                     <td>First Name</td>
-                    <td><input type="text" id="firstname"/></td>
+                    <td><input type="text" name="FirstName" id="firstname"/></td>
                 </tr>
-                <tr>
+               <tr>
                     <td>Last Name</td>
-                    <td><input type="text" id="lastname" /></td>
+                    <td><input type="text" name="LastName" /></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="text" id="email" /></td>
+                    <td><input type="text" name="Email" /></td>
                 </tr>
                 <tr>
                     <td>Program</td>
@@ -90,15 +89,15 @@
                 </tr>
                 <tr>
                     <td>User ID</td>
-                    <td><input type="text" id="userID" pattern="[A-Za-z]{4}[0-9]{4}" /></td>
+                    <td><input type="text" name="UserID"/></td>
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" id="password" /></td>
+                    <td><input type="password" name="Password" /></td>
                 </tr>
                 <tr>
                     <td>Confirm Password</td>
-                    <td><input type="password" id="confirmpassword" /></td>
+                    <td><input type="password" name="ConfirmPassword" /></td>
                 </tr>
                 <tr>
                     <td><input type="submit" /></td>

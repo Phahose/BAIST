@@ -1,0 +1,114 @@
+﻿@page
+@model UIRazorPagesAssignment.Pages.SignUpModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome To Nicholas App</title>
+     <script type="text/javascript">
+         function isFormValid(newStudent) {
+             var isValid = false
+             var firstNameValue = document.getElementById("firstname")
+             var lastNameValue = document.getElementById("lastname")
+             var emailValue = document.getElementById("email")
+             var passwordValue = document.getElementById("password")
+             var userIDValue = document.getElementById("userID")
+             var confirmPasswordValue = document.getElementById("confirmpassword")
+
+             // Pattern validation
+             var userIdpattern = userIDValue.getAttribute("pattern")
+             var re = new RegExp(userIdpattern)
+             if (firstNameValue == null) {
+                 alert("First Name is Required")
+             }
+             else if(lastNameValue = null){
+
+                alert("Last Name is Required")
+
+             }else if(emailValue = null){
+
+                alert("Email is Required")
+
+             }else if(userIDValue = null){
+
+                alert("UserID is Required")
+
+             } else if (re.test(userIDValue.value)){
+                alert("valid User ID, 4 letters followed by 4 digits")
+             }
+             else if(passwordValue = null){
+
+                alert("Password is Required")
+
+             } else if (passwordValue.length < 6) {
+                alert("Password must be at least 6 charcters")
+             }
+             else if(confirmPasswordValue = null){
+
+                alert("Must Confirm Password")
+
+             }else if(confirmPasswordValue != passwordValue){
+
+                alert("Passwords Must Match")
+
+             }
+             else{
+                 isValid = true
+             }
+             return isValid
+         }
+     </script> 
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">New Student</h1>
+        <form name="SignUp" method="post" onsubmit="return isFormValid(window.document.SignUp)">
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td><input type="text" id="firstname"/></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" id="lastname" /></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="email" /></td>
+                </tr>
+                <tr>
+                    <td>Program</td>
+                    <td>
+                        <select name="Program">
+                            <option value="BAIST">Bachelor Of Applied Information Systems Technology</option>
+                            <option value="BBA">Bachelor of Business Administration</option>
+                            <option value="PHOT">Photographic Technology</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User ID</td>
+                    <td><input type="text" id="userID" pattern="[A-Za-z]{4}[0-9]{4}" /></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" /></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" id="confirmpassword" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" /></td>
+                </tr>
+                <tr>
+                    <td>@Model.Message</td>     
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+</html>

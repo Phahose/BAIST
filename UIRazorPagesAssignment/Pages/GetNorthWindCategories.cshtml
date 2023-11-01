@@ -1,0 +1,33 @@
+﻿@page
+@model UIRazorPagesAssignment.Pages.GetNorthWindCategoriesModel
+@{
+}
+<table border="1">
+    <tr>
+        <td style="border: 2px solid black; text-align: center; width: 10rem">CategoryID</td>
+        <td style="border: 2px solid black; text-align: center; width: 10rem">Category Name </td>
+        <td style="border: 2px solid black; text-align: center;">Descriptions </td>
+        <td style="border: 2px solid black; text-align: center;">Picture </td>
+    </tr>
+    @foreach (var product in Model.FoundProducts)
+    {
+        <tr>
+            <td style="border: 2px solid black; text-align: center;">@product.CategoryId</td>
+            <td style="border: 2px solid black; text-align: center;">@product.CategoryName</td>
+            <td style="border: 2px solid black; text-align: center;">@product.Description</td>
+            <td style="border: 2px solid black; text-align: center;">
+                @{
+                    byte[] originalImageData = @product.Picture; // Your original image data
+
+                    // Skip the first 78 bytes
+                    byte[] modifiedImageData = new byte[originalImageData.Length - 78];
+                    Array.Copy(originalImageData, 78, modifiedImageData, 0, modifiedImageData.Length);
+
+                    // Convert the modified image data to a base64 string
+                    string base64String = Convert.ToBase64String(modifiedImageData);
+                }
+                <img src="data:image/jpeg;base64,@base64String" alt="Image" />
+            </td>
+        </tr>
+    }
+</table>

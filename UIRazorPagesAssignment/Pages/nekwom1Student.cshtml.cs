@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace UIRazorPagesAssignment.Pages
 {
@@ -29,6 +30,13 @@ namespace UIRazorPagesAssignment.Pages
         }
         public void OnPost()
         {
+            string emailPattern = "^\\S+@\\S+\\.\\S+$";
+            string usernamePattern = "^[A-Za-z]{4}\\[0-9]{4}$";
+            Regex emailregex = new Regex(emailPattern);
+            Regex userIDregex = new Regex(usernamePattern);
+            Match emailMatch = emailregex.Match(emailPattern);
+            Match userIDMatch = userIDregex.Match(usernamePattern);
+
             if (FirstName == null)
             {
                 ModelState.AddModelError("FirstNameInput", "First Name is Required");
@@ -41,9 +49,17 @@ namespace UIRazorPagesAssignment.Pages
             {
                 ModelState.AddModelError("EmailInput", "Email is Required");
             }
+            else if (!emailMatch.Success)
+            {
+                ModelState.AddModelError("EmailInput", "Valid Email is Required");
+            }
             else if (UserID == null)
             {
                 ModelState.AddModelError("UserNameInput", "UserID is Required");
+            }
+            else if (!userIDMatch.Success)
+            {
+                ModelState.AddModelError("UserNameInput", "Valid UserID is Required");
             }
             else if (Password == null)
             {

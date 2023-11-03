@@ -5,7 +5,7 @@
         private int _categoryId { get; set; } = 0;
         private string _categoryName { get; set; } = string.Empty;
         private string _description { get; set; } = string.Empty;
-        private byte[] picture { get; set; }
+        private byte[]? picture { get; set; }
 
         public int CategoryId 
         {

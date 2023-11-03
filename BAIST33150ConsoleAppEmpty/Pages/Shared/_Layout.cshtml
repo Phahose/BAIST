@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8"/>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/SampleBlueStyle.css" />
+    <link rel="icon" href="~/images/BAISTFavoritesIcon.ico"  type="image/x-icon"/>
+    <script type="text/javascript">
+        // script from Layout    
+    </script>
+    @RenderSection("scriptContent", required: false) <!-- render a section -->
+
+</head>
+<body>
+    <header>
+        Header area from Layout<br />
+    </header>
+    <nav>
+        Nabvigation Area from Layout<br />
+    </nav>
+    <main>
+        Main Are From Layout <br />
+        @RenderBody()
+    </main>
+    <footer>
+        Footer Area From Layout
+
+        @if (IsSectionDefined("footerContent"))
+        {
+            @RenderSection("footerContent")
+        }
+    </footer>
+</body>
+</html>

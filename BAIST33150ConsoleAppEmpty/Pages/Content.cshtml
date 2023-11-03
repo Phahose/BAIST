@@ -1,0 +1,39 @@
+﻿@page
+@model BAIST33150ConsoleAppEmpty.Pages.ContentModel
+@{
+    //Layout = "_Layout";
+        // The layouut can be either set here or in the _ViewStart
+    ViewData["Title"] = "*** Title From Content Page";
+}
+@section scriptContent{
+    <script type="text/javascript">
+        // script from javascript
+    </script>
+}
+
+<table>
+    <tr>
+        <td>** Main Arree From The conatent Page**</td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <table>
+                    <tr>
+                        <td>** Division are From Content page</td>
+                    </tr>
+                    <tr>
+                        <td>****<input type="text" name="InputField" />****</td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+@section footerContent{
+    <table>
+        <tr>
+            <td>*** Footer Area From Layout</td>
+        </tr>
+    </table>
+}

@@ -27,7 +27,7 @@ namespace UIRazorPagesAssignment.Pages
 
         public void OnPost()
         {
-          
+            Message = "Sign In Complete";
         }
     }
 }

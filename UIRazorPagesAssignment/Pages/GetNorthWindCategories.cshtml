@@ -17,13 +17,13 @@
             <td style="border: 2px solid black; text-align: center;">@product.Description</td>
             <td style="border: 2px solid black; text-align: center;">
                 @{
-                    byte[] originalImageData = @product.Picture; // Your original image data
+                    byte[] originalImageData = @product.Picture; 
 
-                    // Skip the first 78 bytes
+           
                     byte[] modifiedImageData = new byte[originalImageData.Length - 78];
                     Array.Copy(originalImageData, 78, modifiedImageData, 0, modifiedImageData.Length);
 
-                    // Convert the modified image data to a base64 string
+
                     string base64String = Convert.ToBase64String(modifiedImageData);
                 }
                 <img src="data:image/jpeg;base64,@base64String" alt="Image" />

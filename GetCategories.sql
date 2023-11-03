@@ -11,3 +11,5 @@ if @@ERROR = 0
 else 
 	RaisError('GetStudent stored procedure An Error Occured',16,1)
 RETURN @ReturnCode
+
+Exec GetProducts

@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form name="NameForm" method="post" onsubmit="return isNameValid(window.document.NameForm);">
+    <h1>Name</h1>
+    <input type="text" size="80" name="UserName" id="username">
+    <br />
+    @if (Model.NameResponse != null)
+    {
+        @Model.NameResponse
+        <br />
+        @Html.Raw(Model.NameResponse)
+    }
+    <br /><br />
+    <h1>Message Board</h1>
+    <textarea cols="40" rows="4" asp-for="MessageText"></textarea>
+    <br />
+    <br />
+    @if (Model.MessageResponse != null)
+    {
+        @Html.Raw(Model.MessageResponse)
+    }
+    <hr />
+    <br />
+    <h1>Filename</h1>
+    <input size="80" name="UserName">
+    <br />
+    <br />
+    <hr />
+    <input type="submit">
+</form>

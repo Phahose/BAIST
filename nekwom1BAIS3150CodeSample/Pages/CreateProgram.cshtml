@@ -2,3 +2,30 @@
 @model nekwom1BAIS3150CodeSample.Pages.CreateProgramModel
 @{
 }
+
+<form name="AddProgram" method="post">
+    <table>
+        <tr>
+            <td>@Model.Message</td>
+        </tr>
+        <tr>
+            <td>Program Code</td>
+            <td>
+                <input type="text" name="ProgramCode" />
+                @Html.ValidationMessage("Programcode");
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input type="text" name="Description" />
+                @Html.ValidationMessage("Description");
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="AddProgram"/>
+            </td>
+        </tr>
+    </table>
+</form>

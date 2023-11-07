@@ -2,3 +2,50 @@
 @model nekwom1BAIS3150CodeSample.Pages.EnrollStudentModel
 @{
 }
+<form name="EnrollStudent" method="post">
+    <table>
+        <tr>
+            <td>@Model.Message</td>
+        </tr>
+        <tr>
+            <td>Student ID</td>
+            <td>
+                <input type="text" name="ID" />
+                @Html.ValidationMessage("IdInput");
+            </td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>
+                <input type="text" name="Firstname" />
+                @Html.ValidationMessage("FirstnameInput");
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>
+                <input type="text" name="Lastname" />
+                @Html.ValidationMessage("LastnameInput");
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" name="Email" />
+                @Html.ValidationMessage("EmailInput");
+            </td>
+        </tr>
+        <tr>
+            <td>Program Code</td>
+            <td>
+                <input type="text" name="ProgramCode" />
+                @Html.ValidationMessage("ProgramCodeinput");
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>

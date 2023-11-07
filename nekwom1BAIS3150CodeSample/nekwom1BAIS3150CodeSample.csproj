@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="TechnicalServices\" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
   </ItemGroup>
 
 </Project>

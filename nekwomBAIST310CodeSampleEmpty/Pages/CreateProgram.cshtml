@@ -2,8 +2,29 @@
 @model nekwomBAIST310CodeSampleEmpty.Pages.CreateProgramModel
 @{
 }
+@section scriptCreateProgramValidation{
+    <script type="text/javascript">
+        function isFormValid(createForm){
+            var isValid = true;
+            var pCodeValue = createForm.ProgramCode.value;
+            var descriptionValue = createForm.Description.value;
 
-<form name="AddProgram" method="post">
+            if (pCodeValue.length < 1){
+                alert("Program Code is Required");
+                isValid = false;
+            }
+            else if(descriptionValue.length < 1){
+                alert('Description is Required');
+                isValid = false;
+            }else{
+                isValid = true;
+            }
+
+            return isValid;
+        }
+    </script>
+}
+<form name="AddProgram" method="post" onsubmit="return isFormValid(window.document.AddProgram);">
     <table>
         <tr>
             <td>@Model.Message</td>

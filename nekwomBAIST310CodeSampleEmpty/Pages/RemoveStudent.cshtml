@@ -2,8 +2,12 @@
 @model nekwomBAIST310CodeSampleEmpty.Pages.RemoveStudentModel
 @{
 }
-
-<form name="DeleteStudent" method="post" >
+@section scriptDDAVAlidation{
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+<form name="DeleteStudent" method="post">
     <table border="1">
         <tr>
             <td>@Model.Message</td>

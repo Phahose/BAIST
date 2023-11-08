@@ -1,12 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.Domain;
 using System.Data;
 
-namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
+namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
 {
     public class Students
     {
-        public bool AddStudent(Domain.Student acceptetStudent, string progarmCode) // parameters, Camel Case
+        public bool AddStudent(nekwomBAIST310CodeSampleEmpty.Domain.Student acceptetStudent, string progarmCode) // parameters, Camel Case
         {
             bool Success = false;
 
@@ -115,7 +115,7 @@ namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
             return EnrolledStudent;
         }
 
-        public bool UpdateStudent(Student EnrolledStudent)
+        public bool UpdateStudent(nekwomBAIST310CodeSampleEmpty.Domain.Student EnrolledStudent)
         {
             bool Success = false;
             SqlConnection nekwom1Connection = new();

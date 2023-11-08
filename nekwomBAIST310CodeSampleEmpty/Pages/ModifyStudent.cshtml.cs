@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class ModifyStudentModel : PageModel
     {
@@ -61,8 +61,8 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
 
             if (ModelState.IsValid)
             {
-                Students students = new();
-                students.UpdateStudent(Student);
+                BCS bCS = new BCS();
+                bCS.ModifyStudent(Student);
 
                 Message = "The Student Has Been Updated";
             }

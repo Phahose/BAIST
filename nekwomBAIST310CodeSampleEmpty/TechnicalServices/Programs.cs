@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.Domain;
 using Microsoft.Data.SqlClient;
-namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
+namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
 {
     public class Programs
     {
@@ -46,9 +46,9 @@ namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
             connection.Close();
             return result;
         }
-         public Domain.Program GetProgram(string programCode)
+         public nekwomBAIST310CodeSampleEmpty.Domain.Program GetProgram(string programCode)
           {
-            Domain.Program ActiveProgram = new();
+            nekwomBAIST310CodeSampleEmpty.Domain.Program ActiveProgram = new();
             SqlConnection nekwom1connection = new SqlConnection();
             nekwom1connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
             nekwom1connection.Open();

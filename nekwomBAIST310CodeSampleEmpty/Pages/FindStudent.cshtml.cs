@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
 using System.ComponentModel.DataAnnotations;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class FindStudentModel : PageModel
     {
@@ -12,15 +12,15 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
         [BindProperty]
         [Required(ErrorMessage ="Must Enter a Student Id")]
         public string StudentID { get; set; } = string.Empty;
-        public Domain.Student Student { get; set; } = new();
+        public nekwomBAIST310CodeSampleEmpty.Domain.Student Student { get; set; } = new();
         public void OnGet()
         {
         }
 
         public void OnPost()
         {
-            Students students = new();
-            Student = students.GetStudent(StudentID);
+            BCS bCS = new BCS();
+            Student = bCS.FindStudent(StudentID);
         }
     }
 }

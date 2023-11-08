@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class CreateProgramModel : PageModel
     {
@@ -47,7 +48,8 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
                     Programs programs = new Programs();
                     try
                     {
-                        programs.AddProgram(ProgramCode, Description);
+                        BCS bCS = new();
+                        bCS.CreateProgram(ProgramCode, Description);
                     }
                     catch (Exception ex)
                     {

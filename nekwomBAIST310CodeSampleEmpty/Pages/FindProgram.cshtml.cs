@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+using nekwomBAIST310CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class FindProgramModel : PageModel
     {
@@ -21,8 +21,8 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
         {
             if (ModelState.IsValid)
             {
-                Programs programs = new Programs();
-                Program = programs.GetProgram(ProgramCode);
+                BCS bcs = new BCS();
+                Program =  bcs.FindProgram(ProgramCode);
             }
         }
     }

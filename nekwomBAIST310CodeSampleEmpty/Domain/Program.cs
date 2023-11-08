@@ -1,4 +1,4 @@
-﻿namespace nekwomBAIS3150CodeSampleEmpty.Domain
+﻿namespace nekwomBAIST310CodeSampleEmpty.Domain
 {
     public class Program
     {

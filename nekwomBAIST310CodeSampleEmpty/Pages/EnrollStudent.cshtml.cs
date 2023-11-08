@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwomBAIS3150CodeSampleEmpty.Domain;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.Domain;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class EnrollStudentModel : PageModel
     {
-        List<Program> ProgramList = new();
-        [BindProperty]
+ 
         public string Message { get; set; } = string.Empty;
-        [BindProperty]
         public Student Student { get; set; } = new Student();
         [BindProperty]
         public string Id { get; set; } = string.Empty;
@@ -66,8 +65,8 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
             {
                 try
                 {
-                    Students students = new Students();
-                    students.AddStudent(Student, ProgramCode);
+                    BCS bCS = new();
+                    bCS.EnrollStudent(Student, ProgramCode);
                 }
                 catch (Exception ex)
                 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class IndexModel : PageModel
     {

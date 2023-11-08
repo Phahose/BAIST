@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
+using nekwomBAIST310CodeSampleEmpty.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace nekwomBAIS3150CodeSampleEmpty.Pages
+namespace nekwomBAIST310CodeSampleEmpty.Pages
 {
     public class RemoveStudentModel : PageModel
     {
@@ -20,7 +21,8 @@ namespace nekwomBAIS3150CodeSampleEmpty.Pages
         public void OnPost()
         {
             Students students = new();
-            students.DeleteStudent(StudentID);
+            BCS bCS = new BCS();
+            bCS.RemoveStudent(StudentID);
             Message = "The student has been deleted";
         }
     }

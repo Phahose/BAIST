@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using nekwom1BAIS3150CodeSample.Domain;
-using nekwom1BAIS3150CodeSample.TechnicalServices;
-namespace nekwom1BAIS3150CodeSample.Pages
+using nekwomBAIS3150CodeSampleEmpty.Domain;
+using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
+namespace nekwomBAIS3150CodeSampleEmpty.Pages
 {
     public class FindProgramModel : PageModel
     {

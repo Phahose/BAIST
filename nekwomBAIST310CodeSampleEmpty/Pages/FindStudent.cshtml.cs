@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using nekwom1BAIS3150CodeSample.Domain;
-using nekwom1BAIS3150CodeSample.TechnicalServices;
+using nekwomBAIS3150CodeSampleEmpty.Domain;
+using nekwomBAIS3150CodeSampleEmpty.TechnicalServices;
 using System.ComponentModel.DataAnnotations;
 
-namespace nekwom1BAIS3150CodeSample.Pages
+namespace nekwomBAIS3150CodeSampleEmpty.Pages
 {
     public class FindStudentModel : PageModel
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
-using nekwom1BAIS3150CodeSample.Domain;
+using nekwomBAIS3150CodeSampleEmpty.Domain;
 using System.Data;
 
-namespace nekwom1BAIS3150CodeSample.TechnicalServices
+namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
 {
     public class Students
     {
@@ -113,6 +113,102 @@ namespace nekwom1BAIS3150CodeSample.TechnicalServices
             StudentReader.Close();
             nekwom1Connnnection.Close();
             return EnrolledStudent;
+        }
+
+        public bool UpdateStudent(Student EnrolledStudent)
+        {
+            bool Success = false;
+            SqlConnection nekwom1Connection = new();
+
+            nekwom1Connection.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
+
+            SqlCommand ModifyStudent = new()
+            {
+                Connection = nekwom1Connection,
+                CommandText = "UpdateStudent",
+                CommandType = System.Data.CommandType.StoredProcedure,
+            };
+
+            SqlParameter StudentID = new()
+            {
+                ParameterName = "@StudentId",
+                SqlValue = EnrolledStudent.StudentId,
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+
+            ModifyStudent.Parameters.Add(StudentID);
+
+            SqlParameter FirstName = new()
+            {
+                ParameterName = "@StudentFirstName",
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                SqlValue = EnrolledStudent.FirstName,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+            ModifyStudent.Parameters.Add(FirstName);
+
+            SqlParameter LastName = new()
+            {
+                ParameterName = "@StudentLastName",
+                SqlValue = EnrolledStudent.LastName,
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+            ModifyStudent.Parameters.Add(LastName);
+
+            SqlParameter Email = new()
+            {
+                ParameterName = "@StudentEmail",
+                SqlValue = EnrolledStudent.Email,
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+            ModifyStudent.Parameters.Add(Email);
+            try
+            {
+
+                ModifyStudent.ExecuteNonQuery();
+                Success = true;
+                nekwom1Connection.Close();
+            }
+
+            catch (SqlException)
+            {
+                Success = false;
+            }
+
+            return Success;
+        }
+
+        public bool DeleteStudent(string StudentID)
+        {
+            bool Success = false;
+            SqlConnection conn = new();
+
+            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            conn.Open();
+
+            SqlCommand RemoveStudent = new()
+            {
+                Connection = conn,
+                CommandText = "DeleteStudent",
+                CommandType = System.Data.CommandType.StoredProcedure,
+            };
+
+            SqlParameter StudentIDParameter = new()
+            {
+                ParameterName = "@StudentID",
+                SqlValue = StudentID,
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+
+            RemoveStudent.Parameters.Add(StudentIDParameter);
+            RemoveStudent.ExecuteNonQuery();
+            conn.Close();
+            return Success;
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿@page
+@model nekwomBAIS3150CodeSampleEmpty.Pages.RemoveStudentModel
+@{
+}
+
+<form name="DeleteStudent" method="post" >
+    <table border="1">
+        <tr>
+            <td>@Model.Message</td>
+        </tr>
+        <tr>
+            <td>
+                Student ID
+            </td>
+            <td>
+                <input asp-for="StudentID" />
+            </td>
+            <td>
+                <span asp-validation-for="StudentID"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="Delete Student" />
+            </td>
+        </tr>
+    </table>
+</form>

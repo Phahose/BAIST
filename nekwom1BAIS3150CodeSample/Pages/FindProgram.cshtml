@@ -2,3 +2,33 @@
 @model nekwom1BAIS3150CodeSample.Pages.FindProgramModel
 @{
 }
+<script src="~/lib/jquery/jquery.js"></script>
+<script src="~/lib/jquery-validate/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<form name="FindProgram" method="post">
+    <table>
+        <tr>
+            <td>@Model.Message</td>
+        </tr>
+        <tr>
+            <td>
+                Program Code
+            </td>
+            <td>
+                <input asp-for="ProgramCode" />
+            </td>
+            <td>
+                <span asp-validation-for="ProgramCode"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="Find Program"/>
+            </td>
+        </tr>
+        <tr>
+            <td>@Model.Program.ProgramCode</td>
+            <td>@Model.Program.Description</td>
+        </tr>
+    </table>
+</form>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using nekwom1BAIS3150CodeSample.Domain;
+using nekwomBAIS3150CodeSampleEmpty.Domain;
 using Microsoft.Data.SqlClient;
-namespace nekwom1BAIS3150CodeSample.TechnicalServices
+namespace nekwomBAIS3150CodeSampleEmpty.TechnicalServices
 {
     public class Programs
     {

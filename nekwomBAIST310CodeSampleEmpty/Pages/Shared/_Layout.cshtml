@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <header class="nav">
+        <ul>
+            <li>
+                <a href="Index">Home</a>
+            </li> 
+             <li>
+                <a href="Privacy">Privacy</a>
+            </li>
+             <li>
+                <a href="CreateProgram">Create Program</a>
+            </li>
+             <li>
+                <a href="EnrollStudent">Enroll Student</a>
+            </li>
+             <li>
+                <a href="FindProgram">Find Program</a>
+            </li>
+            <li>
+                <a href="FindStudent">Find Student</a>
+            </li>
+            <li>
+                <a href="ModifyStudent">Modify Student</a>
+            </li>
+             <li>
+                <a href="RemoveStudent">Remove Student</a>
+            </li>
+
+        </ul>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

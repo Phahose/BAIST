@@ -20,6 +20,8 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
         public string Email { get; set; } = string.Empty;
         [BindProperty]
         public string ProgramCode { get; set; } = string.Empty;
+        [BindProperty]
+        public string Submit {  get; set; } = string.Empty;
         public void OnGet()
         {
             Message = "Modify a Student";
@@ -27,50 +29,69 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
 
         public void OnPost()
         {
-            if (Id == null)
+            BCS bCS = new BCS();
+            switch (Submit)
             {
-                ModelState.AddModelError("IdInput", "Id is Required");
-            }
-            else if (Firstname == null)
-            {
-                ModelState.AddModelError("FirstnameInput", "Firstname is Required");
-            }
-            else if (Lastname == null)
-            {
-                ModelState.AddModelError("LastnameInput", "Lastname is Required");
-            }
-            else if (Email == null)
-            {
-                ModelState.AddModelError("EmailInput", "Email is Required");
-            }
-            else if (Lastname == null)
-            {
-                ModelState.AddModelError("LastnameInput", "Lastname is Required");
-            }
-            else if (ProgramCode == null)
-            {
-                ModelState.AddModelError("ProgramCodeInput", "PrgramCode is Required");
-            }
-            else
-            {
-                Student.StudentId = Id;
-                Student.FirstName = Firstname;
-                Student.LastName = Lastname;
-                Student.Email = Email;
-            }
+                case "Getstudents":
+                    if (Id == null)
+                    {
+                        ModelState.AddModelError("IdInput", "Id is Required");
+                        Message = $"Student Cant be Gotten Errors Found {ModelState.ValidationState}";
+                    }
+                    else
+                    {
+                        Student = bCS.FindStudent(Id);
+                    }
+                        
+                break;
 
-            if (ModelState.IsValid)
-            {
-                BCS bCS = new BCS();
-                bCS.ModifyStudent(Student);
+                case "ModifyStudent":
+                    if (Id == null)
+                    {
+                        ModelState.AddModelError("IdInput", "Id is Required");
+                    }
+                    else if (Firstname == null)
+                    {
+                        ModelState.AddModelError("FirstnameInput", "Firstname is Required");
+                    }
+                    else if (Lastname == null)
+                    {
+                        ModelState.AddModelError("LastnameInput", "Lastname is Required");
+                    }
+                    else if (Email == null)
+                    {
+                        ModelState.AddModelError("EmailInput", "Email is Required");
+                    }
+                    else if (Lastname == null)
+                    {
+                        ModelState.AddModelError("LastnameInput", "Lastname is Required");
+                    }
+                    else if (ProgramCode == null)
+                    {
+                        ModelState.AddModelError("ProgramCodeInput", "PrgramCode is Required");
+                    }
+                    else
+                    {
+                        Student.StudentId = Id;
+                        Student.FirstName = Firstname;
+                        Student.LastName = Lastname;
+                        Student.Email = Email;
+                    }
 
-                Message = "The Student Has Been Updated";
-            }
-            else
-            {
-                Message = $"Student Cant be Modified Errors Found {ModelState.ValidationState}";
+                    if (ModelState.IsValid)
+                    {
+                        bCS.ModifyStudent(Student);
+                        Message = "The Student Has Been Updated";
+                    }
+                    else
+                    {
+                        Message = $"Student Cant be Modified Errors Found {ModelState.ValidationState}";
 
+                    }
+                   
+                    break;
             }
+            
 
         }
     }

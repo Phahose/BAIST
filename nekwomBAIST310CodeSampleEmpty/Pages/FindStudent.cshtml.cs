@@ -19,8 +19,13 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
 
         public void OnPost()
         {
-            BCS bCS = new BCS();
-            Student = bCS.FindStudent(StudentID);
+            if (ModelState.IsValid)
+            {
+                BCS bCS = new BCS();
+                Student = bCS.FindStudent(StudentID);
+              
+            }
+       
         }
     }
 }

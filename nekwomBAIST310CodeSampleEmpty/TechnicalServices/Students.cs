@@ -210,5 +210,48 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
             conn.Close();
             return Success;
         }
+        public List<Student> GetStudents(string ProgramCode)
+        {
+            List<Student> enrolledStudents = new List<Student>();
+            SqlConnection conn = new();
+
+            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            conn.Open();
+
+            SqlCommand FindProgram = new()
+            {
+                Connection = conn,
+                CommandText = "GetStudentByProgram",
+                CommandType = System.Data.CommandType.StoredProcedure,
+            };
+            SqlParameter ProgramID = new()
+            {
+                ParameterName = "@ProgramCode",
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                SqlValue = ProgramCode,
+                Direction = System.Data.ParameterDirection.Input,
+            };
+            FindProgram.Parameters.Add(ProgramID);
+            SqlDataReader programReader;
+            programReader = FindProgram.ExecuteReader();
+            if (programReader.HasRows)
+            {
+                while (programReader.Read())
+                {
+                    Student student = new Student()
+                    {
+                        StudentId = (string)programReader["StudentID"],
+                        FirstName = (string)programReader["FirstName"],
+                        LastName = (string)programReader["LastName"],
+                        Email = (string)programReader["Email"],
+                    };
+                    enrolledStudents.Add(student);
+                }
+
+            }
+            programReader.Close();
+            conn.Close();
+            return enrolledStudents;
+        }
     }
 }

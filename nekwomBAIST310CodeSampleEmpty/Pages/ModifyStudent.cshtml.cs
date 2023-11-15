@@ -19,8 +19,6 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
         [BindProperty]
         public string Email { get; set; } = string.Empty;
         [BindProperty]
-        public string ProgramCode { get; set; } = string.Empty;
-        [BindProperty]
         public string Submit {  get; set; } = string.Empty;
         public void OnGet()
         {
@@ -41,6 +39,9 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
                     else
                     {
                         Student = bCS.FindStudent(Id);
+                        Firstname = Student.FirstName;
+                        Lastname = Student.LastName;
+                        Email = Student.Email;  
                     }
                         
                 break;
@@ -66,10 +67,6 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
                     {
                         ModelState.AddModelError("LastnameInput", "Lastname is Required");
                     }
-                    else if (ProgramCode == null)
-                    {
-                        ModelState.AddModelError("ProgramCodeInput", "PrgramCode is Required");
-                    }
                     else
                     {
                         Student.StudentId = Id;
@@ -85,8 +82,7 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
                     }
                     else
                     {
-                        Message = $"Student Cant be Modified Errors Found {ModelState.ValidationState}";
-
+                        Message = $"Student Cant be Modified Errors Found";
                     }
                    
                     break;

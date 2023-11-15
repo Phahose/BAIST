@@ -70,12 +70,35 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
             };
 
             GetProgramCommand.Parameters.Add(ProgramCode);
-
+            Students StudentManager = new Students();
             SqlDataReader programReader = GetProgramCommand.ExecuteReader();
-            
+            List<Student> EnrolledStudents;
+            EnrolledStudents = StudentManager.GetStudents(programCode);
             if (programReader.HasRows)
             {
                 programReader.Read();
+                foreach (Student EnrolledStudent in EnrolledStudents)
+                {
+                    Student ActiveProgramStduent = new()
+                    {
+                        StudentId = EnrolledStudent.StudentId,
+                        FirstName = EnrolledStudent.FirstName,
+                        LastName = EnrolledStudent.LastName,
+                        Email = EnrolledStudent.Email,
+                    };
+                    ActiveProgram.EnrolledStudents.Add(ActiveProgramStduent);
+
+                }
+
+                for (int i = 0; i < ActiveProgram.EnrolledStudents.Count; i++)
+                {
+                    ActiveProgram.EnrolledStudents[i].StudentId = EnrolledStudents[i].StudentId;
+                    ActiveProgram.EnrolledStudents[i].FirstName = EnrolledStudents[i].FirstName;
+                    ActiveProgram.EnrolledStudents[i].LastName = EnrolledStudents[i].LastName;
+                    ActiveProgram.EnrolledStudents[i].Email = EnrolledStudents[i].Email;
+                    ActiveProgram.ProgramCode = (string)programReader["ProgramCode"];
+                    ActiveProgram.Description = (string)programReader["Description"];
+                }
                 ActiveProgram.ProgramCode = (string)programReader["ProgramCode"];
                 ActiveProgram.Description = (string)programReader["Description"];
             }

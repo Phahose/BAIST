@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using nekwomBAIST310CodeSampleEmpty.TechnicalServices;
 using nekwomBAIST310CodeSampleEmpty.Domain;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace nekwomBAIST310CodeSampleEmpty.Pages
@@ -11,10 +10,10 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
     {
 
         [BindProperty]
-        [Required(ErrorMessage="Program Code is Required")]
+       
         public string ProgramCode { get; set; } = string.Empty;
         [BindProperty]
-        [Required(ErrorMessage = "Description is Required")]
+       
         public string Description { get; set; } = string.Empty;
 
         public string Message { get; set; } = string.Empty;
@@ -33,10 +32,7 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
             {
                 ModelState.AddModelError("ProgramCode", "Program Code is Required");
             }
-            /*else if (!programcodeRegex.Match(pCodePattern).Success)
-            {
-                ModelState.AddModelError("ProgramCode", "Must be Capital 4 Letter Text");
-            }*/
+           
             else if(Description == null)
             {
                 ModelState.AddModelError("Description", "Description is Required");
@@ -45,19 +41,10 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
             {
                 if (ModelState.IsValid)
                 {
-                    Programs programs = new Programs();
-                    try
-                    {
-                        BCS bCS = new();
-                        bCS.CreateProgram(ProgramCode, Description);
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrorList.Add(ex.Message);
-                        Message = ex.Message;
-                        Console.WriteLine(ex.Message);
-                    }
 
+                    BCS bCS = new();
+                    bCS.CreateProgram(ProgramCode, Description);
+                   
                     Message = $"Program has been Added {ProgramCode} {Description}";
                 }
                 else

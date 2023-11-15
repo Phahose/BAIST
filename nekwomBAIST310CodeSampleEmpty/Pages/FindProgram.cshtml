@@ -30,7 +30,25 @@
         </tr>
         <tr>
             <td>@Model.Program.ProgramCode</td>
-            <td>@Model.Program.Description</td>
+            <td>@Model.Program.Description</td> <br />
+           
+            
         </tr>
+        @foreach (var student in Model.Program.EnrolledStudents)
+        {
+            <tr>
+                <td>
+                    @student.FirstName
+                </td>
+
+                <td>
+                    @student.LastName
+                </td> 
+                <td>
+                    @student.Email
+                </td>
+            </tr>
+
+        }
     </table>
 </form>

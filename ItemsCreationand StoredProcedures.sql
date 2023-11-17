@@ -121,7 +121,7 @@ As
 
 Drop Procedure DeleteItem
 
-Create Procedure UpdateItem (@ItemNumber INT,@Description Varchar(50), @UnitPrice Money)
+Create Procedure UpdateItem (@ItemNumber INT = NULL,@Description Varchar(50) = NULL, @UnitPrice Money = NULL)
 	As 
 	DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -149,6 +149,10 @@ Create Procedure UpdateItem (@ItemNumber INT,@Description Varchar(50), @UnitPric
 
 
 
-
+		Drop Procedure UpdateItem
 		Exec AddItem "AirPod Max", "5500"
 		--Exec DeleteItem "6"
+
+		Select * from Item
+
+		Exec UpdateItem	null, "Not Needed Description", 100000

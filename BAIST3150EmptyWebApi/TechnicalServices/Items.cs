@@ -62,7 +62,7 @@ namespace BAIST3150EmptyWebApi.TechnicalServices
             Item item = new();
             if (ItemReader.HasRows)
             {
-             
+               ItemReader.Read();
                item = new Item()
                 {
                     ItemNumber = (int)ItemReader["ItemNumber"],
@@ -119,6 +119,14 @@ namespace BAIST3150EmptyWebApi.TechnicalServices
                 CommandText = "UpdateItem",
                 Connection = nekwom1,
             };
+            SqlParameter ItemNumberParameter = new SqlParameter()
+            {
+                ParameterName = "@ItemNumber",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+                SqlValue = exampleItem.ItemNumber
+            };
+            UpdateItemCommand.Parameters.Add(ItemNumberParameter);
             SqlParameter DescriptionParameter = new SqlParameter()
             {
                 ParameterName = "@Description",
@@ -137,7 +145,8 @@ namespace BAIST3150EmptyWebApi.TechnicalServices
             };
             UpdateItemCommand.Parameters.Add(UnitPriceParameter);
 
-            UpdateItemCommand.ExecuteNonQuery() ;
+            UpdateItemCommand.ExecuteNonQuery();
+            nekwom1.Close() ;
         }
 
         public void DeleteItem (int ItemNumber)

@@ -21,11 +21,10 @@ namespace BAIST3150EmptyWebApi.Controllers
         }
 
         // GET api/<ItemsController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{ItemNumber}")]
         public Item Get(int ItemNumber)
         {
-
-            Items ItemManger = new Items();
+            Items ItemManger = new();
             Item Item = ItemManger.GetItem(ItemNumber);
             return Item;
         }
@@ -39,7 +38,7 @@ namespace BAIST3150EmptyWebApi.Controllers
         }
 
         // PUT api/<ItemsController>/5
-        [HttpPut("{id}")]
+        [HttpPut("{itemNumber}")]
         public void Put(int itemNumber, [FromBody] Item exampleItem)
         {
             Items ItemManager = new Items();
@@ -47,7 +46,7 @@ namespace BAIST3150EmptyWebApi.Controllers
         }
 
         // DELETE api/<ItemsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{itemNumber}")]
         public void Delete(int itemNumber)
         {
             Items ItemManager = new Items();

@@ -148,3 +148,7 @@ Create Procedure UpdateItem (@ItemNumber INT,@Description Varchar(50), @UnitPric
 		RETURN @ReturnCode
 
 
+
+
+		Exec AddItem "AirPod Max", "5500"
+		--Exec DeleteItem "6"

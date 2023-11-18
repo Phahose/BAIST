@@ -124,5 +124,23 @@ namespace BAIST3150AssignmentNorthwind.TechnicalServices
 
             return prime;
         }
+
+        public string ConvertToBaseTwo(int baseTenNumber)
+        {
+            if (baseTenNumber == 0)
+            {
+                return "0";
+            }
+
+            string baseTwoNumber = "";
+            while (baseTenNumber > 0)
+            {
+                int remainder =  baseTenNumber % 2;
+                baseTwoNumber = remainder + baseTwoNumber;
+                baseTenNumber /= 2;
+            }
+
+            return baseTwoNumber;
+        }
     }
 }

@@ -20,10 +20,13 @@ namespace BAIST3150AssignmentNorthwind.Controller
         }
 
         // GET api/<CustomersController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{customerid}")]
+        public Customer Get(string customerid)
         {
-            return "value";
+            Customers customers = new Customers();
+            Customer customer;
+            customer = customers.GetCustomer(customerid);
+            return customer;
         }
 
         // POST api/<CustomersController>

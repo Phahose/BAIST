@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using BAIST3150AssignmentNorthwind.TechnicalServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,10 +17,13 @@ namespace BAIST3150AssignmentNorthwind.Controller
         }
 
         // GET api/<BasetenController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{binaryNumber}")]
+        public int Get(string binaryNumber)
         {
-            return "value";
+            Customers customer = new Customers();
+            int decimalNumber = customer.ConvertToBaseTen(binaryNumber);
+
+            return decimalNumber;
         }
 
         // POST api/<BasetenController>

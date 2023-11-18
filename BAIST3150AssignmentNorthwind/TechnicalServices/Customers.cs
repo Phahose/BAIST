@@ -142,5 +142,18 @@ namespace BAIST3150AssignmentNorthwind.TechnicalServices
 
             return baseTwoNumber;
         }
+
+        public int ConvertToBaseTen(string binaryNumber)
+        {
+            int decimalResult = 0;
+
+            for (int i = binaryNumber.Length - 1, power = 0; i >= 0; i--, power++)
+            {
+                int bit = binaryNumber[i] - '0';
+                decimalResult += bit * (int)Math.Pow(2, power);
+            }
+
+            return decimalResult;
+        }
     }
 }

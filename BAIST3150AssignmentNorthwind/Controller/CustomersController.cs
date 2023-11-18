@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using BAIST3150AssignmentNorthwind.Domain;
+using BAIST3150AssignmentNorthwind.TechnicalServices;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BAIST3150AssignmentNorthwind.Controller
@@ -10,9 +11,12 @@ namespace BAIST3150AssignmentNorthwind.Controller
     {
         // GET: api/<CustomersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<Customer> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Customer> customerList = new List<Customer>(); 
+            Customers customers = new Customers();
+            customerList = customers.GetCustomers();
+            return customerList;
         }
 
         // GET api/<CustomersController>/5

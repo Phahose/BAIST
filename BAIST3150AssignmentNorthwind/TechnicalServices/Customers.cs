@@ -93,5 +93,36 @@ namespace BAIST3150AssignmentNorthwind.TechnicalServices
             }
             return customer;
         }
+
+        public bool IsPrime (int number)
+        {
+            bool prime = true;
+            int count = 0;
+
+            if (number <= 1)
+            {
+                Console.WriteLine("Not a prime number");
+                prime = false;
+            }
+            else
+            {
+                for (int i = 2; i < number; i++)
+                {
+                    if ((number % i) == 0)
+                    {
+                        Console.WriteLine("Not Prime");
+                        prime = false;
+                        count++;
+                    }
+                }
+
+                if (count > 0)
+                {
+                    prime = false;
+                }
+            }
+
+            return prime;
+        }
     }
 }

@@ -22,21 +22,21 @@
         <tr>
             <td>First Name</td>
             <td>
-                <input type="text" name="Firstname" />
+                <input type="text" name="Firstname" value="@Model.Firstname"/>
                 @Html.ValidationMessage("FirstnameInput");
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
             <td>
-                <input type="text" name="Lastname" />
+                <input type="text" name="Lastname" value="@Model.Lastname"/>
                 @Html.ValidationMessage("LastnameInput");
             </td>
         </tr>
         <tr>
             <td>Email</td>
             <td>
-                <input type="text" name="Email" />
+                <input type="text" name="Email" value="@Model.Email"/>
                 @Html.ValidationMessage("EmailInput");
             </td>
         </tr>   

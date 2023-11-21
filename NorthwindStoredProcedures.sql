@@ -15,7 +15,7 @@ End
 
 --Drop Procedure nekwom1.GetCustomers
 
-Create Procedure nekwom1.GetCustomer(@CustomerID NCHAR)
+Create Procedure nekwom1.GetCustomer(@CustomerID NCHAR(5))
 As
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -26,7 +26,7 @@ Begin
 Select 
 *
 From Customers 
-Where CustomerID = @CustomerID
+Where CustomerID =@CustomerID
 
 IF @@ERROR = 0
 
@@ -40,10 +40,8 @@ Drop Procedure nekwom1.GetCustomer
 
 Exec nekwom1.GetCustomers
 
-Exec nekwom1.GetCustomer "ANATR"
+Exec nekwom1.GetCustomer 'ANATR'
 
 Exec nekwom1.GetCustomersByCountry 'Germany'
 
 
-Select * From Customers
-Where CustomerID = 'ANATR'

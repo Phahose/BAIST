@@ -151,8 +151,8 @@ Create Procedure UpdateItem (@ItemNumber INT = NULL,@Description Varchar(50) = N
 
 		Drop Procedure UpdateItem
 		Exec AddItem "AirPod Max", "5500"
-		--Exec DeleteItem "6"
+		Exec DeleteItem "18"
 
 		Select * from Item
 
-		Exec UpdateItem	null, "Not Needed Description", 100000
+		Exec UpdateItem 3, 'Not Needed Description', 100000.43

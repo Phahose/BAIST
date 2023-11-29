@@ -3,9 +3,12 @@
 
 use nekwom1
 
-sp_helpuser
+sp_helpuser -- this give information about all the users in the database
 
-Create User aspnetcore For Login [BUILTIN\IIS_IUSRS]
+
+Create User aspnetcore For Login [BUILTIN\IIS_IUSRS] -- adds a user to the DB 
+													 -- with the name by which the user is identified inside the Database
+DROP USER aspnetcore -- This is used to drop a User In the DB
 
 CREATE PROCEDURE GetDatabaseUser
 AS
@@ -24,3 +27,6 @@ AS
 	Return @ReturnCode
 
 	Exec GetDatabaseUser
+
+	GRANT EXECUTE ON GETDATABASEUSER TO aspnetcore  -- grants execute privilege
+	REVOKE EXECUTE ON GETDATABASEUSER FROM aspnetcore -- revokes execute privilege

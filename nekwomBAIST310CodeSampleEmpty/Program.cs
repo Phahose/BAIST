@@ -11,6 +11,11 @@ namespace nekwomBAIST310CodeSampleEmpty
             var app = builder.Build();
 
             //Configure the HTTP reqest pipeline
+            if (!app.Environment.IsDevelopment()) // check for any enviromnet that is not a development 
+            {
+                app.UseDeveloperExceptionPage(); // not for production, remove this line when all production testing is done 
+                // app.UseExceptionHandler("/Error"); customised error page use for final release
+            }
             app.UseStaticFiles(); // add for wwroot
             app.UseRouting();
 

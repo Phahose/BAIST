@@ -1,0 +1,29 @@
+﻿@page
+@model nekwomBAIST310CodeSampleEmpty.Pages.GetDataBaseUserModel
+@{
+}
+<!DOCTYPE html>
+<html>   
+    <head>
+        <title>GetDataBase User</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td> Current User:</td>
+                <td>@Model.CurrentDatabaseuser.CurrentUser</td>
+            </tr>
+            <tr>
+                <td> System User:</td>
+                <td>@Model.CurrentDatabaseuser.SystemUser</td>
+            </tr>
+            <tr>
+                <td> Session User:</td>
+                <td>@Model.CurrentDatabaseuser.SessionUser</td>
+            </tr>
+
+        </table>
+    </body>
+</html>
+

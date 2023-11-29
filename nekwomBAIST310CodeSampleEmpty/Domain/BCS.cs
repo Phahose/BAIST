@@ -60,5 +60,13 @@ namespace nekwomBAIST310CodeSampleEmpty.Domain
             confirmation = programs.AddProgram(programCode, description);
             return confirmation;
         }
+
+        public DatabserUser FindDatabaseuser()
+        {
+            DatabaseUsers databaseUsers = new ();
+            DatabserUser databaseUser = databaseUsers.GetDatabaseUser();
+
+            return databaseUser;
+        }
     }
 }

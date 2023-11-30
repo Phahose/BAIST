@@ -30,3 +30,19 @@ AS
 
 	GRANT EXECUTE ON GETDATABASEUSER TO aspnetcore  -- grants execute privilege
 	REVOKE EXECUTE ON GETDATABASEUSER FROM aspnetcore -- revokes execute privilege
+
+	sp_help
+
+	GRANT EXECUTE ON AddItem TO aspnetcore
+	GRANT EXECUTE ON AddProgram TO aspnetcore
+	GRANT EXECUTE ON AddStudent TO aspnetcore
+	GRANT EXECUTE ON DeleteItem TO aspnetcore
+	GRANT EXECUTE ON DeleteStudent TO aspnetcore
+	GRANT EXECUTE ON GetItem TO aspnetcore
+	GRANT EXECUTE ON GetItems TO aspnetcore
+	GRANT EXECUTE ON GetProgram TO aspnetcore
+	GRANT EXECUTE ON GetPrograms TO aspnetcore
+	GRANT EXECUTE ON GetStudent TO aspnetcore
+	GRANT EXECUTE ON GetStudentByProgram TO aspnetcore
+	GRANT EXECUTE ON UpdateItem TO aspnetcore
+	GRANT EXECUTE ON UpdateStudent TO aspnetcore

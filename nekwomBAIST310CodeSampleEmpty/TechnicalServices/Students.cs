@@ -6,12 +6,21 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
 {
     public class Students
     {
+        private string? _connectionString;
+        public Students()
+        {
+            ConfigurationBuilder DatabaseUserBuilder = new ConfigurationBuilder();
+            DatabaseUserBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            DatabaseUserBuilder.AddJsonFile("appsettings.json");
+            IConfiguration DatabaseUserConfiguration = DatabaseUserBuilder.Build();
+            _connectionString = DatabaseUserConfiguration.GetConnectionString("nekwom1");
+        }
         public bool AddStudent(nekwomBAIST310CodeSampleEmpty.Domain.Student acceptetStudent, string progarmCode) // parameters, Camel Case
         {
             bool Success = false;
 
             SqlConnection Nekwom1 = new();
-            Nekwom1.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            Nekwom1.ConnectionString = _connectionString;
             Nekwom1.Open();
 
             SqlCommand AddStudentCommand = new()
@@ -81,7 +90,7 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
         {
             Student EnrolledStudent = new();
             SqlConnection nekwom1Connnnection = new();
-            nekwom1Connnnection.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connnnection.ConnectionString = _connectionString;
             nekwom1Connnnection.Open();
 
             SqlCommand FindStudent = new()
@@ -120,7 +129,7 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
             bool Success = false;
             SqlConnection nekwom1Connection = new();
 
-            nekwom1Connection.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = _connectionString;
             nekwom1Connection.Open();
 
             SqlCommand ModifyStudent = new()
@@ -187,7 +196,7 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
             bool Success = false;
             SqlConnection conn = new();
 
-            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            conn.ConnectionString = _connectionString;
             conn.Open();
 
             SqlCommand RemoveStudent = new()
@@ -215,7 +224,7 @@ namespace nekwomBAIST310CodeSampleEmpty.TechnicalServices
             List<Student> enrolledStudents = new List<Student>();
             SqlConnection conn = new();
 
-            conn.ConnectionString = "Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            conn.ConnectionString = _connectionString;
             conn.Open();
 
             SqlCommand FindProgram = new()

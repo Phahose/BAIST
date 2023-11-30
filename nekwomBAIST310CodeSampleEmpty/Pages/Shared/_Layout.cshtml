@@ -9,45 +9,39 @@
     @RenderSection("scriptCreateProgramValidation", required: false)
     <script src="~/css/script.js"></script>
 </head>
-<body>
-    <header class="nav">
-       
-        <p>Nicholas Ekwom</p>
-        <div class="hamburger-menu">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <ul class="nav-links">
-           
-            <li>
-                <a href="Index">Home</a>
-            </li> 
-             <li>
-                <a href="Privacy">Privacy</a>
-            </li>
-             <li>
-                <a href="CreateProgram">Create Program</a>
-            </li>
-             <li>
-                <a href="EnrollStudent">Enroll Student</a>
-            </li>
-             <li>
-                <a href="FindProgram">Find Program</a>
-            </li>
-            <li>
-                <a href="FindStudent">Find Student</a>
-            </li>
-            <li>
-                <a href="ModifyStudent">Modify Student</a>
-            </li>
-             <li>
-                <a href="RemoveStudent">Remove Student</a>
-            </li>
-        </ul>
-    </header>
+<body>  
     <div>
-        @RenderBody()
+        <div class="nav">
+            <ul class="nav-links">
+                <li>
+                    <a href="Index">Home</a>
+                </li>
+                <li>
+                    <a href="Privacy">Privacy</a>
+                </li>
+                <li>
+                    <a href="CreateProgram">Create Program</a>
+                </li>
+                <li>
+                    <a href="EnrollStudent">Enroll Student</a>
+                </li>
+                <li>
+                    <a href="FindProgram">Find Program</a>
+                </li>
+                <li>
+                    <a href="FindStudent">Find Student</a>
+                </li>
+                <li>
+                    <a href="ModifyStudent">Modify Student</a>
+                </li>
+                <li>
+                    <a href="RemoveStudent">Remove Student</a>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

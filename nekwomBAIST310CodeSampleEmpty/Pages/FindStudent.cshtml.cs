@@ -15,6 +15,7 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
         public nekwomBAIST310CodeSampleEmpty.Domain.Student Student { get; set; } = new();
         public void OnGet()
         {
+            Message = "Find A Student";
         }
 
         public void OnPost()

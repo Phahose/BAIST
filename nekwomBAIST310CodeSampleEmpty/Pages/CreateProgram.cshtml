@@ -24,23 +24,24 @@
         }
     </script>
 }
+<h2>@Model.Message</h2>
 <form name="AddProgram" method="post" onsubmit="return isFormValid(window.document.AddProgram);">
     <table>
         <tr>
-            <td>@Model.Message</td>
+            <td></td>
         </tr>
         <tr>
             <td>Program Code</td>
             <td>
                 <input type="text" name="ProgramCode" />
-                @Html.ValidationMessage("Programcode");
+                @Html.ValidationMessage("Programcode")
             </td>
         </tr>
         <tr>
             <td>Description</td>
             <td>
                 <input type="text" name="Description" />
-                @Html.ValidationMessage("Description");
+                @Html.ValidationMessage("Description")
             </td>
         </tr>
         <tr>

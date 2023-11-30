@@ -2,44 +2,42 @@
 @model nekwomBAIST310CodeSampleEmpty.Pages.EnrollStudentModel
 @{
 }
-<form name="EnrollStudent" method="post">
+<h2>@Model.Message</h2>
+<form name="EnrollStudent" method="post"> 
     <table>
-        <tr>
-            <td>@Model.Message</td>
-        </tr>
         <tr>
             <td>Student ID</td>
             <td>
                 <input type="text" name="ID" />
-                @Html.ValidationMessage("IdInput");
+                @Html.ValidationMessage("IdInput")
             </td>
         </tr>
         <tr>
             <td>First Name</td>
             <td>
                 <input type="text" name="Firstname" />
-                @Html.ValidationMessage("FirstnameInput");
+                @Html.ValidationMessage("FirstnameInput")
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
             <td>
                 <input type="text" name="Lastname" />
-                @Html.ValidationMessage("LastnameInput");
+                @Html.ValidationMessage("LastnameInput")
             </td>
         </tr>
         <tr>
             <td>Email</td>
             <td>
                 <input type="text" name="Email" />
-                @Html.ValidationMessage("EmailInput");
+                @Html.ValidationMessage("EmailInput")
             </td>
         </tr>
         <tr>
             <td>Program Code</td>
             <td>
                 <input type="text" name="ProgramCode" />
-                @Html.ValidationMessage("ProgramCodeinput");
+                @Html.ValidationMessage("ProgramCodeinput")
             </td>
         </tr>
         <tr>

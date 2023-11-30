@@ -2,16 +2,14 @@
 @model nekwomBAIST310CodeSampleEmpty.Pages.ModifyStudentModel
 @{
 }
+<h2>@Model.Message</h2>
 <form name="ModifyStudent" method="post" >
     <table>
-        <tr>
-            <td>@Model.Message</td>
-        </tr>
         <tr>
             <td>Student ID</td>
             <td>
                 <input type="text" name="ID" />
-                @Html.ValidationMessage("IdInput");
+                @Html.ValidationMessage("IdInput")
             </td>
         </tr>
         <tr>
@@ -23,21 +21,21 @@
             <td>First Name</td>
             <td>
                 <input type="text" name="Firstname" value="@Model.Firstname"/>
-                @Html.ValidationMessage("FirstnameInput");
+                @Html.ValidationMessage("FirstnameInput")
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
             <td>
                 <input type="text" name="Lastname" value="@Model.Lastname"/>
-                @Html.ValidationMessage("LastnameInput");
+                @Html.ValidationMessage("LastnameInput")
             </td>
         </tr>
         <tr>
             <td>Email</td>
             <td>
                 <input type="text" name="Email" value="@Model.Email"/>
-                @Html.ValidationMessage("EmailInput");
+                @Html.ValidationMessage("EmailInput")
             </td>
         </tr>   
         <tr>

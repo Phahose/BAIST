@@ -15,6 +15,7 @@ namespace nekwomBAIST310CodeSampleEmpty.Pages
         public string Message { get; set; } = string.Empty;
         public void OnGet()
         {
+            Message = "Find A Program";
         }
 
         public void OnPost()

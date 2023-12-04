@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BAIS3110___Authentication__1.Controller;
+using BAIS3110___Authentication__1.Domain;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
+using System;
 
 namespace BAIS3110Authentication.Pages
 {
@@ -16,13 +21,34 @@ namespace BAIS3110Authentication.Pages
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; }
         public string Message { get; set; }
+
         public async Task<IActionResult> OnPost()
         {
-            // Hardcoded User Credentials
-            string UserEmail = "nekwom1@nait.ca";
-            string UserName = "Nicholas";
-            string UserPassword = "123";
-            string UserRole = "Admin";
+            BCS bCS = new BCS();
+            User existingUser = new();
+
+            byte[] salt = new byte[128 / 8];
+            using (var rngCsp = new RNGCryptoServiceProvider())
+            {
+                rngCsp.GetNonZeroBytes(salt);
+            }
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: Password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
+           // Password = hashed;
+
+            existingUser = bCS.GetUser(Email);
+
+            string UserEmail = existingUser.Email;
+            string UserName = existingUser.Username;
+            string UserPassword = existingUser.Password;
+            string UserRole = existingUser.Role;
+
             if (Email == UserEmail)
             {
                 if (Password == UserPassword)

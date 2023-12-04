@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 namespace BAIS3110___Authentication__1.Technical_Services
 {
-    public class Controls
+    public class SecurityManager
     {
         public bool AddUser(User user)
         {
@@ -55,6 +55,46 @@ namespace BAIS3110___Authentication__1.Technical_Services
 
             systemsConnection.Close();
             return confirmation;
+        }
+
+        public User GetUser(string email)
+        {
+            User user = new User();
+            SqlConnection systemsConnection = new SqlConnection();
+            systemsConnection.ConnectionString = "Persist Security Info=False;Integrated Security=True;Database=Systems;server=(localDB)\\MSSQLLocalDB";
+            systemsConnection.Open();
+
+            SqlCommand GetUser = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                Connection = systemsConnection,
+                CommandText = "GetUser"
+            };
+
+            SqlParameter EmailParameter = new()
+            {
+                ParameterName = "@Email",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                SqlValue = email
+            };
+
+            GetUser.Parameters.Add(EmailParameter);
+            SqlDataReader UserReader = GetUser.ExecuteReader();
+
+            if (UserReader.HasRows)
+            {
+                while (UserReader.Read())
+                {
+                    user.Username = (string)UserReader["Username"];
+                    user.Email = (string)UserReader["Email"];
+                    user.Password = (string)UserReader["UserPassword"];
+                    user.Role = (string)UserReader["UserRole"];
+                }
+            }
+            UserReader.Close();
+            systemsConnection.Close();
+            return user;
         }
     }
 }

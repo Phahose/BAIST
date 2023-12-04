@@ -23,10 +23,19 @@ namespace BAIS3110___Authentication__1.Controller
               iterationCount: 100000,
               numBytesRequested: 256 / 8));
 
-            Controls controll= new Controls();
+            SecurityManager controll= new SecurityManager();
             addeduser.Password = hashed;
             Console.WriteLine(addeduser.Password);
             controll.AddUser(addeduser);
+        }
+
+        public User GetUser(string existingUseremail)
+        {
+            User user = new User();
+            SecurityManager controll = new SecurityManager();
+            user = controll.GetUser(existingUseremail);
+
+            return user;
         }
     }
 }

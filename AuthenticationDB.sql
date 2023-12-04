@@ -32,3 +32,21 @@ BEGIN
 		RAISERROR ('Add User - INSERT error: Users table.', 16, 1)
 	END
 		RETURN @ReturnCode
+
+
+CREATE PROCEDURE GetUser(@Email NVARCHAR(100))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+
+    IF @Email IS NULL
+        RAISERROR('Email Cannot BE Null', 16, 1);
+	ELSE
+	SELECT * FROM Users WHERE Email = @Email
+IF @@ERROR = 0
+		SET @ReturnCode = 0
+	ELSE
+		RAISERROR ('Get User - Find error: Users table.', 16, 1)
+	END
+RETURN @ReturnCode

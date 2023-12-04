@@ -24,6 +24,7 @@ namespace BAIS3110___Authentication__1.Controller
               numBytesRequested: 256 / 8));
 
             Controls controll= new Controls();
+            addeduser.Password = hashed;
             Console.WriteLine(addeduser.Password);
             controll.AddUser(addeduser);
         }

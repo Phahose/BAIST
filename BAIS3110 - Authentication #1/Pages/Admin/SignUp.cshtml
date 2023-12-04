@@ -1,0 +1,49 @@
+﻿@page
+@model BAIS3110___Authentication__1.Pages.Admin.SignUpModel
+@{
+}
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Sign Up</title>
+    </head>
+    <body>
+        <h1>Admin - Create A User</h1>
+        <div>
+            <form method="post" name="SignUp" >
+                <table>
+                    <tr>
+                        <td>UserName</td>
+                        <td>
+                            <input type="text" name="Username" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input type="email" name="Email" />
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>Password</td>
+                        <td>
+                            <input type="password" name="Password" />
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>Role</td>
+                        <td>
+                            <input type="text" name="Role" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" name="Submit" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

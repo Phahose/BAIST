@@ -50,3 +50,5 @@ IF @@ERROR = 0
 		RAISERROR ('Get User - Find error: Users table.', 16, 1)
 	END
 RETURN @ReturnCode
+
+Exec GetUser 'ekwomnick@gmail.com'

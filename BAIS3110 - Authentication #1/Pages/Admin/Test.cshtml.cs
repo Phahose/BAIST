@@ -43,7 +43,7 @@ namespace BAIS3110Authentication.Pages
         private bool CheckUserCredentials(string email, string password)
         {
             // Replace the connection string with your actual database connection string
-            string connectionString = @"Persist Security Info=False;Database=YourDatabaseName;User ID=YourUserId;Password=YourPassword;server=YourServer";
+            string connectionString = @"Persist Security Info=False;Integrated Security=True;Database=Systems;server=(localDB)\MSSQLLocalDB";
 
             using SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
@@ -55,7 +55,7 @@ namespace BAIS3110Authentication.Pages
 
             if (reader.Read())
             {
-                byte[] storedHashedPassword = (byte[])reader["Password"];
+                byte[] storedHashedPassword = (byte[])reader["UserPassword"];
                 byte[] storedSalt = (byte[])reader["Salt"];
 
                 byte[] hashedPassword = HashPasswordWithSalt(password, storedSalt);

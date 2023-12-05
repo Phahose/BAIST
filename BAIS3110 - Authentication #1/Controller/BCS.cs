@@ -16,15 +16,15 @@ namespace BAIS3110___Authentication__1.Controller
             {
                 rngCsp.GetNonZeroBytes(salt);
             }
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-              password: addeduser.Password,
-              salt: salt,
-              prf: KeyDerivationPrf.HMACSHA256,
-              iterationCount: 100000,
-              numBytesRequested: 256 / 8));
+            byte[] hashedPassword = HashPasswordWithSalt (addeduser.Password, salt);
+
+            // Convert the salt and hashed password to Base64 for storage
+            string saltBase64 = Convert.ToBase64String(salt);
+            string hashedPasswordBase64 = Convert.ToBase64String(hashedPassword);
 
             SecurityManager controll= new SecurityManager();
-            addeduser.Password = hashed;
+            addeduser.Password = hashedPasswordBase64;
+            addeduser.Salt = saltBase64;
             Console.WriteLine(addeduser.Password);
             controll.AddUser(addeduser);
         }
@@ -36,6 +36,13 @@ namespace BAIS3110___Authentication__1.Controller
             user = controll.GetUser(existingUseremail);
 
             return user;
+        }
+
+        // Hash the Passwords
+        private static byte[] HashPasswordWithSalt(string password, byte[] salt)
+        {
+            // Hash the password with PBKDF2 using HMACSHA256
+            return new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256).GetBytes(32);
         }
     }
 }

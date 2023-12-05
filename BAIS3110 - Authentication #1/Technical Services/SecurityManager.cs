@@ -39,6 +39,13 @@ namespace BAIS3110___Authentication__1.Technical_Services
                 Direction = ParameterDirection.Input,
                 SqlValue = user.Password
             };
+            SqlParameter Saltparameter = new()
+            {
+                ParameterName = "@Salt",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+                SqlValue = user.Salt
+            };
             SqlParameter UserRoleParemeter = new()
             {
                 ParameterName = "@UserRole",
@@ -50,6 +57,7 @@ namespace BAIS3110___Authentication__1.Technical_Services
             AddUser.Parameters.Add(EmailParameter);
             AddUser.Parameters.Add(PasswordParameter);
             AddUser.Parameters.Add(UserRoleParemeter);
+            AddUser.Parameters.Add(Saltparameter);
 
             AddUser.ExecuteNonQuery();
 
@@ -90,6 +98,7 @@ namespace BAIS3110___Authentication__1.Technical_Services
                     user.Email = (string)UserReader["Email"];
                     user.Password = (string)UserReader["UserPassword"];
                     user.Role = (string)UserReader["UserRole"];
+                    user.Salt = (string)UserReader["Salt"];
                 }
             }
             UserReader.Close();

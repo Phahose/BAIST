@@ -6,14 +6,17 @@ CREATE TABLE Users
     Username NVARCHAR(50) NOT NULL,
     Email NVARCHAR(100) NOT NULL,
     UserPassword NVARCHAR(255) NOT NULL,
-    UserRole NVARCHAR(50) NOT NULL
+    UserRole NVARCHAR(50) NOT NULL,
+	Salt NVARCHAR(255) NOT NULL
 );
 
+Drop Table Users
 CREATE PROCEDURE AddUser
     @Username NVARCHAR(50),
     @Email NVARCHAR(100),
     @UserPassword NVARCHAR(255),
-    @UserRole NVARCHAR(50)
+    @UserRole NVARCHAR(50),
+	@Salt NVARCHAR(255)
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -24,15 +27,15 @@ BEGIN
 	ELSE
 
 
-    INSERT INTO Users (Username, Email, UserPassword, UserRole)
-    VALUES (@Username, @Email, @UserPassword, @UserRole);
+    INSERT INTO Users (Username, Email, UserPassword, UserRole, Salt)
+    VALUES (@Username, @Email, @UserPassword, @UserRole,@Salt);
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 	ELSE
 		RAISERROR ('Add User - INSERT error: Users table.', 16, 1)
 	END
 		RETURN @ReturnCode
-
+Drop Procedure AddUser
 
 CREATE PROCEDURE GetUser(@Email NVARCHAR(100))
 AS
@@ -52,3 +55,4 @@ IF @@ERROR = 0
 RETURN @ReturnCode
 
 Exec GetUser 'ekwomnick@gmail.com'
+Exec AddUser 'user3','u3@gmail.com','123456','Admin'

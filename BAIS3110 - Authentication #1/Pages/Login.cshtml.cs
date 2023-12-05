@@ -11,6 +11,7 @@ using BAIS3110___Authentication__1.Domain;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using System;
+using System.Collections;
 
 namespace BAIS3110Authentication.Pages
 {
@@ -26,23 +27,17 @@ namespace BAIS3110Authentication.Pages
         {
             BCS bCS = new BCS();
             User existingUser = new();
-
-            byte[] salt = new byte[128 / 8];
-            using (var rngCsp = new RNGCryptoServiceProvider())
-            {
-                rngCsp.GetNonZeroBytes(salt);
-            }
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: Password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA256,
-            iterationCount: 100000,
-            numBytesRequested: 256 / 8));
-
-           // Password = hashed;
-
             existingUser = bCS.GetUser(Email);
+
+            // Convert DB Data Back to byte[] form because they werr stored in the DB as strings
+            byte[] salt = Convert.FromBase64String(existingUser.Salt);
+            byte[] storedHashedpassword = Convert.FromBase64String(existingUser.Password);
+
+            // Convert user Input to byte[] hash and then to strings
+            byte[] enteredHashedPassword = HashPasswordWithSalt(Password, salt);
+            string enteredHashedPasswordBase64 = Convert.ToBase64String(enteredHashedPassword);
+
+            Password = enteredHashedPasswordBase64;
 
             string UserEmail = existingUser.Email;
             string UserName = existingUser.Username;
@@ -51,18 +46,20 @@ namespace BAIS3110Authentication.Pages
 
             if (Email == UserEmail)
             {
-                if (Password == UserPassword)
+                // Compare the Two arrays and not the Hashed Figures
+                if (ByteArraysAreEqual(storedHashedpassword, enteredHashedPassword))
                 {
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, Email),
                         new Claim(ClaimTypes.Name, UserName)
                     };
-                        var claimsIdentity = new ClaimsIdentity(claims,
-                        CookieAuthenticationDefaults.AuthenticationScheme);
-                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserRole));
-                        AuthenticationProperties authProperties = new AuthenticationProperties
+                    var claimsIdentity = new ClaimsIdentity(claims,
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserRole));
+                    AuthenticationProperties authProperties = new AuthenticationProperties
                     {
+                        #region
                         //AllowRefresh = <bool>,
                         // Refreshing the authentication session should be allowed.
                         //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
@@ -79,6 +76,7 @@ namespace BAIS3110Authentication.Pages
                         //RedirectUri = <string>
                         // The full path or absolute URI to be used as an http
                         // redirect response value.
+                        #endregion
                     };
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity), authProperties);
@@ -88,6 +86,29 @@ namespace BAIS3110Authentication.Pages
             }
             Message = "Invalid attempt";
             return Page();
+        }
+
+        // Hashes the Enterd password with the same hashing algorithm that was used to Hash them into the DB
+        private static byte[] HashPasswordWithSalt(string password, byte[] salt)
+        {
+            // Hash the password with PBKDF2 using HMACSHA256
+            return new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256).GetBytes(32);
+        }
+
+
+        // Search Through all the values in the Byte Array to be sure that they match
+        private bool ByteArraysAreEqual(byte[] a, byte[] b)
+        {
+            if (a == null || b == null || a.Length != b.Length)
+                return false;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] != b[i])
+                    return false;
+            }
+
+            return true;
         }
     }
 }

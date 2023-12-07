@@ -8,6 +8,7 @@ CREATE TABLE Customer (
     PostalCode VARCHAR(7)
 );
 
+
 Drop table Customer
 
 CREATE TABLE Item (
@@ -60,7 +61,7 @@ ADD CONSTRAINT FK_ItemCode FOREIGN KEY (ItemCode) REFERENCES Item(ItemCode);
 
 
 -- Add To Inventory
-Create Procedure AddToInventory (@ItemCode VARCHAR(6), @Description VARCHAR(6), @UnitPrice DECIMAL(10,2), @Deleted BIT)
+Create Procedure AddToInventory (@ItemCode VARCHAR(6), @Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted BIT)
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -82,7 +83,7 @@ BEGIN
 
 
 		-- Update Inventory
-Create Procedure UpdateInventory (@Description VARCHAR(6), @UnitPrice DECIMAL(10,2), @Deleted BIT, @ItemCode VARCHAR(6))
+Create Procedure UpdateInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted BIT, @ItemCode VARCHAR(6))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -104,6 +105,9 @@ BEGIN
 
 		RETURN @ReturnCode
 
+Drop Procedure UpdateInventory
+
+
 		-- Delete From Inventory
 Create Procedure DeleteFromInventory (@ItemCode VARCHAR(6))
 AS
@@ -115,6 +119,26 @@ BEGIN
 	ELSE
 	UPDATE Item
 		SET Deleted = 0
+		WHERE Item.ItemCode = @ItemCode
+		IF @@ERROR = 0
+
+					SET @ReturnCode = 0
+				ELSE
+					RAISERROR ('DeleteItem - Delete error: Item table.', 16, 1)
+			END
+
+		RETURN @ReturnCode
+
+Create Procedure BringBackInventory (@ItemCode VARCHAR(6))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	IF @ItemCode is NULL
+		RAISERROR('Item Code Cannot be null',16,1)
+	ELSE
+	UPDATE Item
+		SET Deleted = 1
 		WHERE Item.ItemCode = @ItemCode
 		IF @@ERROR = 0
 
@@ -140,8 +164,8 @@ BEGIN
 	IF @FirstName is NULL OR @LastName is NULL OR @Address is NULL OR @City is NULL OR @Province is NULL OR @PostalCode is NULL
 		RAISERROR('Must have a value for all of the Inputs',16,1)
 	ELSE
-		INSERT INTO Customer (FirstName, LastName, Address, City, Province, PostalCode)
-		VALUES (@FirstName,@LastName,@Address,@City,@Province,@PostalCode)
+		INSERT INTO Customer (CustomerID,FirstName, LastName, Address, City, Province, PostalCode,Deleted)
+		VALUES (@CustomerID,@FirstName,@LastName,@Address,@City,@Province,@PostalCode,1)
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 	ELSE
@@ -149,6 +173,7 @@ BEGIN
 	END
 		RETURN @ReturnCode
 
+Drop Procedure AddCustomer
 		-- Update  Customer 
 Create Procedure UpdateCustomer(@CustomerID VARCHAR(25), 
 							  @FirstName VARCHAR(25),
@@ -195,7 +220,7 @@ BEGIN
 	ELSE
 	UPDATE Customer
 		SET Deleted = 0
-		WHERE Item.ItemCode = @CustomerID
+		WHERE CustomerID = @CustomerID
 		IF @@ERROR = 0
 
 					SET @ReturnCode = 0
@@ -206,6 +231,38 @@ BEGIN
 		RETURN @ReturnCode
 
 
+-- Find Item
+Create Procedure FindItem (@ItemCode VARCHAR(6))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	IF @ItemCode is NULL
+		RAISERROR('Item Code Cannot be null',16,1)
+	ELSE
+	SELECT * FROM Item
+	WHERE ItemCode = @ItemCode AND Deleted = 1
+	IF @@ERROR = 0
 
-Exec  AddToInventory 1,'Iphone15',1500.34,1
-     
+					SET @ReturnCode = 0
+				ELSE
+					RAISERROR ('FindItem - Find error: Item table.', 16, 1)
+			END
+
+		RETURN @ReturnCode
+
+Exec  AddToInventory 4,'AirPods Max',700.34,1
+
+Exec UpdateInventory'MacBook',5500.34,1,2
+
+Exec DeleteFromInventory 4
+
+Exec BringBackInventory 4
+
+Exec FindItem 4
+
+Exec AddCustomer '3','Davicdo','Oluws','Rogers Place','Toronto','Canada','T4V5V4'
+
+Exec UpdateCustomer '1','Nicholas','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
+
+Exec DeleteCustomer '3'

@@ -1,0 +1,103 @@
+﻿@page
+@model nekwomBAIST310CodeSampleEmpty.Pages.WeebStorageExampleModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WebStorage Sample</title>
+    <script type="text/javascript">
+        /*
+             WebStorage API provides a mechaniasi, by which browsers can store key/value pairs
+             rather then using cookies
+
+             sessionStorage
+             stores data until the browser (or tab) is closed
+
+             localStorage 
+             presists even when the browser is closed and reopened (this stored stuff in the users device)
+
+             Reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+        */
+       function displayFieldsInStorage(){
+           var fieldArray = [];
+           var index = 0;
+           var serializedJSON;
+           var displayHTML = '<tr><th>Fields In Storage</th></tr>';
+
+           if (localStorage.getItem('FieldsInStorage') !== null) 
+           {
+               serializedJSON = localStorage.getItem('FieldsInStorage');
+               fieldArray = JSON.parse(serializedJSON);
+           }
+
+           if (fieldArray.length > 0) {
+               for (index = 0; index <= fieldArray.length - 1; index++){
+                   displayHTML += '<tr><td>' + fieldArray[index] + '</td></tr>';
+               }
+           }
+           else {
+               displayHTML += '<tr><td>There is no data in the Local Storage</td></tr>';
+           }
+
+           window.document.getElementById('DisplayTable').innerHTML = displayHTML;
+       }
+
+       function clearField() {
+            localStorage.removeItem('FieldsInStorage');
+            // alternatively if we want to clear everything
+            //localStorage.clear
+            displayFieldsInStorage();
+       }
+
+        function storeField(aField) {
+            var fieldArray = [];
+            var serializedJSON;
+
+            if (localStorage.getItem('FieldsInStorage') !== null)
+            { 
+                serializedJSON = localStorage.getItem('FieldsInStorage');
+                fieldArray = JSON.parse(serializedJSON);
+            }
+
+            fieldArray.push(aField.value);
+            serializedJSON = JSON.stringify(fieldArray);
+            localStorage.setItem('FieldsInStorage', serializedJSON);
+
+            displayFieldsInStorage();
+
+            aField.value = '';
+            aField.focus();
+            aField.select();
+        }
+
+    </script>
+</head>
+<body>
+    <form name="SampleForm" >
+        <table id="EntryTable">
+            <tr>
+                <td>Field:</td>
+                <td>
+                    <input type="text" name="Field"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" name="Store" value="Store" onclick="storeField(window.document.SampleForm.Field);"/>
+                </td>
+                 <td>
+                    <input type="button" name="Clear" value="Clear" onclick="clearField();"/>
+                </td>
+            </tr>
+        </table>
+        <table id="DisplayTable">
+        </table>
+        <script type="text/javascript">
+            displayFieldsInStorage();
+
+        </script>
+    </form>
+</body>
+</html>

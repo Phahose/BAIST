@@ -8,6 +8,7 @@ namespace nekwomBAIST310CodeSampleEmpty
 
             // Add services to the container
             builder.Services.AddRazorPages();
+            builder.Services.AddSession();
             var app = builder.Build();
 
             //Configure the HTTP reqest pipeline
@@ -18,7 +19,7 @@ namespace nekwomBAIST310CodeSampleEmpty
             }
             app.UseStaticFiles(); // add for wwroot
             app.UseRouting();
-
+            app.UseSession();
             app.MapRazorPages();
 
             app.Run();

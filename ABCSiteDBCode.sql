@@ -296,7 +296,7 @@ BEGIN
 		RETURN @ReturnCode
 
 
-Exec  AddToInventory 4,'AirPods Max',700.34,1
+Exec  AddToInventory 5,'Samsung Galaxy S24',1300,1
 
 Exec UpdateInventory'MacBook',5500.34,1,2
 
@@ -304,7 +304,7 @@ Exec DeleteFromInventory 4
 
 Exec BringBackInventory 4
 
-Exec FindItem 4
+Exec FindItem 5
 
 Exec AddCustomer '3','Davicdo','Oluws','Rogers Place','Toronto','Canada','T4V5V4'
 

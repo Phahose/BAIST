@@ -251,6 +251,51 @@ BEGIN
 
 		RETURN @ReturnCode
 
+
+-- Find Customer 
+
+Create Procedure FindCustomer (@CustomerID VARCHAR(25))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	IF @CustomerID is NULL
+		RAISERROR('CustomerID Cannot be null',16,1)
+	ELSE
+	SELECT * FROM Customer
+	WHERE CustomerID = @CustomerID AND Deleted = 1
+	IF @@ERROR = 0
+
+					SET @ReturnCode = 0
+				ELSE
+					RAISERROR ('Fins Customer  - Find error: Customer table.', 16, 1)
+			END
+
+		RETURN @ReturnCode
+		Drop procedure FindCustomer
+
+-- Bring Back Customer
+Create Procedure BringBackCustomer (@CustomerID VARCHAR(25))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	IF @CustomerID is NULL
+		RAISERROR('Customer ID Cannot be null',16,1)
+	ELSE
+	UPDATE Customer
+		SET Deleted = 1
+		WHERE CustomerID = @CustomerID
+		IF @@ERROR = 0
+
+					SET @ReturnCode = 0
+				ELSE
+					RAISERROR ('Bring Back Customer Error - Update error: Customer table.', 16, 1)
+			END
+
+		RETURN @ReturnCode
+
+
 Exec  AddToInventory 4,'AirPods Max',700.34,1
 
 Exec UpdateInventory'MacBook',5500.34,1,2
@@ -266,3 +311,8 @@ Exec AddCustomer '3','Davicdo','Oluws','Rogers Place','Toronto','Canada','T4V5V4
 Exec UpdateCustomer '1','Nicholas','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
 
 Exec DeleteCustomer '3'
+
+Exec BringBackCustomer '3'
+
+Exec FindCustomer 3
+

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    @RenderSection("scriptDDAVAlidation", required: false)
+    @RenderSection("scriptCreateProgramValidation", required: false)
+    <script src="~/css/script.js"></script>
+</head>
+<body>  
+    <div>
+        <div class="nav">
+            <ul class="nav-links">
+                <li>
+                    <a href="~/Index">Home</a>
+                </li>
+                <li>
+                    <a href="~/Privacy">Privacy</a>
+                </li>
+                <li>
+                    <a href="~/CreateProgram">Create Program</a>
+                </li>
+                <li>
+                    <a href="~/EnrollStudent">Enroll Student</a>
+                </li>
+                <li>
+                    <a href="~/FindProgram">Find Program</a>
+                </li>
+                <li>
+                    <a href="~/FindStudent">Find Student</a>
+                </li>
+                <li>
+                    <a href="~/ModifyStudent">Modify Student</a>
+                </li>
+                <li>
+                    <a href="~/RemoveStudent">Remove Student</a>
+                </li>
+                <li>
+                    <a href="~/GetDataBaseUser">GetDataBaseUser</a>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

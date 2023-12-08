@@ -1,0 +1,37 @@
+﻿@page
+@model ABCHardWare.Pages.UpdateItemModel
+@{
+}
+<h2>Update Item</h2>
+<form name="UpdateItem" method="post">
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="ItemCode" placeholder="ItemCode" value="@Model.ItemCode"/>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <input type="submit" name="Submit" value="FindItem" class="sub"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="Description" placeholder="Description" value="@Model.Description"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" name="UnitPrice" min="0" max="9999999999" step=".01" placeholder="UnitPrice" value="@Model.UnitPrice"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="UpdateItem" class="sub" />
+            </td>
+        </tr>
+    </table>
+    <div class="message">
+        <p>@Model.Message</p>
+    </div>
+</form>

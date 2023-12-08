@@ -6,30 +6,26 @@
 <form name="AddItem" method="post">
     <table>
         <tr>
-            <td>Item Code</td>
             <td>
-                <input type="text" name="ItemCode" required  />
-            </td>
-        </tr>
-        <tr>
-            <td>Description</td>
-            <td>
-                <input type="text" name="Description" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>Unit Price</td>
-            <td>
-                <input type="number" name="UnitPrice" required min="0" max="9999999999" step=".01" />
+                <input type="text" name="ItemCode" required  placeholder="Item Code"/>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="submit" name="AddItem" value="AddItem" />
+                <input type="text" name="Description" required placeholder="Description"/>
             </td>
         </tr>
         <tr>
-            <td>@Model.Message</td>    
+            <td>
+                <input type="number" name="UnitPrice" required min="0" max="9999999999" step=".01" placeholder="Unit Price" />
+            </td>
         </tr>
     </table>
+    <div class="submit">
+        <input type="submit" name="AddItem" value="AddItem" class="sub" />
+    </div>
+
+    <div class="message">
+        <p>@Model.Message</p>
+    </div>
 </form>

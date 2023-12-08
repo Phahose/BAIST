@@ -16,5 +16,28 @@ namespace ABCHardWare.Domian
             items.AddItem(item);
             return item;
         }
+        public Item GetItem(string id)
+        {      
+            Items items = new Items();
+            Item inventoryItem = items.FindItem(id);
+
+            return inventoryItem;
+        }
+        public bool UpdateItem (Item item)
+        {
+            bool confirmation = false;
+            Items items = new Items();
+            items.UpdateItem(item);
+            confirmation = true;
+            return confirmation;
+        }
+        public bool DeleteItem(string itemId)
+        {
+            bool confirmation = false;
+            Items items = new Items();
+            items.DeleteItem(itemId);
+            confirmation = true;
+            return confirmation;
+        }
     }
 }

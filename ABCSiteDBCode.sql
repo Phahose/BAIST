@@ -18,6 +18,13 @@ CREATE TABLE Item (
     Deleted BIT NOT NULL
 );
 
+ALTER TABLE Customer
+ADD Deleted INT
+
+ALTER TABLE Customer
+DROP COLUMN Deleted;
+
+Drop Table Sale 
 Drop table Item
 
 CREATE TABLE Sale (
@@ -61,7 +68,7 @@ ADD CONSTRAINT FK_ItemCode FOREIGN KEY (ItemCode) REFERENCES Item(ItemCode);
 
 
 -- Add To Inventory
-Create Procedure AddToInventory (@ItemCode VARCHAR(6), @Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted BIT)
+Create Procedure AddToInventory (@ItemCode VARCHAR(6), @Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT)
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -83,7 +90,7 @@ BEGIN
 
 
 		-- Update Inventory
-Create Procedure UpdateInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted BIT, @ItemCode VARCHAR(6))
+Create Procedure UpdateInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -174,7 +181,7 @@ BEGIN
 		RETURN @ReturnCode
 
 Drop Procedure AddCustomer
-		-- Update  Customer 
+-- Update  Customer 
 Create Procedure UpdateCustomer(@CustomerID VARCHAR(25), 
 							  @FirstName VARCHAR(25),
 							  @LastName VARCHAR(25),
@@ -182,7 +189,7 @@ Create Procedure UpdateCustomer(@CustomerID VARCHAR(25),
 							  @City VARCHAR(25),
 							  @Province VARCHAR(25),
 							  @PostalCode VARCHAR(7),
-							  @Deleted BIT)
+							  @Deleted INT)
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -208,7 +215,7 @@ BEGIN
 	END
 		RETURN @ReturnCode
 
-
+Drop Procedure UpdateCustomer
 		--- Delete Customer
 Create Procedure DeleteCustomer (@CustomerID VARCHAR(25))
 AS
@@ -296,17 +303,17 @@ BEGIN
 		RETURN @ReturnCode
 
 
-Exec  AddToInventory 5,'Samsung Galaxy S24',1300,1
+Exec  AddToInventory 2,'Apple Watch',1300,1
 
-Exec UpdateInventory'MacBook',5500.34,1,2
+Exec UpdateInventory'MacBook',5500.34,0,2
 
 Exec DeleteFromInventory 4
 
 Exec BringBackInventory 4
 
-Exec FindItem 5
+Exec FindItem 2
 
-Exec AddCustomer '3','Davicdo','Oluws','Rogers Place','Toronto','Canada','T4V5V4'
+Exec AddCustomer '2','Nicholas','Ekwom','CollAddress 123Street','Toronto','Canada','T4V5V4'
 
 Exec UpdateCustomer '1','Nicholas','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
 
@@ -316,3 +323,4 @@ Exec BringBackCustomer '3'
 
 Exec FindCustomer 3
 
+DELETE FROM CUSTOMER

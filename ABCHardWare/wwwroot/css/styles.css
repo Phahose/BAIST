@@ -42,6 +42,8 @@ h2 {
     font-family: monospace;
     width: fit-content;
     margin: auto;
+    color: white;
+    text-decoration: underline;
 }
 .index{
 
@@ -130,7 +132,7 @@ input[type=button] {
     width: 50rem;
     margin: auto;
     margin-top: 1rem;
-    background-color: palegoldenrod;
+    background-color: lightgreen;
     height: 3.3rem;
     border-radius: 5px;
     padding-top: .3rem;

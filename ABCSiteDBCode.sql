@@ -37,10 +37,10 @@ CREATE TABLE Sale (
     SaleTotal DECIMAL(10, 2)
 );
 ALTER TABLE Customer
-ADD Deleted BIT
+ADD CustomerID INT IDENTITY(1,1) PRIMARY KEY;
 
-	ALTER TABLE Sale
-DROP COLUMN CustomerName;
+ALTER TABLE Customer
+DROP COLUMN CustomerID;
 Drop Table Sale 
 
 CREATE TABLE SaleItem (
@@ -157,13 +157,13 @@ BEGIN
 		RETURN @ReturnCode
 
 		-- Add Customer
-Create Procedure AddCustomer (@CustomerID VARCHAR(25), 
-							  @FirstName VARCHAR(25),
+Create Procedure AddCustomer (@FirstName VARCHAR(25),
 							  @LastName VARCHAR(25),
 							  @Address VARCHAR(25),
 							  @City VARCHAR(25),
 							  @Province VARCHAR(25),
 							  @PostalCode VARCHAR(7))
+							  
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -171,12 +171,12 @@ BEGIN
 	IF @FirstName is NULL OR @LastName is NULL OR @Address is NULL OR @City is NULL OR @Province is NULL OR @PostalCode is NULL
 		RAISERROR('Must have a value for all of the Inputs',16,1)
 	ELSE
-		INSERT INTO Customer (CustomerID,FirstName, LastName, Address, City, Province, PostalCode,Deleted)
-		VALUES (@CustomerID,@FirstName,@LastName,@Address,@City,@Province,@PostalCode,1)
+		INSERT INTO Customer (FirstName, LastName, Address, City, Province, PostalCode,Deleted)
+		VALUES (@FirstName,@LastName,@Address,@City,@Province,@PostalCode,1)
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 	ELSE
-		RAISERROR ('Add User - INSERT error: Customer table.', 16, 1)
+		RAISERROR ('Add Customer - INSERT error: Customer table.', 16, 1)
 	END
 		RETURN @ReturnCode
 
@@ -216,7 +216,9 @@ BEGIN
 		RETURN @ReturnCode
 
 Drop Procedure UpdateCustomer
-		--- Delete Customer
+
+
+--- Delete Customer
 Create Procedure DeleteCustomer (@CustomerID VARCHAR(25))
 AS
 DECLARE @ReturnCode INT
@@ -303,7 +305,7 @@ BEGIN
 		RETURN @ReturnCode
 
 
-Exec  AddToInventory 2,'Apple Watch',1300,1
+Exec  AddToInventory 3,'MacBook Pro',2300,1
 
 Exec UpdateInventory'MacBook',5500.34,0,2
 
@@ -313,7 +315,7 @@ Exec BringBackInventory 4
 
 Exec FindItem 2
 
-Exec AddCustomer '2','Nicholas','Ekwom','CollAddress 123Street','Toronto','Canada','T4V5V4'
+Exec AddCustomer 'Christine','Ekwom','CollAddress 123Street','Toronto','Canada','T4V5V4'
 
 Exec UpdateCustomer '1','Nicholas','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
 

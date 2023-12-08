@@ -20,6 +20,7 @@ namespace ABCHardWare.Pages
         public string Message { get; set; } = string.Empty;
         public void OnGet()
         {
+            Message = "Find Then Delete an Item";
         }
 
         public void OnPost()
@@ -42,10 +43,11 @@ namespace ABCHardWare.Pages
                         UnitPrice = item.UnitPrice;
                         Deleted = item.Deleted;
                     }
-
+                    Message = "Item Found Do you Still Wish To Delete";
                     break;
                 case "DeleteItem":
                     aBCPOS.DeleteItem(ItemCode);
+                    Message = "Item Has been Deleted Successfully";
                  break;
             }
 

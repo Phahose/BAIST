@@ -1,0 +1,46 @@
+﻿@page
+@model ABCHardWare.Pages.AddCustomerModel
+@{
+}
+<h2>Add New Customer</h2>
+<form name="AddItem" method="post">
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="FirstName" required placeholder="First Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="LastName" required placeholder="Last Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="Address" required placeholder="Address" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="City" required placeholder="City" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="Province" required placeholder="Province" />
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <input type="text" name="PostalCode" required placeholder="PostalCode" />
+            </td>
+        </tr>
+    </table>
+
+    <div class="submit">
+        <input type="submit" name="AddCustomer" value="Add New Customer" class="sub" />
+    </div>
+    <div class="message">
+        <p>@Model.Message</p>
+    </div>
+</form>

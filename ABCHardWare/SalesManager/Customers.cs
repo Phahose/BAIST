@@ -75,5 +75,144 @@ namespace ABCHardWare.SalesManager
             nekwom1Connection.Close();
             return confirmation;
         }
+
+        public bool UpdateCustomer(Customer existingcustomer)
+        {
+            bool confirmation = false;
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
+
+            SqlCommand UpdateCustomerCommand = new()
+            {
+                Connection = nekwom1Connection,
+                CommandText = "UpdateCustomer",
+                CommandType = CommandType.StoredProcedure
+            };
+            SqlParameter CustomerIdParameter = new()
+            {
+                ParameterName = "@CustomerID",
+                SqlValue = existingcustomer.CustomerID,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter FirstNameParameter = new()
+            {
+                ParameterName = "@FirstName",
+                SqlValue = existingcustomer.FirstName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter LastNameParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlValue = existingcustomer.LastName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter AddressParameter = new()
+            {
+                ParameterName = "@Address",
+                SqlValue = existingcustomer.Address,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter CityParameter = new()
+            {
+                ParameterName = "@City",
+                SqlValue = existingcustomer.City,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter ProvinceParameter = new()
+            {
+                ParameterName = "@Province",
+                SqlValue = existingcustomer.Province,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter PostalCodeParameter = new()
+            {
+                ParameterName = "@PostalCode",
+                SqlValue = existingcustomer.PostalCode,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter DeletedParameter = new()
+            {
+                ParameterName = "@Deleted",
+                SqlValue = 1,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+            };
+
+            UpdateCustomerCommand.Parameters.Add(CustomerIdParameter);
+            UpdateCustomerCommand.Parameters.Add(FirstNameParameter);
+            UpdateCustomerCommand.Parameters.Add(LastNameParameter);
+            UpdateCustomerCommand.Parameters.Add(AddressParameter);
+            UpdateCustomerCommand.Parameters.Add(CityParameter);
+            UpdateCustomerCommand.Parameters.Add(ProvinceParameter);
+            UpdateCustomerCommand.Parameters.Add(PostalCodeParameter);
+            UpdateCustomerCommand.Parameters.Add(DeletedParameter);
+
+            UpdateCustomerCommand.ExecuteNonQuery();
+            nekwom1Connection.Close();
+            confirmation = true;
+
+            return confirmation;
+        }
+
+        public Customer FindCustomer(string FirstName , string LastName)
+        {
+            Customer customer = new();
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
+
+            SqlCommand FindCustomerCommand = new()
+            {
+                Connection = nekwom1Connection,
+                CommandText = "FindCustomer",
+                CommandType = CommandType.StoredProcedure
+            };
+            SqlParameter FirstNameParameter = new()
+            {
+                ParameterName = "@FirstName",
+                SqlValue = FirstName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter LastNameParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlValue = LastName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            FindCustomerCommand.Parameters.Add(FirstNameParameter);
+            FindCustomerCommand.Parameters.Add(LastNameParameter);
+            FindCustomerCommand.ExecuteNonQuery();
+            SqlDataReader FindCustomerDataReader = FindCustomerCommand.ExecuteReader();
+
+            if (FindCustomerDataReader.HasRows)
+            {
+                FindCustomerDataReader.Read();
+
+                customer = new Customer()
+                {
+                    FirstName = (string)FindCustomerDataReader["FirstName"],
+                    LastName = (string)FindCustomerDataReader["LastName"],
+                    Address = (string)FindCustomerDataReader["Address"],
+                    City = (string)FindCustomerDataReader["City"],
+                    Province = (string)FindCustomerDataReader["Province"],
+                    PostalCode = (string)FindCustomerDataReader["PostalCode"],
+                    CustomerID = (int)FindCustomerDataReader["CustomerID"]
+                };
+            }
+            return customer;
+        }
     }
 }

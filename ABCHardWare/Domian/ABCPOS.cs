@@ -47,5 +47,19 @@ namespace ABCHardWare.Domian
             confirmation = true;
             return confirmation;
         }
+        public bool UpdateCustomer(Customer customer)
+        {
+            bool confirmation = false;
+            Customers customers = new Customers();
+            customers.UpdateCustomer(customer);
+            confirmation = true;
+            return confirmation;
+        }
+        public Customer FindCustomer(string firstName, string lastName)
+        {
+            Customers customers = new Customers();
+            Customer existingCustomer = customers.FindCustomer(firstName, lastName);
+            return existingCustomer;
+        }
     }
 }

@@ -146,3 +146,17 @@ input[type=button] {
     margin-bottom: 0rem;
     font-size: 20px;
 }
+
+.updateCustomertr {
+    height:fit-content
+}
+.updateCustomertr > td {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+    .updateCustomertr > td > input[type=text] {
+        width: 49%; 
+    }
+

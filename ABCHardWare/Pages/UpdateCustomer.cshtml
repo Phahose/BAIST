@@ -1,0 +1,49 @@
+﻿@page
+@model ABCHardWare.Pages.UpdateCustomerModel
+@{
+}
+<h2>Update Customer</h2>
+<form method="post" name="UpdateCustomer">
+    <table>
+        <tr class="updateCustomertr">
+            <td>
+                <input type="text" name="FirstName" required placeholder="First Name" value="@Model.FirstName" />
+                <input type="text" name="LastName" required placeholder="Last Name" value="@Model.LastName"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="FindCustomer" class="sub" />
+            </td>
+        </tr>
+            <input type="text" name="CustomerID" placeholder="ID" value="@Model.CustomerID" hidden/>
+        <tr>
+            <td>
+                <input type="text" name="Address" placeholder="Address" value="@Model.Address"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="City" placeholder="City" value="@Model.City"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="Province" placeholder="Province" value="@Model.Province"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="PostalCode" placeholder="PostalCode" value="@Model.PostalCode"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="UpdateCustomer" class="sub" />
+            </td>
+        </tr>
+    </table>
+    <div class="message">
+        <p>@Model.Message</p>
+    </div>
+</form>

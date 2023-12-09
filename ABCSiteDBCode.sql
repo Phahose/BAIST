@@ -260,24 +260,25 @@ BEGIN
 
 		RETURN @ReturnCode
 
-
 -- Find Customer 
-
-Create Procedure FindCustomer (@CustomerID VARCHAR(25))
+Create Procedure FindCustomer (@FirstName VARCHAR(25),
+							   @LastName VARCHAR(25))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
 BEGIN
-	IF @CustomerID is NULL
-		RAISERROR('CustomerID Cannot be null',16,1)
+	IF @FirstName is NULL
+		RAISERROR('FirstName Cannot be null',16,1)
+	ELSE IF @LastName is NULL
+		RAISERROR('LastName Cannot be Null',16,1)
 	ELSE
 	SELECT * FROM Customer
-	WHERE CustomerID = @CustomerID AND Deleted = 1
+	WHERE FirstName = @FirstName AND LastName = @LastName AND Deleted = 1
 	IF @@ERROR = 0
 
 					SET @ReturnCode = 0
 				ELSE
-					RAISERROR ('Fins Customer  - Find error: Customer table.', 16, 1)
+					RAISERROR ('Find Customer  - Find error: Customer table.', 16, 1)
 			END
 
 		RETURN @ReturnCode
@@ -313,16 +314,16 @@ Exec DeleteFromInventory 4
 
 Exec BringBackInventory 4
 
-Exec FindItem 2
+Exec FindItem 4
 
 Exec AddCustomer 'Christine','Ekwom','CollAddress 123Street','Toronto','Canada','T4V5V4'
 
-Exec UpdateCustomer '1','Nicholas','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
+Exec UpdateCustomer '1','Chidubem','Ekwom','CollAddress 123Street','Calgary','Alberta','T4V5V4',1
 
 Exec DeleteCustomer '3'
 
 Exec BringBackCustomer '3'
 
-Exec FindCustomer 3
+Exec FindCustomer 'Joan','Ekwom'
 
 DELETE FROM CUSTOMER

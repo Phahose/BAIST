@@ -214,5 +214,34 @@ namespace ABCHardWare.SalesManager
             }
             return customer;
         }
+        public bool DeleteCustomer(int customerID)
+        {
+            bool confirmation = false;
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
+
+            SqlCommand DeleteCustomerCommand = new()
+            {
+                Connection = nekwom1Connection,
+                CommandText = "DeleteCustomer",
+                CommandType = CommandType.StoredProcedure
+            };
+
+            SqlParameter CustomerIDParameter = new()
+            {
+                ParameterName = "@CustomerID",
+                SqlValue = customerID,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+
+            DeleteCustomerCommand.Parameters.Add(CustomerIDParameter);
+
+            DeleteCustomerCommand.ExecuteNonQuery();
+            nekwom1Connection.Close();
+            confirmation = true;
+            return confirmation;
+        }
     }
 }

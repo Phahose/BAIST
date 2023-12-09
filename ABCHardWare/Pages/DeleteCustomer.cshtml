@@ -1,0 +1,43 @@
+﻿@page
+@model ABCHardWare.Pages.DeleteCustomerModel
+@{
+}
+<h2>Delete Customer</h2>
+<form name="DeleteCustomer" method="post">
+    <table>
+        <tr class="updateCustomertr">
+            <td>
+                <input type="text" name="FirstName" required placeholder="First Name" value="@Model.FirstName" />
+                <input type="text" name="LastName" required placeholder="Last Name" value="@Model.LastName" />
+            </td>
+        </tr>
+        <input type="text" name="CustomerID" placeholder="ID" value="@Model.CustomerID" hidden />
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="FindCustomer" class="sub" />
+            </td>
+        </tr>       
+    </table>
+
+    <table border="0">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.FirstName</td>
+                <td>@Model.LastName</td>
+                <td>
+                    <input type="submit" name="Submit" value="Delete" class="deleteB"/>
+                </td>
+            </tr>
+        </tbody>   
+    </table>
+</form>
+<div class="message">
+    <p>@Model.Message</p>
+</div>

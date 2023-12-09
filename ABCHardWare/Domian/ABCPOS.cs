@@ -61,5 +61,13 @@ namespace ABCHardWare.Domian
             Customer existingCustomer = customers.FindCustomer(firstName, lastName);
             return existingCustomer;
         }
+        public bool DeleteCustomer(int customerID)
+        {
+            bool confirmation = false;
+            Customers customers = new Customers();
+            customers.DeleteCustomer(customerID);
+            confirmation = true;
+            return confirmation;
+        }
     }
 }

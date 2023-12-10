@@ -55,7 +55,6 @@ namespace ABCHardWare.Pages
 
                         Message = "Customer Found Update Customer";
                     }
-
                     break;
                 case "Delete":
                     aBCPOS.DeleteCustomer(CustomerID);

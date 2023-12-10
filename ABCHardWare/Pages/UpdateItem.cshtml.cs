@@ -29,31 +29,58 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindItem":
-
-                    Item item = aBCPOS.GetItem(ItemCode);
-                    
-                    if (item.Description == "")
+                    if (ItemCode == 0)
                     {
-                        Message = "This Item Dosent Exist - Check your Item Number ";
+                        ModelState.AddModelError("DescriptionInput", "Description is Required");
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        Item item = aBCPOS.GetItem(ItemCode);
+
+                        if (item.Description == "")
+                        {
+                            Message = "This Item Dosent Exist - Check your Item Number ";
+                        }
+                        else
+                        {
+                            ItemCode = item.ItemCode;
+                            Description = item.Description;
+                            UnitPrice = item.UnitPrice;
+                            Deleted = item.Deleted;
+                        }
                     }
                     else
                     {
-                        ItemCode = item.ItemCode;
-                        Description = item.Description;
-                        UnitPrice = item.UnitPrice;
-                        Deleted = item.Deleted;
+                        Message = "Item not Found Errors in the Form";
                     }
-
+                    
                     break;
                 case "UpdateItem":
-                    Item updateditem = new Item()
+                    if (Description == null)
                     {
-                        ItemCode = ItemCode,
-                        Description = Description,
-                        UnitPrice = UnitPrice,
-                        Deleted = Deleted
-                    };
-                    aBCPOS.UpdateItem(updateditem);
+                        ModelState.AddModelError("DescriptionInput", "Description is Required");
+                    }
+                    else if (UnitPrice == 0)
+                    {
+                        ModelState.AddModelError("UnitPriceInput", "Unit Price is Required");
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        Item updateditem = new Item()
+                        {
+                            ItemCode = ItemCode,
+                            Description = Description,
+                            UnitPrice = UnitPrice,
+                            Deleted = Deleted
+                        };
+                        aBCPOS.UpdateItem(updateditem);
+                        Message = "Update successfull";
+                    }
+                    else
+                    {
+                        Message = "Update Not Successfull Errors in the Form";
+                    }           
                 break;
             }
            

@@ -7,7 +7,8 @@
     <table>
         <tr>
             <td>
-                <input type="text" name="ItemCode" placeholder="ItemCode" value="@Model.ItemCode"/>
+                <input type="text" name="ItemCode" required placeholder="ItemCode"/>
+                @Html.ValidationMessage("ItemCodeInput")
             </td>
         </tr>
          <tr>
@@ -18,11 +19,13 @@
         <tr>
             <td>
                 <input type="text" name="Description" placeholder="Description" value="@Model.Description"/>
+                @Html.ValidationMessage("ItemCodeInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="number" name="UnitPrice" min="0" max="9999999999" step=".01" placeholder="UnitPrice" value="@Model.UnitPrice"/>
+                @Html.ValidationMessage("ItemCodeInput")
             </td>
         </tr>
         <tr>

@@ -8,7 +8,10 @@
         <tr class="updateCustomertr">
             <td>
                 <input type="text" name="FirstName" required placeholder="First Name" value="@Model.FirstName" />
+                @Html.ValidationMessage("FirstNameInput")
                 <input type="text" name="LastName" required placeholder="Last Name" value="@Model.LastName" />
+                @Html.ValidationMessage("LastNameInput")
+
             </td>
         </tr>
         <input type="text" name="CustomerID" placeholder="ID" value="@Model.CustomerID" hidden />

@@ -8,7 +8,7 @@ namespace ABCHardWare.Pages
     public class UpdateItemModel : PageModel
     {
         [BindProperty]
-        public string ItemCode { get; set; } = string.Empty;
+        public int ItemCode { get; set; }
         [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]

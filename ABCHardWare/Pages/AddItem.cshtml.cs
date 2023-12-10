@@ -8,8 +8,6 @@ namespace ABCHardWare.Pages
     public class AddItemModel : PageModel
     {
         [BindProperty]
-        public string ItemCode { get; set; } = string.Empty;
-        [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]
         public decimal UnitPrice { get; set; }
@@ -23,19 +21,35 @@ namespace ABCHardWare.Pages
 
         public void OnPost() 
         {
-            ABCPOS aBCPOS = new ABCPOS();
-
-            Item newItem = new Item()
+            if(Description == null)
             {
-                ItemCode = ItemCode,
-                Description = Description,
-                UnitPrice = UnitPrice,
-                Deleted = 1
-            };
+                ModelState.AddModelError("DescriptionInput", "Description is Required");
+            }
+            else if(UnitPrice == 0)
+            {
+                ModelState.AddModelError("UnitPriceInput", "Unit Price is Required");
+            }
 
-            aBCPOS.AddNewItem(newItem);
+            if (ModelState.IsValid)
+            {
+                ABCPOS aBCPOS = new ABCPOS();
 
-            Message = "Item has Been Added";
+                Item newItem = new Item()
+                {
+                    Description = Description,
+                    UnitPrice = UnitPrice,
+                    Deleted = 1
+                };
+
+                aBCPOS.AddNewItem(newItem);
+
+                Message = "Item has Been Added";
+            }
+            else
+            {
+                Message = "Item Cannot Be added Errors Found In the Form";
+            }
+            
         }
     }
 }

@@ -11,12 +11,12 @@ namespace ABCHardWare.Domian
         }
 
         public Item AddNewItem(Item item)
-        {       
+        {
             Items items = new Items();
             items.AddItem(item);
             return item;
         }
-        public Item GetItem(string id)
+        public Item GetItem(int id)
         {      
             Items items = new Items();
             Item inventoryItem = items.FindItem(id);
@@ -31,7 +31,7 @@ namespace ABCHardWare.Domian
             confirmation = true;
             return confirmation;
         }
-        public bool DeleteItem(string itemId)
+        public bool DeleteItem(int itemId)
         {
             bool confirmation = false;
             Items items = new Items();

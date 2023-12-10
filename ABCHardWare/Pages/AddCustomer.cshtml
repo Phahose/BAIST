@@ -8,31 +8,37 @@
         <tr>
             <td>
                 <input type="text" name="FirstName" required placeholder="First Name" />
+                @Html.ValidationMessage("FirstNameInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="text" name="LastName" required placeholder="Last Name" />
+                @Html.ValidationMessage("LastNameInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="text" name="Address" required placeholder="Address" />
+                @Html.ValidationMessage("AddressInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="text" name="City" required placeholder="City" />
+                @Html.ValidationMessage("CityInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="text" name="Province" required placeholder="Province" />
+                @Html.ValidationMessage("ProvinceInput")
             </td>
         </tr>
          <tr>
             <td>
                 <input type="text" name="PostalCode" required placeholder="PostalCode" />
+                @Html.ValidationMessage("PostalCodeInput")
             </td>
         </tr>
     </table>

@@ -7,7 +7,7 @@ namespace ABCHardWare.Pages
     public class DeleteItemModel : PageModel
     {
         [BindProperty]
-        public string ItemCode { get; set; } = string.Empty;
+        public int ItemCode { get; set; }
         [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]
@@ -29,21 +29,33 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindItem":
-
-                    Item item = aBCPOS.GetItem(ItemCode);
-
-                    if (item.Description == "")
+                    if (ItemCode == 0) 
                     {
-                        Message = "This Item Dosent Exist - Check your Item Number ";
+                        ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        Item item = aBCPOS.GetItem(ItemCode);
+
+                        if (item.Description == "")
+                        {
+                            Message = "This Item Dosent Exist - Check your Item Number ";
+                        }
+                        else
+                        {
+                            ItemCode = item.ItemCode;
+                            Description = item.Description;
+                            UnitPrice = item.UnitPrice;
+                            Deleted = item.Deleted;
+                        }
+                        Message = "Item Found Do you Still Wish To Delete";
                     }
                     else
                     {
-                        ItemCode = item.ItemCode;
-                        Description = item.Description;
-                        UnitPrice = item.UnitPrice;
-                        Deleted = item.Deleted;
+                        Message = "Item Not Found Errors Found in the Form";
                     }
-                    Message = "Item Found Do you Still Wish To Delete";
+                             
                     break;
                 case "DeleteItem":
                     aBCPOS.DeleteItem(ItemCode);

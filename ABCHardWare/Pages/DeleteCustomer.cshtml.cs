@@ -35,26 +35,41 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindCustomer":
-
-                    Customer customer = aBCPOS.FindCustomer(FirstName, LastName);
-                    if (customer.FirstName == "")
+                    if (FirstName == null)
                     {
-                        Message = "This Customer Not Found Check The Name ";
-                        FirstName = "";
-                        LastName = "";
+                        ModelState.AddModelError("FirstNameInput", "First Name is Required");
+                    }
+                    else if (LastName == null)
+                    {
+                        ModelState.AddModelError("LastNameInput", "Last Name is Required");
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        Customer customer = aBCPOS.FindCustomer(FirstName, LastName);
+                        if (customer.FirstName == "")
+                        {
+                            Message = "This Customer Not Found Check The Name ";
+                            FirstName = "";
+                            LastName = "";
+                        }
+                        else
+                        {
+                            FirstName = customer.FirstName;
+                            LastName = customer.LastName;
+                            Address = customer.Address;
+                            City = customer.City;
+                            Province = customer.Province;
+                            PostalCode = customer.PostalCode;
+                            CustomerID = customer.CustomerID;
+
+                            Message = "Customer Found Update Customer";
+                        }
                     }
                     else
                     {
-                        FirstName = customer.FirstName;
-                        LastName = customer.LastName;
-                        Address = customer.Address;
-                        City = customer.City;
-                        Province = customer.Province;
-                        PostalCode = customer.PostalCode;
-                        CustomerID = customer.CustomerID;
-
-                        Message = "Customer Found Update Customer";
-                    }
+                        Message = "Customer Could Not be Added";
+                    }               
                     break;
                 case "Delete":
                     aBCPOS.DeleteCustomer(CustomerID);

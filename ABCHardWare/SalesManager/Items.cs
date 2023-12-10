@@ -18,14 +18,6 @@ namespace ABCHardWare.SalesManager
                 CommandType = CommandType.StoredProcedure
             };
 
-            SqlParameter ItemCodeParameter = new()
-            {
-                ParameterName = "@ItemCode",
-                SqlValue = Item.ItemCode,
-                SqlDbType = SqlDbType.VarChar,
-                Direction = ParameterDirection.Input,
-            };
-
             SqlParameter DescriptonParameter = new()
             {
                 ParameterName = "@Description",
@@ -50,7 +42,6 @@ namespace ABCHardWare.SalesManager
                 Direction = ParameterDirection.Input,
             };
 
-            AddItemCommand.Parameters.Add(ItemCodeParameter);
             AddItemCommand.Parameters.Add (DescriptonParameter);
             AddItemCommand.Parameters.Add(UnitPriceParameter);
             AddItemCommand.Parameters.Add(DeletedParameter);
@@ -61,7 +52,7 @@ namespace ABCHardWare.SalesManager
             return Item;
         }
 
-        public Item FindItem(string itemCode)
+        public Item FindItem(int itemCode)
         {
             Item inventoryItem = new();
             SqlConnection nekwom1Connection = new();
@@ -79,7 +70,7 @@ namespace ABCHardWare.SalesManager
             {
                 ParameterName = "@ItemCode",
                 SqlValue = itemCode,
-                SqlDbType = SqlDbType.VarChar,
+                SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input,
             };
 
@@ -91,7 +82,7 @@ namespace ABCHardWare.SalesManager
                 itemReader.Read();
                 inventoryItem = new() 
                 { 
-                    ItemCode = (string)itemReader["ItemCode"],
+                    ItemCode = (int)itemReader["ItemCode"],
                     Description = (string)itemReader["Description"],
                     UnitPrice = (decimal)itemReader["UnitPrice"],
                     Deleted = (int)itemReader["Deleted"]
@@ -159,7 +150,7 @@ namespace ABCHardWare.SalesManager
             return confirmation;
         }
 
-        public bool DeleteItem(string itemCode)
+        public bool DeleteItem(int itemCode)
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
@@ -177,7 +168,7 @@ namespace ABCHardWare.SalesManager
             {
                 ParameterName = "@ItemCode",
                 SqlValue = itemCode,
-                SqlDbType = SqlDbType.VarChar,
+                SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input,
             };
 

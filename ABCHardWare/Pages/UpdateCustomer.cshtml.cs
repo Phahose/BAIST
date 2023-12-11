@@ -36,6 +36,7 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindCustomer":
+                    ModelState.Clear();
                     if (FirstName == null)
                     {
                         ModelState.AddModelError("FirstNameInput", "First Name is Required");

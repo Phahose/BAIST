@@ -2,18 +2,19 @@
 @model ABCHardWare.Pages.AddItemModel
 @{
 }
-<h2>Add New Item</h2>
+
 <form name="AddItem" method="post">
+    <h2>Add New Item</h2>
     <table>
         <tr>
             <td>
-                <input type="text" name="Description"  placeholder="Description"/>
+                <input type="text" name="Description" required placeholder="Description"/>
                 @Html.ValidationMessage("DescriptionInput")
             </td>
         </tr>
         <tr>
             <td>
-                <input type="number" name="UnitPrice"  min="0" max="9999999999" step=".01" placeholder="Unit Price" />
+                <input type="number" name="UnitPrice" required min="0" max="9999999999" step=".01" placeholder="Unit Price" />
                 @Html.ValidationMessage("UnitPriceInput")
             </td>
         </tr>

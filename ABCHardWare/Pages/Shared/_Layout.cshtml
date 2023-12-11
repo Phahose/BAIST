@@ -9,37 +9,39 @@
     @RenderSection("scriptCreateProgramValidation", required: false)
     <script src="~/css/script.js"></script>
 </head>
-<body>   
-    <div class="nav">
-        <ul class="nav-links">
-            <li>
-                <a href="~/Index">Home</a>
-            </li>
-            <li>
-                <a href="~/AddItem">AddItem</a>
-            </li>
-            <li>
-                <a href="~/UpdateItem">Update Item</a>
-            </li>
-            <li>
-                <a href="~/DeleteItem">Delete Item</a>
-            </li>
-            <li>
-                <a href="~/AddCustomer">Add Customer</a>
-            </li>
-            <li>
-                <a href="~/UpdateCustomer">Update Customer</a>
-            </li>
-            <li>
-                <a href="~/DeleteCustomer">Delete Customer</a>
-            </li>
-            <li>
-                <a href="~/ProcessSale">Process Sale</a>
-            </li>
-        </ul>
-    </div>
-    <div class="body">
-        @RenderBody()
+<body> 
+    <div class="first">
+        <div class="nav">
+            <ul class="nav-links">
+                <li>
+                    <a href="~/Index">Home</a>
+                </li>
+                <li>
+                    <a href="~/AddItem">AddItem</a>
+                </li>
+                <li>
+                    <a href="~/UpdateItem">Update Item</a>
+                </li>
+                <li>
+                    <a href="~/DeleteItem">Delete Item</a>
+                </li>
+                <li>
+                    <a href="~/AddCustomer">Add Customer</a>
+                </li>
+                <li>
+                    <a href="~/UpdateCustomer">Update Customer</a>
+                </li>
+                <li>
+                    <a href="~/DeleteCustomer">Delete Customer</a>
+                </li>
+                <li>
+                    <a href="~/ProcessSale">Process Sale</a>
+                </li>
+            </ul>
+        </div>
+        <div class="body">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

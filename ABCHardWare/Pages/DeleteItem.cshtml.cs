@@ -33,6 +33,7 @@ namespace ABCHardWare.Pages
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
                     }
+                    ModelState.Clear();
 
                     if (ModelState.IsValid)
                     {

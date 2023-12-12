@@ -1,7 +1,10 @@
 #nullable disable
 using ABCHardWare.Domian;
+using ABCHardWare.SalesManager;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace ABCHardWare.Pages
 {
@@ -24,12 +27,12 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int Deleted { get; set; }
         public int Price { get; set; }
-        [BindProperty (SupportsGet = true)] 
-        public List<Item> SaleItems { get; set; }
+        [BindProperty]
+        public List<Item> SaleItems { get; set; } = new();
         public Item Item { get; set; } = new();
         public void OnGet()
         {
-            SaleItems = new();
+            HttpContext.Session.SetString("SaleItems", Item.ToString());
             Message = "Process A Sale";
         }
 
@@ -61,7 +64,17 @@ namespace ABCHardWare.Pages
                             UnitPrice = Item.UnitPrice;
                             Deleted = Item.Deleted;
 
+
+                            string SalesItemString = JsonSerializer.Serialize(Item);
+                            SalesItemString = HttpContext.Session.GetString("SaleItems");
+
+                            if (SaleItems.Count != 0)
+                            {
+                                Item = JsonSerializer.Deserialize<Item>(SalesItemString);
+                            }
+
                             SaleItems.Add(Item);
+                            HttpContext.Session.SetString("SaleItems", SalesItemString);
                             Message = $"Total Items {SaleItems.Count}";
                         }
                         

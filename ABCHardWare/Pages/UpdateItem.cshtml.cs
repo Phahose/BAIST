@@ -29,6 +29,7 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindItem":
+                    ModelState.Clear();
                     if (ItemCode == 0)
                     {
                         ModelState.AddModelError("DescriptionInput", "Description is Required");

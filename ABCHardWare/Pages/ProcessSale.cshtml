@@ -24,31 +24,35 @@
         window.document.getElementById('DisplayTable').innerHTML = displayHTML;
     }
     function storeField(itemCode, description, unitPrice) {
-        var fieldArray = [];
-        var serializedJSON;
+        alert('storefield called');
+        // var fieldArray = [];
+        // var serializedJSON;
 
-        if (localStorage.getItem('ItemDetails') !== null) {
-            serializedJSON = localStorage.getItem('ItemDetails');
-            fieldArray = JSON.parse(serializedJSON);
-        }
+        // if (localStorage.getItem('ItemDetails') !== null) {
+        //     serializedJSON = localStorage.getItem('ItemDetails');
+        //     fieldArray = JSON.parse(serializedJSON);
+        // }
 
-        fieldArray.push(itemCode);
-        fieldArray.push(description);
-        fieldArray.push(unitPrice);
-        serializedJSON = JSON.stringify(fieldArray);
-        localStorage.setItem('ItemDetails', serializedJSON);
+        // fieldArray.push(itemCode);
+        // fieldArray.push(description);
+        // fieldArray.push(unitPrice);
 
-        displayFieldsInStorage();
+        // serializedJSON = JSON.stringify(fieldArray);
+        // localStorage.setItem('ItemDetails', serializedJSON);
 
-        itemCode = '';
-        itemCode.focus();
-        itemCode.select();
-        description = '';
-        description.focus();
-        description.select();
-        unitPrice = '';
-        unitPrice.focus();
-        unitPrice.select();
+        // displayFieldsInStorage();
+
+        // itemCode = '';
+        // itemCode.focus();
+        // itemCode.select();
+
+        // description = '';
+        // description.focus();
+        // description.select();
+
+        // unitPrice = '';
+        // unitPrice.focus();
+        // unitPrice.select();
 
     }
 </script>
@@ -62,7 +66,7 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.ItemCode, @Model.Description, @Model.UnitPrice);" />
+                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.Description, @Model.UnitPrice);" />
             </td>
         </tr>
 

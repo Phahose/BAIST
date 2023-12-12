@@ -31,21 +31,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.SaleItems)
+            @if (Model.SaleItems != null)
             {
-                <tr>
-                    <td>@Model.ItemCode</td>
-                    <td>@Model.Description</td>
-                    <td>@Model.UnitPrice</td>
-                    <td>@Model.Price</td>
-                    <td>
-                        <input type="number" name="Quantity" />
-                    </td>
-                    <td>
-                        <input type="submit" name="Submit" value="Delete" class="deleteB" />
-                    </td>
-                </tr>
-            }    
+                @foreach (var item in Model.SaleItems)
+                {
+                    <tr>
+                        <td>@Model.ItemCode</td>
+                        <td>@Model.Description</td>
+                        <td>@Model.UnitPrice</td>
+                        <td>@Model.Price</td>
+                        <td>
+                            <input type="number" name="Quantity" />
+                        </td>
+                        <td>
+                            <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                        </td>
+                    </tr>
+                }
+            }        
         </tbody>
     </table>
     <div class="message">

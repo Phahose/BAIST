@@ -24,12 +24,15 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int Deleted { get; set; }
         public int Price { get; set; }
-        public List<Item> SaleItems { get; set; } = new();
+        [BindProperty (SupportsGet = true)] 
+        public List<Item> SaleItems { get; set; } = new List<Item> ();
         public Item Item { get; set; } = new();
         public void OnGet()
         {
+            SaleItems = new();
             Message = "Process A Sale";
         }
+
 
         public void OnPost()
         {

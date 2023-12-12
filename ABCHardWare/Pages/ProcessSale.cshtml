@@ -25,34 +25,34 @@
     }
     function storeField(itemCode, description, unitPrice) {
         alert('storefield called');
-        // var fieldArray = [];
-        // var serializedJSON;
+        var fieldArray = [];
+        var serializedJSON;
 
-        // if (localStorage.getItem('ItemDetails') !== null) {
-        //     serializedJSON = localStorage.getItem('ItemDetails');
-        //     fieldArray = JSON.parse(serializedJSON);
-        // }
+        if (localStorage.getItem('ItemDetails') !== null) {
+            serializedJSON = localStorage.getItem('ItemDetails');
+            fieldArray = JSON.parse(serializedJSON);
+        }
 
-        // fieldArray.push(itemCode);
-        // fieldArray.push(description);
-        // fieldArray.push(unitPrice);
+        fieldArray.push(itemCode);
+        fieldArray.push(description);
+        fieldArray.push(unitPrice);
 
-        // serializedJSON = JSON.stringify(fieldArray);
-        // localStorage.setItem('ItemDetails', serializedJSON);
+        serializedJSON = JSON.stringify(fieldArray);
+        localStorage.setItem('ItemDetails', serializedJSON);
 
-        // displayFieldsInStorage();
+        displayFieldsInStorage();
 
-        // itemCode = '';
-        // itemCode.focus();
-        // itemCode.select();
+        itemCode = '';
+        itemCode.focus();
+        itemCode.select();
 
-        // description = '';
-        // description.focus();
-        // description.select();
+        description = '';
+        description.focus();
+        description.select();
 
-        // unitPrice = '';
-        // unitPrice.focus();
-        // unitPrice.select();
+        unitPrice = '';
+        unitPrice.focus();
+        unitPrice.select();
 
     }
 </script>
@@ -61,12 +61,12 @@
     <table>
         <tr>
             <td>
-                <input type="text" name="ItemCode" placeholder="ItemCode" value="@Model.ItemCode" />
+                <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" />
             </td>
         </tr>
         <tr>
             <td>
-                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.Description, @Model.UnitPrice);" />
+                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.ItemCode, @Model.Description);" />
             </td>
         </tr>
 
@@ -89,9 +89,9 @@
                 @foreach (var item in Model.SaleItems)
                 {
                     <tr>
-                        <td>@Model.ItemCode</td>
-                        <td>@Model.Description</td>
-                        <td>@Model.UnitPrice</td>
+                        <td>@item.ItemCode</td>
+                        <td>@item.Description</td>
+                        <td>@item.UnitPrice</td>
                         <td>@Model.Price</td>
                         <td>
                             <input type="number" name="Quantity" />

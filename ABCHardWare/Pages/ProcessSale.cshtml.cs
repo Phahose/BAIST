@@ -25,7 +25,7 @@ namespace ABCHardWare.Pages
         public int Deleted { get; set; }
         public int Price { get; set; }
         [BindProperty (SupportsGet = true)] 
-        public List<Item> SaleItems { get; set; } = new List<Item> ();
+        public List<Item> SaleItems { get; set; }
         public Item Item { get; set; } = new();
         public void OnGet()
         {
@@ -60,9 +60,12 @@ namespace ABCHardWare.Pages
                             Description = Item.Description;
                             UnitPrice = Item.UnitPrice;
                             Deleted = Item.Deleted;
+
+                            SaleItems.Add(Item);
+                            Message = $"Total Items {SaleItems.Count}";
                         }
-                        SaleItems.Add(Item);
-                        Message = "Item Found Do you Still Wish To Delete";
+                        
+                        
                     }
                     else
                     {

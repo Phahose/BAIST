@@ -2,7 +2,56 @@
 @model ABCHardWare.Pages.ProcessSaleModel
 @{
 }
+<script type="text/javascript">
+    function displayFieldsInStorage() {
+        var fieldArray = [];
+        var index = 0;
+        var serializedJSON;
 
+        if (localStorage.getItem('ItemDetails') !== null) {
+            serializedJSON = localStorage.getItem('ItemDetails');
+            fieldArray = JSON.parse(serializedJSON);
+        }
+
+        if (fieldArray.length > 0) {
+            for (index = 0; index <= fieldArray.length - 1; index++) {
+            }
+        }
+        else {
+            displayHTML += '<tr><td>There is no data in the Local Storage</td></tr>';
+        }
+
+        window.document.getElementById('DisplayTable').innerHTML = displayHTML;
+    }
+    function storeField(itemCode, description, unitPrice) {
+        var fieldArray = [];
+        var serializedJSON;
+
+        if (localStorage.getItem('ItemDetails') !== null) {
+            serializedJSON = localStorage.getItem('ItemDetails');
+            fieldArray = JSON.parse(serializedJSON);
+        }
+
+        fieldArray.push(itemCode);
+        fieldArray.push(description);
+        fieldArray.push(unitPrice);
+        serializedJSON = JSON.stringify(fieldArray);
+        localStorage.setItem('ItemDetails', serializedJSON);
+
+        displayFieldsInStorage();
+
+        itemCode = '';
+        itemCode.focus();
+        itemCode.select();
+        description = '';
+        description.focus();
+        description.select();
+        unitPrice = '';
+        unitPrice.focus();
+        unitPrice.select();
+
+    }
+</script>
 <form name="ProcessSale" method="post" class="pSale">
     <h2>Process Sale</h2>
     <table>
@@ -13,7 +62,7 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" name="Submit" value="AddItem" class="sub" />
+                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.ItemCode, @Model.Description, @Model.UnitPrice);" />
             </td>
         </tr>
 
@@ -51,6 +100,10 @@
             }        
         </tbody>
     </table>
+    <script type="text/javascript">
+        displayFieldsInStorage();
+
+    </script>
     <div class="message">
         <p>@Model.Message</p>
     </div>

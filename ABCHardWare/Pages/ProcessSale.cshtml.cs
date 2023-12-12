@@ -1,3 +1,4 @@
+#nullable disable
 using ABCHardWare.Domian;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -23,7 +24,8 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int Deleted { get; set; }
         public int Price { get; set; }
-        public List<Item>? SaleItems { get; set; } = new();
+        public List<Item> SaleItems { get; set; } = new();
+        public Item Item { get; set; } = new();
         public void OnGet()
         {
             Message = "Process A Sale";
@@ -43,20 +45,20 @@ namespace ABCHardWare.Pages
                   
                     if (ModelState.IsValid)
                     {
-                        Item item = aBCPOS.GetItem(ItemCode);
+                        Item = aBCPOS.GetItem(ItemCode);
                         
-                        if (item.Description == "")
+                        if (Item.Description == "")
                         {
                             Message = "This Item Dosent Exist - Check your Item Number ";
                         }
                         else
                         {
-                            ItemCode = item.ItemCode;
-                            Description = item.Description;
-                            UnitPrice = item.UnitPrice;
-                            Deleted = item.Deleted;
+                            ItemCode = Item.ItemCode;
+                            Description = Item.Description;
+                            UnitPrice = Item.UnitPrice;
+                            Deleted = Item.Deleted;
                         }
-                        SaleItems.Add(item);
+                        SaleItems.Add(Item);
                         Message = "Item Found Do you Still Wish To Delete";
                     }
                     else

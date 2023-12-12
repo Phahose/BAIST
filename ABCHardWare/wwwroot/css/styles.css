@@ -237,3 +237,24 @@ input[type=button] {
         opacity: 1;
     }
 }
+.pSale td{
+    padding: 0rem 2rem;
+}
+.pSale .found th{
+    padding: 0rem 1rem;
+    border: none;
+}
+
+.pSale .found{
+    width:fit-content;
+    border: none;
+}
+
+.pSale input[type=number]{
+   max-width:5rem;
+}
+
+.pSale .found th {
+    padding: 1rem;
+    border: none;
+}

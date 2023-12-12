@@ -29,12 +29,12 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindItem":
+                    ModelState.Clear();
                     if (ItemCode == 0) 
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
                     }
-                    ModelState.Clear();
-
+              
                     if (ModelState.IsValid)
                     {
                         Item item = aBCPOS.GetItem(ItemCode);

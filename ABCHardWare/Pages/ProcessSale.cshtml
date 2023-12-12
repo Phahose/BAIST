@@ -2,11 +2,50 @@
 @model ABCHardWare.Pages.ProcessSaleModel
 @{
 }
-<h2>Process Sale</h2>
-<form name="ProcessSale" method="post">
-    <tr>
-        <td>
-            <input type="text" name="ItemCode" required placeholder="Item Code" />
-        </td>
-    </tr>
+
+<form name="ProcessSale" method="post" class="pSale">
+    <h2>Process Sale</h2>
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="ItemCode" placeholder="ItemCode" value="@Model.ItemCode" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="Submit" value="AddItem" class="sub" />
+            </td>
+        </tr>
+
+
+    </table>
+    <table class="found">
+        <thead>
+            <tr>
+                <th>Item Code</th>
+                <th>Description</th>
+                <th>UnitPrice</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.ItemCode</td>
+                <td>@Model.Description</td>
+                <td>@Model.UnitPrice</td>
+                <td>@Model.Price</td>
+                <td>
+                    <input type="number" name="Quantity"/>
+                </td>
+                <td>
+                    <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="message">
+        <p>@Model.Message</p>
+    </div>
 </form>

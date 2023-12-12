@@ -25,24 +25,27 @@
                 <th>Item Code</th>
                 <th>Description</th>
                 <th>UnitPrice</th>
-                <th>Quantity</th>
                 <th>Price</th>
+                <th>Quantity</th>             
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>@Model.ItemCode</td>
-                <td>@Model.Description</td>
-                <td>@Model.UnitPrice</td>
-                <td>@Model.Price</td>
-                <td>
-                    <input type="number" name="Quantity"/>
-                </td>
-                <td>
-                    <input type="submit" name="Submit" value="Delete" class="deleteB" />
-                </td>
-            </tr>
+            @foreach (var item in Model.SaleItems)
+            {
+                <tr>
+                    <td>@Model.ItemCode</td>
+                    <td>@Model.Description</td>
+                    <td>@Model.UnitPrice</td>
+                    <td>@Model.Price</td>
+                    <td>
+                        <input type="number" name="Quantity" />
+                    </td>
+                    <td>
+                        <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                    </td>
+                </tr>
+            }    
         </tbody>
     </table>
     <div class="message">

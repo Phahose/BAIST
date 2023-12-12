@@ -23,6 +23,7 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int Deleted { get; set; }
         public int Price { get; set; }
+        public List<Item>? SaleItems { get; set; } = new();
         public void OnGet()
         {
             Message = "Process A Sale";
@@ -43,7 +44,7 @@ namespace ABCHardWare.Pages
                     if (ModelState.IsValid)
                     {
                         Item item = aBCPOS.GetItem(ItemCode);
-
+                        
                         if (item.Description == "")
                         {
                             Message = "This Item Dosent Exist - Check your Item Number ";
@@ -55,6 +56,7 @@ namespace ABCHardWare.Pages
                             UnitPrice = item.UnitPrice;
                             Deleted = item.Deleted;
                         }
+                        SaleItems.Add(item);
                         Message = "Item Found Do you Still Wish To Delete";
                     }
                     else

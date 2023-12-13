@@ -32,7 +32,7 @@ namespace ABCHardWare.Pages
         public Item Item { get; set; } = new();
         public void OnGet()
         {
-            HttpContext.Session.SetString("SaleItems", Item.ToString());
+           // HttpContext.Session.SetString("SaleItems", Item.ToString());
             Message = "Process A Sale";
         }
 
@@ -52,7 +52,7 @@ namespace ABCHardWare.Pages
                     if (ModelState.IsValid)
                     {
                         Item = aBCPOS.GetItem(ItemCode);
-                        
+
                         if (Item.Description == "")
                         {
                             Message = "This Item Dosent Exist - Check your Item Number ";
@@ -64,16 +64,15 @@ namespace ABCHardWare.Pages
                             UnitPrice = Item.UnitPrice;
                             Deleted = Item.Deleted;
 
-
-                            string SalesItemString = JsonSerializer.Serialize(Item);
-                            SalesItemString = HttpContext.Session.GetString("SaleItems");
-
-                            if (SaleItems.Count != 0)
+                            string SalesItemString = string.Empty;
+                            if (HttpContext.Session.GetString("SaleItems") != null)
                             {
-                                Item = JsonSerializer.Deserialize<Item>(SalesItemString);
+                                SalesItemString = HttpContext.Session.GetString("SaleItems");
+                                SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
                             }
 
                             SaleItems.Add(Item);
+                            SalesItemString = JsonSerializer.Serialize(SaleItems);
                             HttpContext.Session.SetString("SaleItems", SalesItemString);
                             Message = $"Total Items {SaleItems.Count}";
                         }

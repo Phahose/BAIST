@@ -20,6 +20,43 @@
             </td>
         </tr>
             <input type="text" name="CustomerID" placeholder="ID" value="@Model.CustomerID" hidden/>
+    </table>
+        @if (Model.Customers.Count > 0)
+        {
+            <div class="scroll">
+                <table class="found scroll">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Province</th>
+                            <th>PostalCode</th>
+                            <th>CustomerID</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Customers)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td class="address">@item.Address</td>
+                                <td>@item.City</td>
+                                <td>@item.Province</td>
+                                <td>@item.PostalCode</td>
+                                <td>@item.CustomerID</td>
+                                <td>
+                                    <input type="submit" name="Submit" value="Select" class="select" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div> 
+        }
+    <table>
         <tr>
             <td>
                 <input type="text" name="Address" placeholder="Address" value="@Model.Address"/>

@@ -26,6 +26,8 @@ form {
     padding: 2rem 5rem;
     border-radius: 5%;
     border-color: purple;
+    max-height: 50rem;
+    overflow:auto
 }
 ul{
     margin-top:3rem;
@@ -108,8 +110,26 @@ tr {
     border-bottom: 2px solid;
     border-right: 1px solid;
     border-color: white;
+    
+}
+.found th {
+    min-width:7rem;
+    padding: 0 1rem;
+}
+.address {
+    min-width:18rem;
 }
 
+.scroll{
+    max-height: 20rem;
+    overflow: auto;
+}
+
+.scroll thead {
+    position: sticky;
+    top: 0;
+    background-color: #121211;
+}
 input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -132,6 +152,18 @@ input[type=number] {
     font-size: 15px;
     cursor: pointer;
     background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
+}
+
+.select {
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: green;
     color: #fff;
     border: none;
     border-radius: 5px;

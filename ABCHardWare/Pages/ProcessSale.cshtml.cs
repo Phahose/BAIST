@@ -32,14 +32,7 @@ namespace ABCHardWare.Pages
         public Item Item { get; set; } = new();
         public string SalesItemString { get; set; } = string.Empty;
         public void OnGet()
-        {
-            /*if (HttpContext.Session.GetString("SaleItems") != null)
-            {
-                SalesItemString = HttpContext.Session.GetString("SaleItems");
-                HttpContext.Session.SetString("SaleItems", Item.ToString());
-                SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
-            }*/
-            
+        {            
             Message = "Process A Sale";
         }
 

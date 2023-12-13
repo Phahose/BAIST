@@ -1,6 +1,7 @@
 using ABCHardWare.Domian;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace ABCHardWare.Pages
 {
@@ -24,6 +25,8 @@ namespace ABCHardWare.Pages
         public string Submit { get; set; } = string.Empty;
         [BindProperty]
         public int CustomerID { get; set; }
+        public List<Customer> Customers { get; set; } = new();
+        public string CustomerString { get; set; } = string.Empty;
 
         public void OnGet()
         {
@@ -48,12 +51,8 @@ namespace ABCHardWare.Pages
 
                     if (ModelState.IsValid)
                     {
-                        Customer customer = aBCPOS.FindCustomer(FirstName, LastName);
-                        if (customer.FirstName == "")
-                        {
-                            Message = "This Customer Not Found Check The Name ";
-                        }
-                        else
+                        Customers = aBCPOS.FindCustomer(FirstName, LastName);
+                        foreach (Customer customer in Customers)
                         {
                             FirstName = customer.FirstName;
                             LastName = customer.LastName;
@@ -62,16 +61,50 @@ namespace ABCHardWare.Pages
                             Province = customer.Province;
                             PostalCode = customer.PostalCode;
                             CustomerID = customer.CustomerID;
-
-                            Message = "Customer Found Update Customer";
-                            ModelState.Clear();
                         }
+
+                        if (Customers.Count == 0)
+                        {
+                            Message = "This Customer Not Found Check The Name ";
+                        }
+                        CustomerString = string.Empty;
+                        if (HttpContext.Session.GetString("Customers") != null)
+                        {
+                            CustomerString = HttpContext.Session.GetString("Customers")!;
+                            Customers = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
+                        }
+                        CustomerString = JsonSerializer.Serialize(Customers);
+                        HttpContext.Session.SetString("Customers", CustomerString);
                     }
                     else
                     {
                         Message = "The Customer Could not be Found Errors In the Form";
                     }
                     
+                    break;
+                case "Select":
+                    CustomerString = string.Empty;
+                    if (HttpContext.Session.GetString("Customers") != null)
+                    {
+                        CustomerString = HttpContext.Session.GetString("Customers")!;
+                        Customers = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
+                    }
+
+                    Customer selectedCustomer = new Customer();
+                    selectedCustomer =  Customers.Where(x => x.CustomerID == CustomerID).FirstOrDefault()!;
+                    if (selectedCustomer != null)
+                    {
+                        FirstName = selectedCustomer.FirstName;
+                        LastName = selectedCustomer.LastName;
+                        Address = selectedCustomer.Address;
+                        City = selectedCustomer.City;
+                        Province = selectedCustomer.Province;
+                        PostalCode = selectedCustomer.PostalCode;
+                        CustomerID = selectedCustomer.CustomerID;
+
+                        Message = "Customer Found Update Customer";
+                        ModelState.Clear();
+                    }  
                     break;
                 case "UpdateCustomer":
                     if (Address == null)

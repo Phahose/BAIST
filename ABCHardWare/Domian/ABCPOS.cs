@@ -63,10 +63,10 @@ namespace ABCHardWare.Domian
             confirmation = true;
             return confirmation;
         }
-        public Customer FindCustomer(string firstName, string lastName)
+        public List<Customer> FindCustomer(string firstName, string lastName)
         {
             Customers customers = new Customers();
-            Customer existingCustomer = customers.FindCustomer(firstName, lastName);
+            List<Customer> existingCustomer = customers.FindCustomer(firstName, lastName);
             return existingCustomer;
         }
         public bool DeleteCustomer(int customerID)

@@ -27,6 +27,7 @@ namespace ABCHardWare.Pages
 
         public void OnPost()
         {
+            ModelState.Clear();
             if (FirstName == null)
             {
                 ModelState.AddModelError("FirstNameInput","First Name is Required");

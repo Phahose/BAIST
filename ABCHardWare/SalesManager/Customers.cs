@@ -164,9 +164,9 @@ namespace ABCHardWare.SalesManager
             return confirmation;
         }
 
-        public Customer FindCustomer(string FirstName , string LastName)
+        public List<Customer> FindCustomer(string FirstName , string LastName)
         {
-            Customer customer = new();
+            List<Customer> customers = new();
             SqlConnection nekwom1Connection = new();
             nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
             nekwom1Connection.Open();
@@ -199,20 +199,23 @@ namespace ABCHardWare.SalesManager
 
             if (FindCustomerDataReader.HasRows)
             {
-                FindCustomerDataReader.Read();
-
-                customer = new Customer()
+                while (FindCustomerDataReader.Read())
                 {
-                    FirstName = (string)FindCustomerDataReader["FirstName"],
-                    LastName = (string)FindCustomerDataReader["LastName"],
-                    Address = (string)FindCustomerDataReader["Address"],
-                    City = (string)FindCustomerDataReader["City"],
-                    Province = (string)FindCustomerDataReader["Province"],
-                    PostalCode = (string)FindCustomerDataReader["PostalCode"],
-                    CustomerID = (int)FindCustomerDataReader["CustomerID"]
-                };
+                    Customer customer = new()
+                    {
+                        FirstName = (string)FindCustomerDataReader["FirstName"],
+                        LastName = (string)FindCustomerDataReader["LastName"],
+                        Address = (string)FindCustomerDataReader["Address"],
+                        City = (string)FindCustomerDataReader["City"],
+                        Province = (string)FindCustomerDataReader["Province"],
+                        PostalCode = (string)FindCustomerDataReader["PostalCode"],
+                        CustomerID = (int)FindCustomerDataReader["CustomerID"]
+                    };
+                    customers.Add(customer);
+                }
+               
             }
-            return customer;
+            return customers;
         }
         public bool DeleteCustomer(int customerID)
         {

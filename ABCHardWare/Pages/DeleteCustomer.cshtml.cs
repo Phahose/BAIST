@@ -1,4 +1,5 @@
 using ABCHardWare.Domian;
+using ABCHardWare.SalesManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,6 +25,7 @@ namespace ABCHardWare.Pages
         public string Submit { get; set; } = string.Empty;
         [BindProperty]
         public int CustomerID { get; set; }
+        public List<Customer> Customers { get; set; } = new();
         public void OnGet()
         {
             Message = "Delete A Customer";
@@ -46,24 +48,23 @@ namespace ABCHardWare.Pages
 
                     if (ModelState.IsValid)
                     {
-                        Customer customer = aBCPOS.FindCustomer(FirstName, LastName);
-                        if (customer.FirstName == "")
+                        Customers = aBCPOS.FindCustomer(FirstName, LastName);
+                        if (Customers[0].FirstName == "")
                         {
                             Message = "This Customer Not Found Check The Name ";
-                            FirstName = "";
-                            LastName = "";
                         }
                         else
                         {
-                            FirstName = customer.FirstName;
-                            LastName = customer.LastName;
-                            Address = customer.Address;
-                            City = customer.City;
-                            Province = customer.Province;
-                            PostalCode = customer.PostalCode;
-                            CustomerID = customer.CustomerID;
+                            FirstName = Customers[0].FirstName;
+                            LastName = Customers[0].LastName;
+                            Address = Customers[0].Address;
+                            City = Customers[0].City;
+                            Province = Customers[0].Province;
+                            PostalCode = Customers[0].PostalCode;
+                            CustomerID = Customers[0].CustomerID;
 
                             Message = "Customer Found Update Customer";
+                            ModelState.Clear();
                         }
                     }
                     else

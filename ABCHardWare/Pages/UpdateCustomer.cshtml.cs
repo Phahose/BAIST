@@ -92,6 +92,7 @@ namespace ABCHardWare.Pages
 
                     Customer selectedCustomer = new Customer();
                     selectedCustomer =  Customers.Where(x => x.CustomerID == CustomerID).FirstOrDefault()!;
+
                     if (selectedCustomer != null)
                     {
                         FirstName = selectedCustomer.FirstName;

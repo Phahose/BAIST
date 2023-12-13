@@ -30,9 +30,16 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public List<Item> SaleItems { get; set; } = new();
         public Item Item { get; set; } = new();
+        public string SalesItemString { get; set; } = string.Empty;
         public void OnGet()
         {
-           // HttpContext.Session.SetString("SaleItems", Item.ToString());
+            /*if (HttpContext.Session.GetString("SaleItems") != null)
+            {
+                SalesItemString = HttpContext.Session.GetString("SaleItems");
+                HttpContext.Session.SetString("SaleItems", Item.ToString());
+                SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
+            }*/
+            
             Message = "Process A Sale";
         }
 
@@ -64,7 +71,7 @@ namespace ABCHardWare.Pages
                             UnitPrice = Item.UnitPrice;
                             Deleted = Item.Deleted;
 
-                            string SalesItemString = string.Empty;
+                            SalesItemString = string.Empty;
                             if (HttpContext.Session.GetString("SaleItems") != null)
                             {
                                 SalesItemString = HttpContext.Session.GetString("SaleItems");
@@ -85,9 +92,21 @@ namespace ABCHardWare.Pages
                     }
 
                     break;
-                case "DeleteItem":
-                    aBCPOS.DeleteItem(ItemCode);
-                    Message = "Item Has been Deleted Successfully";
+                case "Delete":
+                    SalesItemString = string.Empty;
+                    if (HttpContext.Session.GetString("SaleItems") != null)
+                    {
+                        SalesItemString = HttpContext.Session.GetString("SaleItems");
+                        SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
+                    }
+
+                    Item deletedItem = SaleItems.Where(x => x.ItemCode == ItemCode).FirstOrDefault();
+
+                    SaleItems.Remove(deletedItem);
+                    SalesItemString = JsonSerializer.Serialize(SaleItems);
+                    HttpContext.Session.SetString("SaleItems", SalesItemString);   
+                   
+                    Message = "Item Removed";
                 break;
             }
         }

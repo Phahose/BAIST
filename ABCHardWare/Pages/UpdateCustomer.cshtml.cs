@@ -54,7 +54,7 @@ namespace ABCHardWare.Pages
 
                     if (ModelState.IsValid)
                     {
-                        Customers = aBCPOS.FindCustomer(FirstName, LastName);
+                        Customers = aBCPOS.FindCustomer(FirstName!, LastName!);
 
                         if (Customers.Count == 0)
                         {
@@ -135,11 +135,11 @@ namespace ABCHardWare.Pages
                         {
                             FirstName = FirstName,
                             LastName = LastName,
-                            Address = Address,
-                            City = City,
-                            Province = Province,
-                            PostalCode = PostalCode,
-                            CustomerID = CustomerID,
+                            Address = Address!,
+                            City = City!,
+                            Province = Province!,
+                            PostalCode = PostalCode!,
+                            CustomerID = CustomerID!,
                         };
                         aBCPOS.UpdateCustomer(newselectedCustomer);
                         Message = "Customer Updated Successfully";

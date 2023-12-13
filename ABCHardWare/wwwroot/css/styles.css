@@ -183,6 +183,17 @@ input[type=number] {
     margin: auto;
 }
 
+.addItem {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: purple;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 7rem;
+    margin: auto;
+}
 
 input[type=button] {
     padding: 10px 15px;

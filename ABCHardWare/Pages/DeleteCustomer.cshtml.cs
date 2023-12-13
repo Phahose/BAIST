@@ -54,7 +54,7 @@ namespace ABCHardWare.Pages
 
                     if (ModelState.IsValid)
                     {
-                        Customers = aBCPOS.FindCustomer(FirstName, LastName);
+                        Customers = aBCPOS.FindCustomer(FirstName!, LastName!);
 
                         if (Customers.Count == 0)
                         {

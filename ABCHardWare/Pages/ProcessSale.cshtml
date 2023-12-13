@@ -20,21 +20,30 @@
 <form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale)">
     <h2>Process Sale</h2>
     <table>
-        <tr>
+        <tr> 
             <td>
                 <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" />
             </td>
-        </tr>
-        <tr>
             <td>
-                <input type="submit" name="Submit" value="AddItem" class="sub"/>
+                <input type="submit" name="Submit" value="AddItem" class="addItem" />
             </td>
         </tr>
-
-
     </table>
     <div class="scrollable-section">
         <table class="found">
+            @if (Model.SaleItems.Count > 0)
+            {
+                <tr>
+                    <td class="address">Remove From List</td>
+                    <td>
+                        <input type="text" name="SelectedItem" placeholder="ItemCode" />
+                    </td>
+                    <td>
+                        <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                    </td>
+                </tr>
+            }
+            
             <thead>
                 <tr>
                     <th>Item Code</th>
@@ -42,12 +51,11 @@
                     <th>UnitPrice</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.SaleItems != null)
-                {
+                {  
                     @foreach (var item in Model.SaleItems)
                     {
                         <tr>
@@ -57,9 +65,6 @@
                             <td>@Model.Price</td>
                             <td>
                                 <input type="number" name="Quantity" />
-                            </td>
-                            <td>
-                                <input type="submit" name="Submit" value="Delete" class="deleteB" />
                             </td>
                         </tr>
                     }

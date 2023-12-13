@@ -31,6 +31,8 @@ namespace ABCHardWare.Pages
         public List<Item> SaleItems { get; set; } = new();
         public Item Item { get; set; } = new();
         public string SalesItemString { get; set; } = string.Empty;
+        [BindProperty]
+        public string SelectedItem { get; set; }
         public void OnGet()
         {            
             Message = "Process A Sale";
@@ -75,9 +77,7 @@ namespace ABCHardWare.Pages
                             SalesItemString = JsonSerializer.Serialize(SaleItems);
                             HttpContext.Session.SetString("SaleItems", SalesItemString);
                             Message = $"Total Items {SaleItems.Count}";
-                        }
-                        
-                        
+                        }                       
                     }
                     else
                     {
@@ -93,7 +93,7 @@ namespace ABCHardWare.Pages
                         SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
                     }
 
-                    Item deletedItem = SaleItems.Where(x => x.ItemCode == ItemCode).FirstOrDefault();
+                    Item deletedItem = SaleItems.Where(x => x.ItemCode == SelectedItem).FirstOrDefault();
 
                     SaleItems.Remove(deletedItem);
                     SalesItemString = JsonSerializer.Serialize(SaleItems);

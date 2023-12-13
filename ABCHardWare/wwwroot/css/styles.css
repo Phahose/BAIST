@@ -258,3 +258,13 @@ input[type=button] {
     padding: 1rem;
     border: none;
 }
+
+.scrollable-section {
+    max-height: 330px;
+    overflow-y: auto;
+}
+.scrollable-section thead {
+    position: sticky;
+    top: 0;
+    background-color: #121211;
+}

@@ -2,60 +2,6 @@
 @model ABCHardWare.Pages.ProcessSaleModel
 @{
 }
-<script type="text/javascript">
-    function displayFieldsInStorage() {
-        var fieldArray = [];
-        var index = 0;
-        var serializedJSON;
-
-        if (localStorage.getItem('ItemDetails') !== null) {
-            serializedJSON = localStorage.getItem('ItemDetails');
-            fieldArray = JSON.parse(serializedJSON);
-        }
-
-        if (fieldArray.length > 0) {
-            for (index = 0; index <= fieldArray.length - 1; index++) {
-            }
-        }
-        else {
-            displayHTML += '<tr><td>There is no data in the Local Storage</td></tr>';
-        }
-
-        window.document.getElementById('DisplayTable').innerHTML = displayHTML;
-    }
-    function storeField(itemCode, description, unitPrice) {
-        alert('storefield called');
-        var fieldArray = [];
-        var serializedJSON;
-
-        if (localStorage.getItem('ItemDetails') !== null) {
-            serializedJSON = localStorage.getItem('ItemDetails');
-            fieldArray = JSON.parse(serializedJSON);
-        }
-
-        fieldArray.push(itemCode);
-        fieldArray.push(description);
-        fieldArray.push(unitPrice);
-
-        serializedJSON = JSON.stringify(fieldArray);
-        localStorage.setItem('ItemDetails', serializedJSON);
-
-        displayFieldsInStorage();
-
-        itemCode = '';
-        itemCode.focus();
-        itemCode.select();
-
-        description = '';
-        description.focus();
-        description.select();
-
-        unitPrice = '';
-        unitPrice.focus();
-        unitPrice.select();
-
-    }
-</script>
 <form name="ProcessSale" method="post" class="pSale">
     <h2>Process Sale</h2>
     <table>
@@ -66,44 +12,47 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" name="Submit" value="AddItem" class="sub" onclick="storeField(@Model.ItemCode, @Model.Description, @Model.UnitPrice);" />
+                <input type="submit" name="Submit" value="AddItem" class="sub"/>
             </td>
         </tr>
 
 
     </table>
-    <table class="found">
-        <thead>
-            <tr>
-                <th>Item Code</th>
-                <th>Description</th>
-                <th>UnitPrice</th>
-                <th>Price</th>
-                <th>Quantity</th>             
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.SaleItems != null)
-            {
-                @foreach (var item in Model.SaleItems)
+    <div class="scrollable-section">
+        <table class="found">
+            <thead>
+                <tr>
+                    <th>Item Code</th>
+                    <th>Description</th>
+                    <th>UnitPrice</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.SaleItems != null)
                 {
-                    <tr>
-                        <td>@item.ItemCode</td>
-                        <td>@item.Description</td>
-                        <td>@item.UnitPrice</td>
-                        <td>@Model.Price</td>
-                        <td>
-                            <input type="number" name="Quantity" />
-                        </td>
-                        <td>
-                            <input type="submit" name="Submit" value="Delete" class="deleteB" />
-                        </td>
-                    </tr>
+                    @foreach (var item in Model.SaleItems)
+                    {
+                        <tr>
+                            <td>@item.ItemCode</td>
+                            <td>@item.Description</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@Model.Price</td>
+                            <td>
+                                <input type="number" name="Quantity" />
+                            </td>
+                            <td>
+                                <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                            </td>
+                        </tr>
+                    }
                 }
-            }        
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    
     <script type="text/javascript">
         displayFieldsInStorage();
 

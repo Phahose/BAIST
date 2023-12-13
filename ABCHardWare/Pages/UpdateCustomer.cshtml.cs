@@ -27,6 +27,8 @@ namespace ABCHardWare.Pages
         public int CustomerID { get; set; }
         public List<Customer> Customers { get; set; } = new();
         public string CustomerString { get; set; } = string.Empty;
+        [BindProperty]
+        public int SelectedCustomer {  get; set; }
 
         public void OnGet()
         {
@@ -52,16 +54,6 @@ namespace ABCHardWare.Pages
                     if (ModelState.IsValid)
                     {
                         Customers = aBCPOS.FindCustomer(FirstName, LastName);
-                        foreach (Customer customer in Customers)
-                        {
-                            FirstName = customer.FirstName;
-                            LastName = customer.LastName;
-                            Address = customer.Address;
-                            City = customer.City;
-                            Province = customer.Province;
-                            PostalCode = customer.PostalCode;
-                            CustomerID = customer.CustomerID;
-                        }
 
                         if (Customers.Count == 0)
                         {
@@ -91,7 +83,7 @@ namespace ABCHardWare.Pages
                     }
 
                     Customer selectedCustomer = new Customer();
-                    selectedCustomer =  Customers.Where(x => x.CustomerID == CustomerID).FirstOrDefault()!;
+                    selectedCustomer =  Customers.Where(x => x.CustomerID == SelectedCustomer).FirstOrDefault()!;
 
                     if (selectedCustomer != null)
                     {

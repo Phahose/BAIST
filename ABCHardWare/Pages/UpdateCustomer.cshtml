@@ -36,23 +36,31 @@
                             <th>CustomerID</th>
                         </tr>
                     </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" name="SelectedCustomer" placeholder="CustomerID" />
+                        </td>
+                        <td>
+                            <input type="submit" name="Submit" value="Select" class="select" />
+                        </td>
+                    </tr>
                     @foreach (var item in Model.Customers)
                     {
-                        <tbody>
-                            <tr>
-                                <td>@item.FirstName</td>
-                                <td>@item.LastName</td>
-                                <td class="address">@item.Address</td>
-                                <td>@item.City</td>
-                                <td>@item.Province</td>
-                                <td>@item.PostalCode</td>
-                                <td>@item.CustomerID</td>
-                                <td>
-                                    <input type="submit" name="Submit" value="Select" class="select" />
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td class="address">@item.Address</td>
+                            <td>@item.City</td>
+                            <td>@item.Province</td>
+                            <td>@item.PostalCode</td>
+                            <td>@item.CustomerID</td>
+                            
+                        </tr>
                     }
+                   
+                    </tbody>
+                    
                 </table>
             </div> 
         }

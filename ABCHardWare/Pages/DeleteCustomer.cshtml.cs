@@ -2,6 +2,7 @@ using ABCHardWare.Domian;
 using ABCHardWare.SalesManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace ABCHardWare.Pages
 {
@@ -26,6 +27,9 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int CustomerID { get; set; }
         public List<Customer> Customers { get; set; } = new();
+        public string CustomerString { get; set; } = string.Empty;
+        [BindProperty]
+        public int SelectedCustomer { get; set; }
         public void OnGet()
         {
             Message = "Delete A Customer";
@@ -37,42 +41,63 @@ namespace ABCHardWare.Pages
             switch (Submit)
             {
                 case "FindCustomer":
+                    ModelState.Clear();
+                    HttpContext.Session.Clear();
                     if (FirstName == null)
                     {
                         ModelState.AddModelError("FirstNameInput", "First Name is Required");
                     }
                     else if (LastName == null)
                     {
-                        ModelState.AddModelError("LastNameInput", "Last Name is Required");
+                        ModelState.AddModelError("LastNameInput", "Last NAme is Required");
                     }
 
                     if (ModelState.IsValid)
                     {
                         Customers = aBCPOS.FindCustomer(FirstName, LastName);
-                        if (Customers[0].FirstName == "")
+
+                        if (Customers.Count == 0)
                         {
                             Message = "This Customer Not Found Check The Name ";
                         }
-                        else
+                        CustomerString = string.Empty;
+                        if (HttpContext.Session.GetString("Customers") != null)
                         {
-                            FirstName = Customers[0].FirstName;
-                            LastName = Customers[0].LastName;
-                            Address = Customers[0].Address;
-                            City = Customers[0].City;
-                            Province = Customers[0].Province;
-                            PostalCode = Customers[0].PostalCode;
-                            CustomerID = Customers[0].CustomerID;
-
-                            Message = "Customer Found Update Customer";
-                            ModelState.Clear();
+                            CustomerString = HttpContext.Session.GetString("Customers")!;
+                            Customers = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
                         }
+                        CustomerString = JsonSerializer.Serialize(Customers);
+                        HttpContext.Session.SetString("Customers", CustomerString);
                     }
                     else
                     {
-                        Message = "Customer Could Not be Added";
-                    }               
+                        Message = "The Customer Could not be Found Errors In the Form";
+                    }
                     break;
                 case "Delete":
+                    CustomerString = string.Empty;
+                    if (HttpContext.Session.GetString("Customers") != null)
+                    {
+                        CustomerString = HttpContext.Session.GetString("Customers")!;
+                        Customers = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
+                    }
+
+                    Customer selectedCustomer = new Customer();
+                    selectedCustomer = Customers.Where(x => x.CustomerID == SelectedCustomer).FirstOrDefault()!;
+
+                    if (selectedCustomer != null)
+                    {
+                        FirstName = selectedCustomer.FirstName;
+                        LastName = selectedCustomer.LastName;
+                        Address = selectedCustomer.Address;
+                        City = selectedCustomer.City;
+                        Province = selectedCustomer.Province;
+                        PostalCode = selectedCustomer.PostalCode;
+                        CustomerID = selectedCustomer.CustomerID;
+
+                        Message = "Customer Found Delete Customer";
+                        ModelState.Clear();
+                    }
                     aBCPOS.DeleteCustomer(CustomerID);
                     Message = "Customer Deleted Successfully";
                 break;

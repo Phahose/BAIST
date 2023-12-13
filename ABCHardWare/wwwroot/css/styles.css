@@ -121,7 +121,7 @@ tr {
 }
 
 .scroll{
-    max-height: 20rem;
+    max-height: 30rem;
     overflow: auto;
 }
 
@@ -234,9 +234,9 @@ input[type=button] {
     justify-content: space-between;
 }
 
-    .updateCustomertr > td > input[type=text] {
-        width: 49%; 
-    }
+.updateCustomertr > td > input[type=text] {
+    width: 49%; 
+}
 
 .transition-fade {
     animation: transitionleft 1.5s;

@@ -42,6 +42,7 @@ namespace ABCHardWare.Pages
             {
                 case "FindCustomer":
                     ModelState.Clear();
+                    HttpContext.Session.Clear();
                     if (FirstName == null)
                     {
                         ModelState.AddModelError("FirstNameInput", "First Name is Required");
@@ -100,6 +101,7 @@ namespace ABCHardWare.Pages
                     }  
                     break;
                 case "UpdateCustomer":
+                    ModelState.Clear();
                     if (Address == null)
                     {
                         ModelState.AddModelError("AddressInput", "Address is Required");
@@ -117,9 +119,19 @@ namespace ABCHardWare.Pages
                         ModelState.AddModelError("PostalCodeInput", "PostalCode is Required");
                     }
 
+                    CustomerString = string.Empty;
+                    if (HttpContext.Session.GetString("Customers") != null)
+                    {
+                        CustomerString = HttpContext.Session.GetString("Customers")!;
+                        Customers = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
+                    }
+
+                    Customer newselectedCustomer = new Customer();
+                    newselectedCustomer = Customers.Where(x => x.CustomerID == SelectedCustomer).FirstOrDefault()!;
+
                     if (ModelState.IsValid)
                     {
-                        Customer newCustomer = new Customer()
+                        newselectedCustomer = new Customer()
                         {
                             FirstName = FirstName,
                             LastName = LastName,
@@ -129,8 +141,10 @@ namespace ABCHardWare.Pages
                             PostalCode = PostalCode,
                             CustomerID = CustomerID,
                         };
-                        aBCPOS.UpdateCustomer(newCustomer);
+                        aBCPOS.UpdateCustomer(newselectedCustomer);
                         Message = "Customer Updated Successfully";
+                        HttpContext.Session.Clear();
+                        Customers.Clear();
                     }
                     else
                     {

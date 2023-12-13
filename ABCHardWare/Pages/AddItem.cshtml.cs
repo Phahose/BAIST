@@ -2,11 +2,15 @@ using ABCHardWare.Domian;
 using ABCHardWare.SalesManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace ABCHardWare.Pages
 {
     public class AddItemModel : PageModel
     {
+        [BindProperty]
+        [RegularExpression("[A-Za-z][0-9]{5}", ErrorMessage = "Item Code must start with a letter and be followed by five numbers")]
+        public string ItemCode { get; set; } = string.Empty;
         [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]
@@ -21,6 +25,7 @@ namespace ABCHardWare.Pages
 
         public void OnPost() 
         {
+            bool success = true;
             if(Description == null)
             {
                 ModelState.AddModelError("DescriptionInput", "Description is Required");
@@ -29,6 +34,10 @@ namespace ABCHardWare.Pages
             {
                 ModelState.AddModelError("UnitPriceInput", "Unit Price is Required");
             }
+            else if(ItemCode == string.Empty)
+            {
+                ModelState.AddModelError("ItemCodeInput", "ItemCode is Required");
+            }
 
             if (ModelState.IsValid)
             {
@@ -36,14 +45,23 @@ namespace ABCHardWare.Pages
 
                 Item newItem = new Item()
                 {
+                    ItemCode = ItemCode,
                     Description = Description,
                     UnitPrice = UnitPrice,
                     Deleted = 1
                 };
 
-                aBCPOS.AddNewItem(newItem);
+                success =  aBCPOS.AddNewItem(newItem);
 
-                Message = "Item has Been Added";
+                if (success == true)
+                {
+                    Message = "Item has Been Added";
+                }
+                else
+                {
+                    Message = "Item Could Not Be Added This ItemCode Already exists";
+                }
+                
             }
             else
             {

@@ -8,7 +8,7 @@ namespace ABCHardWare.Pages
     public class UpdateItemModel : PageModel
     {
         [BindProperty]
-        public int ItemCode { get; set; }
+        public string ItemCode { get; set; } = string.Empty;
         [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]
@@ -30,7 +30,7 @@ namespace ABCHardWare.Pages
             {
                 case "FindItem":
                     ModelState.Clear();
-                    if (ItemCode == 0)
+                    if (ItemCode == string.Empty)
                     {
                         ModelState.AddModelError("DescriptionInput", "Description is Required");
                     }

@@ -7,7 +7,7 @@ namespace ABCHardWare.Pages
     public class DeleteItemModel : PageModel
     {
         [BindProperty]
-        public int ItemCode { get; set; }
+        public string ItemCode { get; set; } = string.Empty;
         [BindProperty]
         public string Description { get; set; } = string.Empty;
         [BindProperty]
@@ -30,7 +30,7 @@ namespace ABCHardWare.Pages
             {
                 case "FindItem":
                     ModelState.Clear();
-                    if (ItemCode == 0) 
+                    if (ItemCode == string.Empty) 
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
                     }

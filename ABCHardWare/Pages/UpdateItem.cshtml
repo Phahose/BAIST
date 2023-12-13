@@ -2,13 +2,27 @@
 @model ABCHardWare.Pages.UpdateItemModel
 @{
 }
-
-<form name="UpdateItem" method="post">
+ <script type="text/javascript">
+    function isFormValid(newItem) {
+        var isValid = false;
+        var ItemCodeValue = newItem.ItemCode.value;
+        const ItemCodePattern = /^[A-Za-z][0-9]{5}$/
+ 
+        if (!ItemCodePattern.test(ItemCodeValue)) {
+            alert("Item Code must start with a letter and be followed by five numbers");
+        }
+        else {
+            isValid = true;
+        }
+        return isValid
+    }
+</script>
+<form name="UpdateItem" method="post" onsubmit="return isFormValid(window.document.UpdateItem)">
     <h2>Update Item</h2>
     <table>
         <tr>
             <td>
-                <input type="text" name="ItemCode" required placeholder="ItemCode"/>
+                <input type="text" name="ItemCode" required placeholder="ItemCode" />
                 @Html.ValidationMessage("ItemCodeInput")
             </td>
         </tr>

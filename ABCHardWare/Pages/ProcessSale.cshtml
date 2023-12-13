@@ -2,7 +2,22 @@
 @model ABCHardWare.Pages.ProcessSaleModel
 @{
 }
-<form name="ProcessSale" method="post" class="pSale">
+<script type="text/javascript">
+    function isFormValid(newItem) {
+        var isValid = false;
+        var ItemCodeValue = newItem.ItemCode.value;
+        const ItemCodePattern = /^[A-Za-z][0-9]{5}$/
+
+        if (!ItemCodePattern.test(ItemCodeValue)) {
+            alert("Item Code must start with a letter and be followed by five numbers");
+        }
+        else {
+            isValid = true;
+        }
+        return isValid
+    }
+</script>
+<form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale)">
     <h2>Process Sale</h2>
     <table>
         <tr>

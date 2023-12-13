@@ -22,13 +22,14 @@ ALTER TABLE Item
 DROP COLUMN ItemCode;
 
 ALTER TABLE Item
-ADD ItemCode INT IDENTITY(1,1) PRIMARY KEY;
+ADD ItemCode VARCHAR(6) PRIMARY KEY;
 
 ALTER TABLE Customer
 DROP COLUMN Deleted;
 
 Drop Table Sale 
 Drop table Item
+
 
 CREATE TABLE Sale (
     SaleNumber INT NOT NULL,
@@ -54,13 +55,27 @@ CREATE TABLE SaleItem (
 );
 
 ALTER TABLE SaleItem
-ADD ItemCode INT NOT NULL;
+ADD ItemCode VARCHAR(6) PRIMARY KEY;
+
+ALTER TABLE SaleItem
+DROP CONSTRAINT CK_SaleItemItemCodeFormat
+CHECK (ItemCode LIKE '[A-Z][0-9][0-9][0-9][0-9][0-9]' AND LEN(ItemCode) = 6);
+
+
 
 ALTER TABLE Customer
 ADD CONSTRAINT PK_Customer PRIMARY KEY (CustomerID);
 
 ALTER TABLE Item
+DROP CONSTRAINT PK__Item__3ECC0FEB4FDD3670
 ADD CONSTRAINT PK_Item PRIMARY KEY (ItemCode);
+
+-- Get Constraint Name
+SELECT CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE TABLE_NAME = 'Item' AND COLUMN_NAME = 'ItemCode' AND CONSTRAINT_NAME LIKE 'PK%';
+
+
 
 ALTER TABLE Sale
 ADD CONSTRAINT PK_Sale PRIMARY KEY (SaleNumber);
@@ -73,16 +88,16 @@ ADD CONSTRAINT FK_ItemCode FOREIGN KEY (ItemCode) REFERENCES Item(ItemCode);
 
 
 -- Add To Inventory
-Create Procedure AddToInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT)
+Create Procedure AddToInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6))
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
 BEGIN
-	IF @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL
+	IF @ItemCode is Null or @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL
 		RAISERROR('Must have a value for all of the Inputs',16,1)
 	ELSE
-		INSERT INTO Item (Description, UnitPrice, Deleted)
-		VALUES (@Description,@UnitPrice,@Deleted)
+		INSERT INTO Item (ItemCode, Description, UnitPrice, Deleted)
+		VALUES (@ItemCode, @Description,@UnitPrice,@Deleted)
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 	ELSE
@@ -119,7 +134,7 @@ Drop Procedure UpdateInventory
 
 
 		-- Delete From Inventory
-Create Procedure DeleteFromInventory (@ItemCode INT)
+Create Procedure DeleteFromInventory (@ItemCode VARCHAR(6))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -140,7 +155,7 @@ BEGIN
 		RETURN @ReturnCode
 		Drop Procedure DeleteFromInventory
 
-Create Procedure BringBackInventory (@ItemCode INT)
+Create Procedure BringBackInventory (@ItemCode VARCHAR(6))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
@@ -246,7 +261,7 @@ BEGIN
 
 
 -- Find Item
-Create Procedure FindItem (@ItemCode INT)
+Create Procedure FindItem (@ItemCode VARCHAR(6))
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1

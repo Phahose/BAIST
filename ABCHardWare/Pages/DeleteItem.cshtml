@@ -2,7 +2,22 @@
 @model ABCHardWare.Pages.DeleteItemModel
 @{
 }
-<form name="UpdateItem" method="post" >
+<script type="text/javascript">
+    function isFormValid(newItem) {
+        var isValid = false;
+        var ItemCodeValue = newItem.ItemCode.value;
+        const ItemCodePattern = /^[A-Za-z][0-9]{5}$/
+
+        if (!ItemCodePattern.test(ItemCodeValue)) {
+            alert("Item Code must start with a letter and be followed by five numbers");
+        }
+        else {
+            isValid = true;
+        }
+        return isValid
+    }
+</script>
+<form name="DeleteItem" method="post" onsubmit="return isFormValid(window.document.DeleteItem)">
     <h2>Delete Item</h2>
     <table>
         <tr>
@@ -27,16 +42,20 @@
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>@Model.ItemCode</td>
-                <td>@Model.Description</td>
-                <td>@Model.UnitPrice</td>
-                <td>
-                    <input type="submit" name="Submit" value="Delete" class="deleteB"/>
-                </td>
-            </tr>
-        </tbody>   
+        @if (Model.Description != string.Empty)
+        {
+            <tbody>
+
+                <tr>
+                    <td>@Model.ItemCode</td>
+                    <td>@Model.Description</td>
+                    <td>@Model.UnitPrice</td>
+                    <td>
+                        <input type="submit" name="Submit" value="Delete" class="deleteB" />
+                    </td>
+                </tr>
+            </tbody>
+        }  
     </table>
     <div class="message">
         <p>@Model.Message</p>

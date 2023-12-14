@@ -80,16 +80,9 @@
     </div>
     
     <div class="mesage">
-        <table>
-            <tr>
-                <td>Sub Total:</td>
-                <td>@Model.Item.ItemTotal</td>
-            </tr>
-            <tr>
-                <td>Total:</td>
-                <td>@Model.Total</td>
-            </tr>
-        </table>
+        <p>Sub Total: @Model.Item.ItemTotal</p>
+        <p>GST: @Model.GST</p>
+        <p>Total: @Model.Total</p>
         <input type="submit" name="Submit" value="ProcessSale" class="select" />
    @*      <p>@Model.Message</p> *@
     </div>

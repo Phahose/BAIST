@@ -66,6 +66,11 @@ h2 {
     margin: auto;
     color: white;
 }
+p {
+    font-family: monospace;
+    color: white;
+    font-size: 20px;
+}
 .index{
     width:fit-content;
     margin:auto;
@@ -193,6 +198,9 @@ input[type=number] {
     border-radius: 5px;
     width: 7rem;
     margin: auto;
+}
+.addItem:hover{
+    background-color: mediumpurple;
 }
 
 input[type=button] {

@@ -27,6 +27,7 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int Deleted { get; set; }
         public decimal Total { get; set; }
+        public decimal GST { get; set; }
         [BindProperty]
         public List<Item> SaleItems { get; set; } = new();
         public Item Item { get; set; } = new();
@@ -80,7 +81,8 @@ namespace ABCHardWare.Pages
 
                             SaleItems.Add(Item);
                             Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
-                            Total = (Item.ItemTotal * 0.05m) + Item.ItemTotal;
+                            GST = (Item.ItemTotal * 0.05m);
+                            Total = GST + Item.ItemTotal;
                             Total = Math.Round(Total, 2);
                             SalesItemString = JsonSerializer.Serialize(SaleItems);
                             HttpContext.Session.SetString("SaleItems", SalesItemString);

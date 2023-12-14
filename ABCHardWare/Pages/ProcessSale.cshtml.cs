@@ -26,13 +26,15 @@ namespace ABCHardWare.Pages
         public string Submit { get; set; } = string.Empty;
         [BindProperty]
         public int Deleted { get; set; }
-        public int Price { get; set; }
+        public decimal Total { get; set; }
         [BindProperty]
         public List<Item> SaleItems { get; set; } = new();
         public Item Item { get; set; } = new();
         public string SalesItemString { get; set; } = string.Empty;
         [BindProperty]
         public string SelectedItem { get; set; }
+        public SalesItem SalesItem { get; set; } = new();   
+        public decimal ItemTotal { get; set; } 
         public void OnGet()
         {            
             Message = "Process A Sale";
@@ -46,6 +48,7 @@ namespace ABCHardWare.Pages
             {
                 case "AddItem":
                     ModelState.Clear();
+                   
                     if (ItemCode == string.Empty)
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
@@ -61,6 +64,8 @@ namespace ABCHardWare.Pages
                         }
                         else
                         {
+                            Item.Quantity = Quantity;
+                            Item.Price = Item.UnitPrice * Item.Quantity;
                             ItemCode = Item.ItemCode;
                             Description = Item.Description;
                             UnitPrice = Item.UnitPrice;
@@ -74,6 +79,9 @@ namespace ABCHardWare.Pages
                             }
 
                             SaleItems.Add(Item);
+                            Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
+                            Total = (Item.ItemTotal * 0.05m) + Item.ItemTotal;
+                            Total = Math.Round(Total, 2);
                             SalesItemString = JsonSerializer.Serialize(SaleItems);
                             HttpContext.Session.SetString("SaleItems", SalesItemString);
                             Message = $"Total Items {SaleItems.Count}";
@@ -102,8 +110,19 @@ namespace ABCHardWare.Pages
                     Message = "Item Removed";
                 break;
                 case "ProcessSale":
-
-                    break;
+                    SalesItemString = string.Empty;
+                    if (HttpContext.Session.GetString("SaleItems") != null)
+                    {
+                        SalesItemString = HttpContext.Session.GetString("SaleItems");
+                        SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
+                    }
+                    SalesItem = new()
+                    {
+                        ItemCode = ItemCode,
+                        Quantity = SaleItems.Count(),
+                        
+                    };
+                break;
             }
         }
     }

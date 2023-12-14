@@ -33,7 +33,7 @@
         <tr>
             <td class="qtty">Quantity</td>
             <td>
-                <input type="number" required name="Quantity" />
+                <input type="number" required name="Quantity" value="1" min="1"/>
             </td>
         </tr>
     </table>
@@ -57,31 +57,39 @@
                     <th>Item Code</th>
                     <th>Description</th>
                     <th>UnitPrice</th>
+                    <th>Quantity</th>
                     <th>Price</th>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.SaleItems != null)
-                {  
+                {
                     @foreach (var item in Model.SaleItems)
                     {
                         <tr>
                             <td>@item.ItemCode</td>
                             <td>@item.Description</td>
                             <td>@item.UnitPrice</td>
-                            <td>@Model.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
                         </tr>
                     }
-                } 
+                }       
             </tbody>
         </table>
     </div>
     
-    <script type="text/javascript">
-        displayFieldsInStorage();
-
-    </script>
     <div class="mesage">
+        <table>
+            <tr>
+                <td>Sub Total:</td>
+                <td>@Model.Item.ItemTotal</td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td>@Model.Total</td>
+            </tr>
+        </table>
         <input type="submit" name="Submit" value="ProcessSale" class="select" />
    @*      <p>@Model.Message</p> *@
     </div>

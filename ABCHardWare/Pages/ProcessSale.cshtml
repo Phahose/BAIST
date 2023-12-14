@@ -21,11 +21,19 @@
     <h2>Process Sale</h2>
     <table>
         <tr> 
+            <td>ItemCode</td>
             <td>
                 <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" />
             </td>
+            
             <td>
                 <input type="submit" name="Submit" value="AddItem" class="addItem" />
+            </td>
+        </tr>
+        <tr>
+            <td class="qtty">Quantity</td>
+            <td>
+                <input type="number" required name="Quantity" />
             </td>
         </tr>
     </table>
@@ -50,7 +58,6 @@
                     <th>Description</th>
                     <th>UnitPrice</th>
                     <th>Price</th>
-                    <th>Quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,12 +70,9 @@
                             <td>@item.Description</td>
                             <td>@item.UnitPrice</td>
                             <td>@Model.Price</td>
-                            <td>
-                                <input type="number" name="Quantity" />
-                            </td>
                         </tr>
                     }
-                }
+                } 
             </tbody>
         </table>
     </div>
@@ -77,7 +81,8 @@
         displayFieldsInStorage();
 
     </script>
-    <div class="message">
-        <p>@Model.Message</p>
+    <div class="mesage">
+        <input type="submit" name="Submit" value="ProcessSale" class="select" />
+   @*      <p>@Model.Message</p> *@
     </div>
 </form>

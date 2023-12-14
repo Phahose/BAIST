@@ -310,3 +310,6 @@ input[type=button] {
     top: 0;
     background-color: #121211;
 }
+.qtty {
+    max-width: 1rem;
+}

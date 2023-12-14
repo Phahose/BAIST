@@ -101,6 +101,9 @@ namespace ABCHardWare.Pages
                    
                     Message = "Item Removed";
                 break;
+                case "ProcessSale":
+
+                    break;
             }
         }
     }

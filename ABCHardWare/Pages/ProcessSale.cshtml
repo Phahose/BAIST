@@ -19,24 +19,30 @@
 </script>
 <form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale)">
     <h2>Process Sale</h2>
-    <table>
-        <tr> 
-            <td>ItemCode</td>
-            <td>
-                <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" />
-            </td>
+    <div>
+        <p>
+            ItemCode: <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" class="code"/>   
+            Quantity: <input type="number" required name="Quantity" value="1" min="1" />
+        </p>
+        <p> <input type="submit" name="Submit" value="AddItem" class="addItem" /></p>
+    </div>
+
+    <div class="topReciept">
+        <div>
+            <p>Sale Number: @Model.Item.ItemTotal</p>
+            <p>SaleDate: @Model.GST</p>
+            <p>SalesPerson: Jenny Brooks</p>
             
-            <td>
-                <input type="submit" name="Submit" value="AddItem" class="addItem" />
-            </td>
-        </tr>
-        <tr>
-            <td class="qtty">Quantity</td>
-            <td>
-                <input type="number" required name="Quantity" value="1" min="1"/>
-            </td>
-        </tr>
-    </table>
+        </div>
+        <div>
+            <p>CustomerName: @Model.Total</p>
+            <p>Address: @Model.Total</p>
+            <p>City: @Model.Total</p>
+            <p>Province: @Model.Total</p>
+            <p>PostalCode: @Model.Total</p>
+        </div>
+    </div>
+
     <div class="scrollable-section">
         <table class="found">
             @if (Model.SaleItems.Count > 0)
@@ -58,7 +64,7 @@
                     <th>Description</th>
                     <th>UnitPrice</th>
                     <th>Quantity</th>
-                    <th>Price</th>
+                    <th>ItemTotal</th>
                 </tr>
             </thead>
             <tbody>

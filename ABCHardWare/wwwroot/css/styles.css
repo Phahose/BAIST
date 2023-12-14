@@ -321,3 +321,10 @@ input[type=button] {
 .qtty {
     max-width: 1rem;
 }
+.topReciept{
+    display: flex;
+    justify-content: space-between;
+}
+.code{
+    max-width: 8rem;
+}

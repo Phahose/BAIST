@@ -77,5 +77,11 @@ namespace ABCHardWare.Domian
             confirmation = true;
             return confirmation;
         }
+        public List<Customer> GetAllCustomers()
+        {
+            Customers customers = new Customers();
+            List<Customer> existingCustomer = customers.GetAllCustomers();
+            return existingCustomer;
+        }
     }
 }

@@ -217,6 +217,43 @@ namespace ABCHardWare.SalesManager
             }
             return customers;
         }
+        public List<Customer> GetAllCustomers()
+        {
+            List<Customer> customers = new();
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.Open();
+
+            SqlCommand FindCustomerCommand = new()
+            {
+                Connection = nekwom1Connection,
+                CommandText = "GetAllCustomers",
+                CommandType = CommandType.StoredProcedure
+            };
+           
+            FindCustomerCommand.ExecuteNonQuery();
+            SqlDataReader FindCustomerDataReader = FindCustomerCommand.ExecuteReader();
+
+            if (FindCustomerDataReader.HasRows)
+            {
+                while (FindCustomerDataReader.Read())
+                {
+                    Customer customer = new()
+                    {
+                        FirstName = (string)FindCustomerDataReader["FirstName"],
+                        LastName = (string)FindCustomerDataReader["LastName"],
+                        Address = (string)FindCustomerDataReader["Address"],
+                        City = (string)FindCustomerDataReader["City"],
+                        Province = (string)FindCustomerDataReader["Province"],
+                        PostalCode = (string)FindCustomerDataReader["PostalCode"],
+                        CustomerID = (int)FindCustomerDataReader["CustomerID"]
+                    };
+                    customers.Add(customer);
+                }
+
+            }
+            return customers;
+        }
         public bool DeleteCustomer(int customerID)
         {
             bool confirmation = false;

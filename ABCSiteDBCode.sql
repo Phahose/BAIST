@@ -325,6 +325,24 @@ BEGIN
 
 		RETURN @ReturnCode
 
+Create Procedure GetAllCustomers
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+	BEGIN
+	SELECT * FROM Customer
+	Where Deleted = 1
+		IF @@ERROR = 0
+
+					SET @ReturnCode = 0
+				ELSE
+					RAISERROR ('Get All Customers - SELECT error: Customer table.', 16, 1)
+			END
+
+		RETURN @ReturnCode
+
+		Drop Procedure GetAllCustomers
+Exec GetAllCustomers
 
 Exec  AddToInventory 3,'MacBook Pro',2300,1
 

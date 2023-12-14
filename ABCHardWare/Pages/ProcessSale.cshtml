@@ -16,30 +16,41 @@
         }
         return isValid
     }
+    function disableSelect() {
+        var selectElement = document.getElementById('mySelect');
+        selectElement.disabled = true;
+    }
 </script>
-<form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale)">
+<form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale); disableSelect();">
     <h2>Process Sale</h2>
-    <div>
+    <div class="topReciept">
         <p>
             ItemCode: <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" class="code"/>   
             Quantity: <input type="number" required name="Quantity" value="1" min="1" />
+          @*   <select id="mySelect" name="CustomerID" style="width: 150px; height: 3rem; background-color: white; border-radius: 10%;">
+                <option value="#">Select A Customer</option>
+                @foreach (var item in Model.CustomerList)
+                {
+                   <option value="@item.CustomerID" >@item.FirstName @item.LastName</option>
+                }
+            </select> *@
         </p>
         <p> <input type="submit" name="Submit" value="AddItem" class="addItem" /></p>
     </div>
 
     <div class="topReciept">
         <div>
-            <p>Sale Number: @Model.Item.ItemTotal</p>
-            <p>SaleDate: @Model.GST</p>
+            <p>Sale Number: 123456789</p>
+            <p>SaleDate: @Model.SaleDate</p>
             <p>SalesPerson: Jenny Brooks</p>
             
         </div>
         <div>
-            <p>CustomerName: @Model.Total</p>
-            <p>Address: @Model.Total</p>
-            <p>City: @Model.Total</p>
-            <p>Province: @Model.Total</p>
-            <p>PostalCode: @Model.Total</p>
+            <p>CustomerName: @Model.Customer.FirstName @Model.Customer.LastName</p>
+            <p>Address: @Model.Customer.Address</p>
+            <p>City: @Model.Customer.City</p>
+            <p>Province: @Model.Customer.Province</p>
+            <p>PostalCode: @Model.Customer.PostalCode</p>
         </div>
     </div>
 
@@ -85,11 +96,18 @@
         </table>
     </div>
     
-    <div class="mesage">
-        <p>Sub Total: @Model.Item.ItemTotal</p>
-        <p>GST: @Model.GST</p>
-        <p>Total: @Model.Total</p>
+    <div class="topReciept">
+        <div>
+            <p>Sub Total: @Model.Item.ItemTotal</p>
+            <p>GST: @Model.GST</p>
+            <p>Total: @Model.Total</p>
+        </div>
+        <div>
+            <p>Time: @Model.SaleTime</p>
+        </div> 
+    </div>
+    <div>
         <input type="submit" name="Submit" value="ProcessSale" class="select" />
-   @*      <p>@Model.Message</p> *@
+        <p>@Model.Message</p>
     </div>
 </form>

@@ -35,9 +35,17 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public string SelectedItem { get; set; }
         public SalesItem SalesItem { get; set; } = new();   
-        public decimal ItemTotal { get; set; } 
+        public decimal ItemTotal { get; set; }
+        public DateOnly SaleDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public TimeOnly SaleTime { get; set; } = TimeOnly.FromDateTime(DateTime.Now);
+        public List<Customer> CustomerList { get; set; } = new();
+        [BindProperty]
+        public int CustomerID { get; set; }
+        public Customer Customer { get; set; } = new Customer();
         public void OnGet()
         {            
+            ABCPOS aBCPOS = new ABCPOS();
+            CustomerList = aBCPOS.GetAllCustomers();
             Message = "Process A Sale";
         }
 
@@ -49,7 +57,9 @@ namespace ABCHardWare.Pages
             {
                 case "AddItem":
                     ModelState.Clear();
-                   
+                    Customer = new Customer();
+                    CustomerList = aBCPOS.GetAllCustomers();
+                    Customer = CustomerList.FirstOrDefault();
                     if (ItemCode == string.Empty)
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");

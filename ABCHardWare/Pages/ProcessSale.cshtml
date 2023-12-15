@@ -27,6 +27,7 @@
         <p>
             ItemCode: <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" class="code"/>   
             Quantity: <input type="number" required name="Quantity" value="1" min="1" />
+            <input type="submit" name="Submit" value="AddItem" class="addItem" />
           @*   <select id="mySelect" name="CustomerID" style="width: 150px; height: 3rem; background-color: white; border-radius: 10%;">
                 <option value="#">Select A Customer</option>
                 @foreach (var item in Model.CustomerList)
@@ -35,14 +36,13 @@
                 }
             </select> *@
         </p>
-        <p> <input type="submit" name="Submit" value="AddItem" class="addItem" /></p>
     </div>
 
     <div class="topReciept">
         <div>
-            <p>Sale Number: 123456789</p>
+            <p>Sale Number: @Model.SaleNumber</p>
             <p>SaleDate: @Model.SaleDate</p>
-            <p>SalesPerson: Jenny Brooks</p>
+            <p>SalesPerson: @Model.SalesPerson</p>
             
         </div>
         <div>

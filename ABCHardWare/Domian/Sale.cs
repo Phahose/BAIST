@@ -10,6 +10,7 @@
         public decimal SubTotal { get; set; }
         public decimal GST { get; set; }
         public decimal SaleTotal { get; set; }
+        public List<SalesItem> SalesItems { get; set; } = new();
 
     }
 }

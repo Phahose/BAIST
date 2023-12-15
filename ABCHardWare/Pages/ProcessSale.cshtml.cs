@@ -4,6 +4,7 @@ using ABCHardWare.SalesManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Text.Json;
 
 namespace ABCHardWare.Pages
@@ -34,7 +35,7 @@ namespace ABCHardWare.Pages
         public string SalesItemString { get; set; } = string.Empty;
         [BindProperty]
         public string SelectedItem { get; set; }
-        public SalesItem SalesItem { get; set; } = new();   
+        public List<SalesItem> ProcessedSalesItem { get; set; } = new();   
         public decimal ItemTotal { get; set; }
         public DateOnly SaleDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public TimeOnly SaleTime { get; set; } = TimeOnly.FromDateTime(DateTime.Now);
@@ -42,10 +43,15 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int CustomerID { get; set; }
         public Customer Customer { get; set; } = new Customer();
+        public int SaleNumber { get; set; }
+        public string SalesPerson { get; set; } = "Novak Djokovic";
         public void OnGet()
         {            
             ABCPOS aBCPOS = new ABCPOS();
             CustomerList = aBCPOS.GetAllCustomers();
+
+            Random random = new Random();
+            SaleNumber = random.Next(100000000, 999999999);
             Message = "Process A Sale";
         }
 
@@ -83,13 +89,28 @@ namespace ABCHardWare.Pages
                             Deleted = Item.Deleted;
 
                             SalesItemString = string.Empty;
+                            bool exists = false;
                             if (HttpContext.Session.GetString("SaleItems") != null)
                             {
                                 SalesItemString = HttpContext.Session.GetString("SaleItems");
                                 SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
                             }
 
-                            SaleItems.Add(Item);
+                            if (SaleItems.Count > 0)
+                            {
+                                exists = SaleItems.Any(x => x.ItemCode == ItemCode);
+                            }
+                            if (exists == false)
+                            {
+                                SaleItems.Add(Item);
+                            }
+                            else
+                            {
+                                SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity += Quantity;
+                                SaleItems.Where(x => x.ItemCode == ItemCode).First().Price = SaleItems.Where(x => x.ItemCode == ItemCode).First().UnitPrice * SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity;
+                            }
+
+                            
                             Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
                             GST = (Item.ItemTotal * 0.05m);
                             Total = GST + Item.ItemTotal;
@@ -128,13 +149,35 @@ namespace ABCHardWare.Pages
                         SalesItemString = HttpContext.Session.GetString("SaleItems");
                         SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
                     }
-                    SalesItem = new()
+                    
+                    foreach (Item item in SaleItems)
                     {
-                        ItemCode = ItemCode,
-                        Quantity = SaleItems.Count(),
-                        
+                        SalesItem SalesItem = new()
+                        {
+                            SaleNumber = SaleNumber,
+                            ItemCode = item.ItemCode,
+                            Quantity = item.Quantity,
+                            ItemTotal = item.ItemTotal,
+                        };
+                        ProcessedSalesItem.Add(SalesItem);
+                    }
+                    Sale processedSale = new()
+                    {
+                        SaleNumber = SaleNumber,
+                        SaleDate = SaleDate,
+                        SalesPerson = SalesPerson,
+                        FirstName = Customer.FirstName,
+                        LastName = Customer.LastName,
+                        SubTotal = Item.ItemTotal,
+                        GST = GST,
+                        SaleTotal = Total,
+                        SalesItems = ProcessedSalesItem
                     };
-                break;
+             
+                    aBCPOS.AddSaleItem(ProcessedSalesItem);
+                    aBCPOS.ProcessSale(processedSale);
+                    Message = $"Sale Has Been Processed {ProcessedSalesItem.Count}";
+                    break;
             }
         }
     }

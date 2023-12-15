@@ -83,5 +83,18 @@ namespace ABCHardWare.Domian
             List<Customer> existingCustomer = customers.GetAllCustomers();
             return existingCustomer;
         }
+        public int AddSaleItem(List<SalesItem> salesItemsList)
+        {
+            Sales sales = new Sales();
+            int saleNumber = sales.AddSaleItem(salesItemsList);
+            return saleNumber;
+        }
+        public int ProcessSale(Sale sale)
+        {
+            Sales sales = new Sales();
+
+           int salenumber = sales.AddSale(sale);
+            return salenumber;
+        }
     }
 }

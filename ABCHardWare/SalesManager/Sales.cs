@@ -5,53 +5,157 @@ namespace ABCHardWare.SalesManager
 {
     public class Sales
     {
-        public Sale AddSale()
+        public string connectionString {  get; set; } = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+        public int AddSaleItem(List<SalesItem> salesItemList)
         {
-            Sale sale = new Sale();
+            int saleNumber = 1;
+            foreach (SalesItem item in salesItemList)
+            {
+                SqlConnection nekwom1Connection = new();
+                nekwom1Connection.ConnectionString = connectionString;
+                nekwom1Connection.Open();
 
-            return sale;
+                SqlCommand AddSaleItemCommand = new()
+                {
+                    Connection = nekwom1Connection,
+                    CommandText = "AddSaleItem",
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                SqlParameter SaleNumberParameter = new()
+                {
+                    ParameterName = "@SaleNumber",
+                    SqlValue = item.SaleNumber,
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Input,
+                };
+
+                SqlParameter QuantityParameter = new()
+                {
+                    ParameterName = "@Quantity",
+                    SqlValue = item.Quantity,
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Input,
+                };
+
+                SqlParameter ItemTotalParameter = new()
+                {
+                    ParameterName = "@ItemTotal",
+                    SqlValue = item.ItemTotal,
+                    SqlDbType = SqlDbType.Decimal,
+                    Direction = ParameterDirection.Input,
+                };
+
+                SqlParameter ItemCodeParameter = new()
+                {
+                    ParameterName = "@ItemCode",
+                    SqlValue = item.ItemCode,
+                    SqlDbType = SqlDbType.VarChar,
+                    Direction = ParameterDirection.Input,
+                };
+                saleNumber = item.SaleNumber;
+                AddSaleItemCommand.Parameters.Add(SaleNumberParameter);
+                AddSaleItemCommand.Parameters.Add(QuantityParameter);
+                AddSaleItemCommand.Parameters.Add(ItemTotalParameter);
+                AddSaleItemCommand.Parameters.Add(ItemCodeParameter);
+
+                AddSaleItemCommand.ExecuteNonQuery();
+                nekwom1Connection.Close();
+                
+            }
+            return saleNumber;
         }
-        /*public SalesItem FindItem(string itemCode)
+        public int AddSale(Sale sale)
         {
-            SalesItem inventoryItem = new();
+            int saleNumber;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
-            SqlCommand FindItemCommand = new()
+            SqlCommand AddSaleCommand = new()
             {
                 Connection = nekwom1Connection,
-                CommandText = "FindItem",
+                CommandText = "AddSaleItem",
                 CommandType = CommandType.StoredProcedure
             };
-
-            SqlParameter ItemCodeParameter = new()
+            SqlParameter SaleNumberParameter = new()
             {
-                ParameterName = "@ItemCode",
-                SqlValue = itemCode,
+                ParameterName = "@SaleNumber",
+                    SqlValue = sale.SaleNumber,
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter SaleDateParameter = new()
+            {
+                ParameterName = "@SaleDate",
+                SqlValue = sale.SaleDate,
+                SqlDbType = SqlDbType.Date,
+                Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter SalesPersonParemeter = new()
+            {
+                ParameterName = "@Salesperson",
+                SqlValue = sale.SalesPerson,
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
             };
 
-            FindItemCommand.Parameters.Add(ItemCodeParameter);
-
-            SqlDataReader itemReader = FindItemCommand.ExecuteReader();
-            if (itemReader.HasRows)
+            SqlParameter FirstNameParameter = new()
             {
-                itemReader.Read();
-                inventoryItem = new()
-                {
-                    ItemCode = (string)itemReader["ItemCode"],
-                    Description = (string)itemReader["Description"],
-                    UnitPrice = (decimal)itemReader["UnitPrice"],
-                    Deleted = (int)itemReader["Deleted"]
-                };
+                ParameterName = "@FirstName",
+                SqlValue = sale.FirstName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
 
-                itemReader.Close();
-                nekwom1Connection.Close();
-            }
-            return inventoryItem;
+            SqlParameter LastNameParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlValue = sale.LastName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+
+            SqlParameter SubTotalParameter = new()
+            {
+                ParameterName = "@SubTotal",
+                SqlValue = sale.SubTotal,
+                SqlDbType = SqlDbType.Decimal,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter GstParameter = new()
+            {
+                ParameterName = "@GST",
+                SqlValue = sale.GST,
+                SqlDbType = SqlDbType.Decimal,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter SaleTotalParameter = new()
+            {
+                ParameterName = "@SaleTotal",
+                SqlValue = sale.SaleTotal,
+                SqlDbType = SqlDbType.Decimal,
+                Direction = ParameterDirection.Input,
+            };
+
+            AddSaleCommand.Parameters.Add(SaleNumberParameter);
+            AddSaleCommand.Parameters.Add(SaleDateParameter);
+            AddSaleCommand.Parameters.Add(SalesPersonParemeter);
+            AddSaleCommand.Parameters.Add(FirstNameParameter);
+            AddSaleCommand.Parameters.Add(LastNameParameter);
+            AddSaleCommand.Parameters.Add(SubTotalParameter);
+            AddSaleCommand.Parameters.Add(GstParameter);
+            AddSaleCommand.Parameters.Add(SaleTotalParameter);
+
+            saleNumber = sale.SaleNumber;
+            AddSaleCommand.ExecuteNonQuery();
+            nekwom1Connection.Close();
+
+
+            return saleNumber;
         }
-*/
+       
     }
 }

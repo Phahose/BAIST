@@ -342,6 +342,75 @@ DECLARE @ReturnCode INT
 		RETURN @ReturnCode
 
 		Drop Procedure GetAllCustomers
+
+Create Procedure AddSaleItem (@SaleNumber INT, 
+							  @Quantity INT, 
+							  @ItemTotal decimal (10,2),
+							  @ItemCode VARCHAR(6))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+	BEGIN
+	IF @SaleNumber IS NULL
+	RAISERROR('The Sale Number is Required',16,1)
+	ELSE IF @Quantity IS NULL
+	RAISERROR('The Quantity is Required',16,1)
+	ELSE IF @ItemTotal IS NULL
+	RAISERROR('The ItemTotal  is Required',16,1)
+	ELSE IF @ItemCode IS NULL
+	RAISERROR('The ItemCode is Required',16,1)
+	ELSE
+	INSERT INTO SaleItem(SaleNumber, Quantity,ItemTotal, ItemCode)
+	VALUES (@SaleNumber,@Quantity,@ItemTotal,@ItemCode)
+	IF @@ERROR = 0
+		SET @ReturnCode = 0
+			ELSE
+				RAISERROR ('Add Sale Item - Insert error: SaleItem table.', 16, 1)
+			END
+			RETURN @ReturnCode
+
+
+CREATE PROCEDURE AddSale
+	@SaleNumber INT,
+    @SaleDate DATE,
+    @Salesperson VARCHAR(25),
+    @FirstName VARCHAR(25),
+    @LastName VARCHAR(25),
+    @SubTotal DECIMAL(12, 2),
+    @GST DECIMAL(10, 2),
+    @SaleTotal DECIMAL(10, 2)
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+
+
+ BEGIN
+    -- Validate parameters for null values
+    IF @SaleNumber IS NULL
+	    OR @SaleDate IS NULL
+        OR @Salesperson IS NULL
+        OR @FirstName IS NULL
+        OR @LastName IS NULL
+        OR @SubTotal IS NULL
+        OR @GST IS NULL
+        OR @SaleTotal IS NULL
+   
+        RAISERROR('All parameters must have non-null values.', 16, 1);
+        RETURN;
+ 
+
+    -- Insert into Sale table
+    INSERT INTO Sale (SaleNumber,SaleDate, Salesperson, FirstName, LastName, SubTotal, GST, SaleTotal)
+    VALUES (@SaleNumber,@SaleDate, @Salesperson, @FirstName, @LastName, @SubTotal, @GST, @SaleTotal)
+	IF @@ERROR = 0
+		SET @ReturnCode = 0
+			ELSE
+				RAISERROR ('Add Sale Item - Insert error: SaleItem table.', 16, 1)
+			END
+			RETURN @ReturnCode
+
+			Drop Procedure AddSale
+
 Exec GetAllCustomers
 
 Exec  AddToInventory 3,'MacBook Pro',2300,1

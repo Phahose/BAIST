@@ -43,15 +43,12 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public int CustomerID { get; set; }
         public Customer Customer { get; set; } = new Customer();
-        public int SaleNumber { get; set; }
+        public int SaleNumber { get; set; } = 123456789;
         public string SalesPerson { get; set; } = "Novak Djokovic";
         public void OnGet()
         {            
             ABCPOS aBCPOS = new ABCPOS();
-            CustomerList = aBCPOS.GetAllCustomers();
-
-            Random random = new Random();
-            SaleNumber = random.Next(100000000, 999999999);
+            CustomerList = aBCPOS.GetAllCustomers(); 
             Message = "Process A Sale";
         }
 
@@ -143,6 +140,10 @@ namespace ABCHardWare.Pages
                     Message = "Item Removed";
                 break;
                 case "ProcessSale":
+                    CustomerList = aBCPOS.GetAllCustomers();
+                    Customer = CustomerList.FirstOrDefault();
+                    Random random = new Random();
+                    SaleNumber = random.Next(100000000, 999999999);
                     SalesItemString = string.Empty;
                     if (HttpContext.Session.GetString("SaleItems") != null)
                     {
@@ -161,6 +162,12 @@ namespace ABCHardWare.Pages
                         };
                         ProcessedSalesItem.Add(SalesItem);
                     }
+
+                    Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
+                    GST = (Item.ItemTotal * 0.05m);
+                    Total = GST + Item.ItemTotal;
+                    Total = Math.Round(Total, 2);
+
                     Sale processedSale = new()
                     {
                         SaleNumber = SaleNumber,
@@ -175,8 +182,8 @@ namespace ABCHardWare.Pages
                     };
              
                     aBCPOS.AddSaleItem(ProcessedSalesItem);
-                    aBCPOS.ProcessSale(processedSale);
-                    Message = $"Sale Has Been Processed {ProcessedSalesItem.Count}";
+                    int saleNo = aBCPOS.ProcessSale(processedSale);
+                    Message = $"Sale Has Been Processed {saleNo}";
                     break;
             }
         }

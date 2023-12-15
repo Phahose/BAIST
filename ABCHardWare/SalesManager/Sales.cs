@@ -75,7 +75,7 @@ namespace ABCHardWare.SalesManager
             SqlCommand AddSaleCommand = new()
             {
                 Connection = nekwom1Connection,
-                CommandText = "AddSaleItem",
+                CommandText = "AddSale",
                 CommandType = CommandType.StoredProcedure
             };
             SqlParameter SaleNumberParameter = new()

@@ -73,7 +73,7 @@ ADD CONSTRAINT PK_Item PRIMARY KEY (ItemCode);
 -- Get Constraint Name
 SELECT CONSTRAINT_NAME
 FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-WHERE TABLE_NAME = 'Item' AND COLUMN_NAME = 'ItemCode' AND CONSTRAINT_NAME LIKE 'PK%';
+WHERE TABLE_NAME = 'SaleItem' AND COLUMN_NAME = 'ItemCode' AND CONSTRAINT_NAME LIKE 'PK%';
 
 
 
@@ -81,9 +81,10 @@ ALTER TABLE Sale
 ADD CONSTRAINT PK_Sale PRIMARY KEY (SaleNumber);
 
 ALTER TABLE SaleItem
-ADD CONSTRAINT PK_SaleItem PRIMARY KEY (SaleNumber, ItemCode);
+ADD CONSTRAINT PK_SaleItem PRIMARY KEY (SaleNumber);
 
 ALTER TABLE SaleItem
+DROP CONSTRAINT PK_SaleItem
 ADD CONSTRAINT FK_ItemCode FOREIGN KEY (ItemCode) REFERENCES Item(ItemCode);
 
 
@@ -360,6 +361,7 @@ DECLARE @ReturnCode INT
 	ELSE IF @ItemCode IS NULL
 	RAISERROR('The ItemCode is Required',16,1)
 	ELSE
+
 	INSERT INTO SaleItem(SaleNumber, Quantity,ItemTotal, ItemCode)
 	VALUES (@SaleNumber,@Quantity,@ItemTotal,@ItemCode)
 	IF @@ERROR = 0
@@ -396,7 +398,6 @@ DECLARE @ReturnCode INT
         OR @SaleTotal IS NULL
    
         RAISERROR('All parameters must have non-null values.', 16, 1);
-        RETURN;
  
 
     -- Insert into Sale table

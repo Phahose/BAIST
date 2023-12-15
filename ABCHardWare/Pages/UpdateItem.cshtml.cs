@@ -17,6 +17,8 @@ namespace ABCHardWare.Pages
         public int Deleted { get; set; }
         [BindProperty]
         public string Submit { get; set; } = string.Empty;
+        [BindProperty]
+        public int QOH { get; set; }
         public string Message { get; set; } = string.Empty;
         public void OnGet()
         {
@@ -32,8 +34,9 @@ namespace ABCHardWare.Pages
                     ModelState.Clear();
                     if (ItemCode == string.Empty)
                     {
-                        ModelState.AddModelError("DescriptionInput", "Description is Required");
+                        ModelState.AddModelError("ItemCodeInput", "Description is Required");
                     }
+
                     if (ModelState.IsValid)
                     {
                         Item item = aBCPOS.GetItem(ItemCode);
@@ -47,6 +50,7 @@ namespace ABCHardWare.Pages
                             ItemCode = item.ItemCode;
                             Description = item.Description;
                             UnitPrice = item.UnitPrice;
+                            QOH = item.QOH;
                             Deleted = item.Deleted;
                         }
                     }
@@ -65,6 +69,10 @@ namespace ABCHardWare.Pages
                     {
                         ModelState.AddModelError("UnitPriceInput", "Unit Price is Required");
                     }
+                    else if (QOH == 0)
+                    {
+                        ModelState.AddModelError("QOHInput", "Must Have At Least One Item To Add");
+                    }
 
                     if (ModelState.IsValid)
                     {
@@ -73,7 +81,8 @@ namespace ABCHardWare.Pages
                             ItemCode = ItemCode,
                             Description = Description,
                             UnitPrice = UnitPrice,
-                            Deleted = Deleted
+                            Deleted = Deleted,
+                            QOH = QOH
                         };
                         aBCPOS.UpdateItem(updateditem);
                         Message = "Update successfull";

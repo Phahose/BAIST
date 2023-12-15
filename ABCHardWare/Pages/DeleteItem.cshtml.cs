@@ -49,8 +49,10 @@ namespace ABCHardWare.Pages
                             Description = item.Description;
                             UnitPrice = item.UnitPrice;
                             Deleted = item.Deleted;
+
+                            Message = "Item Found Do you Still Wish To Delete";
                         }
-                        Message = "Item Found Do you Still Wish To Delete";
+                        
                     }
                     else
                     {
@@ -58,7 +60,7 @@ namespace ABCHardWare.Pages
                     }
                              
                     break;
-                case "DeleteItem":
+                case "Delete":
                     aBCPOS.DeleteItem(ItemCode);
                     Message = "Item Has been Deleted Successfully";
                  break;

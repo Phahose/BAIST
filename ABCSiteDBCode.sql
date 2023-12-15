@@ -22,6 +22,7 @@ ALTER TABLE Item
 DROP COLUMN ItemCode;
 
 ALTER TABLE Item
+ADD QOH INT 
 ADD ItemCode VARCHAR(6) PRIMARY KEY;
 
 ALTER TABLE Customer
@@ -89,16 +90,16 @@ ADD CONSTRAINT FK_ItemCode FOREIGN KEY (ItemCode) REFERENCES Item(ItemCode);
 
 
 -- Add To Inventory
-Create Procedure AddToInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6))
+Create Procedure AddToInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6), @QOH INT)
 AS 
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
 BEGIN
-	IF @ItemCode is Null or @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL
+	IF @ItemCode is Null or @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL OR @QOH IS NULL
 		RAISERROR('Must have a value for all of the Inputs',16,1)
 	ELSE
-		INSERT INTO Item (ItemCode, Description, UnitPrice, Deleted)
-		VALUES (@ItemCode, @Description,@UnitPrice,@Deleted)
+		INSERT INTO Item (ItemCode, Description, UnitPrice, Deleted, QOH)
+		VALUES (@ItemCode, @Description,@UnitPrice,@Deleted, @QOH)
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 	ELSE
@@ -109,17 +110,18 @@ BEGIN
 
 
 -- Update Inventory
-Create Procedure UpdateInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6))
+Create Procedure UpdateInventory (@Description VARCHAR(50), @UnitPrice DECIMAL(10,2), @Deleted INT, @ItemCode VARCHAR(6), @QOH INT)
 AS
 DECLARE @ReturnCode INT
 	SET @ReturnCode = 1
 BEGIN
-	IF @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL OR @ItemCode is NULL
+	IF @Description is NULL OR @UnitPrice is NULL OR @Deleted is NULL OR @ItemCode is NULL OR @QOH IS NULL
 		RAISERROR('Must have a value for all of the Inputs',16,1)
 	ELSE
 		Update Item 
 		SET Description = @Description,
 			UnitPrice = @UnitPrice,
+			QOH = @QOH,
 			@Deleted = @Deleted
 		WHERE ItemCode = @ItemCode
 		IF @@ERROR = 0
@@ -364,6 +366,10 @@ DECLARE @ReturnCode INT
 
 	INSERT INTO SaleItem(SaleNumber, Quantity,ItemTotal, ItemCode)
 	VALUES (@SaleNumber,@Quantity,@ItemTotal,@ItemCode)
+
+	UPDATE Item
+	SET QOH = QOH- @Quantity
+	WHERE Item.ItemCode = @ItemCode
 	IF @@ERROR = 0
 		SET @ReturnCode = 0
 			ELSE
@@ -371,7 +377,7 @@ DECLARE @ReturnCode INT
 			END
 			RETURN @ReturnCode
 
-
+			Drop Procedure AddSaleItem
 CREATE PROCEDURE AddSale
 	@SaleNumber INT,
     @SaleDate DATE,
@@ -434,4 +440,17 @@ Exec BringBackCustomer '3'
 
 Exec FindCustomer 'Joan','Ekwom'
 
-DELETE FROM CUSTOMER
+	GRANT EXECUTE ON FindCustomer TO aspnetcore
+	GRANT EXECUTE ON AddToInventory TO aspnetcore
+	GRANT EXECUTE ON UpdateInventory TO aspnetcore
+	GRANT EXECUTE ON DeleteFromInventory TO aspnetcore
+	GRANT EXECUTE ON FindItem TO aspnetcore
+	GRANT EXECUTE ON UpdateCustomer TO aspnetcore
+	GRANT EXECUTE ON DeleteCustomer TO aspnetcore
+	GRANT EXECUTE ON BringBackCustomer TO aspnetcore
+	GRANT EXECUTE ON FindCustomer TO aspnetcore
+	GRANT EXECUTE ON GetAllCustomers TO aspnetcore
+	GRANT EXECUTE ON AddSaleItem TO aspnetcore
+	GRANT EXECUTE ON AddSale TO aspnetcore
+	GRANT EXECUTE ON AddCustomer TO aspnetcore
+	

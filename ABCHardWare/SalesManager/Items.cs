@@ -83,7 +83,7 @@ namespace ABCHardWare.SalesManager
         {
             Item inventoryItem = new();
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
             nekwom1Connection.Open();
 
             SqlCommand FindItemCommand = new()
@@ -112,6 +112,7 @@ namespace ABCHardWare.SalesManager
                     ItemCode = (string)itemReader["ItemCode"],
                     Description = (string)itemReader["Description"],
                     UnitPrice = (decimal)itemReader["UnitPrice"],
+                    QOH = (int)itemReader["QOH"],
                     Deleted = (int)itemReader["Deleted"]
                 };
 
@@ -125,7 +126,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
             nekwom1Connection.Open();
 
             SqlCommand UpdateItemCommand = new()
@@ -159,6 +160,14 @@ namespace ABCHardWare.SalesManager
                 Direction = ParameterDirection.Input,
             };
 
+            SqlParameter QOHParameter = new()
+            {
+                ParameterName = "@QOH",
+                SqlValue = existingItem.QOH,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+            };
+
             SqlParameter DeletedParameter = new()
             {
                 ParameterName = "@Deleted",
@@ -170,7 +179,9 @@ namespace ABCHardWare.SalesManager
             UpdateItemCommand.Parameters.Add(ItemCodeParameter);
             UpdateItemCommand.Parameters.Add(DescriptonParameter);
             UpdateItemCommand.Parameters.Add(UnitPriceParameter);
-            UpdateItemCommand.Parameters.Add(DeletedParameter); 
+            UpdateItemCommand.Parameters.Add(DeletedParameter);
+            UpdateItemCommand.Parameters.Add(QOHParameter);
+
             UpdateItemCommand.ExecuteNonQuery();
             confirmation = true;
 
@@ -181,7 +192,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca"; ;
             nekwom1Connection.Open();
 
             SqlCommand DeleteItemCommand = new()

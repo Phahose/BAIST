@@ -22,7 +22,7 @@
     <table>
         <tr>
             <td>
-                <input type="text" name="ItemCode" required placeholder="ItemCode" />
+                <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode"/>
                 @Html.ValidationMessage("ItemCodeInput")
             </td>
         </tr>
@@ -34,13 +34,19 @@
         <tr>
             <td>
                 <input type="text" name="Description" placeholder="Description" value="@Model.Description"/>
-                @Html.ValidationMessage("ItemCodeInput")
+                @Html.ValidationMessage("DescriptionInput")
             </td>
         </tr>
         <tr>
             <td>
                 <input type="number" name="UnitPrice" min="0" max="9999999999" step=".01" placeholder="UnitPrice" value="@Model.UnitPrice"/>
-                @Html.ValidationMessage("ItemCodeInput")
+                @Html.ValidationMessage("UnitPriceInput")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" name="QOH" min="0" max="9999999999" placeholder="Quantity On Hand" value="@Model.QOH"/>
+                @Html.ValidationMessage("QOHInput")
             </td>
         </tr>
         <tr>

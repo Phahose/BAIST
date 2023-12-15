@@ -39,12 +39,14 @@
         </tr>
         <tr>
             <td>
+                UnitPrice
                 <input type="number" name="UnitPrice" min="0" max="9999999999" step=".01" placeholder="UnitPrice" value="@Model.UnitPrice"/>
                 @Html.ValidationMessage("UnitPriceInput")
             </td>
         </tr>
         <tr>
             <td>
+                Quantity On hand
                 <input type="number" name="QOH" min="0" max="9999999999" placeholder="Quantity On Hand" value="@Model.QOH"/>
                 @Html.ValidationMessage("QOHInput")
             </td>

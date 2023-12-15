@@ -83,7 +83,7 @@ namespace ABCHardWare.SalesManager
         {
             Item inventoryItem = new();
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand FindItemCommand = new()
@@ -126,7 +126,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand UpdateItemCommand = new()
@@ -192,7 +192,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = "Persist Security Info=False; Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca"; ;
+            nekwom1Connection.ConnectionString = connectionString; ;
             nekwom1Connection.Open();
 
             SqlCommand DeleteItemCommand = new()

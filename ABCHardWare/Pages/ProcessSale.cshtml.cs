@@ -44,11 +44,16 @@ namespace ABCHardWare.Pages
         public int CustomerID { get; set; }
         public Customer Customer { get; set; } = new Customer();
         public int SaleNumber { get; set; } = 123456789;
-        public string SalesPerson { get; set; } = "Novak Djokovic";
+        [BindProperty]
+        public string SalesPerson { get; set; }
+        [BindProperty]
+        public string FirstName { get; set; } = string.Empty;
+        [BindProperty]
+        public string LastName { get; set; } = string.Empty;
+        public string CustomerString { get; set; } = string.Empty;
         public void OnGet()
         {            
             ABCPOS aBCPOS = new ABCPOS();
-            CustomerList = aBCPOS.GetAllCustomers(); 
             Message = "Process A Sale";
         }
 
@@ -61,15 +66,36 @@ namespace ABCHardWare.Pages
                 case "AddItem":
                     ModelState.Clear();
                     Customer = new Customer();
-                    CustomerList = aBCPOS.GetAllCustomers();
-                    Customer = CustomerList.FirstOrDefault();
                     if (ItemCode == string.Empty)
                     {
                         ModelState.AddModelError("ItemCodeInput", "Please Enter a Valid ItemCode");
                     }
-                  
+                    else if (FirstName == null)
+                    {
+                        ModelState.AddModelError("FirstNameInput", "First Name is Required");
+                    }
+                    else if (LastName == null)
+                    {
+                        ModelState.AddModelError("LastNameInput", "Last NAme is Required");
+                    }
                     if (ModelState.IsValid)
                     {
+                        CustomerList = aBCPOS.FindCustomer(FirstName!, LastName!);
+
+                        if (CustomerList.Count == 0)
+                        {
+                            Message = "This Customer Not Found Check The Name ";
+                        }
+                        CustomerString = string.Empty;
+                        if (HttpContext.Session.GetString("Customers") != null)
+                        {
+                            CustomerString = HttpContext.Session.GetString("Customers")!;
+                            CustomerList = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
+                        }
+                        Customer = CustomerList.FirstOrDefault();
+                        CustomerString = JsonSerializer.Serialize(CustomerList);
+                        HttpContext.Session.SetString("Customers", CustomerString);
+
                         Item = aBCPOS.GetItem(ItemCode);
 
                         if (Item.Description == "")

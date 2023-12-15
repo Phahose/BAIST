@@ -5,10 +5,19 @@ namespace ABCHardWare.SalesManager
 {
     public class Items
     {
+        private string? connectionString;
+        public Items()
+        {
+            ConfigurationBuilder DatabaseUserBuilder = new ConfigurationBuilder();
+            DatabaseUserBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            DatabaseUserBuilder.AddJsonFile("appsettings.json");
+            IConfiguration DatabaseUserConfiguration = DatabaseUserBuilder.Build();
+            connectionString = DatabaseUserConfiguration.GetConnectionString("nekwom1");
+        }
         public Item AddItem (Item Item)
         {
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand AddItemCommand = new()
@@ -42,6 +51,14 @@ namespace ABCHardWare.SalesManager
                 Direction= ParameterDirection.Input,
             };
 
+            SqlParameter QOHParameter = new()
+            {
+                ParameterName = "@QOH",
+                SqlValue = Item.QOH,
+                SqlDbType = SqlDbType.Int,
+                Direction= ParameterDirection.Input,
+            };
+
             SqlParameter DeletedParameter = new()
             {
                 ParameterName = "@Deleted",
@@ -54,6 +71,7 @@ namespace ABCHardWare.SalesManager
             AddItemCommand.Parameters.Add (DescriptonParameter);
             AddItemCommand.Parameters.Add(UnitPriceParameter);
             AddItemCommand.Parameters.Add(DeletedParameter);
+            AddItemCommand.Parameters.Add(QOHParameter);
 
             AddItemCommand.ExecuteNonQuery();
             nekwom1Connection.Close();
@@ -65,7 +83,7 @@ namespace ABCHardWare.SalesManager
         {
             Item inventoryItem = new();
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand FindItemCommand = new()
@@ -107,7 +125,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand UpdateItemCommand = new()
@@ -163,7 +181,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand DeleteItemCommand = new()

@@ -328,3 +328,6 @@ input[type=button] {
 .code{
     max-width: 8rem;
 }
+.ncode {
+    max-width: 11rem;
+}

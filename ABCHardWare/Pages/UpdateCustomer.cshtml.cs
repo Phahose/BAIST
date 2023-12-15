@@ -49,7 +49,7 @@ namespace ABCHardWare.Pages
                     }
                     else if (LastName == null)
                     {
-                        ModelState.AddModelError("LastNameInput", "Last NAme is Required");
+                        ModelState.AddModelError("LastNameInput", "Last Name is Required");
                     }
 
                     if (ModelState.IsValid)

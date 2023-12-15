@@ -38,6 +38,13 @@
                 @Html.ValidationMessage("UnitPriceInput")
             </td>
         </tr>
+        <tr>
+            <td>
+                <input type="number" name="QOH" required min="0" max="9999999999" placeholder="Quantity On Hand" />
+                @Html.ValidationMessage("QOHInput")
+            </td>
+        </tr>
+
     </table>
     <div class="submit">
         <input type="submit" name="AddItem" value="AddItem" class="sub" />

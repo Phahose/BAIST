@@ -5,7 +5,15 @@ namespace ABCHardWare.SalesManager
 {
     public class Sales
     {
-        public string connectionString {  get; set; } = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+        private string? connectionString;
+        public Sales()
+        {
+            ConfigurationBuilder DatabaseUserBuilder = new ConfigurationBuilder();
+            DatabaseUserBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            DatabaseUserBuilder.AddJsonFile("appsettings.json");
+            IConfiguration DatabaseUserConfiguration = DatabaseUserBuilder.Build();
+            connectionString = DatabaseUserConfiguration.GetConnectionString("nekwom1");
+        }
         public int AddSaleItem(List<SalesItem> salesItemList)
         {
             int saleNumber = 1;

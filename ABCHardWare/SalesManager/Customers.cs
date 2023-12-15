@@ -5,11 +5,20 @@ namespace ABCHardWare.SalesManager
 {
     public class Customers
     {
+        private string? connectionString;
+        public Customers() 
+        {
+            ConfigurationBuilder DatabaseUserBuilder = new ConfigurationBuilder();
+            DatabaseUserBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            DatabaseUserBuilder.AddJsonFile("appsettings.json");
+            IConfiguration DatabaseUserConfiguration = DatabaseUserBuilder.Build();
+            connectionString = DatabaseUserConfiguration.GetConnectionString("nekwom1");
+        }
         public bool AddCustomer(Customer newCustomer)
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand AddCustomerCommand = new()
@@ -168,7 +177,7 @@ namespace ABCHardWare.SalesManager
         {
             List<Customer> customers = new();
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand FindCustomerCommand = new()
@@ -221,7 +230,7 @@ namespace ABCHardWare.SalesManager
         {
             List<Customer> customers = new();
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand FindCustomerCommand = new()
@@ -258,7 +267,7 @@ namespace ABCHardWare.SalesManager
         {
             bool confirmation = false;
             SqlConnection nekwom1Connection = new();
-            nekwom1Connection.ConnectionString = @"Persist Security Info=False;Database=nekwom1;User ID=nekwom1;Password=Nickzone25041#;server=dev1.baist.ca";
+            nekwom1Connection.ConnectionString = connectionString;
             nekwom1Connection.Open();
 
             SqlCommand DeleteCustomerCommand = new()

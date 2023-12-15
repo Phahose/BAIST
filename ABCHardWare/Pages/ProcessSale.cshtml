@@ -17,24 +17,31 @@
         return isValid
     }
     function disableSelect() {
-        var selectElement = document.getElementById('mySelect');
-        selectElement.disabled = true;
+        alert('Function is called');
+        var formSubmitted = document.querySelector('input[name="ProcessSale"]').value;
+
+        if (formSubmitted === "True") {
+            var yourInput = document.getElementById('mySelect');
+            yourInput.disabled = true;
+        }
+
     }
 </script>
 <form name="ProcessSale" method="post" class="pSale" onsubmit="return isFormValid(window.document.ProcessSale); disableSelect();">
     <h2>Process Sale</h2>
-    <div class="topReciept">
+    <div class="topReciep">
+        <p>
+            <input type="text" name="SalesPerson" required placeholder="Sales Person Name" value="@Model.SalesPerson" class="ncode" id="mySelect" />
+            <input type="text" name="FirstName" required placeholder=" Customer First Name" value="@Model.FirstName" class="ncode" id="mySelect" />
+            @Html.ValidationMessage("FirstNameInput")
+            <input type="text" name="LastName" required placeholder="Customer Last Name" value="@Model.LastName" class="ncode" id="mySelect" />
+            @Html.ValidationMessage("LastNameInput")
+
+        </p>
         <p>
             ItemCode: <input type="text" name="ItemCode" required placeholder="ItemCode" value="@Model.ItemCode" class="code"/>   
             Quantity: <input type="number" required name="Quantity" value="1" min="1" />
             <input type="submit" name="Submit" value="AddItem" class="addItem" />
-          @*   <select id="mySelect" name="CustomerID" style="width: 150px; height: 3rem; background-color: white; border-radius: 10%;">
-                <option value="#">Select A Customer</option>
-                @foreach (var item in Model.CustomerList)
-                {
-                   <option value="@item.CustomerID" >@item.FirstName @item.LastName</option>
-                }
-            </select> *@
         </p>
     </div>
 

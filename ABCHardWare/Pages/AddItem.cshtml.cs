@@ -16,6 +16,8 @@ namespace ABCHardWare.Pages
         [BindProperty]
         public decimal UnitPrice { get; set; }
         [BindProperty]
+        public int QOH { get; set; }
+        [BindProperty]
         public int Deleted { get; set; }
         public string Message { get; set; } = string.Empty;   
         public void OnGet()
@@ -38,6 +40,10 @@ namespace ABCHardWare.Pages
             {
                 ModelState.AddModelError("ItemCodeInput", "ItemCode is Required");
             }
+            else if(QOH == 0)
+            {
+                ModelState.AddModelError("QOHInput", "Must Have At Least One Item To Add");
+            }
 
             if (ModelState.IsValid)
             {
@@ -48,6 +54,7 @@ namespace ABCHardWare.Pages
                     ItemCode = ItemCode,
                     Description = Description,
                     UnitPrice = UnitPrice,
+                    QOH = QOH,
                     Deleted = 1
                 };
 

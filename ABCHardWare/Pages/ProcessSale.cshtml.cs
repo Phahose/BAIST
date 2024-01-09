@@ -170,6 +170,7 @@ namespace ABCHardWare.Pages
                     Customer = CustomerList.FirstOrDefault();
                     Random random = new Random();
                     SaleNumber = random.Next(100000000, 999999999);
+
                     SalesItemString = string.Empty;
                     if (HttpContext.Session.GetString("SaleItems") != null)
                     {

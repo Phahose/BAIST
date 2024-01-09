@@ -86,62 +86,66 @@ namespace ABCHardWare.Pages
                         {
                             Message = "This Customer Not Found Check The Name ";
                         }
-                        CustomerString = string.Empty;
-                        if (HttpContext.Session.GetString("Customers") != null)
-                        {
-                            CustomerString = HttpContext.Session.GetString("Customers")!;
-                            CustomerList = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
-                        }
-                        Customer = CustomerList.FirstOrDefault();
-                        CustomerString = JsonSerializer.Serialize(CustomerList);
-                        HttpContext.Session.SetString("Customers", CustomerString);
-
-                        Item = aBCPOS.GetItem(ItemCode);
-
-                        if (Item.Description == "")
-                        {
-                            Message = "This Item Dosent Exist - Check your Item Number ";
-                        }
                         else
                         {
-                            Item.Quantity = Quantity;
-                            Item.Price = Item.UnitPrice * Item.Quantity;
-                            ItemCode = Item.ItemCode;
-                            Description = Item.Description;
-                            UnitPrice = Item.UnitPrice;
-                            Deleted = Item.Deleted;
-
-                            SalesItemString = string.Empty;
-                            bool exists = false;
-                            if (HttpContext.Session.GetString("SaleItems") != null)
+                            CustomerString = string.Empty;
+                            if (HttpContext.Session.GetString("Customers") != null)
                             {
-                                SalesItemString = HttpContext.Session.GetString("SaleItems");
-                                SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
+                                CustomerString = HttpContext.Session.GetString("Customers")!;
+                                CustomerList = JsonSerializer.Deserialize<List<Customer>>(CustomerString)!;
                             }
+                            Customer = CustomerList.FirstOrDefault();
+                            CustomerString = JsonSerializer.Serialize(CustomerList);
+                            HttpContext.Session.SetString("Customers", CustomerString);
 
-                            if (SaleItems.Count > 0)
+                            Item = aBCPOS.GetItem(ItemCode);
+
+                            if (Item.Description == "")
                             {
-                                exists = SaleItems.Any(x => x.ItemCode == ItemCode);
-                            }
-                            if (exists == false)
-                            {
-                                SaleItems.Add(Item);
+                                Message = "This Item Dosent Exist - Check your Item Number ";
                             }
                             else
                             {
-                                SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity += Quantity;
-                                SaleItems.Where(x => x.ItemCode == ItemCode).First().Price = SaleItems.Where(x => x.ItemCode == ItemCode).First().UnitPrice * SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity;
-                            }
+                                Item.Quantity = Quantity;
+                                Item.Price = Item.UnitPrice * Item.Quantity;
+                                ItemCode = Item.ItemCode;
+                                Description = Item.Description;
+                                UnitPrice = Item.UnitPrice;
+                                Deleted = Item.Deleted;
 
-                            
-                            Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
-                            GST = (Item.ItemTotal * 0.05m);
-                            Total = GST + Item.ItemTotal;
-                            Total = Math.Round(Total, 2);
-                            SalesItemString = JsonSerializer.Serialize(SaleItems);
-                            HttpContext.Session.SetString("SaleItems", SalesItemString);
-                            Message = $"Total Items {SaleItems.Count}";
-                        }                       
+                                SalesItemString = string.Empty;
+                                bool exists = false;
+                                if (HttpContext.Session.GetString("SaleItems") != null)
+                                {
+                                    SalesItemString = HttpContext.Session.GetString("SaleItems");
+                                    SaleItems = JsonSerializer.Deserialize<List<Item>>(SalesItemString);
+                                }
+
+                                if (SaleItems.Count > 0)
+                                {
+                                    exists = SaleItems.Any(x => x.ItemCode == ItemCode);
+                                }
+                                if (exists == false)
+                                {
+                                    SaleItems.Add(Item);
+                                }
+                                else
+                                {
+                                    SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity += Quantity;
+                                    SaleItems.Where(x => x.ItemCode == ItemCode).First().Price = SaleItems.Where(x => x.ItemCode == ItemCode).First().UnitPrice * SaleItems.Where(x => x.ItemCode == ItemCode).First().Quantity;
+                                }
+
+
+                                Item.ItemTotal = SaleItems.Sum(SaleItems => SaleItems.Price);
+                                GST = (Item.ItemTotal * 0.05m);
+                                Total = GST + Item.ItemTotal;
+                                Total = Math.Round(Total, 2);
+                                SalesItemString = JsonSerializer.Serialize(SaleItems);
+                                HttpContext.Session.SetString("SaleItems", SalesItemString);
+                                Message = $"Total Items {SaleItems.Count}";
+                            }
+                        }
+                                   
                     }
                     else
                     {
@@ -166,7 +170,7 @@ namespace ABCHardWare.Pages
                     Message = "Item Removed";
                 break;
                 case "ProcessSale":
-                    CustomerList = aBCPOS.GetAllCustomers();
+                    CustomerList = aBCPOS.FindCustomer(FirstName!, LastName!);
                     Customer = CustomerList.FirstOrDefault();
                     Random random = new Random();
                     SaleNumber = random.Next(100000000, 999999999);
@@ -210,6 +214,8 @@ namespace ABCHardWare.Pages
              
                     aBCPOS.AddSaleItem(ProcessedSalesItem);
                     int saleNo = aBCPOS.ProcessSale(processedSale);
+                    HttpContext.Session.Clear();
+                    SaleItems.Clear();
                     Message = $"Sale Has Been Processed {saleNo}";
                     break;
             }

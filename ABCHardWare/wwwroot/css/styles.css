@@ -331,3 +331,9 @@ input[type=button] {
 .ncode {
     max-width: 11rem;
 }
+.notify{
+    background-color: cornflowerblue;
+    height: 2rem;
+    padding: 1rem;
+    border-radius: 5%;
+}

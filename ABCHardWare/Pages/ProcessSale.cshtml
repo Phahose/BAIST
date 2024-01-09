@@ -43,6 +43,7 @@
             Quantity: <input type="number" required name="Quantity" value="1" min="1" />
             <input type="submit" name="Submit" value="AddItem" class="addItem" />
         </p>
+       
     </div>
 
     <div class="topReciept">
@@ -104,6 +105,7 @@
     </div>
     
     <div class="topReciept">
+       
         <div>
             <p>Sub Total: @Model.Item.ItemTotal</p>
             <p>GST: @Model.GST</p>
@@ -111,10 +113,10 @@
         </div>
         <div>
             <p>Time: @Model.SaleTime</p>
+            <p class="notify">@Model.Message</p>
         </div> 
     </div>
     <div>
         <input type="submit" name="Submit" value="ProcessSale" class="select" />
-        <p>@Model.Message</p>
     </div>
 </form>

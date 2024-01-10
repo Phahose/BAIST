@@ -83,54 +83,79 @@ h1 {
 
 
 /*Sign Up page*/
+
 .signup{
-    max-width: 90%;
-    min-width: 70%;
-    width: 50rem;
+    max-width: 50%;
+    /*min-width: fit-content;*/
     margin: auto;
     padding: 1rem;
     margin-top: 1rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+.signup div{
+
 }
 .signup h1{
     width: fit-content;
     margin:auto;
 }
 .signup form {
-    display: flex;
     max-width: 50%;
-    margin: auto;
+    margin: 0 auto;
     border: 1px solid white;
-    padding: 1rem;
+    padding: 3rem;
     border-radius: 3%;
     margin-top: 1rem;
-}
-tr {
-    display: block;
-    width: fit-content;
 }
 
 input[type=text] {
     padding: 12px 20px;
-    margin: 6px 0;
+    margin: 6px 0rem;
     border: 1px solid powderblue;
     border-radius: 5px;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 label {
     color: white;
 }
-td {
-    color: white;
+.flexform {
+    display: flex;
+}
+.flexform > div {
+    max-width: 55%;
+    margin: 1rem;
 }
 
-@media (min-width: 760px){
+@media (max-width: 760px){
     .signup h1 {
         width: fit-content;
         margin: auto;
     }
-
-    input[type=text] {
-        width: 200%;
+    .signup{
+        flex-flow:column;
     }
+    input[type=text] {
+        max-width: 100%;
+    }
+    .signup form > div {
+        display: flex;
+        flex-flow: column;
+    }
+}
+
+@media(max-width: 1600px){
+    .signup form {
+        justify-content: center;
+        max-width: 50%;
+    }
+        .signup form > div {
+            display: flex;
+            flex-flow: column;
+        }
+
 }

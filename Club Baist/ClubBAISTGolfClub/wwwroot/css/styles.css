@@ -1,0 +1,11 @@
+﻿body {
+}
+.intro {
+    background-image: url("/img/indexbackdrop.jpg");
+    background-color: rebeccapurple;
+    background-size: cover; /* This ensures the background image covers the entire screen */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+}

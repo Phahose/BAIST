@@ -91,6 +91,10 @@ h1 {
     padding: 1rem;
     margin-top: 1rem;
 }
+.signup h1{
+    width: fit-content;
+    margin:auto;
+}
 .signup form {
     display: flex;
     max-width: 50%;
@@ -98,12 +102,11 @@ h1 {
     border: 1px solid white;
     padding: 1rem;
     border-radius: 3%;
-    margin-top: 1rem
+    margin-top: 1rem;
 }
 tr {
     display: block;
-    justify-content: center;
-    width: 100%;
+    width: fit-content;
 }
 
 input[type=text] {
@@ -119,4 +122,15 @@ label {
 }
 td {
     color: white;
+}
+
+@media (min-width: 760px){
+    .signup h1 {
+        width: fit-content;
+        margin: auto;
+    }
+
+    input[type=text] {
+        width: 200%;
+    }
 }

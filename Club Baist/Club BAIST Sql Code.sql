@@ -130,7 +130,9 @@ Create Procedure CreateApplication (@FirstName varchar(50), @LastName VARCHAR(50
 									@PostalCode VARCHAR(10),@Phone VARCHAR(20),
 									@Email VARCHAR(100), @MemberPassword NVARCHAR(255),
 									@DateOfBirth DATE,   @MembershipType VARCHAR(20),
-									@Sponsor1ID INT,     @Sponsor2ID INT)
+									@Sponsor1ID INT,     @Sponsor2ID INT,
+									@Salt NVARCHAR(225), @ApplicationStatus VARCHAR(20),
+									@DateJoined DATE)
 AS
 	IF @FirstName is NULL 
 	 RAISERROR ('The FirstName Cannot Be Empty ~ INSERT ERROR',0,1)
@@ -148,3 +150,16 @@ AS
 	 RAISERROR ('The DateOfBirth Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @MembershipType IS NULL 
 	 RAISERROR ('The MembershipType Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE
+
+	 BEGIN 
+		INSERT INTO Members(FirstName,LastName,Address,City,Province,
+							Country,PostalCode,Phone,Email,MemberPassword,
+							Salt,DateOfBirth,MembershipType,Sponsor1ID,
+							Sponsor2ID,ApplicationStatus,DateJoined)
+
+		VALUES (@FirstName,@LastName,@Address,@City,@Province,
+		        @Country,@PostalCode,@Phone,@Email,@MemberPassword,
+				@Salt,@DateOfBirth,@MembershipType,@Sponsor1ID,
+				@Sponsor2ID,@ApplicationStatus,@DateJoined)
+	END

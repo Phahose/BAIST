@@ -1,11 +1,81 @@
 ﻿body {
 }
 .intro {
-    background-image: url("/img/indexbackdrop.jpg");
-    background-color: rebeccapurple;
-    background-size: cover; /* This ensures the background image covers the entire screen */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    position: absolute;
+    background-image: url("/img/dgolf.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     height: 100vh;
+    top: 0%;
+    bottom: 100%;
+    left:0%;
+    right:0%;
+}
+h1 {
+    color: white;
+    font-family: Didot, serif;
+    font-size: 3rem;
+    font-weight:100;
+    max-width: 35rem;
+}
+.intro p {
+    color: white;
+}
+.intro a{
+    text-decoration:none;
+    color:aliceblue;
+    border: 1px solid;
+    padding: 1rem;
+    width: 10rem;
+    margin-top: 1rem;
+}
+    .intro a:hover{
+        background-color: antiquewhite;
+        width: 12rem;
+        color: black;
+        transition: 0.5s ease-in-out
+    }
+.introsec {
+    margin-left: auto;
+    margin-top: 15rem;
+    width: fit-content;
+}
+.introsec>div{
+    display: flex;
+    flex-flow:column;
+    margin-left: 4rem;
+    width: 15rem;
+}
+.transition-fade {
+    animation: transitionright 1.5s;
+    transform-origin: right;
+}
+
+.transition-fade-down {
+    animation: transitionIn 1.5s;
+    transform-origin: left;
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes transitionright {
+    from {
+        opacity: 1;
+        transform: translateX(50%);
+    }
+
+    to {
+        opacity: 1;
+    }
 }

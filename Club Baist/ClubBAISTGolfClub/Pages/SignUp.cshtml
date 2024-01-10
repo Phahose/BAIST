@@ -2,3 +2,63 @@
 @model ClubBAISTGolfClub.Pages.SignUpModel
 @{
 }
+<div class="signup">
+    <h1>Create Your Membership</h1>
+    <form name="CreateMembership">
+        <table>
+            <tr>
+                <td><input type="text" name="FirstName" placeholder="FirstName"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="LastName" placeholder="LastName"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Address" placeholder="Address" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="City" placeholder="City" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Province" placeholder="Province" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Country" placeholder="Country" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="PostalCode" placeholder="PostalCode" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Phone" placeholder="Phone" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Email" placeholder="Email" /></td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td><input type="date" name="Address"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="menu">Membership Type</label>
+                    <select id="menu">
+                        <option value="option1">Gold</option>
+                        <option value="option2">Silver</option>
+                        <option value="option3">Bronze</option>
+                        <option value="option3">Copper</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Sponsor1ID" placeholder="Sponsor1ID"/></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="Sponsor2ID" placeholder="Sponsor2ID" /></td>
+            </tr>
+            <tr>
+                <td> 
+                    <input type="submit" name="Submit" value="Apply" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

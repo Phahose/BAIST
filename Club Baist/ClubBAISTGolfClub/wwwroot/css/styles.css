@@ -3,7 +3,7 @@
 }
 .intro {
     position: absolute;
-    background-image: url("/img/dgolf.jpg");
+    background-image: url("/img/golfmen.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -17,7 +17,7 @@
 h1 {
     color: white;
     font-family: Didot, serif;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight:100;
     max-width: 35rem;
 }
@@ -31,6 +31,7 @@ h1 {
     padding: 1rem;
     width: 10rem;
     margin-top: 1rem;
+
 }
     .intro a:hover{
         background-color: antiquewhite;
@@ -39,9 +40,13 @@ h1 {
         transition: 0.5s ease-in-out
     }
 .introsec {
+    margin-right: 1rem;
+    padding: 2rem;
     margin-left: auto;
     margin-top: 15rem;
     width: fit-content;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 2%;
 }
 .introsec>div{
     display: flex;
@@ -81,35 +86,83 @@ h1 {
     }
 }
 
-
-/*Sign Up page*/
-
-.signup{
-    max-width: 50%;
-    /*min-width: fit-content;*/
-    margin: auto;
-    padding: 1rem;
-    margin-top: 1rem;
+/*Sign Up*/
+.contain {
+    display: flex;
+    flex-flow: column;
     height: 100vh;
+    background-image: url("/img/coursegolf.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    top: 0%;
+    bottom: 100%;
+    left: 0%;
+    right: 0%;
+}
+
+.signup {
     display: flex;
     justify-content: center;
-    flex-flow: column;
-}
-.signup div{
-
-}
-.signup h1{
+    margin: auto;
     width: fit-content;
-    margin:auto;
-}
-.signup form {
     max-width: 50%;
-    margin: 0 auto;
-    border: 1px solid white;
-    padding: 3rem;
-    border-radius: 3%;
-    margin-top: 1rem;
+    border-radius: 2%;
 }
+
+.flexed {
+    max-width: 50%;
+}
+
+.signupform {
+    width: 38%;
+    border: 2px solid;
+    border-color: antiquewhite;
+    border-radius: 2%;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+h2 {
+    color: white;
+    font-family: Didot, serif;
+    font-size: 2rem;
+    font-weight: 100;
+    max-width: 35rem;
+    width: fit-content;
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+    flex-flow: row;
+}
+
+.flexform {
+    max-width: 60%;
+}
+
+.apply-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+    .apply-button:hover {
+        background-color: antiquewhite;
+        width: 6rem;
+        color: black;
+        transition: 0.5s ease-in-out
+    }
 
 input[type=text] {
     padding: 12px 20px;
@@ -123,39 +176,176 @@ input[type=text] {
 label {
     color: white;
 }
-.flexform {
-    display: flex;
+
+/*login Page*/
+.login-container {
+    position: absolute;
+    background-image: url("/img/golfcourse.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    top: 0%;
+    bottom: 100%;
+    left: 0%;
+    right: 0%;
 }
-.flexform > div {
-    max-width: 55%;
-    margin: 1rem;
+.login-page{
+    justify-content:center;
+    height: 100vh;
+    display:flex;
+}
+.login-page > h2 {
+    display: none;
 }
 
-@media (max-width: 760px){
-    .signup h1 {
+.loginform {
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin: auto;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ffffff; /* White border */
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text color */
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+    .button:hover {
+        background-color: #cccccc; /* Light gray background on hover */
+    }
+@media (min-width: 760px){
+    /*.signup h1 {
         width: fit-content;
         margin: auto;
-    }
-    .signup{
+    }*/
+   /* .signup{
         flex-flow:column;
-    }
-    input[type=text] {
+    }*/
+    /*input[type=text] {
         max-width: 100%;
     }
     .signup form > div {
         display: flex;
-        flex-flow: column;
-    }
+    }*/
 }
 
-@media(max-width: 1600px){
-    .signup form {
+@media(min-width: 1000px){
+    .contain{
+        display:flex;
+        flex-flow:column;
+        height:100vh
+    }
+    .signup {
+        display: flex;
         justify-content: center;
+        margin: auto;
+        width:fit-content;
+        max-width: 50%;
+        border-radius: 2%;
+    }
+    .flexed{
         max-width: 50%;
     }
-        .signup form > div {
-            display: flex;
-            flex-flow: column;
+    .signupform {
+        width: 38%;
+        border: 2px solid;
+        border-color:antiquewhite;
+        border-radius: 2%;
+        padding: 2rem;
+    }
+
+    h2 {
+        color: white;
+        font-family: Didot, serif;
+        font-size: 2rem;
+        font-weight: 100;
+        max-width: 35rem;
+        width: fit-content;
+        margin: auto;
+    }
+    .flex {
+        display: flex;
+        flex-flow: row;
+    }
+    .flexform{
+        max-width: 60%;
+    }
+    input[type=text] {
+        padding: 12px 10px;
+    }
+    .apply-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid #3498db;
+        background-color: #ffffff;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+        .apply-button:hover {
+            background-color: antiquewhite;
+            width: 6rem;
+            color: black;
+            transition: 0.5s ease-in-out
         }
 
+/*Login*/
+    .login-page{
+        display:flex;
+        height:100vh;
+    }
+    .login-page > h2{
+        display: revert;
+        font-size: 5rem;
+        border-right: 2px solid;
+    }
+    .loginform {
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        margin: auto;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ffffff; /* White border */
+        border-radius: 3px;
+        box-sizing: border-box;
+
+    }
+
+    .button {
+        background-color: #ffffff; /* White background */
+        color: #000000; /* Black text color */
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        .button:hover {
+            background-color: #cccccc; /* Light gray background on hover */
+        }
 }

@@ -2,40 +2,45 @@
 @model ClubBAISTGolfClub.Pages.SignUpModel
 @{
 }
-<div class="signup">  
-    <form name="CreateMembership">
-        <h1>Create Your Membership</h1>
-        <div class="flexform">         
+<div class="contain">
+    <div class="signup">
+        <form name="CreateMembership" class="flexed signupform transition-fade">
+            <h2>Join Club BAIST</h2>
             <div>
-                <input type="text" name="FirstName" placeholder="FirstName" />
-                <input type="text" name="LastName" placeholder="LastName" />
-                <input type="text" name="Address" placeholder="Address" />
-                <input type="text" name="City" placeholder="City" />
-                <input type="text" name="Province" placeholder="Province" />
-                <input type="text" name="Country" placeholder="Country" />
+                <div class="formflex">
+                    <div>
+                        <input type="text" name="FirstName" placeholder="FirstName" />
+                        <input type="text" name="LastName" placeholder="LastName" />
+                        <input type="text" name="Address" placeholder="Address" />
+                        <input type="text" name="City" placeholder="City" />
+                        <input type="text" name="Province" placeholder="Province" />
+                        <input type="text" name="Country" placeholder="Country" />
+                    </div>
+                    <div>
+                        <input type="text" name="PostalCode" placeholder="PostalCode" />
+                        <input type="text" name="Phone" placeholder="Phone" />
+                        <input type="text" name="Email" placeholder="Email" />
+                        <label>Date Of Birth</label>
+                        <input type="date" name="Address" />
+
+                        <label for="menu">Membership Type</label>
+                        <select id="menu" class="input">
+                            <option value="option1">Gold</option>
+                            <option value="option2">Silver</option>
+                            <option value="option3">Bronze</option>
+                            <option value="option3">Copper</option>
+                        </select>
+
+                        <input type="text" name="Sponsor1ID" placeholder="Sponsor1ID" />
+                        <input type="text" name="Sponsor2ID" placeholder="Sponsor2ID" />
+                    </div>
+
+                </div>
+                <div>
+                    <input type="submit" name="Submit" value="Apply" class="apply-button" />
+                </div>
             </div>
-           <div>
-                <input type="text" name="PostalCode" placeholder="PostalCode" />
-                <input type="text" name="Phone" placeholder="Phone" />
-                <input type="text" name="Email" placeholder="Email" />
-                <label>Date Of Birth</label>
-                <input type="date" name="Address" />
-
-                <label for="menu">Membership Type</label>
-                <select id="menu">
-                    <option value="option1">Gold</option>
-                    <option value="option2">Silver</option>
-                    <option value="option3">Bronze</option>
-                    <option value="option3">Copper</option>
-                </select>
-
-                <input type="text" name="Sponsor1ID" placeholder="Sponsor1ID" />
-                <input type="text" name="Sponsor2ID" placeholder="Sponsor2ID" />
-           </div>
-            
-        </div>
-       <div>
-             <input type="submit" name="Submit" value="Apply" />
-       </div>
-   </form>
+        </form>
+    </div>
 </div>
+

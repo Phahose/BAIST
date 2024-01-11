@@ -4,35 +4,38 @@
 }
 <div class="contain">
     <div class="signup">
-        <form name="CreateMembership" class="flexed signupform transition-fade">
+        <form name="CreateMembership" class="flexed signupform transition-fade" method="post">
             <h2>Join Club BAIST</h2>
             <div>
                 <div class="formflex">
                     <div>
-                        <input type="text" name="FirstName" placeholder="FirstName" />
-                        <input type="text" name="LastName" placeholder="LastName" />
-                        <input type="text" name="Address" placeholder="Address" />
-                        <input type="text" name="City" placeholder="City" />
-                        <input type="text" name="Province" placeholder="Province" />
-                        <input type="text" name="Country" placeholder="Country" />
+                        <input type="text" name="FirstName" placeholder="FirstName" required />
+                        <input type="text" name="LastName" placeholder="LastName" required />
+                        <input type="text" name="Address" placeholder="Address" required />
+                        <input type="text" name="City" placeholder="City" required />
+                        <input type="text" name="Province" placeholder="Province" required />
+                        <input type="text" name="Country" placeholder="Country" required />
                     </div>
                     <div>
-                        <input type="text" name="PostalCode" placeholder="PostalCode" />
-                        <input type="text" name="Phone" placeholder="Phone" />
-                        <input type="text" name="Email" placeholder="Email" />
+                        <input type="text" name="PostalCode" placeholder="PostalCode" required />
+                        <input type="text" name="Phone" placeholder="Phone" required />
+                        <input type="text" name="Email" placeholder="Email" required />
+                        <input type="password" name="Password" placeholder="Password" required />
                         <label>Date Of Birth</label>
-                        <input type="date" name="Address" />
+                        <input type="date" name="DOB" required />
 
                         <label for="menu">Membership Type</label>
-                        <select id="menu" class="input">
-                            <option value="option1">Gold</option>
-                            <option value="option2">Silver</option>
-                            <option value="option3">Bronze</option>
-                            <option value="option3">Copper</option>
+                        <select id="menu" class="input" name="MembershipType" required>
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Copper">Copper</option>
                         </select>
 
-                        <input type="text" name="Sponsor1ID" placeholder="Sponsor1ID" />
-                        <input type="text" name="Sponsor2ID" placeholder="Sponsor2ID" />
+                        <input type="number" min="0" name="Sponsor1ID" placeholder="Sponsor1ID" required />
+                        <input type="number" min="0" name="Sponsor2ID" placeholder="Sponsor2ID" required />
+                        <label for="ApplicationForm">Select a file:</label>
+                        <input type="file"  name="ApplicationForm" required>
                     </div>
 
                 </div>

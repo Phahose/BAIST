@@ -19,6 +19,18 @@ CREATE TABLE Members (
     ApplicationStatus VARCHAR(20),
     DateJoined DATE
 );
+--Drop Table Members
+CREATE TABLE ClubMemberApplications (
+    ApplicationID INT IDENTITY(1,1)PRIMARY KEY,
+    LastName VARCHAR(50) NOT NULL,
+    FirstName VARCHAR(50) NOT NULL,
+    Sponsor1Name VARCHAR(100) NOT NULL,
+    Sponsor2Name VARCHAR(100) NOT NULL,
+    ApplicationStatus VARCHAR(20),
+    ApplicationDate DATE,
+	ApplicationFormFile VARBINARY(MAX)
+);
+
 
 -- TeeTimes Table
 --CREATE TABLE TeeTimes (
@@ -146,20 +158,114 @@ AS
 	 RAISERROR ('The Email Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @MemberPassword IS NULL 
 	 RAISERROR ('The MemberPassword Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @Sponsor1ID IS NULL 
+	 RAISERROR ('The Sponsor1ID Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @Sponsor2ID IS NULL 
+	 RAISERROR ('The Sponsor2ID Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @DateOfBirth IS NULL 
 	 RAISERROR ('The DateOfBirth Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @MembershipType IS NULL 
 	 RAISERROR ('The MembershipType Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF NOT EXISTS (SELECT * FROM Members WHERE MemberID = @Sponsor1ID AND  MembershipType = 'Shareholder') 
+	 RAISERROR ('Sponsor Member 1 is not a Sponsor in Our Club ~ INSERT ERROR',0,1)
+	ELSE IF NOT EXISTS (SELECT * FROM Members WHERE MemberID = @Sponsor2ID AND  MembershipType = 'Shareholder')	
+     RAISERROR ('Sponsor Member 2 is not a Sponsor in Our Club ~ INSERT ERROR',0,1)
 	ELSE
+	BEGIN
+		INSERT INTO Members (
+				FirstName,
+				LastName,
+				Address,
+				City,
+				Province,
+				Country,
+				PostalCode,
+				Phone,
+				Email,
+				MemberPassword,
+				Salt,
+				DateOfBirth,
+				MembershipType,
+				Sponsor1ID,
+				Sponsor2ID,
+				ApplicationStatus,
+				DateJoined)
 
-	 BEGIN 
-		INSERT INTO Members(FirstName,LastName,Address,City,Province,
-							Country,PostalCode,Phone,Email,MemberPassword,
-							Salt,DateOfBirth,MembershipType,Sponsor1ID,
-							Sponsor2ID,ApplicationStatus,DateJoined)
-
-		VALUES (@FirstName,@LastName,@Address,@City,@Province,
-		        @Country,@PostalCode,@Phone,@Email,@MemberPassword,
-				@Salt,@DateOfBirth,@MembershipType,@Sponsor1ID,
-				@Sponsor2ID,@ApplicationStatus,@DateJoined)
+		VALUES (@FirstName,
+				@LastName,
+				@Address,
+				@City,
+				@Province,
+				@Country,
+				@PostalCode,
+				@Phone,
+				@Email,
+				@MemberPassword,
+				@Salt,
+				@DateOfBirth,
+				@MembershipType,
+				@Sponsor1ID,
+				@Sponsor2ID,
+				@ApplicationStatus,
+				@DateJoined)
 	END
+Drop Procedure CreateApplication
+
+	INSERT INTO Members (
+    FirstName,
+    LastName,
+    Address,
+    City,
+    Province,
+    Country,
+    PostalCode,
+    Phone,
+    Email,
+    MemberPassword,
+    Salt,
+    DateOfBirth,
+    MembershipType,
+    Sponsor1ID,
+    Sponsor2ID,
+    ApplicationStatus,
+    DateJoined
+)
+VALUES (
+    'Eric',
+    'Ekwom',
+    '123 Main St',
+    'Anytown',
+    'Province1',
+    'Country1',
+    'A1B 2C3',
+    '555-1234',
+    'ekwom.doe@example.com',
+    'hashed_password', -- Replace with your hashed password
+    'random_salt',     -- Replace with your random salt
+    '1990-01-01',
+    'ShareHolder',            -- Replace with the desired membership type
+    123,               -- Replace with an actual Sponsor1ID
+    456,               -- Replace with an actual Sponsor2ID
+    'Approved',         -- Replace with the desired application status
+    GETDATE()          -- Use the current date and time
+);
+
+-- Execute the stored procedure with random values
+EXEC CreateApplication 
+    'John',
+    'Doe',
+    '123 Main St',
+    'Anytown',
+    'Province1',
+    'Country1',
+    'A1B 2C3',
+    '555-1234',
+    'john.doe@example.com',
+    'hashed_password',
+    '1990-02-25',  -- Correct date format (YYYY-MM-DD)
+    'Gold',
+    123,  -- Replace with an actual Sponsor1ID
+    456,  -- Replace with an actual Sponsor2ID
+    'random_salt',
+    'Pending',
+    '2023-02-25';  -- C

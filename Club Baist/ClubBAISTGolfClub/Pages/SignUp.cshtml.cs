@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ClubBAISTGolfClub.Controller;
+using ClubBAISTGolfClub.Domain;
+using System.IO;
 
 namespace ClubBAISTGolfClub.Pages
 {
@@ -28,15 +31,58 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public DateOnly DOB { get; set; }
         [BindProperty]
+        public DateOnly DateJoined { get; set; }
+        [BindProperty]
         public string MembershipType { get; set; } = string.Empty;
         [BindProperty]
-        public string Sponsor1ID { get; set; } = string.Empty;
+        public int Sponsor1ID { get; set; } 
         [BindProperty]
-        public string Sponsor2ID { get; set; } = string.Empty;
+        public int Sponsor2ID { get; set; } 
         [BindProperty]
         public string Submit { get; set; } = string.Empty;
+        [BindProperty]
+        public IFormFile? ApplicationFile { get; set; }
+        public string Message {  get; set; } = string.Empty;
         public void OnGet()
         {
+            Message = "Get Page";
+        }
+        public void OnPost() 
+        {
+            if (ApplicationFile != null && ApplicationFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    ApplicationFile.CopyTo(memoryStream);
+                    var file = memoryStream.ToArray();
+
+                    Message = "Post Worked";
+                    Member member = new()
+                    {
+                        MemberFirstName = FirstName,
+                        MemberLastName = LastName,
+                        MemberAddress = Address,
+                        MemberCity = City,
+                        MemberProvince = Province,
+                        MemberPostalCode = PostalCode,
+                        MemberCountry = Country,
+                        MemberPhoneNumber = Phone,
+                        MemberEmail = Email,
+                        MemberPassword = Password,
+                        MemberSalt = "Salt",
+                        MemberDOB = DOB,
+                        MembershipType = MembershipType,
+                        MemberSponsor1 = Sponsor1ID,
+                        MemberSponsor2 = Sponsor2ID,
+                        Prospective = 1,
+                        MemberDateJoined = DateJoined,
+                        ApplicationFile = file
+                    };
+                    MemberControlls memberControlls = new MemberControlls();
+                    memberControlls.CreateMembership(member);
+                }
+            }
+           
         }
     }
 }

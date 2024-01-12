@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace ClubBAISTGolfClub
 {
     public class Program
@@ -9,14 +11,18 @@ namespace ClubBAISTGolfClub
             // Add services to the container
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
+
+
+            builder.Services.AddRazorPages().AddRazorPagesOptions(o =>
+            {
+                o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+            });
+
+
             var app = builder.Build();
 
             //Configure the HTTP reqest pipeline
-            if (!app.Environment.IsDevelopment()) // check for any enviromnet that is not a development 
-            {
-                app.UseDeveloperExceptionPage(); // not for production, remove this line when all production testing is done 
-                // app.UseExceptionHandler("/Error"); customised error page use for final release
-            }
+           
             app.UseStaticFiles(); // add for wwroot
             app.UseRouting();
             app.UseSession();

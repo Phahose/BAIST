@@ -17,20 +17,24 @@ CREATE TABLE Members (
     Sponsor1ID INT,
     Sponsor2ID INT,
     ApplicationStatus VARCHAR(20),
-    DateJoined DATE
+    DateJoined DATE,
+	Prospective INT
 );
+ALTER TABLE Members
+ADD Prospective INT;
+
 --Drop Table Members
 CREATE TABLE ClubMemberApplications (
     ApplicationID INT IDENTITY(1,1)PRIMARY KEY,
-    LastName VARCHAR(50) NOT NULL,
-    FirstName VARCHAR(50) NOT NULL,
+    ApplicantName VARCHAR(50) NOT NULL,
     Sponsor1Name VARCHAR(100) NOT NULL,
     Sponsor2Name VARCHAR(100) NOT NULL,
     ApplicationStatus VARCHAR(20),
     ApplicationDate DATE,
 	ApplicationFormFile VARBINARY(MAX)
 );
-
+--ALTER TABLE ClubMemberApplications
+--ADD ApplicantName VARCHAR(50) NOT NULL 
 
 -- TeeTimes Table
 --CREATE TABLE TeeTimes (
@@ -144,7 +148,7 @@ Create Procedure CreateApplication (@FirstName varchar(50), @LastName VARCHAR(50
 									@DateOfBirth DATE,   @MembershipType VARCHAR(20),
 									@Sponsor1ID INT,     @Sponsor2ID INT,
 									@Salt NVARCHAR(225), @ApplicationStatus VARCHAR(20),
-									@DateJoined DATE)
+									@DateJoined DATE, @ApplicationFile VARBINARY(max))
 AS
 	IF @FirstName is NULL 
 	 RAISERROR ('The FirstName Cannot Be Empty ~ INSERT ERROR',0,1)
@@ -189,7 +193,8 @@ AS
 				Sponsor1ID,
 				Sponsor2ID,
 				ApplicationStatus,
-				DateJoined)
+				DateJoined,
+				Prospective)
 
 		VALUES (@FirstName,
 				@LastName,
@@ -207,7 +212,28 @@ AS
 				@Sponsor1ID,
 				@Sponsor2ID,
 				@ApplicationStatus,
-				@DateJoined)
+				@DateJoined,
+				1)
+		DECLARE @Sponsor1Name VARCHAR(255);
+		DECLARE @Sponsor2Name VARCHAR(255);
+
+	    SELECT @Sponsor1Name = FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor1ID
+		SELECT @Sponsor2Name =  FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor2ID
+		INSERT INTO ClubMemberApplications(
+		Sponsor1Name,
+		Sponsor2Name,
+		ApplicationStatus,
+		ApplicationDate,
+		ApplicationFormFile,
+		ApplicantName)
+
+		VALUES(
+		@Sponsor1Name,
+		@Sponsor2Name,
+		@ApplicationStatus,
+		@DateJoined,
+		@ApplicationFile,
+		@FirstName + ' ' +@LastName)
 	END
 Drop Procedure CreateApplication
 
@@ -264,8 +290,8 @@ EXEC CreateApplication
     'hashed_password',
     '1990-02-25',  -- Correct date format (YYYY-MM-DD)
     'Gold',
-    123,  -- Replace with an actual Sponsor1ID
-    456,  -- Replace with an actual Sponsor2ID
+    1,  -- Replace with an actual Sponsor1ID
+    2,  -- Replace with an actual Sponsor2ID
     'random_salt',
     'Pending',
     '2023-02-25';  -- C

@@ -4,40 +4,41 @@
 }
 <div class="contain">
     <div class="signup">
-        <form name="CreateMembership" class="flexed signupform transition-fade" method="post">
+        <form name="CreateMembership" method="post" class="flexed signupform transition-fade" enctype="multipart/form-data">
+            @Model.Message
             <h2>Join Club BAIST</h2>
             <div>
                 <div class="formflex">
                     <div>
-                        <input type="text" name="FirstName" placeholder="FirstName" required />
-                        <input type="text" name="LastName" placeholder="LastName" required />
-                        <input type="text" name="Address" placeholder="Address" required />
-                        <input type="text" name="City" placeholder="City" required />
-                        <input type="text" name="Province" placeholder="Province" required />
-                        <input type="text" name="Country" placeholder="Country" required />
+                        <input type="text" name="FirstName" class="SignUp_input" placeholder="FirstName" required /><br />
+                        <input type="text" name="LastName" class="SignUp_input" placeholder="LastName" required /><br/>
+                        <input type="text" name="Address" class="SignUp_input" placeholder="Address" required /><br/>
+                        <input type="text" name="City" class="SignUp_input" placeholder="City" required /><br/>
+                        <input type="text" name="Province" class="SignUp_input" placeholder="Province" required /><br/>
+                        <input type="text" name="Country" class="SignUp_input" placeholder="Country" required /><br/>
+                        <input type="text" name="PostalCode" class="SignUp_input" placeholder="PostalCode" required /><br />
+                        <input type="text" name="Phone" class="SignUp_input" placeholder="Phone" required /><br />
                     </div>
-                    <div>
-                        <input type="text" name="PostalCode" placeholder="PostalCode" required />
-                        <input type="text" name="Phone" placeholder="Phone" required />
-                        <input type="text" name="Email" placeholder="Email" required />
-                        <input type="password" name="Password" placeholder="Password" required />
-                        <label>Date Of Birth</label>
-                        <input type="date" name="DOB" required />
 
-                        <label for="menu">Membership Type</label>
-                        <select id="menu" class="input" name="MembershipType" required>
+                    <div>
+                        <input type="text" name="Email" class="SignUp_input" placeholder="Email" required /><br />
+                        <input type="password" name="Password" class="SignUp_input" placeholder="Password" required /><br/>
+                        <label>Date Of Birth</label><br/>
+                        <input type="date" name="DOB" class="SignUp_input" required /><br/>
+
+                        <label for="menu">Membership Type</label><br/>
+                        <select id="menu" name="MembershipType" class="SignUp_input" required>
                             <option value="Gold">Gold</option>
                             <option value="Silver">Silver</option>
                             <option value="Bronze">Bronze</option>
                             <option value="Copper">Copper</option>
-                        </select>
+                        </select><br />
 
-                        <input type="number" min="0" name="Sponsor1ID" placeholder="Sponsor1ID" required />
-                        <input type="number" min="0" name="Sponsor2ID" placeholder="Sponsor2ID" required />
-                        <label for="ApplicationForm">Select a file:</label>
-                        <input type="file"  name="ApplicationForm" required>
+                        <input type="number" min="0" name="Sponsor1ID" class="SignUp_input" placeholder="Sponsor1ID" required /><br/>
+                        <input type="number" min="0" name="Sponsor2ID" class="SignUp_input" placeholder="Sponsor2ID" required /><br/>
+                        <label for="ApplicationForm">Select a file:</label><br/>
+                        <input type="file" name="ApplicationFile" class="SignUp_input" required>
                     </div>
-
                 </div>
                 <div>
                     <input type="submit" name="Submit" value="Apply" class="apply-button" />

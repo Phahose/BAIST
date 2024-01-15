@@ -20,8 +20,8 @@ CREATE TABLE Members (
     DateJoined DATE,
 	Prospective INT
 );
-ALTER TABLE Members
-ADD Prospective INT;
+
+Drop Column ApplicantName;
 
 --Drop Table Members
 CREATE TABLE ClubMemberApplications (
@@ -295,3 +295,22 @@ EXEC CreateApplication
     'random_salt',
     'Pending',
     '2023-02-25';  -- C
+
+CREATE PROCEDURE GetMember(@Email NVARCHAR(100))
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+
+    IF @Email IS NULL
+        RAISERROR('Email Cannot BE Null', 16, 1);
+	ELSE
+	SELECT * FROM Members WHERE Email = @Email
+IF @@ERROR = 0
+		SET @ReturnCode = 0
+	ELSE
+		RAISERROR ('Get User - Find error: Users table.', 16, 1)
+	END
+RETURN @ReturnCode
+
+Exec GetMember 'ekwomnick@gmail.com'

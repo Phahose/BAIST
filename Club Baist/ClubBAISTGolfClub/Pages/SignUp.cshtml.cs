@@ -45,7 +45,7 @@ namespace ClubBAISTGolfClub.Pages
         public string Message {  get; set; } = string.Empty;
         public void OnGet()
         {
-            Message = "Get Page";
+            /*Message = "Get Page";*/
         }
         public void OnPost() 
         {
@@ -69,7 +69,6 @@ namespace ClubBAISTGolfClub.Pages
                         MemberPhoneNumber = Phone,
                         MemberEmail = Email,
                         MemberPassword = Password,
-                        MemberSalt = "Salt",
                         MemberDOB = DOB,
                         MembershipType = MembershipType,
                         MemberSponsor1 = Sponsor1ID,
@@ -79,7 +78,7 @@ namespace ClubBAISTGolfClub.Pages
                         ApplicationFile = file
                     };
                     MemberControlls memberControlls = new MemberControlls();
-                    memberControlls.CreateMembership(member);
+                    memberControlls.AddUser(member);
                 }
             }
            

@@ -314,3 +314,5 @@ IF @@ERROR = 0
 RETURN @ReturnCode
 
 Exec GetMember 'ekwomnick@gmail.com'
+
+Delete From Members where Email = 'ekwomnick@gmail.com'

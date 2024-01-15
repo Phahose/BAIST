@@ -18,12 +18,13 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
-
+        public string AlertClass { get; set; } = string.Empty;
         public void OnGet()
         {
         }
         public async Task<IActionResult> OnPost()
         {
+            AlertClass = "alert_error";
             MemberControlls bCS = new MemberControlls();
             Member existingMember = new();
             existingMember = bCS.GetMember(Email);

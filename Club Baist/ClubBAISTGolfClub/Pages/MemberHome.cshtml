@@ -1,5 +1,56 @@
 ﻿@page
 @model ClubBAISTGolfClub.Pages.MemberHomeModel
 @{
+    Layout = "_Header";
+    ViewData["Title"] = "Home";
 }
-<h2>Member Home Page IDK what to do here</h2>
+<div class="memberhome">
+   
+    <div>
+        <nav class="hnav">
+            <ul>
+                <li>
+                    <a href="~/Index"> <img src="~/img/clublogo.png" alt="Club BAIST Logo" class="logo"></a>
+                </li>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Tee Times</a>
+                </li>
+                <li>
+                    <a href="#">Memberships</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Membership Type</th>
+                    <th>Application Status</th>
+                    <th>Date Applied</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Nicholas Ekwom</th>
+                    <th>258258258258</th>
+                    <th>123 NAIST St NW</th>
+                    <th>Gold</th>
+                    <th>Pending</th>
+                    <th>25th April 2024</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>

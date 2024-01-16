@@ -244,6 +244,74 @@ select{
     margin: auto;
     border-radius: 10px;
 }
+/*Header*/
+.hbody {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7faf8;
+}
+    .hbody img{
+        border-radius: 60%;
+        max-width: 50px;
+    }
+
+.logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.hnav {
+    
+}
+
+    .hnav a {
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+    }
+
+        .hnav a:hover {
+            color: #ffd700; 
+        }
+.memberhome {
+    display:flex;
+    background-color: blue;
+    height: 80%;
+}
+.h2home{
+    color: black;
+    width:fit-content;
+    background-color: blue;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
 @media (min-width: 760px){
 
 }

@@ -49,7 +49,7 @@ namespace ClubBAISTGolfClub.Pages
                 if (ByteArraysAreEqual(storedHashedpassword, enteredHashedPassword))
                 {
                     Message = "Login Success";
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/MemberHome");
                 }
 
             }

@@ -1,0 +1,46 @@
+﻿@page
+@model ClubBAISTGolfClub.Pages.BookTeeTimeModel
+@{
+    Layout = "_Header";
+}
+<div class="bookTee">
+    <nav class="memberhome_nav">
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a href="~/BookTeeTime">Tee Times</a>
+            </li>
+            <li>
+                <a href="#">Memberships</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    <table border="1">
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+        @for (int row = 0; row < 6; row++)
+        {
+            <tr>
+                @for (int col = 0; col < 7; col++)
+                {
+                    <td>@Model.Calendar[row, col]</td>
+                }
+            </tr>
+        }
+    </table>
+</div>

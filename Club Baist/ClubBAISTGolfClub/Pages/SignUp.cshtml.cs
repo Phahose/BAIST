@@ -56,7 +56,7 @@ namespace ClubBAISTGolfClub.Pages
                     ApplicationFile.CopyTo(memoryStream);
                     var file = memoryStream.ToArray();
 
-                    Message = "Post Worked";
+                    
                     Member member = new()
                     {
                         MemberFirstName = FirstName,
@@ -78,7 +78,16 @@ namespace ClubBAISTGolfClub.Pages
                         ApplicationFile = file
                     };
                     MemberControlls memberControlls = new MemberControlls();
-                    memberControlls.AddUser(member);
+                    if (memberControlls.GetMember(Email).MemberEmail == string.Empty)
+                    {
+                        memberControlls.AddUser(member);
+                        Message = "Post Worked";
+                    }
+                    else
+                    {
+                        Message = "Member Already Exists Try a Diffrent Email";
+                    }
+                    
                 }
             }
            

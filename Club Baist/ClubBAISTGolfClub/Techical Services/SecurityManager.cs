@@ -46,9 +46,18 @@ namespace ClubBAISTGolfClub.Techical_Services
                 {
                     member.MemberFirstName = (string)UserReader["FirstName"];
                     member.MemberLastName = (string)UserReader["LastName"];
+                    member.MemberPhoneNumber = (string)UserReader["Phone"];
                     member.MemberEmail = (string)UserReader["Email"];
                     member.MemberPassword = (string)UserReader["MemberPassword"];
+                    member.MemberDateJoined = (DateTime)UserReader["DateOfBirth"];
+                    member.MemberApplicationStatus = (string)UserReader["ApplicationStatus"];
+                    member.MemberSponsor1 = (int)UserReader["Sponsor1ID"];
+                    member.MemberSponsor2 = (int)UserReader["Sponsor2ID"];
                     member.MembershipType = (string)UserReader["MembershipType"];
+                    member.MemberAddress = (string)UserReader["Address"];
+                    member.MemberCountry = (string)UserReader["Country"];
+                    member.MemberProvince = (string)UserReader["Province"];
+                    member.MemberPostalCode = (string)UserReader["PostalCode"];
                     member.MemberSalt = (string)UserReader["Salt"];
                 }
             }

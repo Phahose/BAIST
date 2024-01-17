@@ -4,14 +4,10 @@
     Layout = "_Header";
     ViewData["Title"] = "Home";
 }
-<div class="memberhome">
-   
+<div class="memberhome"> 
     <div>
-        <nav class="hnav">
+        <nav class="memberhome_nav">
             <ul>
-                <li>
-                    <a href="~/Index"> <img src="~/img/clublogo.png" alt="Club BAIST Logo" class="logo"></a>
-                </li>
                 <li>
                     <a href="#">Home</a>
                 </li>
@@ -29,28 +25,40 @@
                 </li>
             </ul>
         </nav>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Membership Type</th>
-                    <th>Application Status</th>
-                    <th>Date Applied</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Nicholas Ekwom</th>
-                    <th>258258258258</th>
-                    <th>123 NAIST St NW</th>
-                    <th>Gold</th>
-                    <th>Pending</th>
-                    <th>25th April 2024</th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
+        <div class="infodiv">
+            <h2>My Info</h2>
+            <p>Personal Information</p>
+            <div>
+                <div>
+                   
+                </div>
+                <div>
+                    <p class="title">FirstName</p>
+                    <p class="val">@Model.Member.MemberFirstName</p>
+
+                    <p class="title">Address</p>
+                    <p class="val">@Model.Member.MemberAddress</p>
+                    
+                    <p class="title">Membership type</p>
+                    <p class="val">@Model.Member.MembershipType</p>
+
+                    <p class="title">Application Date</p>
+                    <p class="val">@Model.Member.MemberDateJoined</p>
+                </div>
+                <div>
+                    <p class="title">LastName</p>
+                    <p class="val">@Model.Member.MemberLastName</p>
+
+                    <p class="title">Phone Number</p>
+                    <p class="val">@Model.Member.MemberPhoneNumber</p>
+
+                    <p class="title">Email Address</p>
+                    <p class="val">@Model.Email</p>
+
+                    <p class="title">Application Status</p>
+                    <p class="val">@Model.Member.MemberApplicationStatus</p>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>

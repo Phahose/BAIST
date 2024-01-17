@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using ClubBAISTGolfClub.Controller;
 using ClubBAISTGolfClub.Domain;
 using ClubBAISTGolfClub.Techical_Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClubBAISTGolfClub.Pages
 {
@@ -19,9 +20,9 @@ namespace ClubBAISTGolfClub.Pages
         public string Password { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
         public string AlertClass { get; set; } = string.Empty;
-        public void OnGet()
+     /*   public void OnGet()
         {
-        }
+        }*/
         public async Task<IActionResult> OnPost()
         {
             AlertClass = "alert_error";
@@ -40,6 +41,7 @@ namespace ClubBAISTGolfClub.Pages
             Password = enteredHashedPasswordBase64;
 
             string UserEmail = existingMember.MemberEmail;
+            string UserName = existingMember.MemberFirstName;
             string UserPassword = existingMember.MemberPassword;
             string UserRole = existingMember.MembershipType;
 
@@ -48,7 +50,38 @@ namespace ClubBAISTGolfClub.Pages
                 // Compare the Two arrays and not the Hashed Figures
                 if (ByteArraysAreEqual(storedHashedpassword, enteredHashedPassword))
                 {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, Email),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims,
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, UserRole));
+                    AuthenticationProperties authProperties = new AuthenticationProperties
+                    {
+                        #region
+                        //AllowRefresh = <bool>,
+                        // Refreshing the authentication session should be allowed.
+                        //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                        // The time at which the authentication ticket expires. A
+                        // value set here overrides the ExpireTimeSpan option of
+                        // CookieAuthenticationOptions set with AddCookie.
+                        //IsPersistent = true,
+                        // Whether the authentication session is persisted across
+                        // multiple requests. When used with cookies, controls
+                        // whether the cookie's lifetime is absolute (matching the
+                        // lifetime of the authentication ticket) or session‐based.
+                        //IssuedUtc = <DateTimeOffset>,
+                        // The time at which the authentication ticket was issued.
+                        //RedirectUri = <string>
+                        // The full path or absolute URI to be used as an http
+                        // redirect response value.
+                        #endregion
+                    };
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), authProperties);
                     Message = "Login Success";
+                    TempData["UserEmail"] = UserEmail;
                     return RedirectToPage("/MemberHome");
                 }
 

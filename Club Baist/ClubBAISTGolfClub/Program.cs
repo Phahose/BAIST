@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClubBAISTGolfClub
@@ -18,8 +19,15 @@ namespace ClubBAISTGolfClub
                 o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
             });
 
-
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Login"; 
+            });
+            builder.Services.AddAuthorization();
             var app = builder.Build();
+
+
 
             //Configure the HTTP reqest pipeline
            
@@ -27,7 +35,8 @@ namespace ClubBAISTGolfClub
             app.UseRouting();
             app.UseSession();
             app.MapRazorPages();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.Run();
         }
     }

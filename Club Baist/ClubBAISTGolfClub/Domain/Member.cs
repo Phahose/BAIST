@@ -20,7 +20,7 @@
         public int Prospective { get; set; }
         public string MembershipType { get; set; } = string.Empty;
         public string MemberApplicationStatus { get; set; } = string.Empty;
-        public DateOnly MemberDateJoined { get; set; }
+        public DateTime MemberDateJoined { get; set; }
         public byte[]? ApplicationFile { get; set; }
     }
 }

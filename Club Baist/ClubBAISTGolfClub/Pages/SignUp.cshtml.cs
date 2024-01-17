@@ -31,7 +31,7 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public DateOnly DOB { get; set; }
         [BindProperty]
-        public DateOnly DateJoined { get; set; }
+        public DateTime DateJoined { get; set; }
         [BindProperty]
         public string MembershipType { get; set; } = string.Empty;
         [BindProperty]

@@ -20,12 +20,22 @@ namespace ClubBAISTGolfClub.Pages
         {
             _memberHome = memberHome;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             MemberControlls memberControlls = new MemberControlls();
-            Email = TempData["UserEmail"].ToString();
-            Member member = new();
-            Member =  memberControlls.GetMember(Email);   
+            if (TempData["UserEmail"] != null)
+            {
+                Email = TempData["UserEmail"].ToString();
+                Member member = new();
+                Member = memberControlls.GetMember(Email);
+
+                return Page();
+            }
+            else
+            {
+                return RedirectToPage("/Login");
+            }
+            
         }
     }
 }

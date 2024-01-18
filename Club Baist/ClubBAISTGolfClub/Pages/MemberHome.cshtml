@@ -13,17 +13,21 @@
                     <a href="~/Index">Home</a>
                 </li>
                 <li>
-                    <a href="~/BookTeeTime">Tee Times</a>
-                </li>
-                <li>
-                    <a href="#">Memberships</a>
-                </li>
-                <li>
                     <a href="#">Events</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
                 </li>
+                @if (Model.Member.MemberApplicationStatus == "Approved")
+                {
+                    <li>
+                        <a href="~/BookTeeTime">Tee Times</a>
+                    </li>
+                    <li>
+                        <a href="#">Memberships</a>
+                    </li>
+                }         
+               
             </ul>
         </nav>
         <div class="infodiv">

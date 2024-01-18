@@ -295,10 +295,13 @@ select{
 }
 .memberhome_nav ul {
     list-style: none;
-    height: 15rem;
+    height: fit-content;
     display:flex;
     flex-flow:column;
     justify-content: space-between;
+}
+.memberhome_nav li {
+    margin-bottom: 2rem; 
 }
 
     .hnav a {

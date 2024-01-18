@@ -28,7 +28,7 @@ namespace ClubBAISTGolfClub.Pages
                 Email = TempData["UserEmail"].ToString();
                 Member member = new();
                 Member = memberControlls.GetMember(Email);
-
+                HttpContext.Session.SetString("Email", Email);
                 return Page();
             }
             else

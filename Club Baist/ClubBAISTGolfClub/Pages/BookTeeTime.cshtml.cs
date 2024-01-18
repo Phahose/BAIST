@@ -1,4 +1,6 @@
 #nullable disable
+using ClubBAISTGolfClub.Controller;
+using ClubBAISTGolfClub.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,8 +24,13 @@ namespace ClubBAISTGolfClub.Pages
         public string Go { get; set; } = string.Empty;
         [BindProperty]
         public int PlayerNumber { get; set; }
+        public Member Member { get; set; } = new();
+        public string Email { get; set; } = string.Empty;
         public void OnGet()
         {
+            Email = HttpContext.Session.GetString("Email");
+            MemberControlls memberControlls = new MemberControlls();
+            Member = memberControlls.GetMember(Email);
             // Set up the DataGridView
             DateTime today = DateTime.Today;
             Month = today.Month;
@@ -51,13 +58,15 @@ namespace ClubBAISTGolfClub.Pages
         }
         public void OnPost()
         {
+            Email = HttpContext.Session.GetString("Email");
+            MemberControlls memberControlls = new MemberControlls();
+            Member = memberControlls.GetMember(Email);
             DateTime today = DateTime.Today;
             DateTime firstDayOfMonth = new DateTime(today.Year, Month, 1);
             int daysInMonth = DateTime.DaysInMonth(today.Year, today.Month);
             int currentDay = 1;
 
             Calendar = new int[6, 7];
-            
             MonthName = GetMonthName(Month);
             switch (Go)
             {

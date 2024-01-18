@@ -4,6 +4,7 @@ using ClubBAISTGolfClub.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.VisualBasic;
 using System;
 using System.Globalization;
 
@@ -19,6 +20,7 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public int Day { get; set; }
         public DateOnly? Date { get; set; }
+        public string TextDate { get; set; }
         public string MonthName { get; set; }
         [BindProperty]
         public string Go { get; set; } = string.Empty;
@@ -104,8 +106,16 @@ namespace ClubBAISTGolfClub.Pages
                             }
                         }
                     }
-                    Month = (int)HttpContext.Session.GetInt32("Month");
+                    if (HttpContext.Session.GetInt32("Month") == null)
+                    {
+                        Month = today.Month;
+                    }
+                    else
+                    {
+                        Month = (int)HttpContext.Session.GetInt32("Month");
+                    }                   
                     Date = new DateOnly(today.Year, Month, Day);
+                    TextDate = GetFormattedDate((DateOnly)Date);
                     HttpContext.Session.SetString("Date", Date.ToString());
                 break;
                 case "PNumber":
@@ -134,6 +144,15 @@ namespace ClubBAISTGolfClub.Pages
         {
             DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
             return dtfi.GetMonthName(monthNumber);
+        }
+        public static string GetFormattedDate(DateOnly date)
+        {
+            string[] suffixes = { "th", "st", "nd", "rd" };
+
+            int day = date.Day;
+            string suffix = (day >= 11 && day <= 13) || (day % 10 > 3) ? suffixes[0] : suffixes[day % 10];
+
+            return date.ToString($"MMMM d'{suffix}' yyyy");
         }
     }
     }

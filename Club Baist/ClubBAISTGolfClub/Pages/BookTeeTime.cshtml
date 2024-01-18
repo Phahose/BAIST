@@ -8,7 +8,7 @@
     <nav class="memberhome_nav">
         <ul>
             <li>
-                <a href="#">Home</a>
+                <a href="~/MemberHome">My Account</a>
             </li>
             <li>
                 <a href="~/BookTeeTime">Tee Times</a>
@@ -76,7 +76,7 @@
             @if (Model.Date != null)
             {
                 <div class="appointment">
-                    <p>@Model.Date</p>
+                    <p>@Model.TextDate</p>
                     <p>Number Of Players</p>
                     <input type="number" name="PlayerNumber" min="0" max="4" />
                     <input type="submit" name="Go" value="PNumber" class="playerbutton" />

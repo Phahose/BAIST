@@ -43,29 +43,24 @@ CREATE TABLE TeeTimes (
     Date DATE,
     TeeTime TIME,
     NumberOfPlayers INT,
-    EmployeeID INT,
-    CartCount INT,
-    SpecialEventID INT,
     ReservationStatus VARCHAR(20),
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
-    FOREIGN KEY (SpecialEventID) REFERENCES SpecialEvents(EventID)
 );
 
 -- StandingTeeTimeRequests Table
-CREATE TABLE StandingTeeTimeRequests (
-    RequestID INT IDENTITY(1,1) PRIMARY KEY,
-    MemberID INT,
-    RequestedDayOfWeek VARCHAR(20),
-    RequestedTeeTime TIME,
-    RequestedStartDate DATE,
-    RequestedEndDate DATE,
-    PriorityNumber INT,
-    ApprovedTeeTime TIME,
-    ApprovedBy VARCHAR(50),
-    ApprovedDate DATE,
-    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
-);
+--CREATE TABLE StandingTeeTimeRequests (
+--    RequestID INT IDENTITY(1,1) PRIMARY KEY,
+--    MemberID INT,
+--    RequestedDayOfWeek VARCHAR(20),
+--    RequestedTeeTime TIME,
+--    RequestedStartDate DATE,
+--    RequestedEndDate DATE,
+--    PriorityNumber INT,
+--    ApprovedTeeTime TIME,
+--    ApprovedBy VARCHAR(50),
+--    ApprovedDate DATE,
+--    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+--);
 
 -- Employees Table
 CREATE TABLE Employees (
@@ -235,7 +230,52 @@ AS
 		@ApplicationFile,
 		@FirstName + ' ' +@LastName)
 	END
-Drop Procedure CreateApplication
+--Drop Procedure CreateApplication
+
+CREATE PROCEDURE BookTeeTime(@PlayerID INT, @Date DATE, @Time TIME, @NumberOFPlayers INT)
+AS
+ IF @PlayerID is NULL
+  RAISERROR('The Player ID is Required',16,1)
+ ELSE IF @Date IS NULL
+  RAISERROR('The Date is Required',16,1)
+ ELSE IF @Time IS NULL
+  RAISERROR ('The Time is Required',16,1)
+ ELSE IF @NumberOFPlayers IS NULL
+  RAISERROR('The Number of Players Is Required',16,1)
+BEGIN
+	IF @NumberOFPlayers > 3
+	
+	 INSERT INTO TeeTimes(
+	 MemberID,
+	 Date,
+	 TeeTime,
+	 NumberOfPlayers,
+	 ReservationStatus)
+
+	 VALUES(
+	 @PlayerID,
+	 @Date,
+	 @Time,
+	 @NumberOFPlayers,
+	 'Reserved')
+	 ELSE 
+	 INSERT INTO TeeTimes(
+	 MemberID,
+	 Date,
+	 TeeTime,
+	 NumberOfPlayers,
+	 ReservationStatus)
+
+	 VALUES(
+	 @PlayerID,
+	 @Date,
+	 @Time,
+	 @NumberOFPlayers,
+	 'Open')
+END
+
+
+
 
 	INSERT INTO Members (
     FirstName,

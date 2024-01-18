@@ -38,7 +38,7 @@ CREATE TABLE ClubMemberApplications (
 
 -- TeeTimes Table
 CREATE TABLE TeeTimes (
-    TeeTimeID INT PRIMARY KEY,
+    TeeTimeID INT IDENTITY(1,1) PRIMARY KEY,
     MemberID INT,
     Date DATE,
     TeeTime TIME,
@@ -46,7 +46,7 @@ CREATE TABLE TeeTimes (
     ReservationStatus VARCHAR(20),
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
 );
-
+DROP Table TeeTimes
 -- StandingTeeTimeRequests Table
 --CREATE TABLE StandingTeeTimeRequests (
 --    RequestID INT IDENTITY(1,1) PRIMARY KEY,
@@ -245,90 +245,137 @@ AS
 BEGIN
 	DECLARE @PlayerCount INT;
 	SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
+	IF EXISTS (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
+		BEGIN
+			--INSERT INTO TeeTimes(
+			--MemberID,
+			--Date,
+			--TeeTime,
+			--NumberOfPlayers,
+			--ReservationStatus)
 
-	IF @PlayerCount < 4
-	 IF @PlayerCount = 3
-		IF @NumberOFPlayers > 1
-		RAISERROR ('There is Only a Slot For One More Player At this Time',16,1)
-		ELSE
-		 INSERT INTO TeeTimes(
-		 MemberID,
-		 Date,
-		 TeeTime,
-		 NumberOfPlayers,
-		 ReservationStatus)
+			--VALUES(
+			--@PlayerID,
+			--@Date,
+			--@Time,
+			--@NumberOFPlayers,
+			--'Reserved')
+			IF @PlayerCount < 4
+				BEGIN
+					 IF @PlayerCount = 3
+						BEGIN
+							IF @NumberOFPlayers > 1
+								RAISERROR ('There is Only a Slot For One More Player At this Time',16,1)
+							ELSE
+								INSERT INTO TeeTimes(
+								MemberID,
+								Date,
+								TeeTime,
+								NumberOfPlayers,
+								ReservationStatus)
 
-		  VALUES(
-		 @PlayerID,
-		 @Date,
-		 @Time,
-		 @NumberOFPlayers,
-		 'Reserved')
-	IF @PlayerCount = 2
-	IF @NumberOFPlayers > 2
-		RAISERROR ('There is Only a Slot For Two More Players At this Time',16,1)
-		ELSE
-		 INSERT INTO TeeTimes(
-		 MemberID,
-		 Date,
-		 TeeTime,
-		 NumberOfPlayers,
-		 ReservationStatus)
+								VALUES(
+								@PlayerID,
+								@Date,
+								@Time,
+								@NumberOFPlayers,
+								'Reserved')
+						END
+					IF @PlayerCount = 2
+						BEGIN
+							IF @NumberOFPlayers > 2
+								RAISERROR ('There is Only a Slot For Two More Players At this Time',16,1)
+							ELSE
+								 INSERT INTO TeeTimes(
+								 MemberID,
+								 Date,
+								 TeeTime,
+								 NumberOfPlayers,
+								 ReservationStatus)
 
-		 VALUES(
-		 @PlayerID,
-		 @Date,
-		 @Time,
-		 @NumberOFPlayers,
-		 'Reserved')
-	IF @PlayerCount = 1
-	IF @NumberOFPlayers > 3
-		RAISERROR ('There is Only a Slot For 3 More Players At this Time',16,1)
-		ELSE
-		 INSERT INTO TeeTimes(
-		 MemberID,
-		 Date,
-		 TeeTime,
-		 NumberOfPlayers,
-		 ReservationStatus)
+								 VALUES(
+								 @PlayerID,
+								 @Date,
+								 @Time,
+								 @NumberOFPlayers,
+								 'Reserved')
+						END
+					IF @PlayerCount = 1
+						BEGIN
+							IF @NumberOFPlayers > 3
+								RAISERROR ('There is Only a Slot For 3 More Players At this Time',16,1)
+							ELSE
+								 INSERT INTO TeeTimes(
+								 MemberID,
+								 Date,
+								 TeeTime,
+								 NumberOfPlayers,
+								 ReservationStatus)
 
-		 VALUES(
-		 @PlayerID,
-		 @Date,
-		 @Time,
-		 @NumberOFPlayers,
-		 'Reserved')
-	IF @PlayerCount = 0
-	IF @NumberOFPlayers > 4
-		RAISERROR ('Only 4 players Can Play at a Time',16,1)
-		ELSE
-		 INSERT INTO TeeTimes(
-		 MemberID,
-		 Date,
-		 TeeTime,
-		 NumberOfPlayers,
-		 ReservationStatus)
+								 VALUES(
+								 @PlayerID,
+								 @Date,
+								 @Time,
+								 @NumberOFPlayers,
+								 'Reserved')
+						END
+					IF @PlayerCount = NULL
+						BEGIN
+							IF @NumberOFPlayers > 4
+								RAISERROR ('Only 4 players Can Play at a Time',16,1)
+							ELSE
+								 INSERT INTO TeeTimes(
+								 MemberID,
+								 Date,
+								 TeeTime,
+								 NumberOfPlayers,
+								 ReservationStatus)
 
-		 VALUES(
-		 @PlayerID,
-		 @Date,
-		 @Time,
-		 @NumberOFPlayers,
-		 'Reserved')
+								 VALUES(
+								 @PlayerID,
+								 @Date,
+								 @Time,
+								 @NumberOFPlayers,
+								 'Reserved')
+					   END
+					SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
 
-	SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
 
+			
+			END
+			ELSE
+			 RAISERROR ('Shits Not workig',16,1)
+			IF @PlayerCount < 4
+						UPDATE 
+						TeeTimes
+						SET ReservationStatus = 'Open'
+						WHERE DATE = @Date
+						AND TeeTime = @Time
+	END
+	ELSE 
+		BEGIN
+			IF @NumberOFPlayers > 4
+				RAISERROR('Cannot have More Than 4 Players',16,1)
+			ELSE
+				INSERT INTO TeeTimes(
+				MemberID,
+				Date,
+				TeeTime,
+				NumberOfPlayers,
+				ReservationStatus)
 
-	IF @PlayerCount < 4
-	UPDATE 
-	TeeTimes
-	SET ReservationStatus = 'Open'
-	WHERE DATE = @Date
-	AND TeeTime = @Time
-  
+				VALUES(
+				@PlayerID,
+				@Date,
+				@Time,
+				@NumberOFPlayers,
+				'Reserved')
+		END
 END
-
---Drop Procedure BookTeeTime
+--BOOK TEE TIME NOT WORKING INSERT IS WORKING BUT LOGIC HAS TO BE LOOKED AT FRO THE UPDATE CODE
+EXEC BookTeeTime 1009, '2024-10-31', '12:30:00', 3
+DELETE FROm TeeTimes WHERE NumberOFPlayers = 
+Drop Procedure BookTeeTime
 
 
 	INSERT INTO Members (

@@ -57,6 +57,7 @@ namespace ClubBAISTGolfClub.Pages
             int currentDay = 1;
 
             Calendar = new int[6, 7];
+            
             MonthName = GetMonthName(Month);
             switch (Go)
             {
@@ -76,6 +77,7 @@ namespace ClubBAISTGolfClub.Pages
                             }
                         }
                     }
+                    HttpContext.Session.SetInt32("Month", Month);
                     break;
                 case "BookDate":
                     for (int row = 0; row < 6; row++)
@@ -93,6 +95,7 @@ namespace ClubBAISTGolfClub.Pages
                             }
                         }
                     }
+                    Month = (int)HttpContext.Session.GetInt32("Month");
                     Date = new DateOnly(today.Year, Month, Day);
                     HttpContext.Session.SetString("Date", Date.ToString());
                 break;

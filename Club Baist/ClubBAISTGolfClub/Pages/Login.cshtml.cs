@@ -81,7 +81,7 @@ namespace ClubBAISTGolfClub.Pages
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity), authProperties);
                     Message = "Login Success";
-                    TempData["UserEmail"] = UserEmail;
+                    HttpContext.Session.SetString("Email", Email);
                     return RedirectToPage("/MemberHome");
                 }
 

@@ -23,12 +23,11 @@ namespace ClubBAISTGolfClub.Pages
         public IActionResult OnGet()
         {
             MemberControlls memberControlls = new MemberControlls();
-            if (TempData["UserEmail"] != null)
+            Email = HttpContext.Session.GetString("Email");
+            if (Email != null)
             {
-                Email = TempData["UserEmail"].ToString();
                 Member member = new();
                 Member = memberControlls.GetMember(Email);
-                HttpContext.Session.SetString("Email", Email);
                 return Page();
             }
             else

@@ -3,6 +3,7 @@
 @{
     Layout = "_Header";
 }
+
 <div class="bookTee">
     <nav class="memberhome_nav">
         <ul>
@@ -23,24 +24,58 @@
             </li>
         </ul>
     </nav>
-    <table border="1">
-        <tr>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-        </tr>
-        @for (int row = 0; row < 6; row++)
-        {
-            <tr>
-                @for (int col = 0; col < 7; col++)
+    <div class="infodivs">   
+       <form name="TeeTimes" method="post" class="teetimeForm">
+            <div class="month_form">
+                <select id="menu" name="Month" class=month_input">
+                    <option value="#">@Model.MonthName</option>
+                    <option value="1">January</option>
+                    <option value="2">Febuary</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <input type="submit" name="Go" value="Go" />
+            </div>
+            <table border="1">
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+                @for (int row = 0; row < 6; row++)
                 {
-                    <td>@Model.Calendar[row, col]</td>
-                }
-            </tr>
-        }
-    </table>
+                    <tr>
+                        @for (int col = 0; col < 7; col++)
+                        {
+                            if (@Model.Calendar[row, col] != 0)
+                            {
+                                <td><input type="radio" name="date" value="@Model.Calendar[row, col]" />@Model.Calendar[row, col]</td>
+                            }
+                            else
+                            {
+                                <td>-</td>
+                            }
+                        }
+                    </tr>
+                }           
+            </table>
+            <input type="submit" name="Go" value="BookTime" class="bookDatebutton" />
+       </form>
+        
+       
+    </div>
+    
 </div>

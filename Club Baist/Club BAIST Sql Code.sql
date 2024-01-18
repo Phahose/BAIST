@@ -37,20 +37,20 @@ CREATE TABLE ClubMemberApplications (
 --ADD ApplicantName VARCHAR(50) NOT NULL 
 
 -- TeeTimes Table
---CREATE TABLE TeeTimes (
---    TeeTimeID INT PRIMARY KEY,
---    MemberID INT,
---    Date DATE,
---    Time TIME,
---    NumberOfPlayers INT,
---    EmployeeID INT,
---    CartCount INT,
---    SpecialEventID INT,
---    ReservationStatus VARCHAR(20),
---    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
---    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
---    FOREIGN KEY (SpecialEventID) REFERENCES SpecialEvents(EventID)
---);
+CREATE TABLE TeeTimes (
+    TeeTimeID INT PRIMARY KEY,
+    MemberID INT,
+    Date DATE,
+    TeeTime TIME,
+    NumberOfPlayers INT,
+    EmployeeID INT,
+    CartCount INT,
+    SpecialEventID INT,
+    ReservationStatus VARCHAR(20),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+    FOREIGN KEY (SpecialEventID) REFERENCES SpecialEvents(EventID)
+);
 
 -- StandingTeeTimeRequests Table
 CREATE TABLE StandingTeeTimeRequests (

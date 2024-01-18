@@ -62,7 +62,7 @@
                         {
                             if (@Model.Calendar[row, col] != 0)
                             {
-                                <td><input type="radio" name="date" value="@Model.Calendar[row, col]" />@Model.Calendar[row, col]</td>
+                                <td><input type="radio" name="Day" value="@Model.Calendar[row, col]" />@Model.Calendar[row, col]</td>
                             }
                             else
                             {
@@ -72,10 +72,21 @@
                     </tr>
                 }           
             </table>
-            <input type="submit" name="Go" value="BookTime" class="bookDatebutton" />
-       </form>
+            <input type="submit" name="Go" value="BookDate" class="bookDatebutton" />
+            @if (Model.Date != null)
+            {
+                <div class="appointment">
+                    <p>@Model.Date</p>
+                    <p>Number Of Players</p>
+                    <input type="number" name="PlayerNumber" min="0" max="4" />
+                    <input type="submit" name="Go" value="PNumber" class="playerbutton" />
+                    @for (int i = 0; i < Model.PlayerNumber; i++)
+                    {
+                         <input type="number" name="PlayerID" placeholder="PlayerID" />
+                    }
+                </div>
+            }
+        </form>
         
-       
     </div>
-    
 </div>

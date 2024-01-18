@@ -1,3 +1,4 @@
+#nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,11 +11,17 @@ namespace ClubBAISTGolfClub.Pages
     [Authorize]
     public class BookTeeTimeModel : PageModel
     {
-        public int[,]? Calendar { get; set; }
+        public int[,] Calendar { get; set; }
         [BindProperty]
-        public int Month { get; set; } 
+        public int Month { get; set; } = 1;
+        [BindProperty]
+        public int Day { get; set; }
+        public DateOnly? Date { get; set; }
         public string MonthName { get; set; }
-
+        [BindProperty]
+        public string Go { get; set; } = string.Empty;
+        [BindProperty]
+        public int PlayerNumber { get; set; }
         public void OnGet()
         {
             // Set up the DataGridView
@@ -51,21 +58,65 @@ namespace ClubBAISTGolfClub.Pages
 
             Calendar = new int[6, 7];
             MonthName = GetMonthName(Month);
-            for (int row = 0; row < 6; row++)
+            switch (Go)
             {
-                for (int col = 0; col < 7; col++)
-                {
-                    if ((row == 0 && col < (int)firstDayOfMonth.DayOfWeek) || currentDay > daysInMonth)
+                case "Go":
+                    for (int row = 0; row < 6; row++)
                     {
-                        Calendar[row, col] = 0;
+                        for (int col = 0; col < 7; col++)
+                        {
+                            if ((row == 0 && col < (int)firstDayOfMonth.DayOfWeek) || currentDay > daysInMonth)
+                            {
+                                Calendar[row, col] = 0;
+                            }
+                            else
+                            {
+                                Calendar[row, col] = currentDay;
+                                currentDay++;
+                            }
+                        }
                     }
-                    else
+                    break;
+                case "BookDate":
+                    for (int row = 0; row < 6; row++)
                     {
-                        Calendar[row, col] = currentDay;
-                        currentDay++;
+                        for (int col = 0; col < 7; col++)
+                        {
+                            if ((row == 0 && col < (int)firstDayOfMonth.DayOfWeek) || currentDay > daysInMonth)
+                            {
+                                Calendar[row, col] = 0;
+                            }
+                            else
+                            {
+                                Calendar[row, col] = currentDay;
+                                currentDay++;
+                            }
+                        }
                     }
-                }
+                    Date = new DateOnly(today.Year, Month, Day);
+                    HttpContext.Session.SetString("Date", Date.ToString());
+                break;
+                case "PNumber":
+                   
+                    for (int row = 0; row < 6; row++)
+                    {
+                        for (int col = 0; col < 7; col++)
+                        {
+                            if ((row == 0 && col < (int)firstDayOfMonth.DayOfWeek) || currentDay > daysInMonth)
+                            {
+                                Calendar[row, col] = 0;
+                            }
+                            else
+                            {
+                                Calendar[row, col] = currentDay;
+                                currentDay++;
+                            }
+                        }
+                    }
+                    Date = DateOnly.Parse(HttpContext.Session.GetString("Date"));
+                    break;
             }
+           
         }
         static string GetMonthName(int monthNumber)
         {

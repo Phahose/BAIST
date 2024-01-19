@@ -4,12 +4,12 @@ namespace ClubBAISTGolfClub.Controller
 {
     public class TeeTimeController
     {
-        public bool BookReservation(TeeTime teeTime)
+        public string BookReservation(TeeTime teeTime)
         {
-            bool success = false;
+            string message = "";
             TeeTimeServices teeservices = new TeeTimeServices();
-            success = teeservices.BooKTeeTime(teeTime);
-            return success;
+            message = teeservices.BooKTeeTime(teeTime);
+            return message;
         }
     }
 }

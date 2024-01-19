@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
 using System;
 using System.Globalization;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClubBAISTGolfClub.Pages
 {
@@ -28,11 +29,19 @@ namespace ClubBAISTGolfClub.Pages
         public int PlayerNumber { get; set; }
         public Member Member { get; set; } = new();
         public string Email { get; set; } = string.Empty;
+        [BindProperty]
+        public string TeeTime { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public string MemberInfoString { get; set; } = string.Empty;
         public void OnGet()
         {
+            //Get member Info 
             Email = HttpContext.Session.GetString("Email");
             MemberControlls memberControlls = new MemberControlls();
             Member = memberControlls.GetMember(Email);
+            MemberInfoString = JsonSerializer.Serialize(Member);
+            HttpContext.Session.SetString("MemberInfo", MemberInfoString);
+
             // Set up the DataGridView
             DateTime today = DateTime.Today;
             Month = today.Month;
@@ -118,8 +127,7 @@ namespace ClubBAISTGolfClub.Pages
                     TextDate = GetFormattedDate((DateOnly)Date);
                     HttpContext.Session.SetString("Date", Date.ToString());
                 break;
-                case "PNumber":
-                   
+                case "PNumber":             
                     for (int row = 0; row < 6; row++)
                     {
                         for (int col = 0; col < 7; col++)
@@ -135,8 +143,43 @@ namespace ClubBAISTGolfClub.Pages
                             }
                         }
                     }
+                    HttpContext.Session.SetInt32("PlayerNumber", PlayerNumber);
                     Date = DateOnly.Parse(HttpContext.Session.GetString("Date"));
+                    TextDate = GetFormattedDate((DateOnly)Date);
                     break;
+                case"BookTime":
+                    for (int row = 0; row < 6; row++)
+                    {
+                        for (int col = 0; col < 7; col++)
+                        {
+                            if ((row == 0 && col < (int)firstDayOfMonth.DayOfWeek) || currentDay > daysInMonth)
+                            {
+                                Calendar[row, col] = 0;
+                            }
+                            else
+                            {
+                                Calendar[row, col] = currentDay;
+                                currentDay++;
+                            }
+                        }
+                    }
+                    MemberInfoString = HttpContext.Session.GetString("MemberInfo");
+                    Member = JsonSerializer.Deserialize<Member>(MemberInfoString);
+                    Date = DateOnly.Parse(HttpContext.Session.GetString("Date"));
+                    PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
+                    TeeTime teeTime = new()
+                    {
+                        MemberID = Member.MemberID,
+                        Date = (DateOnly)Date,
+                        NumberOfPlayers = PlayerNumber,
+                        Time = TimeOnly.Parse(TeeTime)
+                    };
+                    TeeTimeController teeTimeController = new();
+                    Message =  teeTimeController.BookReservation(teeTime);
+                    
+                    TextDate = GetFormattedDate((DateOnly)Date);
+                    break;
+
             }
            
         }
@@ -155,5 +198,5 @@ namespace ClubBAISTGolfClub.Pages
             return date.ToString($"MMMM d'{suffix}' yyyy");
         }
     }
-    }
+}
 

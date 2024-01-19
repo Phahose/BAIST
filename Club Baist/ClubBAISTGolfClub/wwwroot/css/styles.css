@@ -464,13 +464,17 @@ td {
     margin: auto;
     padding: 1rem;
 }
-.playerbutton{
+.playerbutton {
     background-color: brown;
     color: white;
+    transition: 0.2s ease-in-out;
 }
-
-@media (min-width: 760px) {
-}
+    .playerbutton:hover {
+        color: black;
+        background-color: antiquewhite;
+    }
+    @media (min-width: 760px) {
+    }
 
 @media(min-width: 1000px){
     .contain{

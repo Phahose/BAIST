@@ -15,9 +15,8 @@ namespace ClubBAISTGolfClub.Techical_Services
             IConfiguration DatabaseUserConfiguration = DatabaseUserBuilder.Build();
             connectionString = DatabaseUserConfiguration.GetConnectionString("nekwom1");
         }
-        public bool BooKTeeTime(TeeTime teeTime)
+        public string BooKTeeTime(TeeTime teeTime)
         {
-            bool success = false;
             SqlConnection nekwom1connection = new();
             nekwom1connection.ConnectionString = connectionString;
             nekwom1connection.Open();
@@ -61,16 +60,15 @@ namespace ClubBAISTGolfClub.Techical_Services
                 BookTeeTimesCommand.Parameters.Add(DateParaameter);
                 BookTeeTimesCommand.Parameters.Add(TimeParaameter);
                 BookTeeTimesCommand.Parameters.Add(NumberOfPlayersParaameter);
-                success = true;
                 BookTeeTimesCommand.ExecuteNonQuery();
                 nekwom1connection.Close();             
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                success = false;
+                return ex.Message;
             }
-            return success;
+            return "Successs";
         }
     }
 }

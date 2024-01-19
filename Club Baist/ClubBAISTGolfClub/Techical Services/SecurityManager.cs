@@ -45,6 +45,7 @@ namespace ClubBAISTGolfClub.Techical_Services
                 while (UserReader.Read())
                 {
                     member.MemberFirstName = (string)UserReader["FirstName"];
+                    member.MemberID = (int)UserReader["MemberID"];
                     member.MemberLastName = (string)UserReader["LastName"];
                     member.MemberPhoneNumber = (string)UserReader["Phone"];
                     member.MemberEmail = (string)UserReader["Email"];

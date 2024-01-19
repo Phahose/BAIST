@@ -78,12 +78,12 @@
                 <div class="appointment">
                     <p>@Model.TextDate</p>
                     <p>Number Of Players</p>
-                    <input type="number" name="PlayerNumber" min="0" max="4" />
+                    <input type="number" name="PlayerNumber" min="0" max="4"  />
                     <input type="submit" name="Go" value="PNumber" class="playerbutton" />
-                    <p>Select A Time</p>
+                    <p>Time Slots According to @Model.Member.MembershipType Privileges</p>
                     @if (Model.Member.MembershipType == "Gold")
                     {
-                        <select id="teeTimeSelect">
+                        <select id="teeTimeSelect" name="TeeTime">
                             <option value="07:00">7:00 AM</option>
                             <option value="07:15">7:15 AM</option>
                             <option value="07:30">7:30 AM</option>
@@ -141,7 +141,7 @@
                     }
                    @if (Model.Member.MembershipType == "Silver")
                     {
-                        <select id="teeTimeSelect">
+                        <select id="teeTimeSelect" name="TeeTime">
                             @* Before 3pm *@ 
                             <option value="07:00">7:00 AM</option>
                             <option value="07:15">7:15 AM</option>
@@ -192,7 +192,7 @@
                     }
                    @if (Model.Member.MembershipType == "Bronze")
                     {
-                        <select id="teeTimeSelect">
+                        <select id="teeTimeSelect" name="TeeTime">
                             @* Before 3pm *@ 
                             <option value="07:00">7:00 AM</option>
                             <option value="07:15">7:15 AM</option>
@@ -243,7 +243,14 @@
                     {
                             <input type="number" name="PlayerID" placeholder="PlayerID" />
                     }
+                    @if (Model.PlayerNumber > 0)
+                    {
+                        <p>@Model.Message</p>
+                        <input type="submit" name="Go" value="BookTime" class="playerbutton" />
+                    }
+                   
                 </div>
+                
             }
         </form>
         

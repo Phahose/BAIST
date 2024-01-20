@@ -224,7 +224,6 @@ AS
 	    SELECT @Sponsor1Name = FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor1ID
 		SELECT @Sponsor2Name =  FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor2ID
 		SELECT @MemberID = MemberID FROM Members WHERE Email = @Email
-		SELECT MemberID FROM Members WHERE Email = 'john.doe@example.com'
 		INSERT INTO ClubMemberApplications(
 		Sponsor1Name,
 		Sponsor2Name,
@@ -232,7 +231,7 @@ AS
 		ApplicationDate,
 		ApplicationFormFile,
 		ApplicantName,
-		ApplicationID)
+		ApplicantID)
 
 		VALUES(
 		@Sponsor1Name,
@@ -547,4 +546,4 @@ IF @@ERROR = 0
 		RAISERROR ('Get Member - Find error: Members table.', 16, 1)
 	END
 RETURN @ReturnCode
-Delete From Members where MemberID = 3
+Delete From Members where MemberID = 1011

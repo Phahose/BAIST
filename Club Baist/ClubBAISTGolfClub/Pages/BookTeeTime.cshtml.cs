@@ -33,6 +33,16 @@ namespace ClubBAISTGolfClub.Pages
         public string TeeTime { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
         public string MemberInfoString { get; set; } = string.Empty;
+        [BindProperty]
+        public int Player1Id { get; set; }
+        [BindProperty]
+        public int Player2Id { get; set; }
+        [BindProperty]
+        public int Player3Id { get; set; }
+        [BindProperty]
+        public int Player4Id { get; set; }
+        public List<int> PlayerList { get; set; } = new();
+
         public void OnGet()
         {
             //Get member Info 
@@ -174,9 +184,65 @@ namespace ClubBAISTGolfClub.Pages
                         NumberOfPlayers = PlayerNumber,
                         Time = TimeOnly.Parse(TeeTime)
                     };
-                    TeeTimeController teeTimeController = new();
-                    Message =  teeTimeController.BookReservation(teeTime);
-                    
+                    Member member = memberControlls.GetMemberByID(Player1Id);
+
+                    if (Player1Id != 0)
+                    {
+                        PlayerList.Add(Player1Id);
+                    }
+                    if (Player2Id != 0)
+                    {
+                        PlayerList.Add(Player2Id);
+                    }
+                    if (Player3Id != 0)
+                    {
+                        PlayerList.Add(Player3Id);
+                    }
+                    if (Player4Id != 0)
+                    {
+                        PlayerList.Add(Player4Id);
+                    }
+
+                    bool valid = true;
+                    for (int i = 0; i < PlayerList.Count; i++)
+                    {
+                        member = memberControlls.GetMemberByID(PlayerList[i]);
+                        if (member.MembershipType != "")
+                        {
+                            if (member.MembershipType != Member.MembershipType)
+                            {
+                                if (member.MembershipType == "Silver")
+                                {
+                                    TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
+                                    TimeOnly endTime = new TimeOnly(17, 30); // 5:30 PM
+                                    if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
+                                    {
+                                        Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Silver Member The can Play Before 3:00 PM and After 5:30PM";
+                                        valid = false;
+                                    }
+                                }
+                                else if (member.MembershipType == "Bronze")
+                                {
+                                    TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
+                                    TimeOnly endTime = new TimeOnly(18, 0); // 5:30 PM
+                                    if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
+                                    {
+                                        Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Bronze Member The can Play Before 3:00 PM and After 6:00PM";
+                                        valid = false;
+                                    }
+                                }                              
+                            }
+                        }
+                        else
+                        {
+                            Message = $"Some of You players Dont Exist Check Player ID{PlayerList[i]}";
+                        }
+                    }
+                    if (valid)
+                    {
+                        TeeTimeController teeTimeController = new();
+                        Message =  teeTimeController.BookReservation(teeTime);
+                    }
                     TextDate = GetFormattedDate((DateOnly)Date);
                     break;
 

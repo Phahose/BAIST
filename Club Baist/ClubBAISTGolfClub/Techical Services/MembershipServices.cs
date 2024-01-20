@@ -179,5 +179,136 @@ namespace ClubBAISTGolfClub.Techical_Services
             nekwom1Connection.Close();
             return Member;
         }
+        public Member GetUserByID(int memberID)
+        {
+            Member member = new Member();
+            SqlConnection systemsConnection = new SqlConnection();
+            systemsConnection.ConnectionString = connectionString;
+            systemsConnection.Open();
+
+            SqlCommand GetUserByID = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                Connection = systemsConnection,
+                CommandText = "GetMemberByID"
+            };
+
+            SqlParameter MemberIdParameter = new()
+            {
+                ParameterName = "@MemberID",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+                SqlValue = memberID
+            };
+
+            GetUserByID.Parameters.Add(MemberIdParameter);
+            SqlDataReader UserReader = GetUserByID.ExecuteReader();
+
+            if (UserReader.HasRows)
+            {
+                while (UserReader.Read())
+                {
+                    member.MemberFirstName = (string)UserReader["FirstName"];
+                    member.MemberID = (int)UserReader["MemberID"];
+                    member.MemberLastName = (string)UserReader["LastName"];
+                    member.MemberPhoneNumber = (string)UserReader["Phone"];
+                    member.MemberEmail = (string)UserReader["Email"];
+                    member.MemberPassword = (string)UserReader["MemberPassword"];
+                    member.MemberDateJoined = (DateTime)UserReader["DateOfBirth"];
+                    member.MemberApplicationStatus = (string)UserReader["ApplicationStatus"];
+                    member.MemberSponsor1 = (int)UserReader["Sponsor1ID"];
+                    member.MemberSponsor2 = (int)UserReader["Sponsor2ID"];
+                    member.MembershipType = (string)UserReader["MembershipType"];
+                    member.MemberAddress = (string)UserReader["Address"];
+                    member.MemberCountry = (string)UserReader["Country"];
+                    member.MemberProvince = (string)UserReader["Province"];
+                    member.MemberPostalCode = (string)UserReader["PostalCode"];
+                    member.MemberSalt = (string)UserReader["Salt"];
+                }
+            }
+            UserReader.Close();
+            systemsConnection.Close();
+            return member;
+        }
+        public List<Member> GetAllMembers()
+        {
+            List<Member> Members = new List<Member>();
+            SqlConnection systemsConnection = new SqlConnection();
+            systemsConnection.ConnectionString = connectionString;
+            systemsConnection.Open();
+
+            SqlCommand GetUserByID = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                Connection = systemsConnection,
+                CommandText = "GetAllMembers"
+            };
+            SqlDataReader UserReader = GetUserByID.ExecuteReader();
+            
+            if (UserReader.HasRows)
+            {            
+                while (UserReader.Read())
+                {
+                    Member member = new Member();
+                    member.MemberFirstName = (string)UserReader["FirstName"];
+                    member.MemberID = (int)UserReader["MemberID"];
+                    member.MemberLastName = (string)UserReader["LastName"];
+                    member.MemberPhoneNumber = (string)UserReader["Phone"];
+                    member.MemberEmail = (string)UserReader["Email"];
+                    member.MemberPassword = (string)UserReader["MemberPassword"];
+                    member.MemberDateJoined = (DateTime)UserReader["DateOfBirth"];
+                    member.MemberApplicationStatus = (string)UserReader["ApplicationStatus"];
+                    member.MemberSponsor1 = (int)UserReader["Sponsor1ID"];
+                    member.MemberSponsor2 = (int)UserReader["Sponsor2ID"];
+                    member.MembershipType = (string)UserReader["MembershipType"];
+                    member.MemberAddress = (string)UserReader["Address"];
+                    member.MemberCountry = (string)UserReader["Country"];
+                    member.MemberProvince = (string)UserReader["Province"];
+                    member.MemberPostalCode = (string)UserReader["PostalCode"];
+                    member.MemberSalt = (string)UserReader["Salt"];
+                   // member.ApplicationFile = (byte[]?)UserReader[]
+                    Members.Add(member);
+                }
+            }
+            UserReader.Close();
+            systemsConnection.Close();
+            return Members;
+        }
+        public List<MemberApplications> GetAllMemberApplications()
+        {
+            List<MemberApplications> MemberApplications = new List<MemberApplications>();
+            SqlConnection systemsConnection = new SqlConnection();
+            systemsConnection.ConnectionString = connectionString;
+            systemsConnection.Open();
+
+            SqlCommand GetAllMemberApplications = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                Connection = systemsConnection,
+                CommandText = "GetAllMemberApplications"
+            };
+            SqlDataReader UserReader = GetAllMemberApplications.ExecuteReader();
+
+            if (UserReader.HasRows)
+            {
+                while (UserReader.Read())
+                {
+                    MemberApplications memberApplication = new MemberApplications();
+                    memberApplication.ApplicantID = (int)UserReader["ApplicantID"];
+                    memberApplication.ApplicationID = (int)UserReader["ApplicationID"];
+                    memberApplication.ApplicantName = (string)UserReader["ApplicantName"];
+                    memberApplication.Sponsor1Name = (string)UserReader["Sponsor1Name"];
+                    memberApplication.Sponsor2Name = (string)UserReader["Sponsor2Name"];
+                    memberApplication.ApplicationDate = (DateTime)UserReader["ApplicationDate"];
+                    memberApplication.ApplicationFile = (byte[]?)UserReader["ApplicationFormFile"];
+                    memberApplication.ApplicationStatus = (string)UserReader["ApplicationStatus"];
+
+                    MemberApplications.Add(memberApplication);
+                }
+            }
+            UserReader.Close();
+            systemsConnection.Close();
+            return MemberApplications;
+        }
     }
 }

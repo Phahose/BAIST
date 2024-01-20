@@ -1,0 +1,85 @@
+﻿@page
+@model ClubBAISTGolfClub.Pages.AdminModel
+@{
+    Layout = "_Header";
+    ViewData["Title"] = "Members";
+}
+<div class="bookTee">
+    <nav class="memberhome_nav">
+        <ul>
+            <li>
+                <a href="~/MemberHome">My Account</a>
+            </li>
+            <li>
+                <a href="~/BookTeeTime">Tee Times</a>
+            </li>
+            <li>
+                <a href="#">Memberships</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="~/Admin">Admin</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="infodiv">
+        <h2 class="heading_admin">Prospective Members</h2>
+        <form name="UpdateMembers" method="post" class="teetimeForm">
+            <table border="1" class="admintable">
+                <tr>
+                    <th>Application ID</th>
+                    <th>Appicant ID</th>
+                    <th>Appicant Name</th>
+                    <th>Sponsor1 Name</th>
+                    <th>Sponsor2 Name</th>
+                    <th>Application Status</th>
+                    <th>Date Applied</th>
+                    <th>Application File</th>
+                </tr>
+                @foreach (var memberapplication in Model.Applications)
+                {
+                    <tr>
+                        <td>@memberapplication.ApplicationID</td>
+                        <td>@memberapplication.ApplicantID</td>
+                        <td>@memberapplication.ApplicantName</td>
+                        <td>@memberapplication.Sponsor1Name</td>
+                        <td>@memberapplication.Sponsor2Name</td>
+                        <td>@memberapplication.ApplicationStatus</td>
+                        <td>@memberapplication.ApplicationDate</td>
+                        <td>@memberapplication.ApplicationFile</td>
+                    </tr>
+                }
+            </table>
+            <h2 class="heading_admin"> Club Members</h2>
+            <table border="1" class="admintable"> 
+                <tr>
+                    <th>Member ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Membership Type</th>
+                    <th>Application Status</th>
+                    <th>Date Applied</th>
+                    <th>Email</th>
+                    <th>Sponsor1 ID</th>
+                    <th>Sponsor2 ID</th>
+                </tr>
+                @foreach (var member in Model.Members)
+                {
+                    <tr>
+                        <td>@member.MemberID</td>
+                        <td>@member.MemberFirstName</td>
+                        <td>@member.MemberLastName</td>
+                        <td>@member.MembershipType</td>
+                        <td>@member.MemberApplicationStatus</td>
+                        <td>@member.MemberDateJoined</td>
+                        <td>@member.MemberEmail</td>
+                        <td>@member.MemberSponsor1</td>
+                        <td>@member.MemberSponsor2</td>
+                    </tr>
+                }
+            </table>
+        </form>
+    </div>
+</div>

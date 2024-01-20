@@ -34,7 +34,7 @@ CREATE TABLE ClubMemberApplications (
 	ApplicationFormFile VARBINARY(MAX)
 );
 --ALTER TABLE ClubMemberApplications
---ADD ApplicantName VARCHAR(50) NOT NULL 
+--ADD ApplicantID INT FOREIGN KEY REFERENCES Members (MemberID)
 
 -- TeeTimes Table
 CREATE TABLE TeeTimes (
@@ -219,16 +219,20 @@ AS
 				1)
 		DECLARE @Sponsor1Name VARCHAR(255);
 		DECLARE @Sponsor2Name VARCHAR(255);
+		DECLARE @MemberID INT;
 
 	    SELECT @Sponsor1Name = FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor1ID
 		SELECT @Sponsor2Name =  FirstName +' ' + LastName FROM Members WHERE MemberID = @Sponsor2ID
+		SELECT @MemberID = MemberID FROM Members WHERE Email = @Email
+		SELECT MemberID FROM Members WHERE Email = 'john.doe@example.com'
 		INSERT INTO ClubMemberApplications(
 		Sponsor1Name,
 		Sponsor2Name,
 		ApplicationStatus,
 		ApplicationDate,
 		ApplicationFormFile,
-		ApplicantName)
+		ApplicantName,
+		ApplicationID)
 
 		VALUES(
 		@Sponsor1Name,
@@ -236,9 +240,10 @@ AS
 		@ApplicationStatus,
 		@DateJoined,
 		@ApplicationFile,
-		@FirstName + ' ' +@LastName)
+		@FirstName + ' ' +@LastName,
+		@MemberID)
 	END
---Drop Procedure CreateApplication
+Drop Procedure CreateApplication
 
 CREATE PROCEDURE BookTeeTime(@PlayerID INT, @Date DATE, @Time TIME, @NumberOFPlayers INT)
 AS
@@ -496,6 +501,50 @@ IF @@ERROR = 0
 	END
 RETURN @ReturnCode
 
-Exec GetMember 'ekwomnick@gmail.com'
+CREATE PROCEDURE GetMemberByID(@MemberID INT)
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
 
-Delete From Members where Email = 'ekwomnick@gmail.com'
+    IF @MemberID IS NULL
+        RAISERROR('PlayerID Cannot BE Null', 16, 1);
+	ELSE
+	SELECT * FROM Members WHERE MemberID = @MemberID
+IF @@ERROR = 0
+		SET @ReturnCode = 0
+	ELSE
+		RAISERROR ('Get User - Find error: Users table.', 16, 1)
+	END
+RETURN @ReturnCode
+
+Exec GetMemberByID 1
+
+CREATE PROCEDURE GetAllMembers
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	SELECT * FROM Members 
+IF @@ERROR = 0
+		SET @ReturnCode = 0
+	ELSE
+		RAISERROR ('Get Member - Find error: Members table.', 16, 1)
+	END
+RETURN @ReturnCode
+
+Exec GetAllMembers
+
+CREATE PROCEDURE GetAllMemberApplications
+AS
+DECLARE @ReturnCode INT
+	SET @ReturnCode = 1
+BEGIN
+	SELECT * FROM ClubMemberApplications 
+IF @@ERROR = 0
+		SET @ReturnCode = 0
+	ELSE
+		RAISERROR ('Get Member - Find error: Members table.', 16, 1)
+	END
+RETURN @ReturnCode
+Delete From Members where MemberID = 3

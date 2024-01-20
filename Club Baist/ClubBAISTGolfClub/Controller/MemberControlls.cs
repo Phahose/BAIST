@@ -39,6 +39,29 @@ namespace ClubBAISTGolfClub.Controller
 
             return member;
         }
+        public Member GetMemberByID(int memberID)
+        {
+            Member member = new Member();
+            MembershipServices membercontroll = new MembershipServices();
+            member = membercontroll.GetUserByID(memberID);
+            return member;
+        }
+        public List<Member> GetAllMembers()
+        {
+            List<Member> Members = new();
+            MembershipServices membercontroll = new MembershipServices();
+            Members = membercontroll.GetAllMembers();
+            return Members;
+        }
+        public List<MemberApplications> GetAllMemberApplication()
+        {
+            List<MemberApplications> MemberApplications = new();
+            MembershipServices membercontroll = new MembershipServices();
+            MemberApplications = membercontroll.GetAllMemberApplications();
+            return MemberApplications;
+        }
+
+
         private static byte[] HashPasswordWithSalt(string password, byte[] salt)
         {
             // Hash the password with PBKDF2 using HMACSHA256

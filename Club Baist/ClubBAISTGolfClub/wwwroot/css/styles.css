@@ -432,7 +432,7 @@ select{
         background-color: greenyellow;
         transition: 0.5s ease-in-out;
     }
-table {
+.bookingtable {
     border-collapse: collapse;
     width: 50%;
     height: 50%;
@@ -440,22 +440,22 @@ table {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+.bookingtable th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
     color: black;
 }
 
-th {
+.bookingtable th {
     background-color: #f2f2f2;
 }
 
-td {
+.bookingtable td {
     cursor: pointer;
 }
 
-    td:hover {
+    .bookingtable td:hover {
         background-color: grey;
     }
 .appointment{
@@ -473,8 +473,34 @@ td {
         color: black;
         background-color: antiquewhite;
     }
-    @media (min-width: 760px) {
-    }
+
+/*Admin Page*/
+.admintable {
+    width: 90%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+.admintable th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.admintable th {
+    background-color: #f2f2f2;
+}
+
+.admintable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.heading_admin{
+    padding: 1rem;
+}
+
+@media (min-width: 760px) {
+}
 
 @media(min-width: 1000px){
     .contain{

@@ -2,6 +2,7 @@
 @model ClubBAISTGolfClub.Pages.BookTeeTimeModel
 @{
     Layout = "_Header";
+    ViewData["Title"] = "Book Tee Time";
 }
 
 <div class="bookTee">
@@ -20,7 +21,7 @@
                 <a href="#">Events</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="~/Admin">Admin</a>
             </li>
         </ul>
     </nav>
@@ -45,7 +46,7 @@
 
                 <input type="submit" name="Go" value="Go" />
             </div>
-            <table border="1">
+            <table border="1" class="bookingtable">
                 <tr>
                     <th>Sun</th>
                     <th>Mon</th>
@@ -239,10 +240,29 @@
                         </select>
                     }
 
-                    @for (int i = 0; i < Model.PlayerNumber; i++)
+                    @if (Model.PlayerNumber == 1)
                     {
-                            <input type="number" name="PlayerID" placeholder="PlayerID" />
+                         <input type="number" name="Player1Id" placeholder="PlayerID" />
                     }
+                    @if (Model.PlayerNumber == 2)
+                    {
+                        <input type="number" name="Player1Id" placeholder="PlayerID" />
+                        <input type="number" name="Player2Id" placeholder="PlayerID" />
+                    }
+                    @if (Model.PlayerNumber == 3)
+                    {
+                        <input type="number" name="Player1Id" placeholder="PlayerID" />
+                        <input type="number" name="Player2Id" placeholder="PlayerID" />
+                        <input type="number" name="Player3Id" placeholder="PlayerID" />
+                    }
+                    @if (Model.PlayerNumber == 4)
+                    {
+                        <input type="number" name="Player1Id" placeholder="PlayerID" />
+                        <input type="number" name="Player2Id" placeholder="PlayerID" />
+                        <input type="number" name="Player3Id" placeholder="PlayerID" />
+                        <input type="number" name="Player4Id" placeholder="PlayerID" />
+                    }
+
                     @if (Model.PlayerNumber > 0)
                     {
                         <p>@Model.Message</p>

@@ -236,12 +236,13 @@ namespace ClubBAISTGolfClub.Pages
                         else
                         {
                             Message = $"Some of You players Dont Exist Check Player ID{PlayerList[i]}";
+                            valid = false;
                         }
                     }
                     if (valid)
                     {
                         TeeTimeController teeTimeController = new();
-                        Message =  teeTimeController.BookReservation(teeTime);
+                       // Message =  teeTimeController.BookReservation(teeTime);
                     }
                     TextDate = GetFormattedDate((DateOnly)Date);
                     break;

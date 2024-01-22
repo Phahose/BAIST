@@ -310,5 +310,130 @@ namespace ClubBAISTGolfClub.Techical_Services
             systemsConnection.Close();
             return MemberApplications;
         }
+
+        public Member UpdateMember(Member Member)
+        {
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.Open();
+
+            SqlCommand UpateMember = new()
+            {
+                Connection = nekwom1Connection,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "UpdateMember"
+            };
+
+            SqlParameter FirstNameParameter = new()
+            {
+                ParameterName = "@FirstName",
+                SqlValue = Member.MemberFirstName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter LastNameParameter = new()
+            {
+                ParameterName = "@LastName",
+                SqlValue = Member.MemberLastName,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter AddressParameter = new()
+            {
+                ParameterName = "@Address",
+                SqlValue = Member.MemberAddress,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter CityParameter = new()
+            {
+                ParameterName = "@City",
+                SqlValue = Member.MemberCity,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter ProvinceParameter = new()
+            {
+                ParameterName = "@Province",
+                SqlValue = Member.MemberProvince,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter CountryParameter = new()
+            {
+                ParameterName = "@Country",
+                SqlValue = Member.MemberCountry,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter PostalCodeParameter = new()
+            {
+                ParameterName = "@PostalCode",
+                SqlValue = Member.MemberPostalCode,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter PhoneParameter = new()
+            {
+                ParameterName = "@Phone",
+                SqlValue = Member.MemberPhoneNumber,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter EmailParameter = new()
+            {
+                ParameterName = "@Email",
+                SqlValue = Member.MemberEmail,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+           
+            SqlParameter DateOfBirthParameter = new()
+            {
+                ParameterName = "@DateOfBirth",
+                SqlValue = Member.MemberDOB,
+                SqlDbType = SqlDbType.Date,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter MembershipTypeParameter = new()
+            {
+                ParameterName = "@MembershipType",
+                SqlValue = Member.MembershipType,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };         
+            SqlParameter ApplicationStatusParameter = new()
+            {
+                ParameterName = "@ApplicationStatus",
+                SqlValue = "Pending",
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter DateJoinedParameter = new()
+            {
+                ParameterName = "@DateJoined",
+                SqlValue = Member.MemberDateJoined,
+                SqlDbType = SqlDbType.Date,
+                Direction = ParameterDirection.Input,
+            };
+           
+            UpateMember.Parameters.Add(FirstNameParameter);
+            UpateMember.Parameters.Add(LastNameParameter);
+            UpateMember.Parameters.Add(AddressParameter);
+            UpateMember.Parameters.Add(CityParameter);
+            UpateMember.Parameters.Add(CountryParameter);
+            UpateMember.Parameters.Add(ProvinceParameter);
+            UpateMember.Parameters.Add(PostalCodeParameter);
+            UpateMember.Parameters.Add(PhoneParameter);
+            UpateMember.Parameters.Add(EmailParameter);
+            UpateMember.Parameters.Add(DateOfBirthParameter);
+            UpateMember.Parameters.Add(MembershipTypeParameter);
+            UpateMember.Parameters.Add(ApplicationStatusParameter);
+            UpateMember.Parameters.Add(DateJoinedParameter);
+
+            UpateMember.ExecuteNonQuery();
+            nekwom1Connection.Close();
+            return Member;
+        }
     }
 }

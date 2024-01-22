@@ -165,7 +165,7 @@ h2 {
     }
 
 .SignUp_input{
-    padding: 12px 0px;
+    padding: 12px 1rem;
     margin: 6px 0rem;
     border: 1px solid powderblue;
     border-radius: 5px;
@@ -399,7 +399,7 @@ select{
     margin-top: 12rem;
 }
 .teetimeForm{
-    height: 50%;
+    height: fit-content;
     display: flex;
     flex-flow: column;
     margin-bottom: 2rem;

@@ -39,21 +39,34 @@
                     <th>Application File</th>
                 </tr>
                 @foreach (var memberapplication in Model.Applications)
-                {
+                {                
+                    byte[] wordDocumentBytes = memberapplication.ApplicationFile!; 
+                    string base64Document = Convert.ToBase64String(wordDocumentBytes!);
                     <tr>
                         <td>@memberapplication.ApplicationID</td>
                         <td>@memberapplication.ApplicantID</td>
                         <td>@memberapplication.ApplicantName</td>
                         <td>@memberapplication.Sponsor1Name</td>
                         <td>@memberapplication.Sponsor2Name</td>
-                        <td>@memberapplication.ApplicationStatus</td>
-                        <td>@memberapplication.ApplicationDate</td>
-                        <td>@memberapplication.ApplicationFile</td>
+                        <td>
+                            <select name="ApplicationStatus" class="SignUp_input">
+                                <option value="@memberapplication.ApplicationStatus">@memberapplication.ApplicationStatus</option>
+                                <option value="Approved">Approved</option>
+                            </select><br /> 
+                        </td>
+                        <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <a href="data:application/octet-stream;base64,@base64Document" download="{@memberapplication.ApplicantName}ApplicatonFile">
+                                Application File
+                            </a>
+                        </td>
                     </tr>
                 }
-            </table>
+            </table>         
+        </form>
+        <form name="UpdateMembers" method="post" class="teetimeForm">
             <h2 class="heading_admin"> Club Members</h2>
-            <table border="1" class="admintable"> 
+            <table border="1" class="admintable">
                 <tr>
                     <th>Member ID</th>
                     <th>First Name</th>
@@ -67,17 +80,21 @@
                 </tr>
                 @foreach (var member in Model.Members)
                 {
-                    <tr>
-                        <td>@member.MemberID</td>
-                        <td>@member.MemberFirstName</td>
-                        <td>@member.MemberLastName</td>
-                        <td>@member.MembershipType</td>
-                        <td>@member.MemberApplicationStatus</td>
-                        <td>@member.MemberDateJoined</td>
-                        <td>@member.MemberEmail</td>
-                        <td>@member.MemberSponsor1</td>
-                        <td>@member.MemberSponsor2</td>
-                    </tr>
+                    if (member.MemberApplicationStatus == "Approved")
+                    {
+                        <tr>
+                            <td>@member.MemberID</td>
+                            <td>@member.MemberFirstName</td>
+                            <td>@member.MemberLastName</td>
+                            <td>@member.MembershipType</td>
+                            <td>@member.MemberApplicationStatus</td>
+                            <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
+                            <td>@member.MemberEmail</td>
+                            <td>@member.MemberSponsor1</td>
+                            <td>@member.MemberSponsor2</td>
+                        </tr>
+                    }
+
                 }
             </table>
         </form>

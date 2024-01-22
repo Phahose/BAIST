@@ -547,3 +547,59 @@ IF @@ERROR = 0
 	END
 RETURN @ReturnCode
 Delete From Members where MemberID = 1011
+
+
+Create Procedure UpdateMember      (@FirstName varchar(50), @LastName VARCHAR(50),
+									@Address VARCHAR(255),  @City VARCHAR(255),
+									@Province VARCHAR(255), @Country VARCHAR(255),
+									@PostalCode VARCHAR(10),@Phone VARCHAR(20),
+									@Email VARCHAR(100), @MemberPassword NVARCHAR(255),
+									@DateOfBirth DATE,   @MembershipType VARCHAR(20),
+									@Salt NVARCHAR(225), @ApplicationStatus VARCHAR(20),
+									@DateJoined DATE, @ApplicationFile VARBINARY(max),
+									@MemberID INT)
+AS
+	IF @FirstName is NULL 
+	 RAISERROR ('The FirstName Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @LastName IS NULL 
+	 RAISERROR ('The LastName Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @Address IS NULL 
+	 RAISERROR ('The Address Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @Phone IS NULL 
+	 RAISERROR ('The Phone Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @Email IS NULL 
+	 RAISERROR ('The Email Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @MemberPassword IS NULL 
+	 RAISERROR ('The MemberPassword Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @DateOfBirth IS NULL 
+	 RAISERROR ('The DateOfBirth Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE IF @MembershipType IS NULL 
+	 RAISERROR ('The MembershipType Cannot Be Empty ~ INSERT ERROR',0,1)
+	ELSE
+	BEGIN
+		Update Members
+			SET 
+				FirstName = @Firstname,
+				LastName = @LastName,
+				Address = @Address,
+				City = @City,
+				Province = @Province,
+				Country = @Country,
+				PostalCode = @PostalCode,
+				Phone = @Phone,
+				Email = @Email,
+				DateOfBirth = @DateOfBirth,
+				MembershipType = @MembershipType,
+				ApplicationStatus = @ApplicationStatus,
+				DateJoined = @DateJoined,
+				Prospective = 0
+
+			WHERE MemberID = @MemberId
+
+			Update ClubMemberApplications
+			SET 
+			ApplicationStatus = @ApplicationStatus
+			WHERE ApplicantID = @MemberID
+		
+	END
+	Drop Procedure UpdateMember

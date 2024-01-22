@@ -605,5 +605,7 @@ Create Procedure GetTeeTime(@Date DATE, @Time TIME)
 AS
  BEGIN
   SELECT * FROM TeeTimes
-  WHERE Teetimes.Date =  @Date AND Teetimes.Time = @Time
+  WHERE Teetimes.Date =  @Date AND Teetimes.TeeTime = @Time
  END
+
+EXEC GetTeeTime  '2024-1-31', '7:00:00'

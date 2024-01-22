@@ -21,5 +21,12 @@ namespace ClubBAISTGolfClub.Controller
             
             return message;
         }
+        public TeeTime GetTeeTime(DateOnly date, string time)
+        {
+            TeeTime teeTime = new TeeTime();
+            TeeTimeServices teeservices = new TeeTimeServices();
+            teeTime = teeservices.GetTeeTime(date, time);
+            return teeTime;
+        }
     }
 }

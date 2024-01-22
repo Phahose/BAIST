@@ -31,8 +31,10 @@ namespace ClubBAISTGolfClub.Pages
         public string Email { get; set; } = string.Empty;
         [BindProperty]
         public string TeeTime { get; set; } = string.Empty;
+        public TeeTime TeeTimeInfo { get; set; } = new();
         public string Message { get; set; } = string.Empty;
         public string ErrorMessage { get; set; } = string.Empty;
+        public string SuccessMessage { get; set; } = string.Empty;
         public string MemberInfoString { get; set; } = string.Empty;
         [BindProperty]
         public int Player1Id { get; set; }
@@ -214,7 +216,7 @@ namespace ClubBAISTGolfClub.Pages
                         PlayerList.Add(Player4Id);
                     }
 
-                    bool valid = true;
+                    bool playersvalid = true;
                     for (int i = 0; i < PlayerList.Count; i++)
                     {
                         member = memberControlls.GetMemberByID(PlayerList[i]);
@@ -232,7 +234,7 @@ namespace ClubBAISTGolfClub.Pages
                                         {
                                             Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Silver Member The can Play Before 3:00 PM and After 5:30PM";
                                             ErrorList.Add(Message);
-                                            valid = false;
+                                            playersvalid = false;
                                         }
                                     }
                                     else if (member.MembershipType == "Bronze")
@@ -243,7 +245,7 @@ namespace ClubBAISTGolfClub.Pages
                                         {
                                             Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Bronze Member The can Play Before 3:00 PM and After 6:00PM";
                                             ErrorList.Add(Message);
-                                            valid = false;
+                                            playersvalid = false;
                                         }
                                     }
                                 }
@@ -259,13 +261,47 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             Message = $"Player ID {PlayerList[i]} doesent Exist - Invalid Player ID";
                             ErrorList.Add(Message);
-                            valid = false;
+                            playersvalid = false;
                         }
                     }
-                    if (valid)
-                    {
+                    if (playersvalid)
+                    {        
                         TeeTimeController teeTimeController = new();
-                        Message =  teeTimeController.BookReservation(teeTime);
+                        TeeTimeInfo = teeTimeController.GetTeeTime((DateOnly)Date, TeeTime);
+                        if (TeeTimeInfo.ReservationStatus == "Reserved")
+                        {
+                            Message = "This Time Slot is Reserved";
+                            ErrorList.Add(Message);
+                        }
+                        if(TeeTimeInfo.NumberOfPlayers == 1)
+                        {
+                            if (teeTime.NumberOfPlayers > 3 )
+                            {
+                                Message = "This Time Slot Can Have Only three More Players";
+                                ErrorList.Add(Message);
+                            }
+                        }
+                        if (TeeTimeInfo.NumberOfPlayers == 2)
+                        {
+                            if (teeTime.NumberOfPlayers > 2)
+                            {
+                                Message = "This Time Slot Can Have Only two More Players";
+                                ErrorList.Add(Message);
+                            }
+                        }
+                        if (TeeTimeInfo.NumberOfPlayers == 3)
+                        {
+                            if (teeTime.NumberOfPlayers > 1)
+                            {
+                                Message = "This Time Slot Can Have Only One More Player";
+                                ErrorList.Add(Message);
+                            }
+                        }
+                        if (ErrorList.Count == 0)
+                        {
+                            //SuccessMessage =  teeTimeController.BookReservation(teeTime);
+                        }
+
                     }
                     TextDate = GetFormattedDate((DateOnly)Date);
                     break;

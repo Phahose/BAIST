@@ -70,5 +70,52 @@ namespace ClubBAISTGolfClub.Techical_Services
             }
             return "Successs";
         }
+
+        public TeeTime GetTeeTime(DateOnly date, string time)
+        {
+            SqlConnection nekwom1connection = new();
+            nekwom1connection.ConnectionString = connectionString;
+            nekwom1connection.Open();
+            TeeTime teeTime = new TeeTime();
+            SqlCommand GetTeeTimesCommand = new()
+            {
+                CommandText = "GetTeeTime",
+                CommandType = CommandType.StoredProcedure,
+                Connection = nekwom1connection
+            };
+            SqlParameter DateParaameter = new()
+            {
+                ParameterName = "@Date",
+                SqlDbType = SqlDbType.Date,
+                SqlValue = date,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter TimeParaameter = new()
+            {
+                ParameterName = "@Time",
+                SqlDbType = SqlDbType.Time,
+                SqlValue = time,
+                Direction = ParameterDirection.Input,
+            };
+            GetTeeTimesCommand.Parameters.Add(DateParaameter);
+            GetTeeTimesCommand.Parameters.Add(TimeParaameter);
+            SqlDataReader teeTimeReader = GetTeeTimesCommand.ExecuteReader();
+
+            if (teeTimeReader.HasRows)
+            {
+                while (teeTimeReader.Read())
+                {
+                    teeTime.TeeTimeID = (int)teeTimeReader["TeeTimeID"];
+                    teeTime.MemberID = (int)teeTimeReader["MemberID"];
+                    //teeTime.Date = (DateOnly)teeTimeReader["Date"];
+                    //teeTime.Time = (Time)teeTimeReader["TeeTime"];
+                    teeTime.ReservationStatus = (string)teeTimeReader["ReservationStatus"];
+                    teeTime.NumberOfPlayers = (int)teeTimeReader["NumberOfPlayers"];
+                }
+            }
+            teeTimeReader.Close();
+            nekwom1connection.Close();         
+            return teeTime;
+        }
     }
 }

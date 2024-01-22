@@ -141,7 +141,7 @@
                             <option value="20:00">8:00 PM</option>
                         </select>
                     }
-                   @if (Model.Member.MembershipType == "Silver")
+                    @if (Model.Member.MembershipType == "Silver")
                     {
                         <select id="teeTimeSelect" name="TeeTime">
                             @* Before 3pm *@ 
@@ -192,7 +192,7 @@
                             <option value="20:00">8:00 PM</option>
                         </select>
                     }
-                   @if (Model.Member.MembershipType == "Bronze")
+                    @if (Model.Member.MembershipType == "Bronze")
                     {
                         <select id="teeTimeSelect" name="TeeTime">
                             @* Before 3pm *@ 
@@ -270,14 +270,11 @@
                         {
                             <p class="error">@message</p>
                         }
-                        <p>@Model.Message</p>
+                        <p>@Model.SuccessMessage</p>
                         <input type="submit" name="Go" value="BookTime" class="playerbutton" />
-                    }
-                   
-                </div>
-                
+                    }                  
+                </div>             
             }
-        </form>
-        
+        </form>    
     </div>
 </div>

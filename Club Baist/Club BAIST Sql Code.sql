@@ -357,9 +357,11 @@ BEGIN
 							END
 						END
 						SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)		
-			 END
+			 	END
 			ELSE
-			 
+			 BEGIN 
+					RAISERROR('This Slot is Fully Booked',16,1)
+			 END
 			IF @PlayerCount < 4
 						UPDATE 
 						TeeTimes
@@ -598,3 +600,10 @@ AS
 		
 	END
 	Drop Procedure UpdateMember
+
+Create Procedure GetTeeTime(@Date DATE, @Time TIME)
+AS
+ BEGIN
+  SELECT * FROM TeeTimes
+  WHERE Teetimes.Date =  @Date AND Teetimes.Time = @Time
+ END

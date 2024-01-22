@@ -343,6 +343,7 @@ select{
     width: 100%;
     border-radius: 2%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    height:fit-content;
 }
     .infodiv p{
         font-family: 'Khand', sans-serif;
@@ -372,6 +373,7 @@ select{
     width: 100%;
     padding-bottom: 3rem;
     border-top: 2px solid lightgrey;
+    margin-bottom: 16rem;
     border-bottom: 2px solid lightgrey;
 }
         .infodiv > div > div{
@@ -406,13 +408,14 @@ select{
 }
 .month_form {
     display: flex;
-    width: 17rem;
+    width: 20%;
     margin: auto;
 }
 .month_form > input[type=submit]{
     width: 4rem;
     margin-left: 1rem;
-    background-color: green;
+    background-color: brown;
+    color: white;
 }
 .bookDatebutton {
     width: 30%;
@@ -429,7 +432,7 @@ select{
         background-color: antiquewhite;
     }
     .month_form > input[type=submit]:hover {
-        background-color: greenyellow;
+        background-color: saddlebrown;
         transition: 0.5s ease-in-out;
     }
 .bookingtable {
@@ -473,7 +476,10 @@ select{
         color: black;
         background-color: antiquewhite;
     }
-
+.error{
+    color: red;
+    font-weight: 500;
+}
 /*Admin Page*/
 .admintable {
     width: 90%;
@@ -497,6 +503,27 @@ select{
 }
 .heading_admin{
     padding: 1rem;
+}
+.updatemember_container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+.updateMember_button {
+    background-color: brown;
+}
+.updatemember_container> input[type=submit]{
+    background-color: brown;
+    color: white;
+}
+.updatemember_container > h2 {
+    padding: 1rem;
+    width: fit-content;
+    margin: auto;
+}
+.updatemember_container > input[type=submit]:hover {
+    background-color: saddlebrown;
+    transition: 0.5s ease-in-out;
 }
 
 @media (min-width: 760px) {

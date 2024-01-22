@@ -405,18 +405,18 @@ namespace ClubBAISTGolfClub.Techical_Services
             SqlParameter ApplicationStatusParameter = new()
             {
                 ParameterName = "@ApplicationStatus",
-                SqlValue = "Pending",
+                SqlValue = Member.MemberApplicationStatus,
                 SqlDbType = SqlDbType.VarChar,
                 Direction = ParameterDirection.Input,
             };
-            SqlParameter DateJoinedParameter = new()
+            SqlParameter MemberIdParameter = new()
             {
-                ParameterName = "@DateJoined",
-                SqlValue = Member.MemberDateJoined,
-                SqlDbType = SqlDbType.Date,
+                ParameterName = "@MemberID",
+                SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input,
+                SqlValue = Member.MemberID
             };
-           
+
             UpateMember.Parameters.Add(FirstNameParameter);
             UpateMember.Parameters.Add(LastNameParameter);
             UpateMember.Parameters.Add(AddressParameter);
@@ -429,7 +429,7 @@ namespace ClubBAISTGolfClub.Techical_Services
             UpateMember.Parameters.Add(DateOfBirthParameter);
             UpateMember.Parameters.Add(MembershipTypeParameter);
             UpateMember.Parameters.Add(ApplicationStatusParameter);
-            UpateMember.Parameters.Add(DateJoinedParameter);
+            UpateMember.Parameters.Add(MemberIdParameter);
 
             UpateMember.ExecuteNonQuery();
             nekwom1Connection.Close();

@@ -28,7 +28,7 @@
     <div class="infodivs">   
        <form name="TeeTimes" method="post" class="teetimeForm">
             <div class="month_form">
-                <select id="menu" name="Month" class=month_input">
+                <select id="menu" name="Month" class="month_input">
                     <option value="#">@Model.MonthName</option>
                     <option value="1">January</option>
                     <option value="2">Febuary</option>
@@ -265,7 +265,11 @@
 
                     @if (Model.PlayerNumber > 0)
                     {
-                        <p>@Model.Message</p>
+                        foreach (string message in Model.ErrorList)
+                        {
+                            <p class="error">@message</p>
+                        }
+                        
                         <input type="submit" name="Go" value="BookTime" class="playerbutton" />
                     }
                    

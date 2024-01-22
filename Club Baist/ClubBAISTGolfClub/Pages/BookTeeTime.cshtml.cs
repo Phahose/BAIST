@@ -42,6 +42,7 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public int Player4Id { get; set; }
         public List<int> PlayerList { get; set; } = new();
+        public List<string> ErrorList { get; set; } = new();
 
         public void OnGet()
         {
@@ -209,33 +210,45 @@ namespace ClubBAISTGolfClub.Pages
                         member = memberControlls.GetMemberByID(PlayerList[i]);
                         if (member.MembershipType != "")
                         {
-                            if (member.MembershipType != Member.MembershipType)
+                            if (member.MemberApplicationStatus != "Pending")
                             {
-                                if (member.MembershipType == "Silver")
+                                if (member.MembershipType != Member.MembershipType)
                                 {
-                                    TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
-                                    TimeOnly endTime = new TimeOnly(17, 30); // 5:30 PM
-                                    if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
+                                    if (member.MembershipType == "Silver")
                                     {
-                                        Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Silver Member The can Play Before 3:00 PM and After 5:30PM";
-                                        valid = false;
+                                        TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
+                                        TimeOnly endTime = new TimeOnly(17, 30); // 5:30 PM
+                                        if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
+                                        {
+                                            Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Silver Member The can Play Before 3:00 PM and After 5:30PM";
+                                            ErrorList.Add(Message);
+                                            valid = false;
+                                        }
+                                    }
+                                    else if (member.MembershipType == "Bronze")
+                                    {
+                                        TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
+                                        TimeOnly endTime = new TimeOnly(18, 0); // 5:30 PM
+                                        if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
+                                        {
+                                            Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Bronze Member The can Play Before 3:00 PM and After 6:00PM";
+                                            ErrorList.Add(Message);
+                                            valid = false;
+                                        }
                                     }
                                 }
-                                else if (member.MembershipType == "Bronze")
-                                {
-                                    TimeOnly startTime = new TimeOnly(15, 0); // 3:00 PM
-                                    TimeOnly endTime = new TimeOnly(18, 0); // 5:30 PM
-                                    if (TimeOnly.Parse(TeeTime) >= startTime && TimeOnly.Parse(TeeTime) <= endTime)
-                                    {
-                                        Message = $"Player with ID of ${PlayerList[i]} cannot play at this Time Because They are a Bronze Member The can Play Before 3:00 PM and After 6:00PM";
-                                        valid = false;
-                                    }
-                                }                              
                             }
+                            else
+                            {
+                                Message = $"Player ID {PlayerList[i]} Cannot Play - Membership not Approved";
+                                ErrorList.Add(Message);
+                            }
+                            
                         }
                         else
                         {
-                            Message = $"Some of You players Dont Exist Check Player ID{PlayerList[i]}";
+                            Message = $"Player ID {PlayerList[i]} doesent Exist - Invalid Player ID";
+                            ErrorList.Add(Message);
                             valid = false;
                         }
                     }

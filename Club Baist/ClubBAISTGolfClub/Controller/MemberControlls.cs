@@ -12,6 +12,12 @@ namespace ClubBAISTGolfClub.Controller
             member = membershipServices.CreateApplication(member);
             return member;
         }
+        public Member UpdateMember(Member member)
+        {
+            MembershipServices membershipServices = new MembershipServices();
+            member = membershipServices.UpdateMember(member);
+            return member;
+        }
         public void AddUser(Member addeduser)
         {
             byte[] salt = new byte[128 / 8];

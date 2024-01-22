@@ -27,6 +27,12 @@
     <div class="infodiv">
         <h2 class="heading_admin">Prospective Members</h2>
         <form name="UpdateMembers" method="post" class="teetimeForm">
+            <p>@Model.ErrorMessage</p>
+            <div class="month_form">             
+                <input type="number" name="MemberID" placeholder="Member ID you Would Like To Update" class="updateMember_input" min="0"/>
+                <input type="submit" name="Submit" value="Go" class="updateMember_button" />
+            </div>
+            
             <table border="1" class="admintable">
                 <tr>
                     <th>Application ID</th>
@@ -39,30 +45,52 @@
                     <th>Application File</th>
                 </tr>
                 @foreach (var memberapplication in Model.Applications)
-                {                
-                    byte[] wordDocumentBytes = memberapplication.ApplicationFile!; 
-                    string base64Document = Convert.ToBase64String(wordDocumentBytes!);
-                    <tr>
-                        <td>@memberapplication.ApplicationID</td>
-                        <td>@memberapplication.ApplicantID</td>
-                        <td>@memberapplication.ApplicantName</td>
-                        <td>@memberapplication.Sponsor1Name</td>
-                        <td>@memberapplication.Sponsor2Name</td>
-                        <td>
-                            <select name="ApplicationStatus" class="SignUp_input">
-                                <option value="@memberapplication.ApplicationStatus">@memberapplication.ApplicationStatus</option>
-                                <option value="Approved">Approved</option>
-                            </select><br /> 
-                        </td>
-                        <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
-                        <td>
-                            <a href="data:application/octet-stream;base64,@base64Document" download="{@memberapplication.ApplicantName}ApplicatonFile">
-                                Application File
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </table>         
+                {
+                    if (memberapplication.ApplicationStatus == "Pending")
+                    {
+                        byte[] wordDocumentBytes = memberapplication.ApplicationFile!;
+                        string base64Document = Convert.ToBase64String(wordDocumentBytes!);
+                        <tr>
+                            <td>@memberapplication.ApplicationID</td>
+                            <td>@memberapplication.ApplicantID</td>
+                            <td>@memberapplication.ApplicantName</td>
+                            <td>@memberapplication.Sponsor1Name</td>
+                            <td>@memberapplication.Sponsor2Name</td>
+                            <td>@memberapplication.ApplicationStatus</td>
+                            <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <a href="data:application/octet-stream;base64,@base64Document" download="{@memberapplication.ApplicantName}ApplicatonFile">
+                                    Application File
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    
+                }              
+            </table>      
+            @if(Model.Member.MemberFirstName != "")
+            {
+                <div class="appointment updatemember_container">
+                    <h2>Update - @Model.Member.MemberFirstName</h2>
+                    <input type="text" name="FirstName" value="@Model.Member.MemberFirstName" />
+                    <input type="text" name="LastName" value="@Model.Member.MemberLastName" />
+                    <select name="ApplicationStatus" class="SignUp_input">
+                        <option value="@Model.Member.MemberApplicationStatus">@Model.Member.MemberApplicationStatus</option>
+                        <option value="Approved">Approved</option>
+                    </select>
+                     <select name="MemberShipType" class="SignUp_input">
+                        <option value="@Model.Member.MembershipType">@Model.Member.MembershipType</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Shareholder">ShareHolder</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Bronze</option>
+                        <option value="Gold">Copper</option>
+                    </select><br />
+                    <p>@Model.Message</p>
+                    <input type="submit" name="Submit" value="UpdateMember" />
+                </div>
+            }         
         </form>
         <form name="UpdateMembers" method="post" class="teetimeForm">
             <h2 class="heading_admin"> Club Members</h2>

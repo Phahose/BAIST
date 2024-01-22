@@ -553,10 +553,8 @@ Create Procedure UpdateMember      (@FirstName varchar(50), @LastName VARCHAR(50
 									@Address VARCHAR(255),  @City VARCHAR(255),
 									@Province VARCHAR(255), @Country VARCHAR(255),
 									@PostalCode VARCHAR(10),@Phone VARCHAR(20),
-									@Email VARCHAR(100), @MemberPassword NVARCHAR(255),
-									@DateOfBirth DATE,   @MembershipType VARCHAR(20),
-									@Salt NVARCHAR(225), @ApplicationStatus VARCHAR(20),
-									@DateJoined DATE, @ApplicationFile VARBINARY(max),
+									@Email VARCHAR(100), @DateOfBirth DATE,   
+									@MembershipType VARCHAR(20),@ApplicationStatus VARCHAR(20),
 									@MemberID INT)
 AS
 	IF @FirstName is NULL 
@@ -569,8 +567,6 @@ AS
 	 RAISERROR ('The Phone Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @Email IS NULL 
 	 RAISERROR ('The Email Cannot Be Empty ~ INSERT ERROR',0,1)
-	ELSE IF @MemberPassword IS NULL 
-	 RAISERROR ('The MemberPassword Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @DateOfBirth IS NULL 
 	 RAISERROR ('The DateOfBirth Cannot Be Empty ~ INSERT ERROR',0,1)
 	ELSE IF @MembershipType IS NULL 
@@ -591,7 +587,6 @@ AS
 				DateOfBirth = @DateOfBirth,
 				MembershipType = @MembershipType,
 				ApplicationStatus = @ApplicationStatus,
-				DateJoined = @DateJoined,
 				Prospective = 0
 
 			WHERE MemberID = @MemberId

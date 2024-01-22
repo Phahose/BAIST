@@ -489,6 +489,11 @@ select{
     color: red;
     font-weight: 500;
 }
+.past_date{
+    width: fit-content;
+    margin: auto;
+    padding-top: 1rem;
+}
 /*Admin Page*/
 .admintable {
     width: 90%;

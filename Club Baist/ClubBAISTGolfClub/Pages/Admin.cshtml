@@ -14,7 +14,7 @@
                 <a href="~/BookTeeTime">Tee Times</a>
             </li>
             <li>
-                <a href="#">Memberships</a>
+                <a href="#">Reservations</a>
             </li>
             <li>
                 <a href="#">Events</a>
@@ -76,7 +76,9 @@
                     <input type="text" name="LastName" value="@Model.Member.MemberLastName" />
                     <select name="ApplicationStatus" class="SignUp_input">
                         <option value="@Model.Member.MemberApplicationStatus">@Model.Member.MemberApplicationStatus</option>
-                        <option value="Approved">Approved</option>
+                        <option value="Approved">Approve</option>
+                        <option value="Rejected">Reject</option>
+                        <option value="Pending">Pending</option>
                     </select>
                      <select name="MemberShipType" class="SignUp_input">
                         <option value="@Model.Member.MembershipType">@Model.Member.MembershipType</option>

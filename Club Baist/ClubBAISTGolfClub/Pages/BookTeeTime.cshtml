@@ -15,7 +15,7 @@
                 <a href="~/BookTeeTime">Tee Times</a>
             </li>
             <li>
-                <a href="#">Memberships</a>
+                <a href="#">Reservations</a>
             </li>
             <li>
                 <a href="#">Events</a>
@@ -73,8 +73,9 @@
                     </tr>
                 }           
             </table>
+            <p class="error past_date">@Model.ErrorMessage</p>
             <input type="submit" name="Go" value="BookDate" class="bookDatebutton" />
-            @if (Model.Date != null)
+            @if (Model.TextDate != null)
             {
                 <div class="appointment">
                     <p>@Model.TextDate</p>
@@ -269,7 +270,7 @@
                         {
                             <p class="error">@message</p>
                         }
-                        
+                        <p>@Model.Message</p>
                         <input type="submit" name="Go" value="BookTime" class="playerbutton" />
                     }
                    

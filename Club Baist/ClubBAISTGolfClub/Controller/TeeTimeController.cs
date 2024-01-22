@@ -8,7 +8,17 @@ namespace ClubBAISTGolfClub.Controller
         {
             string message = "";
             TeeTimeServices teeservices = new TeeTimeServices();
-            message = teeservices.BooKTeeTime(teeTime);
+            try
+            {
+                message = teeservices.BooKTeeTime(teeTime);
+                message = "Tee Time Booked Successfully";
+            }
+            catch (Exception ex)
+            {
+
+                message = ex.Message;
+            }
+            
             return message;
         }
     }

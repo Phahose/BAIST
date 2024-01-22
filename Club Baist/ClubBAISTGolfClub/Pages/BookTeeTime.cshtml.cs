@@ -32,6 +32,7 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public string TeeTime { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
+        public string ErrorMessage { get; set; } = string.Empty;
         public string MemberInfoString { get; set; } = string.Empty;
         [BindProperty]
         public int Player1Id { get; set; }
@@ -133,10 +134,19 @@ namespace ClubBAISTGolfClub.Pages
                     else
                     {
                         Month = (int)HttpContext.Session.GetInt32("Month");
-                    }                   
+                    }
                     Date = new DateOnly(today.Year, Month, Day);
-                    TextDate = GetFormattedDate((DateOnly)Date);
-                    HttpContext.Session.SetString("Date", Date.ToString());
+                    
+                    if (Date < DateOnly.FromDateTime(today))
+                    {
+                        ErrorMessage = "Cannot Book a Past Date";
+                    }
+                    else
+                    {
+                        TextDate = GetFormattedDate((DateOnly)Date);
+                        HttpContext.Session.SetString("Date", Date.ToString());
+                    }
+                    
                 break;
                 case "PNumber":             
                     for (int row = 0; row < 6; row++)
@@ -255,7 +265,7 @@ namespace ClubBAISTGolfClub.Pages
                     if (valid)
                     {
                         TeeTimeController teeTimeController = new();
-                       // Message =  teeTimeController.BookReservation(teeTime);
+                        Message =  teeTimeController.BookReservation(teeTime);
                     }
                     TextDate = GetFormattedDate((DateOnly)Date);
                     break;

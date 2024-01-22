@@ -256,7 +256,7 @@ namespace ClubBAISTGolfClub.Techical_Services
                     member.MemberPhoneNumber = (string)UserReader["Phone"];
                     member.MemberEmail = (string)UserReader["Email"];
                     member.MemberPassword = (string)UserReader["MemberPassword"];
-                    member.MemberDateJoined = (DateTime)UserReader["DateOfBirth"];
+                    member.MemberDateJoined = (DateTime)UserReader["DateJoined"];
                     member.MemberApplicationStatus = (string)UserReader["ApplicationStatus"];
                     member.MemberSponsor1 = (int)UserReader["Sponsor1ID"];
                     member.MemberSponsor2 = (int)UserReader["Sponsor2ID"];
@@ -266,7 +266,6 @@ namespace ClubBAISTGolfClub.Techical_Services
                     member.MemberProvince = (string)UserReader["Province"];
                     member.MemberPostalCode = (string)UserReader["PostalCode"];
                     member.MemberSalt = (string)UserReader["Salt"];
-                   // member.ApplicationFile = (byte[]?)UserReader[]
                     Members.Add(member);
                 }
             }

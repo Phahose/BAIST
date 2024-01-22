@@ -74,6 +74,8 @@ namespace ClubBAISTGolfClub.Pages
                     {
                         Message = "Member Updated SuccessFully";
                         memberControlls.UpdateMember(Member);
+                        Members = memberControlls.GetAllMembers();
+                        Applications = memberControlls.GetAllMemberApplication();
                     }
                     catch (Exception ex)
                     {

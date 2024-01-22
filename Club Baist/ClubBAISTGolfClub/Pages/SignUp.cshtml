@@ -1,11 +1,12 @@
 ﻿@page
 @model ClubBAISTGolfClub.Pages.SignUpModel
 @{
+    ViewData["Title"] = "SignUp";
 }
 <div class="contain">
     <div class="signup">
         <form name="CreateMembership" method="post" class="flexed signupform transition-fade" enctype="multipart/form-data">
-            @Model.Message
+            <p class="@Model.MessageClass">@Model.Message</p>
             <h2>Join Club BAIST</h2>
             <div>
                 <div class="formflex">

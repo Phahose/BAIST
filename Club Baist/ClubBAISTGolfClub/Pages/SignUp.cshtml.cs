@@ -43,11 +43,12 @@ namespace ClubBAISTGolfClub.Pages
         [BindProperty]
         public IFormFile? ApplicationFile { get; set; }
         public string Message {  get; set; } = string.Empty;
+        public string MessageClass {  get; set; } = string.Empty;
         public void OnGet()
         {
             /*Message = "Get Page";*/
         }
-        public void OnPost() 
+        public IActionResult OnPost() 
         {
             if (ApplicationFile != null && ApplicationFile.Length > 0)
             {
@@ -81,16 +82,20 @@ namespace ClubBAISTGolfClub.Pages
                     if (memberControlls.GetMember(Email).MemberEmail == string.Empty)
                     {
                         memberControlls.AddUser(member);
-                        Message = "Post Worked";
+                        MessageClass = "signup_message";
+                        Message = "Member Added Success Fully";
+                        return RedirectToPage("/MemberHome");
                     }
                     else
                     {
+                        MessageClass = "signup_message";
                         Message = "Member Already Exists Try a Diffrent Email";
+                        return Page();
                     }
                     
                 }
             }
-           
+            return Page();
         }
     }
 }

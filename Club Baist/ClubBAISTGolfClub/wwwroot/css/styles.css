@@ -120,7 +120,16 @@ h1 {
     padding: 2rem;
     background-color: rgba(0, 0, 0, 0.7);
 }
-
+.signup_message{
+    color: white;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: green;
+    border-radius: 2%;
+}
 h2 {
     color: white;
     font-family: Didot, serif;

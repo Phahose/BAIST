@@ -299,7 +299,7 @@ namespace ClubBAISTGolfClub.Pages
                         }
                         if (ErrorList.Count == 0)
                         {
-                            //SuccessMessage =  teeTimeController.BookReservation(teeTime);
+                            SuccessMessage =  teeTimeController.BookReservation(teeTime);
                         }
 
                     }

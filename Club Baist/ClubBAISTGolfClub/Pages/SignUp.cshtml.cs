@@ -46,7 +46,7 @@ namespace ClubBAISTGolfClub.Pages
         public string MessageClass {  get; set; } = string.Empty;
         public void OnGet()
         {
-            /*Message = "Get Page";*/
+         
         }
         public IActionResult OnPost() 
         {

@@ -39,12 +39,16 @@
                     <th>Time</th>
                     <th>Reservation Status</th>
                 </tr>
+                @if (Model.TeeTimeList.Count == 0)
+                {
+                    <caption>You have No Currently Booked Reservations</caption>
+                }
                 @foreach (var teeTime in Model.TeeTimeList)
                 {
                     <tr>
                         <td>@teeTime.TeeTimeID</td>
                         <td>@teeTime.MemberID</td>
-                        <td>@teeTime.Date</td>
+                        <td>@teeTime.Date.ToString("yyyy-MM-dd")</td>
                         <td>@teeTime.Time</td>
                         <td>@teeTime.ReservationStatus</td>
                     </tr>

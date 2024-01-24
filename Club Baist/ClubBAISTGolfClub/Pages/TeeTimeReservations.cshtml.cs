@@ -19,5 +19,14 @@ namespace ClubBAISTGolfClub.Pages
             TeeTimeController teeTimeController = new();
             TeeTimeList = teeTimeController.GetMemberTeeTime(Member.MemberID);
         }
+        public static string GetFormattedDate(DateTime date)
+        {
+            string[] suffixes = { "th", "st", "nd", "rd" };
+
+            int day = date.Day;
+            string suffix = (day >= 11 && day <= 13) || (day % 10 > 3) ? suffixes[0] : suffixes[day % 10];
+
+            return date.ToString($"MMMM d'{suffix}' yyyy");
+        }
     }
 }

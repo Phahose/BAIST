@@ -26,5 +26,30 @@
     </nav>
     <div class="infodiv">
         <h2>My Reservations</h2>
+        <form>
+            <div class="month_form">
+                <input type="number" name="MemberID" placeholder="TeeTimeID" class="updateMember_input" min="0" />
+                <input type="submit" name="Submit" value="Go" class="updateMember_button" />
+            </div>
+            <table border="1" class="admintable">
+                <tr>
+                    <th>Tee Time ID</th>
+                    <th>MemberID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Reservation Status</th>
+                </tr>
+                @foreach (var teeTime in Model.TeeTimeList)
+                {
+                    <tr>
+                        <td>@teeTime.TeeTimeID</td>
+                        <td>@teeTime.MemberID</td>
+                        <td>@teeTime.Date</td>
+                        <td>@teeTime.Time</td>
+                        <td>@teeTime.ReservationStatus</td>
+                    </tr>
+                }
+            </table>
+        </form>
     </div>
 </div>

@@ -71,7 +71,7 @@ namespace ClubBAISTGolfClub.Techical_Services
             return "Successs";
         }
 
-        public TeeTime GetTeeTime(DateOnly date, string time)
+        public TeeTime GetTeeTime(DateTime date, string time)
         {
             SqlConnection nekwom1connection = new();
             nekwom1connection.ConnectionString = connectionString;
@@ -116,6 +116,48 @@ namespace ClubBAISTGolfClub.Techical_Services
             teeTimeReader.Close();
             nekwom1connection.Close();         
             return teeTime;
+        }
+        public List<TeeTime> GetMemberTeeTime(int memberID)
+        {
+            SqlConnection nekwom1connection = new();
+            nekwom1connection.ConnectionString = connectionString;
+            nekwom1connection.Open();
+            TeeTime teeTime = new TeeTime();
+            List<TeeTime> teeTimeList = new();
+            SqlCommand GetTeeTimesCommand = new()
+            {
+                CommandText = "GetMemberTeeTime",
+                CommandType = CommandType.StoredProcedure,
+                Connection = nekwom1connection
+            };
+            SqlParameter MemberIDParaameter = new()
+            {
+                ParameterName = "@MemberId",
+                SqlDbType = SqlDbType.Int,
+                SqlValue = memberID,
+                Direction = ParameterDirection.Input,
+            };
+           
+            GetTeeTimesCommand.Parameters.Add(MemberIDParaameter);
+            SqlDataReader teeTimeReader = GetTeeTimesCommand.ExecuteReader();
+
+            if (teeTimeReader.HasRows)
+            {
+                while (teeTimeReader.Read())
+                {
+                    teeTime = new TeeTime();
+                    teeTime.TeeTimeID = (int)teeTimeReader["TeeTimeID"];
+                    teeTime.MemberID = (int)teeTimeReader["MemberID"];
+                    teeTime.Date = (DateTime)teeTimeReader["Date"];
+                    teeTime.Time = (TimeSpan)teeTimeReader["TeeTime"];
+                    teeTime.ReservationStatus = (string)teeTimeReader["ReservationStatus"];
+                    teeTime.NumberOfPlayers = (int)teeTimeReader["NumberOfPlayers"];
+                    teeTimeList.Add(teeTime);
+                }
+            }
+            teeTimeReader.Close();
+            nekwom1connection.Close();
+            return teeTimeList;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ClubBAISTGolfClub.Pages
         public int Month { get; set; } = 1;
         [BindProperty]
         public int Day { get; set; }
-        public DateOnly? Date { get; set; }
+        public DateTime Date { get; set; }
         public string TextDate { get; set; }
         public string MonthName { get; set; }
         [BindProperty]
@@ -137,15 +137,15 @@ namespace ClubBAISTGolfClub.Pages
                     {
                         Month = (int)HttpContext.Session.GetInt32("Month");
                     }
-                    Date = new DateOnly(today.Year, Month, Day);
+                    Date = new DateTime(today.Year, Month, Day);
                     
-                    if (Date < DateOnly.FromDateTime(today))
+                    if (Date < DateTime.Now)
                     {
                         ErrorMessage = "Cannot Book a Past Date";
                     }
                     else
                     {
-                        TextDate = GetFormattedDate((DateOnly)Date);
+                        TextDate = GetFormattedDate(Date);
                         HttpContext.Session.SetString("Date", Date.ToString());
                     }
                     
@@ -167,8 +167,8 @@ namespace ClubBAISTGolfClub.Pages
                         }
                     }
                     HttpContext.Session.SetInt32("PlayerNumber", PlayerNumber);
-                    Date = DateOnly.Parse(HttpContext.Session.GetString("Date"));
-                    TextDate = GetFormattedDate((DateOnly)Date);
+                    Date = DateTime.Parse(HttpContext.Session.GetString("Date"));
+                    TextDate = GetFormattedDate(Date);
                     break;
                 case"BookTime":
                     for (int row = 0; row < 6; row++)
@@ -188,14 +188,14 @@ namespace ClubBAISTGolfClub.Pages
                     }
                     MemberInfoString = HttpContext.Session.GetString("MemberInfo");
                     Member = JsonSerializer.Deserialize<Member>(MemberInfoString);
-                    Date = DateOnly.Parse(HttpContext.Session.GetString("Date"));
+                    Date = DateTime.Parse(HttpContext.Session.GetString("Date"));
                     PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
                     TeeTime teeTime = new()
                     {
                         MemberID = Member.MemberID,
-                        Date = (DateOnly)Date,
+                        Date = Date,
                         NumberOfPlayers = PlayerNumber,
-                        Time = TimeOnly.Parse(TeeTime)
+                        Time = TimeSpan.Parse(TeeTime)
                     };
                     Member member = memberControlls.GetMemberByID(Player1Id);
 
@@ -267,7 +267,7 @@ namespace ClubBAISTGolfClub.Pages
                     if (playersvalid)
                     {        
                         TeeTimeController teeTimeController = new();
-                        TeeTimeInfo = teeTimeController.GetTeeTime((DateOnly)Date, TeeTime);
+                        TeeTimeInfo = teeTimeController.GetTeeTime(Date, TeeTime);
                         if (TeeTimeInfo.ReservationStatus == "Reserved")
                         {
                             Message = "This Time Slot is Reserved";
@@ -303,7 +303,7 @@ namespace ClubBAISTGolfClub.Pages
                         }
 
                     }
-                    TextDate = GetFormattedDate((DateOnly)Date);
+                    TextDate = GetFormattedDate(Date);
                     break;
 
             }
@@ -314,7 +314,7 @@ namespace ClubBAISTGolfClub.Pages
             DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
             return dtfi.GetMonthName(monthNumber);
         }
-        public static string GetFormattedDate(DateOnly date)
+        public static string GetFormattedDate(DateTime date)
         {
             string[] suffixes = { "th", "st", "nd", "rd" };
 

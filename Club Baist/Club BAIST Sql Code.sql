@@ -258,7 +258,7 @@ BEGIN
 	DECLARE @PlayerCount INT;
 	SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
 
-	IF EXISTS (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
+	IF EXISTS (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time AND MemberID = @PlayerID)
 		BEGIN
 		DECLARE @TeeTimeID INT;
 		SET @TeeTimeID = (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
@@ -403,7 +403,7 @@ BEGIN
 					AND TeeTime = @Time 
 					END
 			DECLARE @NotExistTeeTimeID INT;
-			SET @NotExistTeeTimeID = (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
+			SET @NotExistTeeTimeID = (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time AND MemberID = @PlayerID)
 
 			INSERT INTO TeeTimePlayers(
 			TeeTimeID,
@@ -609,3 +609,10 @@ AS
  END
 
 EXEC GetTeeTime  '2024-1-31', '7:00:00'
+
+Create Procedure GetMemberTeeTime(@MemberId INT)
+AS
+ BEGIN
+  SELECT * FROM TeeTimes
+  WHERE MemberID =  @MemberId
+END

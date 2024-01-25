@@ -17,7 +17,7 @@ namespace ClubBAISTGolfClub.Pages
     {
         public int[,] Calendar { get; set; }
         [BindProperty]
-        public int Month { get; set; } = 1;
+        public int Month { get; set; } = 4;
         [BindProperty]
         public int Day { get; set; }
         public DateTime Date { get; set; }
@@ -58,7 +58,14 @@ namespace ClubBAISTGolfClub.Pages
 
             // Set up the DataGridView
             DateTime today = DateTime.Today;
-            Month = today.Month;
+            if (today.Month < 4)
+            {
+                Month = 4;
+            }
+            else
+            {
+                Month = today.Month;
+            }
             DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(today.Year, today.Month);
             int currentDay = 1;
@@ -131,7 +138,15 @@ namespace ClubBAISTGolfClub.Pages
                     }
                     if (HttpContext.Session.GetInt32("Month") == null)
                     {
-                        Month = today.Month;
+                        if (today.Month < 4)
+                        {
+                            Month = 4;
+                        }
+                        else
+                        {
+                            Month = today.Month;
+                        }
+                      
                     }
                     else
                     {

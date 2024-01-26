@@ -299,7 +299,7 @@ select{
     }
 .memberhome_nav a:hover {
     background-color: rgba(0, 0, 255, 0.5);
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
     border-radius: 5%;
 }
 .memberhome_nav ul {

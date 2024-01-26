@@ -13,12 +13,6 @@
                 <li>
                     <a href="~/MemberHome">My Account</a>
                 </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="~/Admin">Admin</a>
-                </li>
                 @if (Model.Member.MemberApplicationStatus == "Approved")
                 {
                     <li>
@@ -27,7 +21,16 @@
                     <li>
                         <a href="~/TeeTimeReservations">Reservations</a>
                     </li>
-                }         
+                }
+                @if (Model.Member.MembershipType == "Admin")
+                {
+                    <li>
+                        <a href="#">Events</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin">Admin</a>
+                    </li>
+                } 
                
             </ul>
         </nav>

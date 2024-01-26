@@ -54,6 +54,7 @@ namespace ClubBAISTGolfClub.Pages
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Email, Email),
+                        new Claim(ClaimTypes.Role, UserRole),
                     };
                     var claimsIdentity = new ClaimsIdentity(claims,
                     CookieAuthenticationDefaults.AuthenticationScheme);

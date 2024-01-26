@@ -46,7 +46,7 @@ namespace ClubBAISTGolfClub.Pages
         public string MessageClass {  get; set; } = string.Empty;
         public void OnGet()
         {
-         
+         HttpContext.Session.Clear();
         }
         public IActionResult OnPost() 
         {
@@ -81,6 +81,18 @@ namespace ClubBAISTGolfClub.Pages
                     MemberControlls memberControlls = new MemberControlls();
                     if (memberControlls.GetMember(Email).MemberEmail == string.Empty)
                     {
+                        if (memberControlls.GetMemberByID(Sponsor1ID).MembershipType != "Shareholder")
+                        {
+                            MessageClass = "signup_message";
+                            Message = "Sponsor 1 is Not A Sponsor In our Club";
+                            return Page();
+                        }
+                        if (memberControlls.GetMemberByID(Sponsor2ID).MembershipType != "Shareholder")
+                        {
+                            MessageClass = "signup_message";
+                            Message = "Sponsor 2 is Not A Sponsor In our Club";
+                            return Page();
+                        }
                         memberControlls.AddUser(member);
                         MessageClass = "signup_message";
                         Message = "Member Added Success Fully";

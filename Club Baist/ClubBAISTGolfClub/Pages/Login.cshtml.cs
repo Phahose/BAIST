@@ -20,9 +20,10 @@ namespace ClubBAISTGolfClub.Pages
         public string Password { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
         public string AlertClass { get; set; } = string.Empty;
-     /*   public void OnGet()
+        public void OnGet()
         {
-        }*/
+
+        }
         public async Task<IActionResult> OnPost()
         {
             AlertClass = "alert_error";

@@ -710,3 +710,25 @@ AS
   SELECT * FROM TeeTimes
   WHERE MemberID =  @MemberId
 END
+
+
+Create Procedure CancelTeeTimeReservaion(@TeeTimeID INT)
+AS
+BEGIN 
+ DELETE FROM TeeTimePlayers WHERE TeeTimeID = @TeeTimeID
+ DELETE FROM TeeTimes WHERE TeeTimeID = @TeeTimeID
+ END
+
+DROP PROCEDURE CancelTeeTimeReservaion
+
+EXEC CancelTeeTimeReservaion 38
+
+
+Create Procedure GetTeeTimeByID(@TeeTimeID INT)
+AS
+ BEGIN
+  SELECT * FROM TeeTimes
+  WHERE TeeTimeID =  @TeeTimeID 
+ END
+
+ Exec GetTeeTimeByID 40

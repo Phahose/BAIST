@@ -538,7 +538,36 @@ select{
 }
 .updatemember_container > input[type=submit]:hover {
     background-color: saddlebrown;
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+/*Reservation */
+.noreservations{
+    width: fit-content;
+    margin: auto;
+    margin-top: 1rem;
+}
+.cancelbutton{
+    background-color: cadetblue;
+    color: white;
+}
+.deletebutton {
+    background-color: brown;
+    color: white;
+}
+.cancelteeTimeContainer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+.deletebutton:hover {
+    padding: 1rem 0;
+    background-color: saddlebrown;
+    transition: 0.2s ease-in-out;
+}
+.cancelbutton:hover {
+    padding: 1rem 0;
+    background-color: cornflowerblue;
+    transition: 0.2s ease-in-out;
 }
 
 @media (min-width: 760px) {

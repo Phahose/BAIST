@@ -26,9 +26,10 @@
     </nav>
     <div class="infodiv">
         <h2>My Reservations</h2>
-        <form>
+        <form method="post">
+            <p>@Model.ErrorMessage</p>
             <div class="month_form">
-                <input type="number" name="MemberID" placeholder="TeeTimeID" class="updateMember_input" min="0" />
+                <input type="number" name="TeeTimeID" placeholder="TeeTimeID" class="updateMember_input" min="0" />
                 <input type="submit" name="Submit" value="Go" class="updateMember_button" />
             </div>
             <table border="1" class="admintable">
@@ -39,10 +40,7 @@
                     <th>Time</th>
                     <th>Reservation Status</th>
                 </tr>
-                @if (Model.TeeTimeList.Count == 0)
-                {
-                    <caption>You have No Currently Booked Reservations</caption>
-                }
+               
                 @foreach (var teeTime in Model.TeeTimeList)
                 {
                     <tr>
@@ -54,6 +52,22 @@
                     </tr>
                 }
             </table>
+                @if (Model.TeeTimeList.Count == 0)
+                {
+                    <p class="noreservations">You have No Currently Booked Reservations</p>
+                }
+            <p>@Model.Message</p>
+            @if (Model.TeeTime.ReservationStatus != "")
+            {
+                <div class="appointment cancelteeTimeContainer">
+                    <h3>Are You sure you want to Delete This Reservation?</h3>
+                    <input type="text" name="TeeTimeID" value="@Model.TeeTime.TeeTimeID" disabled />
+                    <input type="text" name="Date" value="@Model.TeeTime.Date.ToString("yyyy-MM-dd")" disabled/>
+                    <input type="text" name="Time" value="@Model.TeeTime.Time" disabled/>
+                    <input type="submit" name="Submit" value="Delete" class="deletebutton"/>
+                    <input type="submit" name="Submit" value="Cancel" class="cancelbutton"/>
+                </div>
+            }
         </form>
     </div>
 </div>

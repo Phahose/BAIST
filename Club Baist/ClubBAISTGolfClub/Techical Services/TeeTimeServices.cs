@@ -159,5 +159,76 @@ namespace ClubBAISTGolfClub.Techical_Services
             nekwom1connection.Close();
             return teeTimeList;
         }
+        public bool CancelTeeTime(int teeTimeID)
+        {
+            SqlConnection nekwom1connection = new();
+            nekwom1connection.ConnectionString = connectionString;
+            bool success = true;
+            nekwom1connection.Open();
+            try
+            {
+                SqlCommand CancelTeeTimesCommand = new()
+                {
+                    CommandText = "CancelTeeTimeReservaion",
+                    CommandType = CommandType.StoredProcedure,
+                    Connection = nekwom1connection
+                };
+                SqlParameter TeeTimeIDParameter = new()
+                {
+                    ParameterName = "@TeeTimeID",
+                    SqlDbType = SqlDbType.Int,
+                    SqlValue = teeTimeID,
+                    Direction = ParameterDirection.Input,
+                };
+                CancelTeeTimesCommand.Parameters.Add(TeeTimeIDParameter);
+                CancelTeeTimesCommand.ExecuteNonQuery();
+                nekwom1connection.Close();
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+           
+            return success;
+        }
+
+        public TeeTime GetTeeTimeByID(int teeTimeID)
+        {
+            SqlConnection nekwom1connection = new();
+            nekwom1connection.ConnectionString = connectionString;
+            nekwom1connection.Open();
+            TeeTime teeTime = new TeeTime();
+            SqlCommand GetTeeTimesByIDCommand = new()
+            {
+                CommandText = "GetTeeTimeByID",
+                CommandType = CommandType.StoredProcedure,
+                Connection = nekwom1connection
+            };
+            SqlParameter TeeTimeIDParameter = new()
+            {
+                ParameterName = "@TeeTimeID",
+                SqlDbType = SqlDbType.Int,
+                SqlValue = teeTimeID,
+                Direction = ParameterDirection.Input,
+            };
+            GetTeeTimesByIDCommand.Parameters.Add(TeeTimeIDParameter);;
+            SqlDataReader teeTimeReader = GetTeeTimesByIDCommand.ExecuteReader();
+
+            if (teeTimeReader.HasRows)
+            {
+                while (teeTimeReader.Read())
+                {
+                    teeTime.TeeTimeID = (int)teeTimeReader["TeeTimeID"];
+                    teeTime.MemberID = (int)teeTimeReader["MemberID"];
+                    teeTime.Date = (DateTime)teeTimeReader["Date"];
+                    teeTime.Time = (TimeSpan)teeTimeReader["TeeTime"];
+                    teeTime.ReservationStatus = (string)teeTimeReader["ReservationStatus"];
+                    teeTime.NumberOfPlayers = (int)teeTimeReader["NumberOfPlayers"];
+                }
+            }
+            teeTimeReader.Close();
+            nekwom1connection.Close();
+            return teeTime;
+        }
     }
 }

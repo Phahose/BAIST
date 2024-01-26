@@ -35,5 +35,27 @@ namespace ClubBAISTGolfClub.Controller
             teeTime = teeservices.GetMemberTeeTime(memberID);
             return teeTime;
         }
+        public string CancelTeeTime(int teeTimeID)
+        {
+            string message = "Tee Time Cancelled Sucssess Fully";
+            TeeTimeServices teeTimeServices = new();
+            try
+            {
+                teeTimeServices.CancelTeeTime(teeTimeID);
+            }
+            catch (Exception ex)
+            {
+               message= ex.Message;
+            }
+
+            return message;
+        }
+        public TeeTime GetTeeTimeByID(int teeTimeID)
+        {
+            TeeTimeServices teeservices = new TeeTimeServices();
+            TeeTime teeTime = new TeeTime();
+            teeTime = teeservices.GetTeeTimeByID(teeTimeID);
+            return teeTime;
+        }
     }
 }

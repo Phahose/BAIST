@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace ClubBAISTGolfClub.Pages
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AdminModel : PageModel
     {
         public List<Member> Members { get; set; } = new();

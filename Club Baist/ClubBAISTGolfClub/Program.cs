@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClubBAISTGolfClub
 {
+
+
     public class Program
     {
         public static void Main(string[] args)
@@ -23,7 +26,7 @@ namespace ClubBAISTGolfClub
             .AddCookie(options =>
             {
                 options.LoginPath = "/Login"; 
-            });
+            });  
             builder.Services.AddAuthorization();
             var app = builder.Build();
 

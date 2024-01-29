@@ -1,0 +1,36 @@
+﻿@page
+@model ClubBAISTGolfClub.Pages.ScoresModel
+@{
+    Layout = "_Header";
+    ViewData["Title"] = "My Reservations";
+}
+<div class="bookTee">
+    <nav class="memberhome_nav">
+        <ul>
+            <li>
+                <a href="~/MemberHome">My Account</a>
+            </li>
+            @if (Model.Member.MemberApplicationStatus == "Approved")
+            {
+                <li>
+                    <a href="~/BookTeeTime">Tee Times</a>
+                </li>
+                <li>
+                    <a href="~/TeeTimeReservations">Reservations</a>
+                </li>
+                <li>
+                    <a href="/Scores">Rec Scores</a>
+                </li>
+            }
+            @if (Model.Member.MembershipType == "Admin")
+            { 
+                <li>
+                    <a href="~/Admin">Admin</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div class="infodiv">
+
+    </div>
+</div>

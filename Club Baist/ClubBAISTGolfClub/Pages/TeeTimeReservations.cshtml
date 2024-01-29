@@ -10,22 +10,25 @@
             <li>
                 <a href="~/MemberHome">My Account</a>
             </li>
-            <li>
-                <a href="~/BookTeeTime">Tee Times</a>
-            </li>
-            <li>
-                <a href="~/TeeTimeReservations">Reservations</a>
-            </li>
-            @if (Model.Member.MembershipType == "Admin")
+            @if (Model.Member.MemberApplicationStatus == "Approved")
             {
                 <li>
-                    <a href="#">Events</a>
+                    <a href="~/BookTeeTime">Tee Times</a>
                 </li>
+                <li>
+                    <a href="~/TeeTimeReservations">Reservations</a>
+                </li>
+                <li>
+                    <a href="/Scores">Rec Scores</a>
+                </li>
+            }
+            @if (Model.Member.MembershipType == "Admin")
+            {
                 <li>
                     <a href="~/Admin">Admin</a>
                 </li>
             }
-            
+        </ul>
         </ul>
     </nav>
     <div class="infodiv">

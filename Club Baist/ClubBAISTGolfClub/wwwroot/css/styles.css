@@ -332,8 +332,16 @@ select{
     /*border-radius: 1%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);*/
 }
-.memberhome>div{
-    display:flex;
+.dashFlex {
+    display: flex;
+    width: 85%;
+    margin: auto;
+    justify-content: space-between;
+    border-top: 2px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
+}
+.memberhome > div {
+    display: flex;
 }
     .memberhome > div > nav {
         background-color: #f7f3f2;

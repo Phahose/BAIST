@@ -398,8 +398,28 @@ select{
             width: 30%;
 
         }
+.updatemem {
+    width: 50%;
+    color: black;
+    transition: 0.2s ease-in-out;
+    border: 2px solid darkblue;
+}
+.deletemem {
+    width: 50%;
+    color: black;
+    transition: 0.2s ease-in-out;
+    border: 2px solid darkred;
+}
+    .deletemem:hover {
+        background-color: darkred;
+        color: white;
+    }
+    .updatemem:hover {
+        background-color: darkblue;
+        color: white;
+    }
 /*Book Tee Time*/
-.bookTee{
+.bookTee {
     padding-top: 10rem;
     height: 100vh;
     display: flex;

@@ -57,7 +57,7 @@
                         <input type="text" name="MembershipType" class="val" value="@Model.Member.MembershipType" disabled />
 
                         <p class="title">Application Status</p>
-                        <input type="text" name="FirstName" class="val" value="@Model.Member.MemberApplicationStatus" disabled />
+                        <input type="text" name="ApplicationStstus" class="val" value="@Model.Member.MemberApplicationStatus" disabled />
                    
                     </div>
                     <div>
@@ -70,10 +70,20 @@
                         <p class="title">Email Address</p>
                         <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" />
 
-                        <input type="submit" name="Update" value="Update" />
-                        <input type="submit" name="Delete" value="Delete" />
+                        <input type="submit" name="Submit" value="UpdateAccount" class="updatemem"/>
+                        <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" />
+                       
                     </div>
+                   
                 </div>
+                @if (Model.Delete == true)
+                {
+                    <div class="appointment cancelteeTimeContainer">
+                        <h3>Are You sure you want to Delete Your Account - This Action CANNOT be Undone</h3>
+                        <input type="submit" name="Submit" value="Delete" class="deletebutton" />
+                        <input type="submit" name="Submit" value="Cancel" class="cancelbutton" />
+                    </div>
+                }
             </form>
         </div>
     </div>  

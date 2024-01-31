@@ -29,6 +29,7 @@ namespace ClubBAISTGolfClub.Pages
         public bool Delete { get; set; } = false;
         public string Message { get; set; } = string.Empty;
         public Member MemberHold { get; set; } = new();
+
         public MemberHomeModel(ILogger<MemberHomeModel> memberHome)
         {
             _memberHome = memberHome;

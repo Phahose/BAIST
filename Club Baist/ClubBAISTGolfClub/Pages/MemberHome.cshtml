@@ -39,7 +39,7 @@
         </nav>
        
         <div class="infodiv">
-            <form method="post" name="Application">
+            <form method="post" name="Application" enctype="multipart/form-data">
                 <h2>My Info</h2>
                 <p>Personal Information</p>
                 <p>MemberID: @Model.Member.MemberID</p>
@@ -47,6 +47,8 @@
                 {
                     <div class="dashFlex">
                         <div>
+                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" disabled />
+                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" disabled />
                         </div>
                         <div>
                             <p class="title">FirstName</p>
@@ -70,10 +72,7 @@
                             <input type="text" name="PhoneNumber" class="val" value="@Model.Member.MemberPhoneNumber" disabled/>
 
                             <p class="title">Email Address</p>
-                            <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" disabled/>
-
-                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" disabled/>
-                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" disabled/>
+                            <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" disabled/>     
 
                         </div>
 
@@ -83,6 +82,8 @@
                 {
                     <div class="dashFlex">
                         <div>
+                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" />
+                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" />
                         </div>
                         <div>
                             <p class="title">FirstName</p>
@@ -107,10 +108,6 @@
 
                             <p class="title">Email Address</p>
                             <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" />
-
-                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" />
-                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" />
-
                         </div>
 
                     </div>

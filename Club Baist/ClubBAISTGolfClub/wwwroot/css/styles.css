@@ -399,13 +399,14 @@ select{
 
         }
 .updatemem {
-    width: 50%;
+    width: 100%;
     color: black;
     transition: 0.2s ease-in-out;
     border: 2px solid darkblue;
+    margin-top: 1rem;
 }
 .deletemem {
-    width: 50%;
+    width: 100%;
     color: black;
     transition: 0.2s ease-in-out;
     border: 2px solid darkred;

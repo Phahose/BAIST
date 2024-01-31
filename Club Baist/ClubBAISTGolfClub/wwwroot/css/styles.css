@@ -418,6 +418,42 @@ select{
         background-color: darkblue;
         color: white;
     }
+.notif {
+    position: absolute;
+    top: 25%;
+    bottom: 0;
+    max-width: 40rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 40%;
+    left: 45%;
+    padding: 15rem;
+    display:flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.notif h3{
+    color: white;
+    width:fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    font-size: medium;
+}
+.notif div{
+    display:flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right:auto
+}
+.notif .deletebutton{
+    width: 30%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.notif .cancelbutton {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
 /*Book Tee Time*/
 .bookTee {
     padding-top: 10rem;
@@ -588,12 +624,12 @@ select{
     margin-top: 2rem;
 }
 .deletebutton:hover {
-    padding: 1rem 0;
+    padding: 0rem 0;
     background-color: saddlebrown;
     transition: 0.2s ease-in-out;
 }
 .cancelbutton:hover {
-    padding: 1rem 0;
+    padding: 0rem 0;
     background-color: cornflowerblue;
     transition: 0.2s ease-in-out;
 }

@@ -81,13 +81,13 @@ namespace ClubBAISTGolfClub.Pages
                     MemberControlls memberControlls = new MemberControlls();
                     if (memberControlls.GetMember(Email).MemberEmail == string.Empty)
                     {
-                        if (memberControlls.GetMemberByID(Sponsor1ID).MembershipType != "Shareholder")
+                        if (memberControlls.GetMemberByID(Sponsor1ID).MembershipType != "ShareHolder")
                         {
                             MessageClass = "signup_message";
                             Message = "Sponsor 1 is Not A Sponsor In our Club";
                             return Page();
                         }
-                        if (memberControlls.GetMemberByID(Sponsor2ID).MembershipType != "Shareholder")
+                        if (memberControlls.GetMemberByID(Sponsor2ID).MembershipType != "ShareHolder")
                         {
                             MessageClass = "signup_message";
                             Message = "Sponsor 2 is Not A Sponsor In our Club";

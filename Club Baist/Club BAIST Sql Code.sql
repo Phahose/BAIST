@@ -142,7 +142,7 @@ ADD BookIngPlayerID INT
 --    Last20RoundScores TEXT,
 --    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
 --);
-
+GO
 Create Procedure CreateApplication (@FirstName varchar(50), @LastName VARCHAR(50),
 									@Address VARCHAR(255),  @City VARCHAR(255),
 									@Province VARCHAR(255), @Country VARCHAR(255),
@@ -432,7 +432,7 @@ Drop Procedure CreateApplication
 --			SET ReservationStatus = 'Reserved'
 --			WHERE [Date] = @Date AND TeeTime = @Time
 --END
-
+GO
 CREATE PROCEDURE BookTeeTime
     @PlayerID INT,
     @Date DATE,
@@ -578,7 +578,7 @@ EXEC CreateApplication
     'random_salt',
     'Pending',
     '2023-02-25';  -- C
-
+GO
 CREATE PROCEDURE GetMember(@Email NVARCHAR(100))
 AS
 DECLARE @ReturnCode INT
@@ -595,7 +595,7 @@ IF @@ERROR = 0
 		RAISERROR ('Get User - Find error: Users table.', 16, 1)
 	END
 RETURN @ReturnCode
-
+GO
 CREATE PROCEDURE GetMemberByID(@MemberID INT)
 AS
 DECLARE @ReturnCode INT
@@ -614,7 +614,7 @@ IF @@ERROR = 0
 RETURN @ReturnCode
 
 Exec GetMemberByID 1
-
+GO
 CREATE PROCEDURE GetAllMembers
 AS
 DECLARE @ReturnCode INT
@@ -629,7 +629,7 @@ IF @@ERROR = 0
 RETURN @ReturnCode
 
 Exec GetAllMembers
-
+GO
 CREATE PROCEDURE GetAllMemberApplications
 AS
 DECLARE @ReturnCode INT
@@ -644,7 +644,7 @@ IF @@ERROR = 0
 RETURN @ReturnCode
 Delete From Members where MemberID = 1011
 
-
+GO
 Create Procedure UpdateMember      (@FirstName varchar(50), @LastName VARCHAR(50),
 									@Address VARCHAR(255),  @City VARCHAR(255),
 									@Province VARCHAR(255), @Country VARCHAR(255),
@@ -694,7 +694,7 @@ AS
 		
 	END
 	Drop Procedure UpdateMember
-
+GO
 Create Procedure GetTeeTime(@Date DATE, @Time TIME)
 AS
  BEGIN
@@ -703,7 +703,7 @@ AS
  END
 
 EXEC GetTeeTime  '2024-1-31', '7:00:00'
-
+GO
 Create Procedure GetMemberTeeTime(@MemberId INT)
 AS
  BEGIN
@@ -711,7 +711,7 @@ AS
   WHERE MemberID =  @MemberId
 END
 
-
+GO
 Create Procedure CancelTeeTimeReservaion(@TeeTimeID INT)
 AS
 BEGIN 
@@ -723,7 +723,7 @@ DROP PROCEDURE CancelTeeTimeReservaion
 
 EXEC CancelTeeTimeReservaion 38
 
-
+GO
 Create Procedure GetTeeTimeByID(@TeeTimeID INT)
 AS
  BEGIN
@@ -732,3 +732,11 @@ AS
  END
 
  Exec GetTeeTimeByID 40
+
+GO
+Create Procedure DeleteMemberAccount (@MemberID INT)
+AS
+	BEGIN
+		DELETE From ClubMemberApplications WHERE ApplicantID = @MemberID
+		DELETE FROM Members WHERE MemberID = @MemberID 
+	END

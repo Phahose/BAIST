@@ -43,45 +43,87 @@
                 <h2>My Info</h2>
                 <p>Personal Information</p>
                 <p>MemberID: @Model.Member.MemberID</p>
-                <div class="dashFlex">
-                    <div>
-                    </div>
-                    <div>
-                        <p class="title">FirstName</p>
-                        <input type="text" name="FirstName" class="val" value="@Model.Member.MemberFirstName" />
-
-                        <p class="title">Address</p>
-                        <input type="text" name="Address" class="val" value="@Model.Member.MemberAddress" />
-
-                        <p class="title">Membership type</p>
-                        <input type="text" name="MembershipType" class="val" value="@Model.Member.MembershipType" disabled />
-
-                        <p class="title">Application Status</p>
-                        <input type="text" name="ApplicationStstus" class="val" value="@Model.Member.MemberApplicationStatus" disabled />
-                   
-                    </div>
-                    <div>
-                        <p class="title">LastName</p>
-                        <input type="text" name="LastName" class="val" value="@Model.Member.MemberLastName" />
-
-                        <p class="title">Phone Number</p>
-                        <input type="text" name="PhoneNumber" class="val" value="@Model.Member.MemberPhoneNumber" />
-
-                        <p class="title">Email Address</p>
-                        <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" />
-
-                        <input type="submit" name="Submit" value="UpdateAccount" class="updatemem"/>
-                        <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" />
-                       
-                    </div>
-                   
-                </div>
                 @if (Model.Delete == true)
                 {
-                    <div class="appointment cancelteeTimeContainer">
-                        <h3>Are You sure you want to Delete Your Account - This Action CANNOT be Undone</h3>
-                        <input type="submit" name="Submit" value="Delete" class="deletebutton" />
-                        <input type="submit" name="Submit" value="Cancel" class="cancelbutton" />
+                    <div class="dashFlex">
+                        <div>
+                        </div>
+                        <div>
+                            <p class="title">FirstName</p>
+                            <input type="text" name="FirstName" class="val" value="@Model.Member.MemberFirstName" disabled/>
+
+                            <p class="title">Address</p>
+                            <input type="text" name="Address" class="val" value="@Model.Member.MemberAddress" disabled/>
+
+                            <p class="title">Membership type</p>
+                            <input type="text" name="MembershipType" class="val" value="@Model.Member.MembershipType" disabled />
+
+                            <p class="title">Application Status</p>
+                            <input type="text" name="ApplicationStstus" class="val" value="@Model.Member.MemberApplicationStatus" disabled />
+
+                        </div>
+                        <div>
+                            <p class="title">LastName</p>
+                            <input type="text" name="LastName" class="val" value="@Model.Member.MemberLastName" disabled/>
+
+                            <p class="title">Phone Number</p>
+                            <input type="text" name="PhoneNumber" class="val" value="@Model.Member.MemberPhoneNumber" disabled/>
+
+                            <p class="title">Email Address</p>
+                            <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" disabled/>
+
+                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" disabled/>
+                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" disabled/>
+
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="dashFlex">
+                        <div>
+                        </div>
+                        <div>
+                            <p class="title">FirstName</p>
+                            <input type="text" name="FirstName" class="val" value="@Model.Member.MemberFirstName" />
+
+                            <p class="title">Address</p>
+                            <input type="text" name="Address" class="val" value="@Model.Member.MemberAddress" />
+
+                            <p class="title">Membership type</p>
+                            <input type="text" name="MembershipType" class="val" value="@Model.Member.MembershipType" disabled />
+
+                            <p class="title">Application Status</p>
+                            <input type="text" name="ApplicationStstus" class="val" value="@Model.Member.MemberApplicationStatus" disabled />
+
+                        </div>
+                        <div>
+                            <p class="title">LastName</p>
+                            <input type="text" name="LastName" class="val" value="@Model.Member.MemberLastName" />
+
+                            <p class="title">Phone Number</p>
+                            <input type="text" name="PhoneNumber" class="val" value="@Model.Member.MemberPhoneNumber" />
+
+                            <p class="title">Email Address</p>
+                            <input type="text" name="Email" class="val" value="@Model.Member.MemberEmail" />
+
+                            <input type="submit" name="Submit" value="UpdateAccount" class="updatemem" />
+                            <input type="submit" name="Submit" value="DeleteAccount" class="deletemem" />
+
+                        </div>
+
+                    </div>
+                }
+                
+                @if (Model.Delete == true)
+                {
+                    <div class="appointment notif">
+                        <h3>Are You sure you want to Delete Your Account</h3>
+                        <div>
+                            <input type="submit" name="Submit" value="Delete" class="deletebutton" />
+                            <input type="submit" name="Submit" value="Cancel" class="cancelbutton" />
+                        </div> 
                     </div>
                 }
             </form>

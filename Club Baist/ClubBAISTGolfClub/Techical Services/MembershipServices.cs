@@ -434,5 +434,37 @@ namespace ClubBAISTGolfClub.Techical_Services
             nekwom1Connection.Close();
             return Member;
         }
+        public bool DeleteAccount (int MemberID)
+        {
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.Open();
+
+            bool success = true;
+            try
+            {
+                SqlCommand DeleteItemCommend = new()
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    Connection = nekwom1Connection,
+                    CommandText = "DeleteMemberAccount"
+                };
+                SqlParameter DeleteItemCommendParameter = new()
+                {
+                    ParameterName = "@MemberID",
+                    SqlDbType = SqlDbType.Int,
+                    SqlValue = MemberID,
+                    Direction = ParameterDirection.Input,
+                };
+                DeleteItemCommend.Parameters.Add(DeleteItemCommendParameter);
+                DeleteItemCommend.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                success = false;
+            }
+            
+            return success;
+        }
     }
 }

@@ -67,6 +67,20 @@ namespace ClubBAISTGolfClub.Controller
             return MemberApplications;
         }
 
+        public string DeleteMemberShip(int memberID)
+        {
+            string message = "Account Deleted Sucssess Fully";
+            MembershipServices membercontroll = new();
+            try
+            {
+                membercontroll.DeleteAccount(memberID);
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            return message;
+        }
 
         private static byte[] HashPasswordWithSalt(string password, byte[] salt)
         {

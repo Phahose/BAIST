@@ -80,7 +80,7 @@
                     <input type="number" name="PlayerNumber" min="0" max="4"  />
                     <input type="submit" name="Go" value="PNumber" class="playerbutton" />
                     <p>Time Slots According to @Model.Member.MembershipType Privileges</p>
-                    @if (Model.Member.MembershipType == "Gold")
+                    @if (Model.Member.MembershipType == "Gold" || Model.Member.MembershipType == "Admin")
                     {
                         <select id="teeTimeSelect" name="TeeTime">
                             <option value="07:00">7:00 AM</option>

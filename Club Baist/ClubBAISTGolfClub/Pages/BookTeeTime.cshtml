@@ -101,13 +101,12 @@
                             }
                             
                         </select>
-
-
                     }
                     @if (Model.Member.MembershipType == "Silver")
                     {       
                         <select id="teeTimeSelect" name="TeeTime">
                             @* Before 3pm *@
+                            <option value="07:00">07:00 AM</option>
                             @for (int hour = 7; hour < 15; hour++)
                             {
                                 for (int minute = 7; minute < 60; minute += 8)

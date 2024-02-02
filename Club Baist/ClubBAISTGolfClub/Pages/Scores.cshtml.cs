@@ -187,7 +187,10 @@ namespace ClubBAISTGolfClub.Pages
         #endregion
       
         public Scores Scores { get; set;} = new();
-        public string Message { get; set; } = string.Empty;
+        public string Player1Message { get; set; } = string.Empty;
+        public string Player2Message { get; set; } = string.Empty;
+        public string Player3Message { get; set; } = string.Empty;
+        public string Player4Message { get; set; } = string.Empty;
         public void OnGet()
         {
             Email = HttpContext.Session.GetString("Email");
@@ -288,7 +291,7 @@ namespace ClubBAISTGolfClub.Pages
                                           Player1Hole16Score + Player1Hole17Score + Player1Hole18Score) - Player1Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
-                        Message = $"Scores Added Success Fully Player 1 Score {Scores.TotalScore}";
+                        Player1Message = $"{Player1Name} Score {Scores.TotalScore}";
                     }
                     if (PlayerNumber == 2)
                     {
@@ -321,9 +324,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player1Hole16Score + Player1Hole17Score + Player1Hole18Score) - Player1Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player1Message = $"{Player1Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player2Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
@@ -350,6 +354,7 @@ namespace ClubBAISTGolfClub.Pages
                                           Player2Hole16Score + Player2Hole17Score + Player2Hole18Score) - Player2Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player2Message = $"{Player2Name} Score {Scores.TotalScore}";
                     }
                     if (PlayerNumber == 3)
                     {
@@ -382,9 +387,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player1Hole16Score + Player1Hole17Score + Player1Hole18Score) - Player1Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player1Message = $"{Player1Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player2Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
@@ -411,9 +417,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player2Hole16Score + Player2Hole17Score + Player2Hole18Score) - Player2Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player2Message = $"{Player2Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player3Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player3Hole1Score,
@@ -440,7 +447,7 @@ namespace ClubBAISTGolfClub.Pages
                                           Player3Hole16Score + Player3Hole17Score + Player3Hole18Score) - Player3Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
-
+                        Player3Message = $"{Player3Name} Score {Scores.TotalScore}";
                     }
                     if (PlayerNumber == 4)
                     {
@@ -473,9 +480,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player1Hole16Score + Player1Hole17Score + Player1Hole18Score) - Player1Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player1Message = $"{Player1Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player2Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
@@ -502,9 +510,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player2Hole16Score + Player2Hole17Score + Player2Hole18Score) - Player2Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player2Message = $"{Player2Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player3Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player3Hole1Score,
@@ -531,9 +540,10 @@ namespace ClubBAISTGolfClub.Pages
                                           Player3Hole16Score + Player3Hole17Score + Player3Hole18Score) - Player3Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player3Message = $"{Player3Name} Score {Scores.TotalScore}";
                         Scores = new()
                         {
-                            PlayerName = Player1Name,
+                            PlayerName = Player4Name,
                             MemberID = Member.MemberID,
                             Date = DateTime.Now,
                             Hole1Score= Player4Hole1Score,
@@ -560,6 +570,7 @@ namespace ClubBAISTGolfClub.Pages
                                           Player4Hole16Score + Player4Hole17Score + Player4Hole18Score) - Player4Handicap
                         };
                         teeTimeController.InsertGolfScores(Scores);
+                        Player4Message = $"{Player4Name} Score {Scores.TotalScore}";
                     }   
                 break;
             }

@@ -57,5 +57,13 @@ namespace ClubBAISTGolfClub.Controller
             teeTime = teeservices.GetTeeTimeByID(teeTimeID);
             return teeTime;
         }
+        public string InsertGolfScores(Scores scores)
+        {
+            TeeTimeServices teeservices = new TeeTimeServices();
+            string success;
+            success = teeservices.InsertGolfScores(scores);
+            return success;
+        }
+
     }
 }

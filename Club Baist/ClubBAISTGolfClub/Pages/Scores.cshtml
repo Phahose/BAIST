@@ -36,14 +36,15 @@
                 <div class="appointmen score_players">
                     <p>How many Players are on the Course</p>
                     <input type="number" name="PlayerNumber" min="0" max="4" />
-                    <input type="submit" name="Go" value="PNumber" class="playerbutton" />
+                    <input type="submit" name="Submit" value="PNumber" class="playerbutton" />
                     
                     @if (Model.PlayerNumber > 0)
                     {
+                       
                         @if (Model.PlayerNumber == 1)
                         {
                             <p>Player 1 Name</p>
-                            <input type="text" name="Player1Name" placeholder="Player 1 Name" />
+                            <input type="text" name="Player1Name" placeholder="Player 1 Name" value="Player 1"/>
                             <p>Player 1 Handicap</p>
                             <input type="number" name="Player1Handicap" />
                         }
@@ -68,7 +69,7 @@
                             <input type="number" name="Player1Handicap" />
 
                             <p>Player 2 Name</p>
-                            <input type="text" name="Player2Name" />
+                            <input type="text" name="Player2Name" value="Player 2" />
                             <p>Player 2 Handicap</p>
                             <input type="number" name="Player2Handicap" />
 
@@ -83,266 +84,2373 @@
                             <div class="score_players_info">
                                 <div>
                                     <p>Player 1 Name</p>
-                                    <input type="text" name="Player1Name" placeholder="Player 1 Name" />
-                                    <p>Player 1 Handicap</p>
-                                    <input type="number" name="Player1Handicap" />
-
+                                    <input type="text" name="Player1Name" placeholder="Player 1 Name" class="separation" />
                                     <p>Player 2 Name</p>
-                                    <input type="text" name="Player2Name" />
-                                    <p>Player 2 Handicap</p>
-                                    <input type="number" name="Player2Handicap" />
+                                    <input type="text" name="Player2Name" class="separation" />
+                                    <p>Player 3 Name</p>
+                                    <input type="text" name="Player3Name" class="separation" />
+                                    <p>Player 4 Name</p>
+                                    <input type="text" name="Player4Name" class="separation" />
                                 </div>
 
                                 <div>
-                                    <p>Player 3 Name</p>
-                                    <input type="text" name="Player3Name" />
+                                    <p>Player 1 Handicap</p>
+                                    <input type="number" name="Player1Handicap" />
+                                    <p>Player 2 Handicap</p>
+                                    <input type="number" name="Player2Handicap" />
                                     <p>Player 3 Handicap</p>
                                     <input type="number" name="Player3Handicap" />
-
-                                    <p>Player 4 Name</p>
-                                    <input type="text" name="Player4Name" />
                                     <p>Player 4 Handicap</p>
                                     <input type="number" name="Player4Handicap" />
                                 </div> 
                             </div>
                         }
-                        
+                        <input type="submit" name="Submit" value="Go" class="playerbutton" />
                     }
                 </div>
-                <div class="cards">
-                    
+                 @if (Model.Complete == true)
+                 {
+                    <div class="cards">
+                        <input type="submit" name="Submit" value="Save" class="save-button" />
+                        <input type="submit" name="Submit" value="Post" class="post-button" />
+                        <p>@Model.Message</p>
+                        @if (Model.PlayerNumber == 1)
+                        {
+                            <div>
+                                <h4>Golf Scorecard @Model.Player1Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
 
-                    <div>
-                        <h4>Golf Scorecard</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Hole</th>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-                                    <th>4</th>
-                                    <th>5</th>
-                                    <th>6</th>
-                                    <th>7</th>
-                                    <th>8</th>
-                                    <th>9</th>
-                                    <th>Out</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Par</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>3/4</td>
-                                    <td>5</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>Red</td>
-                                    <td>371</td>
-                                    <td>438</td>
-                                    <td>96</td>
-                                    <td>226</td>
-                                    <td>346</td>
-                                    <td>17</td>
-                                    <td>250</td>
-                                    <td>436</td>
-                                    <td>311</td>
-                                    <td>2791</td>
-                                </tr>
-                                <tr>
-                                    <td>White</td>
-                                    <td>417</td>
-                                    <td>492</td>
-                                    <td>117</td>
-                                    <td>288</td>
-                                    <td>363</td>
-                                    <td>369</td>
-                                    <td>182</td>
-                                    <td>492</td>
-                                    <td>355</td>
-                                    <td>3055</td>
-                                </tr>
-                                <tr>
-                                    <td>Blue</td>
-                                    <td>430</td>
-                                    <td>505</td>
-                                    <td>144</td>
-                                    <td>288</td>
-                                    <td>380</td>
-                                    <td>395</td>
-                                    <td>235</td>
-                                    <td>530</td>
-                                    <td>361</td>
-                                    <td>3268</td>
-                                </tr>
-                                <tr>
-                                    <td>Stroke Index Men</td>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>17</td>
-                                    <td>11</td>
-                                    <td>9</td>
-                                    <td>7</td>
-                                    <td>15</td>
-                                    <td>3</td>
-                                    <td>13</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Stroke Index Women</td>
-                                    <td>5</td>
-                                    <td>1</td>
-                                    <td>17</td>
-                                    <td>13</td>
-                                    <td>11</td>
-                                    <td>7</td>
-                                    <td>15</td>
-                                    <td>3</td>
-                                    <td>9</td>
-                                    <td>-</td>
-                                </tr>
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
 
-                                <tr>
-                                    <td>Score</td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        
+                        @if (Model.PlayerNumber == 2)
+                        {
+                            <div>
+                                <h4>Golf Scorecard @Model.Player1Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole1Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole2Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole3Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole4Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole5Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole6Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole7Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole8Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole9Score" class="score"/></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole10Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole11Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole12Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole13Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole14Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole15Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole16Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole17Score" class="score"/></td>
+                                            <td><input type="number" name="Player1Hole18Score" class="score"/></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player2Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        @if (Model.PlayerNumber == 3)
+                        {
+                            <div>
+                                <h4>Golf Scorecard @Model.Player1Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player2Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player3Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player3Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player3Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        }
+                        @if (Model.PlayerNumber == 4)
+                        {
+                            <div>
+                                <h4>Golf Scorecard @Model.Player1Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player1Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player1Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player2Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player2Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player2Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player3Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player3Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player3Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player3Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4>Golf Scorecard @Model.Player4Name</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>Out</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3/4</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>371</td>
+                                            <td>438</td>
+                                            <td>96</td>
+                                            <td>226</td>
+                                            <td>346</td>
+                                            <td>17</td>
+                                            <td>250</td>
+                                            <td>436</td>
+                                            <td>311</td>
+                                            <td>2791</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>417</td>
+                                            <td>492</td>
+                                            <td>117</td>
+                                            <td>288</td>
+                                            <td>363</td>
+                                            <td>369</td>
+                                            <td>182</td>
+                                            <td>492</td>
+                                            <td>355</td>
+                                            <td>3055</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>430</td>
+                                            <td>505</td>
+                                            <td>144</td>
+                                            <td>288</td>
+                                            <td>380</td>
+                                            <td>395</td>
+                                            <td>235</td>
+                                            <td>530</td>
+                                            <td>361</td>
+                                            <td>3268</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>17</td>
+                                            <td>11</td>
+                                            <td>9</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>13</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>5</td>
+                                            <td>1</td>
+                                            <td>17</td>
+                                            <td>13</td>
+                                            <td>11</td>
+                                            <td>7</td>
+                                            <td>15</td>
+                                            <td>3</td>
+                                            <td>9</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player4Hole1Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole2Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole3Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole4Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole5Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole6Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole7Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole8Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole9Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Hole</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>In</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Par</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>3</td>
+                                            <td>4/5</td>
+                                            <td>4</td>
+                                            <td>35/36</td>
+                                            <td>71/73</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Red</td>
+                                            <td>339</td>
+                                            <td>323</td>
+                                            <td>165</td>
+                                            <td>434</td>
+                                            <td>343</td>
+                                            <td>268</td>
+                                            <td>97</td>
+                                            <td>393</td>
+                                            <td>305</td>
+                                            <td>2667</td>
+                                            <td>5458</td>
+                                        </tr>
+                                        <tr>
+                                            <td>White</td>
+                                            <td>349</td>
+                                            <td>356</td>
+                                            <td>197</td>
+                                            <td>491</td>
+                                            <td>390</td>
+                                            <td>323</td>
+                                            <td>132</td>
+                                            <td>408</td>
+                                            <td>365</td>
+                                            <td>3011</td>
+                                            <td>6066</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blue</td>
+                                            <td>378</td>
+                                            <td>382</td>
+                                            <td>382</td>
+                                            <td>511</td>
+                                            <td>402</td>
+                                            <td>345</td>
+                                            <td>138</td>
+                                            <td>423</td>
+                                            <td>381</td>
+                                            <td>3174</td>
+                                            <td>6442</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Men</td>
+                                            <td>12</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>10</td>
+                                            <td>14</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stroke Index Women</td>
+                                            <td>8</td>
+                                            <td>14</td>
+                                            <td>16</td>
+                                            <td>2</td>
+                                            <td>6</td>
+                                            <td>12</td>
+                                            <td>18</td>
+                                            <td>4</td>
+                                            <td>8</td>
+                                            <td>-</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Score</td>
+                                            <td><input type="number" name="Player4Hole10Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole11Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole12Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole13Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole14Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole15Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole16Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole17Score" class="score" /></td>
+                                            <td><input type="number" name="Player4Hole18Score" class="score" /></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                       
                     </div>
-                     <div>
-                        <h4>Golf Scorecard</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Hole</th>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-                                    <th>4</th>
-                                    <th>5</th>
-                                    <th>6</th>
-                                    <th>7</th>
-                                    <th>8</th>
-                                    <th>9</th>
-                                    <th>Out</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Par</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>3</td>
-                                    <td>5</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>3</td>
-                                    <td>4/5</td>
-                                    <td>4</td>
-                                    <td>35/36</td>
-                                    <td>71/73</td>
-                                </tr>
-                                <tr>
-                                    <td>Red</td>
-                                    <td>339</td>
-                                    <td>323</td>
-                                    <td>165</td>
-                                    <td>434</td>
-                                    <td>343</td>
-                                    <td>268</td>
-                                    <td>250</td>
-                                    <td>436</td>
-                                    <td>311</td>
-                                    <td>2791</td>
-                                </tr>
-                                <tr>
-                                    <td>White</td>
-                                    <td>417</td>
-                                    <td>492</td>
-                                    <td>117</td>
-                                    <td>288</td>
-                                    <td>363</td>
-                                    <td>369</td>
-                                    <td>182</td>
-                                    <td>492</td>
-                                    <td>355</td>
-                                    <td>3055</td>
-                                </tr>
-                                <tr>
-                                    <td>Blue</td>
-                                    <td>430</td>
-                                    <td>505</td>
-                                    <td>144</td>
-                                    <td>288</td>
-                                    <td>380</td>
-                                    <td>395</td>
-                                    <td>235</td>
-                                    <td>530</td>
-                                    <td>361</td>
-                                    <td>3268</td>
-                                </tr>
-                                <tr>
-                                    <td>Stroke Index Men</td>
-                                    <td>1</td>
-                                    <td>5</td>
-                                    <td>17</td>
-                                    <td>11</td>
-                                    <td>9</td>
-                                    <td>7</td>
-                                    <td>15</td>
-                                    <td>3</td>
-                                    <td>13</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Stroke Index Women</td>
-                                    <td>5</td>
-                                    <td>1</td>
-                                    <td>17</td>
-                                    <td>13</td>
-                                    <td>11</td>
-                                    <td>7</td>
-                                    <td>15</td>
-                                    <td>3</td>
-                                    <td>9</td>
-                                    <td>-</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Score</td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td contenteditable="true"></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                     
-                </div>
+                }
             </div>
         </form>
     </div>

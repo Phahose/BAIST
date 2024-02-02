@@ -88,49 +88,33 @@ ADD BookIngPlayerID INT
 --);
 
 -- Scores Table
---CREATE TABLE Scores (
---    ScoreID INT IDENTITY(1,1) PRIMARY KEY,
---    MemberID INT,
---    Date DATE,
---    GolfCourse VARCHAR(100),
---    CourseRating DECIMAL(4, 2),
---    SlopeRating INT,
---    Hole1Score INT,
---    Hole2Score INT,
---	Hole3Score INT,
---	Hole4Score INT,
---	Hole5Score INT,
---	Hole6Score INT,
---	Hole7Score INT,
---	Hole8Score INT,
---	Hole9Score INT,
---	Hole10Score INT,
---	Hole11Score INT,
---	Hole12Score INT,
---	Hole13Score INT,
---	Hole14Score INT,
---	Hole15Score INT,
---	Hole16Score INT,
---	Hole17Score INT,
---	Hole18Score INT,
---    TotalScore INT,
---    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
---);
+CREATE TABLE Scores (
+	ScoreID INT IDENTITY(1,1) PRIMARY KEY,
+	MemberID INT,
+	PlayerName VARCHAR(50),
+	Date DATE,
+	Hole1Score INT,
+	Hole2Score INT,
+	Hole3Score INT,
+	Hole4Score INT,
+	Hole5Score INT,
+	Hole6Score INT,
+	Hole7Score INT,
+	Hole8Score INT,
+	Hole9Score INT,
+	Hole10Score INT,
+	Hole11Score INT,
+	Hole12Score INT,
+	Hole13Score INT,
+	Hole14Score INT,
+	Hole15Score INT,
+	Hole16Score INT,
+	Hole17Score INT,
+	Hole18Score INT,
+	TotalScore INT,
+);
 
--- Memberships Table
---CREATE TABLE Memberships (
---    MembershipID INT PRIMARY KEY,
---    MemberID INT,
---    MembershipType VARCHAR(20),
---    ShareholderStatus VARCHAR(20),
---    MembershipFee DECIMAL(8, 2),
---    SharePurchasePrice DECIMAL(8, 2),
---    EntranceFee DECIMAL(8, 2),
---    PaymentStatus VARCHAR(20),
---    PaymentDueDate DATE,
---    FoodAndBeverageCharge DECIMAL(8, 2),
---    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
---);
+DROP TABLE Scores
 
 -- Handicaps Table
 --CREATE TABLE Handicaps (
@@ -244,194 +228,6 @@ AS
 	END
 Drop Procedure CreateApplication
 
---CREATE PROCEDURE BookTeeTime(@PlayerID INT, @Date DATE, @Time TIME, @NumberOFPlayers INT)
---AS
--- IF @PlayerID is NULL
---  RAISERROR('The Player ID is Required',16,1)
--- ELSE IF @Date IS NULL
---  RAISERROR('The Date is Required',16,1)
--- ELSE IF @Time IS NULL
---  RAISERROR ('The Time is Required',16,1)
--- ELSE IF @NumberOFPlayers IS NULL
---  RAISERROR('The Number of Players Is Required',16,1)
---BEGIN
---	DECLARE @PlayerCount INT;
---	SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
-
---	IF EXISTS (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time AND MemberID = @PlayerID)
---		BEGIN
---		DECLARE @TeeTimeID INT;
---		SET @TeeTimeID = (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)
---				IF @PlayerCount < 4
---					BEGIN
---						IF @PlayerCount = 3
---							BEGIN
---								IF @NumberOFPlayers > 1
---									RAISERROR ('There is Only a Slot For One More Player At this Time',16,1)
---								ELSE
---								BEGIN
---									UPDATE TeeTimes
---									SET 
---									NumberOfPlayers += @NumberOFPlayers
---									WHERE 
---									TeeTimeID = @TeeTimeID
-
---									INSERT INTO TeeTimePlayers(
---												TeeTimeID,
---												BookIngPlayerID
---												)
-
---												VALUES(
---												@TeeTimeID,
---												@PlayerID
---												)
---								END
---							END
---						IF @PlayerCount = 2
---							BEGIN
---								IF @NumberOFPlayers > 2
---									RAISERROR ('There is Only a Slot For Two More Players At this Time',16,1)
---								ELSE
---								BEGIN
---									UPDATE TeeTimes
---									SET 
---									NumberOfPlayers += @NumberOFPlayers
---									WHERE 
---									TeeTimeID = @TeeTimeID
-
---									INSERT INTO TeeTimePlayers(
---												TeeTimeID,
---												BookIngPlayerID
---												)
-
---												VALUES(
---												@TeeTimeID,
---												@PlayerID
---												)
---								END
---							END
---						IF @PlayerCount = 1
---							BEGIN
---								IF @NumberOFPlayers > 3
---									RAISERROR ('There is Only a Slot For 3 More Players At this Time',16,1)
---								ELSE
---								BEGIN
---									UPDATE TeeTimes
---									SET 
---									NumberOfPlayers += @NumberOFPlayers
---									WHERE 
---									TeeTimeID = @TeeTimeID
-
---									INSERT INTO TeeTimePlayers(
---												TeeTimeID,
---												BookIngPlayerID
---												)
-
---												VALUES(
---												@TeeTimeID,
---												@PlayerID
---												)
---								END
---							END
---						IF @PlayerCount = 0
---							BEGIN
---								IF @NumberOFPlayers > 4
---									RAISERROR ('Only 4 players Can Play at a Time',16,1)
---								ELSE
---								BEGIN
---									UPDATE TeeTimes
---									SET 
---									NumberOfPlayers += @NumberOFPlayers
---									WHERE 
---									TeeTimeID = @TeeTimeID
-
---									INSERT INTO TeeTimePlayers(
---												TeeTimeID,
---												BookIngPlayerID
---												)
-
---												VALUES(
---												@TeeTimeID,
---												@PlayerID
---												)
---							END
---						END
---						SET @PlayerCount = (SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time)		
---			 	END
---			ELSE
---			 BEGIN 
---					RAISERROR('This Slot is Fully Booked',16,1)
---			 END
---			IF @PlayerCount < 4
---						UPDATE 
---						TeeTimes
---						SET ReservationStatus = 'Open'
---						WHERE DATE = @Date
---						AND TeeTime = @Time
---			ELSE
---			UPDATE 
---				TeeTimes
---				SET ReservationStatus = 'Reserved'
---				WHERE DATE = @Date
---				AND TeeTime = @Time
---	END
---	ELSE 
---		BEGIN
---		 IF @NumberOFPlayers > 4
---				RAISERROR('Cannot have More Than 4 Players',16,1)
---			ELSE
---			BEGIN
---				INSERT INTO TeeTimes(
---				MemberID,
---				Date,
---				TeeTime,
---				NumberOfPlayers,
---				ReservationStatus)
-
---				VALUES(
---				@PlayerID,
---				@Date,
---				@Time,
---				@NumberOFPlayers,
---				'Reserved')
---			IF ((SELECT NumberOfPlayers From TeeTimes WHERE DATE = @Date AND TeeTime = @Time) < 4)
---					BEGIN 
---					UPDATE 
---					TeeTimes
---					SET ReservationStatus = 'Open'
---					WHERE DATE = @Date
---					AND TeeTime = @Time 
---					END
---			DECLARE @NotExistTeeTimeID INT;
---			SET @NotExistTeeTimeID = (SELECT TeeTimeID From TeeTimes WHERE DATE = @Date AND TeeTime = @Time AND MemberID = @PlayerID)
-
---			INSERT INTO TeeTimePlayers(
---			TeeTimeID,
---			BookIngPlayerID
---			)
-		
---			VALUES(
---			@NotExistTeeTimeID,
---			@PlayerID
---			)
-
-			
-			
---			END
---		END	
---	END
---	DECLARE @TotalPlayers INT;
-
---			SELECT @TotalPlayers = SUM(NumberOfPlayers)
---			FROM TeeTime
---			WHERE [Date] = @Date AND TeeTime = @Time;
-
---			IF (@TotalPlayers > 3)
---			BEGIN
---			UPDATE TeeTime
---			SET ReservationStatus = 'Reserved'
---			WHERE [Date] = @Date AND TeeTime = @Time
---END
 GO
 CREATE PROCEDURE BookTeeTime
     @PlayerID INT,
@@ -740,3 +536,80 @@ AS
 		DELETE From ClubMemberApplications WHERE ApplicantID = @MemberID
 		DELETE FROM Members WHERE MemberID = @MemberID 
 	END
+
+Go
+CREATE PROCEDURE InsertGolfScores
+    @PlayerName VARCHAR(50),
+	@MemberID INT,
+    @Date DATE,
+    @Hole1Score INT,
+    @Hole2Score INT,
+    @Hole3Score INT,
+    @Hole4Score INT,
+    @Hole5Score INT,
+    @Hole6Score INT,
+    @Hole7Score INT,
+    @Hole8Score INT,
+    @Hole9Score INT,
+    @Hole10Score INT,
+    @Hole11Score INT,
+    @Hole12Score INT,
+    @Hole13Score INT,
+    @Hole14Score INT,
+    @Hole15Score INT,
+    @Hole16Score INT,
+    @Hole17Score INT,
+    @Hole18Score INT,
+	@TotalScore INT
+AS
+BEGIN
+    INSERT INTO Scores (
+        PlayerName,
+		MemberID,
+        Date,
+        Hole1Score,
+        Hole2Score,
+        Hole3Score,
+        Hole4Score,
+        Hole5Score,
+        Hole6Score,
+        Hole7Score,
+        Hole8Score,
+        Hole9Score,
+        Hole10Score,
+        Hole11Score,
+        Hole12Score,
+        Hole13Score,
+        Hole14Score,
+        Hole15Score,
+        Hole16Score,
+        Hole17Score,
+        Hole18Score,
+        TotalScore
+    )
+    VALUES (
+        @PlayerName,
+		@MemberID,
+        @Date,
+        @Hole1Score,
+        @Hole2Score,
+        @Hole3Score,
+        @Hole4Score,
+        @Hole5Score,
+        @Hole6Score,
+        @Hole7Score,
+        @Hole8Score,
+        @Hole9Score,
+        @Hole10Score,
+        @Hole11Score,
+        @Hole12Score,
+        @Hole13Score,
+        @Hole14Score,
+        @Hole15Score,
+        @Hole16Score,
+        @Hole17Score,
+        @Hole18Score,
+        @TotalScore
+    );
+END;
+DROP PROCEDURE InsertGolfScores

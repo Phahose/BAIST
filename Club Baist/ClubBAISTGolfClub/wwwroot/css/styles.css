@@ -638,7 +638,7 @@ select{
 /*GolF Score Card*/
 .score_card{
     display:flex;
-    width: 90%;
+    width: 100%;
     margin-right:auto;
     margin-left:auto;
 }
@@ -652,15 +652,23 @@ select{
 .score_players_info{
     display:flex;
     justify-content:space-between;
-    padding: 1rem;
+    padding: .5rem;
 }
 .cards {
-    max-height: 50%;
+    padding: 1rem;
+    max-height: 40rem;
     overflow-y: scroll;
 }
+.score_players_info input[type=number] {
+    width: 90%;
+}
+.separation  {
+    width: 90%;
+}
+
 /* Customize the scrollbar track */
 .cards::-webkit-scrollbar {
-     background-color: dimgray;
+   
 }
 
 /* Customize the scrollbar handle (thumb) */
@@ -671,6 +679,47 @@ select{
 /* Customize the scrollbar handle on hover */
 .cards::-webkit-scrollbar-thumb:hover {
     background-color: #555;
+}
+.save-button {
+    padding: 8px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    width: 4%;
+}
+
+    .save-button:hover {
+        background-color: #45a049;
+    }
+
+    .post-button {
+    padding: 8px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: brown; 
+    color: #fff; 
+    width: 4%;
+}
+
+
+    .post-button:hover {
+        background-color: #400613; 
+    }
+
+h4{
+    margin-top: 2.5rem;
+    border-bottom: 1px solid grey;
 }
 @media (min-width: 760px) {
 }

@@ -691,7 +691,7 @@ select{
     border-radius: 5px;
     background-color: #4CAF50;
     color: #fff;
-    width: 4%;
+    width: 8%;
 }
 
     .save-button:hover {
@@ -709,7 +709,7 @@ select{
     border-radius: 5px;
     background-color: brown; 
     color: #fff; 
-    width: 4%;
+    width: 8%;
 }
 
 

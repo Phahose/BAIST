@@ -242,11 +242,11 @@ namespace ClubBAISTGolfClub.Pages
                 case"PNumber":
                      HttpContext.Session.SetInt32("PlayerNumber", PlayerNumber);
                 break;
-                case "Save":
+                case "My Scores":
                     PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
                     Complete = true;
                 break;
-                case "Post":
+                case "Post Scores":
                     PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
                     Player1Name = HttpContext.Session.GetString("Player1Name");
                     Player2Name = HttpContext.Session.GetString("Player2Name");

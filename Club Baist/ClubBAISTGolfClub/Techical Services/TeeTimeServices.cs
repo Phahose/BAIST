@@ -263,6 +263,46 @@ namespace ClubBAISTGolfClub.Techical_Services
                     Direction = ParameterDirection.Input
                 };
 
+                 SqlParameter playerNumberParameter = new SqlParameter
+                 {
+                    ParameterName = "@PlayerNumber",
+                    SqlDbType = SqlDbType.Int,
+                    Value = scores.PlayerNumber,
+                    Direction = ParameterDirection.Input
+                 };
+                
+                 SqlParameter player1NameParameter = new SqlParameter
+                 {
+                    ParameterName = "@Player1Name",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = scores.Player1Name,
+                    Direction = ParameterDirection.Input
+                 };
+                
+                 SqlParameter player2NameParameter = new SqlParameter
+                 {
+                    ParameterName = "@Player2Name",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = scores.Player2Name,
+                    Direction = ParameterDirection.Input
+                 };
+                
+                 SqlParameter player3NameParameter = new SqlParameter
+                 {
+                    ParameterName = "@Player3Name",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = scores.Player3Name,
+                    Direction = ParameterDirection.Input
+                 };
+                
+                 SqlParameter player4NameParameter = new SqlParameter
+                 {
+                    ParameterName = "@Player4Name",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = scores.Player4Name,
+                    Direction = ParameterDirection.Input
+                 };
+
                 SqlParameter dateParameter = new SqlParameter
                 {
                     ParameterName = "@Date",
@@ -424,6 +464,11 @@ namespace ClubBAISTGolfClub.Techical_Services
 
                 InsertScoresCommand.Parameters.Add(playerNameParameter);
                 InsertScoresCommand.Parameters.Add(memberIDParameter);
+                InsertScoresCommand.Parameters.Add(playerNumberParameter);
+                InsertScoresCommand.Parameters.Add(player1NameParameter);
+                InsertScoresCommand.Parameters.Add(player2NameParameter);
+                InsertScoresCommand.Parameters.Add(player3NameParameter);
+                InsertScoresCommand.Parameters.Add(player4NameParameter);
                 InsertScoresCommand.Parameters.Add(dateParameter);
                 InsertScoresCommand.Parameters.Add(hole1ScoreParameter);
                 InsertScoresCommand.Parameters.Add(hole2ScoreParameter);
@@ -454,5 +499,80 @@ namespace ClubBAISTGolfClub.Techical_Services
             }
             return success;
         } 
+
+        public List<Scores> GolfScores(DateTime scores, int MemberID)
+        {
+            List<Scores> ScoresList = new List<Scores>();
+            SqlConnection nekwom1connection = new();
+            nekwom1connection.ConnectionString = connectionString;
+            nekwom1connection.Open();
+
+            SqlCommand GetScoresCommand = new()
+            {
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "GetMemberScoresByDate",
+                Connection = nekwom1connection
+            };
+
+            SqlParameter DateParemeter = new()
+            {
+                ParameterName = "@Date",
+                SqlDbType = SqlDbType.DateTime,
+                SqlValue = scores
+            };
+
+            SqlParameter MemberIDParemeter = new()
+            {
+                ParameterName = "@MemberID",
+                SqlDbType = SqlDbType.Int,
+                SqlValue = MemberID
+            };
+
+            GetScoresCommand.Parameters.Add(DateParemeter);
+            GetScoresCommand.Parameters.Add(MemberIDParemeter);
+
+            SqlDataReader scoresreader = GetScoresCommand.ExecuteReader();
+
+            if (scoresreader.HasRows)
+            {
+                while (scoresreader.Read())
+                {
+                    Scores score = new Scores() 
+                    { 
+                        ScoreID = (int)scoresreader["ScoreID"],
+                        MemberID = (int)scoresreader["MemberID"],
+                        PlayerName = (string)scoresreader["PlayerName"],
+                        Date = (DateTime)scoresreader["Date"],
+                        PlayerNumber = (int)scoresreader["PlayerNumber"],
+                        Player1Name = (string)scoresreader["Player1Name"],
+                        Player2Name = (string)scoresreader["Player2Name"],
+                        Player3Name = (string)scoresreader["Player3Name"],
+                        Player4Name = (string)scoresreader["Player4Name"],
+                        Hole1Score = (int)scoresreader["Hole1Score"],
+                        Hole2Score = (int)scoresreader["Hole2Score"],
+                        Hole3Score = (int)scoresreader["Hole3Score"],
+                        Hole4Score = (int)scoresreader["Hole4Score"],
+                        Hole5Score = (int)scoresreader["Hole5Score"],
+                        Hole6Score = (int)scoresreader["Hole6Score"],
+                        Hole7Score = (int)scoresreader["Hole7Score"],
+                        Hole8Score = (int)scoresreader["Hole8Score"],
+                        Hole9Score = (int)scoresreader["Hole9Score"],
+                        Hole10Score = (int)scoresreader["Hole10Score"],
+                        Hole11Score = (int)scoresreader["Hole11Score"],
+                        Hole12Score = (int)scoresreader["Hole12Score"],
+                        Hole13Score = (int)scoresreader["Hole13Score"],
+                        Hole14Score = (int)scoresreader["Hole14Score"],
+                        Hole15Score = (int)scoresreader["Hole15Score"],
+                        Hole16Score = (int)scoresreader["Hole16Score"],
+                        Hole17Score = (int)scoresreader["Hole17Score"],
+                        Hole18Score = (int)scoresreader["Hole18Score"],
+                        TotalScore = (int)scoresreader["TotalScore"]
+                    };
+                    ScoresList.Add(score);
+                }
+            }
+
+            return ScoresList;
+        }
     }
 }

@@ -65,5 +65,12 @@ namespace ClubBAISTGolfClub.Controller
             return success;
         }
 
+        public List<Scores> GetGolfScores(DateTime date, int memberID)
+        {
+            TeeTimeServices teeTimeServices = new();
+            List<Scores> scores = new List<Scores>();
+            scores = teeTimeServices.GolfScores(date, memberID);
+            return scores;
+        }
     }
 }

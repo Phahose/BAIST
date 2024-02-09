@@ -191,6 +191,15 @@ namespace ClubBAISTGolfClub.Pages
         public string Player2Message { get; set; } = string.Empty;
         public string Player3Message { get; set; } = string.Empty;
         public string Player4Message { get; set; } = string.Empty;
+        public bool GetScores {  get; set; } = false;
+        public bool GetPlayersScores { get; set; } = false;
+        public List<Scores> ScoresList { get; set; } = new();
+        public bool GetDayScores { get; set; } = false;
+        [BindProperty]
+        public DateTime ScoresDate { get; set; } 
+        public string Message { get; set; } = string.Empty;
+        [BindProperty]
+        public int GameID { get; set; }
         public void OnGet()
         {
             Email = HttpContext.Session.GetString("Email");
@@ -206,7 +215,7 @@ namespace ClubBAISTGolfClub.Pages
             Member = memberControlls.GetMember(Email);
             MemberInfoString = JsonSerializer.Serialize(Member);
             HttpContext.Session.SetString("MemberInfo", MemberInfoString);
-           
+            TeeTimeController teeTimeController = new TeeTimeController();
             switch (Submit)
             {
                 case "Go":
@@ -243,8 +252,38 @@ namespace ClubBAISTGolfClub.Pages
                      HttpContext.Session.SetInt32("PlayerNumber", PlayerNumber);
                 break;
                 case "My Scores":
-                    PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
-                    Complete = true;
+                    GetScores = true;
+                break;
+                case "Get Score":
+                    GetScores = false;
+                    if (ScoresDate ==  DateTime.MinValue || ScoresDate == DateTime.MaxValue)
+                    {
+                        Message = "Please Enter In a Valid Date";
+                        GetScores = true;
+                    }
+                    else
+                    {
+                        GetDayScores = true;
+                        ScoresList = teeTimeController.GetGolfScores(ScoresDate, Member.MemberID);
+                        if (ScoresList.Count == 0)
+                        {
+                            Message = "No games Have Been Recorded For this Day";
+                        }
+                        HttpContext.Session.SetString("ScoresDate", ScoresDate.ToString());
+                    }
+                   
+                break;
+                case "View Scores":
+                    GetPlayersScores = true;
+                    ScoresDate = DateTime.Parse(HttpContext.Session.GetString("ScoresDate"));
+                    List<Scores> scoresList = teeTimeController.GetGolfScores(ScoresDate, Member.MemberID);
+                    ScoresList = scoresList.Where(s => s.ScoreID == GameID).ToList();
+                    if (ScoresList.Count == 0)
+                    {
+                        Message = "There is no Game With this ID";
+                    }
+                    GetScores = false;
+                    GetDayScores = false;
                 break;
                 case "Post Scores":
                     PlayerNumber = (int)HttpContext.Session.GetInt32("PlayerNumber");
@@ -259,13 +298,15 @@ namespace ClubBAISTGolfClub.Pages
                     Player4Handicap = (int)HttpContext.Session.GetInt32("Player4Handicap");
 
                     Complete = true;
-                    TeeTimeController teeTimeController = new TeeTimeController();
+                    
                     if (PlayerNumber == 1)
                     {
                         Scores = new()
                         {
                             PlayerName = Player1Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
                             Date = DateTime.Now,
                             Hole1Score= Player1Hole1Score,
                             Hole2Score= Player1Hole2Score,
@@ -299,6 +340,9 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player1Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
                             Date = DateTime.Now,
                             Hole1Score= Player1Hole1Score,
                             Hole2Score= Player1Hole2Score,
@@ -329,6 +373,9 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player2Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
                             Hole2Score= Player2Hole2Score,
@@ -362,6 +409,10 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player1Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,
                             Date = DateTime.Now,
                             Hole1Score= Player1Hole1Score,
                             Hole2Score= Player1Hole2Score,
@@ -392,6 +443,10 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player2Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber= PlayerNumber,
+                            Player1Name= Player1Name,
+                            Player2Name= Player2Name,
+                            Player3Name = Player3Name,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
                             Hole2Score= Player2Hole2Score,
@@ -422,6 +477,10 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player3Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,
                             Date = DateTime.Now,
                             Hole1Score= Player3Hole1Score,
                             Hole2Score= Player3Hole2Score,
@@ -455,6 +514,11 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player1Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,  
+                            Player4Name = Player4Name,  
                             Date = DateTime.Now,
                             Hole1Score= Player1Hole1Score,
                             Hole2Score= Player1Hole2Score,
@@ -485,6 +549,11 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player2Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,
+                            Player4Name = Player4Name,
                             Date = DateTime.Now,
                             Hole1Score= Player2Hole1Score,
                             Hole2Score= Player2Hole2Score,
@@ -515,6 +584,11 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player3Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,
+                            Player4Name = Player4Name,
                             Date = DateTime.Now,
                             Hole1Score= Player3Hole1Score,
                             Hole2Score= Player3Hole2Score,
@@ -545,6 +619,11 @@ namespace ClubBAISTGolfClub.Pages
                         {
                             PlayerName = Player4Name,
                             MemberID = Member.MemberID,
+                            PlayerNumber = PlayerNumber,
+                            Player1Name = Player1Name,
+                            Player2Name = Player2Name,
+                            Player3Name = Player3Name,
+                            Player4Name = Player4Name,
                             Date = DateTime.Now,
                             Hole1Score= Player4Hole1Score,
                             Hole2Score= Player4Hole2Score,

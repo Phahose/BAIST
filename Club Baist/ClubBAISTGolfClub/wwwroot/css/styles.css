@@ -658,6 +658,11 @@ select{
     padding: 1rem;
     max-height: 40rem;
     overflow-y: scroll;
+    width: 50%;
+}
+.cards table{
+    width: 100%;
+    margin-bottom: 2rem;
 }
 .score_players_info input[type=number] {
     width: 90%;
@@ -691,7 +696,8 @@ select{
     border-radius: 5px;
     background-color: #4CAF50;
     color: #fff;
-    width: 8%;
+    width: 18%;
+    margin-bottom: 1rem;
 }
 
     .save-button:hover {
@@ -716,8 +722,19 @@ select{
     .post-button:hover {
         background-color: #400613; 
     }
-
-h4{
+.date_input{
+    width: 50%;
+    display: flex;
+    height: fit-content;
+}
+.date_input input[type=submit]{
+    margin-left: 2rem;
+    width: fit-content;
+}
+.date_input input[type=date]{
+    width: 50%;
+}
+h4 {
     margin-top: 2.5rem;
     border-bottom: 1px solid grey;
 }

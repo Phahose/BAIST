@@ -32,6 +32,7 @@
     </nav>
     <div class="infodiv">
         <form name="Scores" method="post">
+            <input type="submit" name="Submit" value="My Scores" class="save-button" />
             <div class="score_card">
                 <div class="appointmen score_players">
                     <p>How many Players are on the Course</p>
@@ -108,10 +109,9 @@
                         <input type="submit" name="Submit" value="Go" class="playerbutton" />
                     }
                 </div>
-                 @if (Model.Complete == true)
+                @if (Model.Complete == true)
                  {
-                    <div class="cards">
-                        <input type="submit" name="Submit" value="My Scores" class="save-button" />
+                    <div class="cards">                      
                         <input type="submit" name="Submit" value="Post Scores" class="post-button" />
                         <p>@Model.Player1Message</p>
                         <p>@Model.Player2Message</p>
@@ -2453,6 +2453,161 @@
                        
                     </div>
                     
+                }
+                @if (Model.GetScores == true)
+                {
+                    <div class="date_input">
+                        <input type="date" name="ScoresDate">
+                        <input type="submit" name="Submit" value="Get Score" class="playerbutton" />
+                        <p>@Model.Message</p>
+                    </div>  
+                }
+                @if(Model.GetDayScores == true)
+                {
+                  <div>
+                      <p>@Model.Message</p>
+                      @if()
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Game ID</td>
+                                    <td>Member ID</td>
+                                    <td>Number Of Players</td>
+                                    <td>Player 1 Name</td>
+                                    <td>Player 2 Name</td>
+                                    <td>Player 3 Name</td>
+                                    <td>Player 4 Name</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var score in Model.ScoresList)
+                                {
+                                    <tr>
+                                        <td>@score.ScoreID</td>
+                                        <td>@score.MemberID</td>
+                                        <td>@score.PlayerNumber</td>
+                                        <td>@score.Player1Name</td>
+                                        <td>@score.Player2Name</td>
+                                        <td>@score.Player3Name</td>
+                                        <td>@score.Player4Name</td>
+                                    </tr>
+                                }
+                    
+                            </tbody>
+                        </table>
+                        <div class="date_input">
+                            <input type="text" name="GameID" placeholder="Enter the Game ID">
+                            <input type="submit" name="Submit" value="View Scores" class="playerbutton" />
+                        </div>
+                  </div>
+                   
+                }
+                @if (Model.GetPlayersScores == true)
+                {
+                    <div class="cards">
+                        <div>
+                            <h4>Golf Scorecard For @Model.ScoresList[0].Player1Name</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Hole</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>Out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Par</td>
+                                        <td>4</td>
+                                        <td>5</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>3/4</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Score</td>
+                                        <td>@Model.ScoresList[0].Hole1Score</td>
+                                        <td>@Model.ScoresList[0].Hole2Score</td>
+                                        <td>@Model.ScoresList[0].Hole3Score</td>
+                                        <td>@Model.ScoresList[0].Hole4Score</td>
+                                        <td>@Model.ScoresList[0].Hole5Score</td>
+                                        <td>@Model.ScoresList[0].Hole6Score</td>
+                                        <td>@Model.ScoresList[0].Hole7Score</td>
+                                        <td>@Model.ScoresList[0].Hole8Score</td>
+                                        <td>@Model.ScoresList[0].Hole9Score</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Hole</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>17</th>
+                                        <th>18</th>
+                                        <th>In</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Par</td>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>3</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>3</td>
+                                        <td>4/5</td>
+                                        <td>4</td>
+                                        <td>35/36</td>
+                                        <td>71/73</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Score</td>
+                                        <td>@Model.ScoresList[0].Hole9Score</td>
+                                        <td>@Model.ScoresList[0].Hole10Score</td>
+                                        <td>@Model.ScoresList[0].Hole11Score</td>
+                                        <td>@Model.ScoresList[0].Hole12Score</td>
+                                        <td>@Model.ScoresList[0].Hole13Score</td>
+                                        <td>@Model.ScoresList[0].Hole14Score</td>
+                                        <td>@Model.ScoresList[0].Hole15Score</td>
+                                        <td>@Model.ScoresList[0].Hole16Score</td>
+                                        <td>@Model.ScoresList[0].Hole17Score</td>
+                                        <td>@Model.ScoresList[0].Hole18Score</td>
+                                        <td>@Model.ScoresList[0].TotalScore</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+
+
+                    </div>
+
                 }
             </div>
         </form>

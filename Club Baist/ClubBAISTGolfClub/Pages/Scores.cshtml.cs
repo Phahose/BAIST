@@ -294,7 +294,7 @@ namespace ClubBAISTGolfClub.Pages
                             {
                                 if (Scores.Player2Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).Skip(1).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
                                 foreach (var item in ScoresList)
@@ -308,12 +308,12 @@ namespace ClubBAISTGolfClub.Pages
                             {
                                 if (Scores.Player2Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).Skip(1).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
                                 if (Scores.Player3Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).Skip(2).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
 
@@ -322,17 +322,17 @@ namespace ClubBAISTGolfClub.Pages
                             {
                                 if (Scores.Player2Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).Skip(1).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
                                 if (Scores.Player3Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).Skip(2).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
                                 if (Scores.Player4Name != "")
                                 {
-                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name && s.Player4Name == Scores.Player4Name).FirstOrDefault();
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name && s.Player4Name == Scores.Player4Name).Skip(3).FirstOrDefault();
                                     ScoresList.Add(Game);
                                 }
                             }

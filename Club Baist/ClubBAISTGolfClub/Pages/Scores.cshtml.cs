@@ -200,6 +200,7 @@ namespace ClubBAISTGolfClub.Pages
         public string Message { get; set; } = string.Empty;
         [BindProperty]
         public int GameID { get; set; }
+        public Scores Game { get; set; } = new();   
         public void OnGet()
         {
             Email = HttpContext.Session.GetString("Email");
@@ -278,9 +279,66 @@ namespace ClubBAISTGolfClub.Pages
                     ScoresDate = DateTime.Parse(HttpContext.Session.GetString("ScoresDate"));
                     List<Scores> scoresList = teeTimeController.GetGolfScores(ScoresDate, Member.MemberID);
                     ScoresList = scoresList.Where(s => s.ScoreID == GameID).ToList();
+                    Scores = scoresList.Where(s => s.ScoreID == GameID).First();
                     if (ScoresList.Count == 0)
                     {
                         Message = "There is no Game With this ID";
+                    }
+                    else
+                    {
+                        if (Scores.PlayerNumber > 1)
+                        {
+                            scoresList = teeTimeController.GetGolfScores(ScoresDate, Member.MemberID);
+                            Game = scoresList.Where(s => s.ScoreID == GameID).FirstOrDefault();
+                            if (Game.PlayerNumber == 2)
+                            {
+                                if (Scores.Player2Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+                                foreach (var item in ScoresList)
+                                {
+                                    Console.WriteLine(item.Player1Name);
+                                    Console.WriteLine(item.Player2Name);
+                                    Console.WriteLine(item.TotalScore);
+                                }
+                            }
+                            if (Game.PlayerNumber == 3)
+                            {
+                                if (Scores.Player2Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+                                if (Scores.Player3Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+
+                            }
+                            if (Game.PlayerNumber == 4)
+                            {
+                                if (Scores.Player2Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+                                if (Scores.Player3Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+                                if (Scores.Player4Name != "")
+                                {
+                                    Game = scoresList.Where(s => s.Player1Name == Scores.Player1Name && s.Player2Name == Scores.Player2Name && s.Player3Name == Scores.Player3Name && s.Player4Name == Scores.Player4Name).FirstOrDefault();
+                                    ScoresList.Add(Game);
+                                }
+                            }
+
+                        }
+                        
                     }
                     GetScores = false;
                     GetDayScores = false;

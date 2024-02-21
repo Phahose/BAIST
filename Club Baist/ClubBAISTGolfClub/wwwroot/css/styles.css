@@ -686,7 +686,7 @@ select{
     background-color: #555;
 }
 .save-button {
-    padding: 8px 0px;
+    padding: 8px 0PX;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -705,7 +705,7 @@ select{
     }
 
     .post-button {
-    padding: 8px 0px;
+    padding: 8px 5px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -715,7 +715,7 @@ select{
     border-radius: 5px;
     background-color: brown; 
     color: #fff; 
-    width: 8%;
+    width: fit-content;
 }
 
 

@@ -633,3 +633,17 @@ BEGIN
     );
 END;
 DROP PROCEDURE InsertGolfScores
+Go
+
+CREATE PROCEDURE GetMemberScoresByDate
+    @MemberID INT,
+    @Date DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM Scores
+    WHERE Scores.MemberID = @MemberID
+      AND Scores.Date = @Date;
+END;

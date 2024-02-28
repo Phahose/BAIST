@@ -85,14 +85,15 @@ const nicholas = new THREE.Mesh(
 const moonTexture = new THREE.TextureLoader().load('img/moon.jpg');
 
 const mooon = new THREE.Mesh(
-  new THREE.SphereGeometry(3,32,32),
+  new THREE.SphereGeometry(5,32,32),
   new THREE.MeshStandardMaterial({
     map: moonTexture
   })
 );
 
-// moonTexture.position.z = 20;
-mooon.position.setX(15);
+mooon.position.setX(5);
+mooon.position.setY(10);
+mooon.position.setZ(10);
 scene.add(mooon)
 
 

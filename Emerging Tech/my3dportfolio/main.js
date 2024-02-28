@@ -126,3 +126,4 @@ function animate(){
 animate()
 // setupCounter(document.querySelector('#counter'))
 
+// Run This by sayiong NP run dev

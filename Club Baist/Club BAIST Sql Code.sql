@@ -222,7 +222,9 @@ AS
 		ApplicantName,
 		ApplicantID,
 		Shareholder1Status,
-		Shareholder2Status)
+		Shareholder2Status,
+		Sponsor1ID,
+		Sponsor2ID)
 
 		VALUES(
 		@Sponsor1Name,
@@ -233,7 +235,9 @@ AS
 		@FirstName + ' ' +@LastName,
 		@MemberID,
 		'Pending',
-		'Pending')
+		'Pending',
+		@Sponsor1ID,
+		@Sponsor2ID)
 	END
 Drop Procedure CreateApplication
 

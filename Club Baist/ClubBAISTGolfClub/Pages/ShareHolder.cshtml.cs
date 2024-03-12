@@ -30,7 +30,16 @@ namespace ClubBAISTGolfClub.Pages
         {
             MemberControlls memberControlls = new MemberControlls();
             Members = memberControlls.GetAllMembers();
-            Applications = memberControlls.GetAllMemberApplication();
+            Applications = memberControlls.GetAllMemberApplication().Where( m => m.Sponsor1Name == Member.MemberFirstName + " " + Member.MemberLastName).ToList();
+            if (Applications.Count < 1)
+            {
+                Applications = memberControlls.GetAllMemberApplication().Where(m => m.Sponsor2Name == Member.MemberFirstName + " " + Member.MemberLastName).ToList();
+            }
         }
+        public void OnPost()
+        {
+
+        }
+        
     }
 }

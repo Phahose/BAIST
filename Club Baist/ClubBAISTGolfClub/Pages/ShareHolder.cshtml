@@ -1,0 +1,143 @@
+﻿@page
+@model ClubBAISTGolfClub.Pages.ShareHolderModel
+@{
+    Layout = "_Header";
+    ViewData["Title"] = "My Applicants";
+}
+<div class="bookTee">
+    <nav class="memberhome_nav">
+        <ul>
+            <li>
+                <a href="~/MemberHome">My Account</a>
+            </li>
+            <li>
+                <a href="~/BookTeeTime">Tee Times</a>
+            </li>
+            <li>
+                <a href="~/TeeTimeReservations">Reservations</a>
+            </li>
+            <li>
+                <a href="/Scores">Rec Scores</a>
+            </li>
+            <li>
+                <a href="~/Admin">Admin</a>
+            </li>
+          @*   @if (Model.Member.MembershipType == "Shareholder")
+            {
+                <li>
+                    <a href="~/ShareHolder">Applicants</a>
+                </li>
+            } *@
+        </ul>
+    </nav>
+    <div class="infodiv">
+        <h2 class="heading_admin">Prospective Members</h2>
+        <form name="UpdateMembers" method="post" class="teetimeForm">
+           @*  <p>@Model.ErrorMessage</p>
+            <div class="month_form">
+                <input type="number" name="MemberID" placeholder="Member ID you Would Like To Update" class="updateMember_input" min="0" />
+                <input type="submit" name="Submit" value="Go" class="updateMember_button" />
+            </div>
+            <table border="1" class="admintable">
+                <tr>
+                    <th>Application ID</th>
+                    <th>Appicant ID</th>
+                    <th>Appicant Name</th>
+                    <th>Sponsor1 Name</th>
+                    <th>Sponsor2 Name</th>
+                    <th>Application Status</th>
+                    <th>Date Applied</th>
+                    <th>Application File</th>
+                </tr>
+                @foreach (var memberapplication in Model.Applications)
+                {
+                    if (memberapplication.ApplicationStatus == "Pending")
+                    {
+                        byte[] wordDocumentBytes = memberapplication.ApplicationFile!;
+                        string base64Document = Convert.ToBase64String(wordDocumentBytes!);
+                        <tr>
+                            <td>@memberapplication.ApplicationID</td>
+                            <td>@memberapplication.ApplicantID</td>
+                            <td>@memberapplication.ApplicantName</td>
+                            <td>@memberapplication.Sponsor1Name</td>
+                            <td>@memberapplication.Sponsor2Name</td>
+                            <td>@memberapplication.ApplicationStatus</td>
+                            <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <a href="data:application/octet-stream;base64,@base64Document" download="@memberapplication.ApplicantName Membership ApplicatonFile">
+                                    Application File
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </table> *@
+           @*  @if (Model.Member.MemberFirstName != "")
+            {
+                <div class="appointment updatemember_container">
+                    <h2>Update - @Model.Member.MemberFirstName</h2>
+                    <input type="text" name="FirstName" value="@Model.Member.MemberFirstName" />
+                    <input type="text" name="LastName" value="@Model.Member.MemberLastName" />
+                    <select name="ApplicationStatus" class="SignUp_input">
+                        <option value="@Model.Member.MemberApplicationStatus">@Model.Member.MemberApplicationStatus</option>
+                        <option value="Approved">Approve</option>
+                        <option value="Rejected">Reject</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <select name="MemberShipType" class="SignUp_input">
+                        <option value="@Model.Member.MembershipType">@Model.Member.MembershipType</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Shareholder">ShareHolder</option>
+                        <option value="Asssociate">Asssociate</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Shareholder Spouse">Sharholder Spouse</option>
+                        <option value="Asssociate Spouse">Asssociate Spouse</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Pee Wee">Pee Wee</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Intermidiate">Intermidiate</option>
+                        <option value="Copper">Copper</option>
+                    </select><br />
+                    <p>@Model.Message</p>
+                    <input type="submit" name="Submit" value="UpdateMember" />
+                </div>
+            } *@
+        </form>
+        @* <form name="UpdateMembers" method="post" class="teetimeForm">
+            <h2 class="heading_admin"> Club Members</h2>
+            <table border="1" class="admintable">
+                <tr>
+                    <th>Member ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Membership Type</th>
+                    <th>Application Status</th>
+                    <th>Date Applied</th>
+                    <th>Email</th>
+                    <th>Sponsor1 ID</th>
+                    <th>Sponsor2 ID</th>
+                </tr>
+                @foreach (var member in Model.Members)
+                {
+                    if (member.MemberApplicationStatus == "Approved")
+                    {
+                        <tr>
+                            <td>@member.MemberID</td>
+                            <td>@member.MemberFirstName</td>
+                            <td>@member.MemberLastName</td>
+                            <td>@member.MembershipType</td>
+                            <td>@member.MemberApplicationStatus</td>
+                            <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
+                            <td>@member.MemberEmail</td>
+                            <td>@member.MemberSponsor1</td>
+                            <td>@member.MemberSponsor2</td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        </form> *@
+    </div>
+</div>

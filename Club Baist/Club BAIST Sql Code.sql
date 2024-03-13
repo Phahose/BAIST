@@ -655,3 +655,17 @@ BEGIN
     WHERE Scores.MemberID = @MemberID
       AND Scores.Date = @Date;
 END;
+
+CREATE PROCEDURE UpdateClubMemberApplication
+    @ApplicationID INT,
+    @Shareholder1Status NVARCHAR(50),
+    @Shareholder2Status NVARCHAR(50)
+AS
+BEGIN
+    UPDATE ClubMemberApplications
+    SET 
+        Shareholder1Status = @Shareholder1Status,
+        Shareholder2Status = @Shareholder2Status
+    WHERE ApplicationID = @ApplicationID;
+END;
+

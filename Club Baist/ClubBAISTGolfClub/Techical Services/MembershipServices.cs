@@ -301,6 +301,10 @@ namespace ClubBAISTGolfClub.Techical_Services
                     memberApplication.ApplicationDate = (DateTime)UserReader["ApplicationDate"];
                     memberApplication.ApplicationFile = (byte[]?)UserReader["ApplicationFormFile"];
                     memberApplication.ApplicationStatus = (string)UserReader["ApplicationStatus"];
+                    memberApplication.Sponsor1ID = (int)UserReader["Sponsor1ID"];
+                    memberApplication.Sponsor2ID = (int)UserReader["Sponsor2ID"];
+                    memberApplication.Sponsor1Status = (string)UserReader["Shareholder1Status"];
+                    memberApplication.Sponsor2Status = (string)UserReader["Shareholder2Status"];
 
                     MemberApplications.Add(memberApplication);
                 }
@@ -465,6 +469,50 @@ namespace ClubBAISTGolfClub.Techical_Services
             }
             
             return success;
+        }
+        public MemberApplications UpdateMemberApplication(MemberApplications memberApplications)
+        {
+            SqlConnection nekwom1Connection = new();
+            nekwom1Connection.ConnectionString = connectionString;
+            nekwom1Connection.Open();
+
+            SqlCommand UpateMemberApplications = new()
+            {
+                Connection = nekwom1Connection,
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "UpdateClubMemberApplication"
+            };
+
+           
+            SqlParameter Sharholder1StatusParameter = new()
+            {
+                ParameterName = "@Shareholder1Status",
+                SqlValue = memberApplications.Sponsor1Status,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter Sharholder2StatusParameter = new()
+            {
+                ParameterName = "@Shareholder2Status",
+                SqlValue = memberApplications.Sponsor2Status,
+                SqlDbType = SqlDbType.VarChar,
+                Direction = ParameterDirection.Input,
+            };
+            SqlParameter ApplicationIDParameter = new()
+            {
+                ParameterName = "@ApplicationID",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input,
+                SqlValue = memberApplications.ApplicationID
+            };
+
+            UpateMemberApplications.Parameters.Add(Sharholder1StatusParameter);
+            UpateMemberApplications.Parameters.Add(Sharholder2StatusParameter);
+            UpateMemberApplications.Parameters.Add(ApplicationIDParameter);
+
+            UpateMemberApplications.ExecuteNonQuery();
+            nekwom1Connection.Close();
+            return memberApplications;
         }
     }
 }

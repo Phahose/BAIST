@@ -19,9 +19,6 @@
             <li>
                 <a href="/Scores">Rec Scores</a>
             </li>
-            <li>
-                <a href="~/Admin">Admin</a>
-            </li>
             @if (Model.Member.MembershipType == "Shareholder")
             {
                 <li>
@@ -31,11 +28,11 @@
         </ul>
     </nav>
     <div class="infodiv">
-        <h2 class="heading_admin">Prospective Members</h2>
+        <h2 class="heading_admin">People You Sponsor</h2>
         <form name="UpdateMembers" method="post" class="teetimeForm">
-           @*  <p>@Model.ErrorMessage</p>
+            <p>@Model.ErrorMessage</p>
             <div class="month_form">
-                <input type="number" name="MemberID" placeholder="Member ID you Would Like To Update" class="updateMember_input" min="0" />
+                <input type="number" name="ApplicationID" placeholder="Application ID you Would Like To Update" class="updateMember_input" min="0" />
                 <input type="submit" name="Submit" value="Go" class="updateMember_button" />
             </div>
             <table border="1" class="admintable">
@@ -47,7 +44,6 @@
                     <th>Sponsor2 Name</th>
                     <th>Application Status</th>
                     <th>Date Applied</th>
-                    <th>Application File</th>
                 </tr>
                 @foreach (var memberapplication in Model.Applications)
                 {
@@ -63,81 +59,56 @@
                             <td>@memberapplication.Sponsor2Name</td>
                             <td>@memberapplication.ApplicationStatus</td>
                             <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
-                            <td>
-                                <a href="data:application/octet-stream;base64,@base64Document" download="@memberapplication.ApplicantName Membership ApplicatonFile">
-                                    Application File
-                                </a>
-                            </td>
                         </tr>
                     }
-
                 }
-            </table> *@
-           @*  @if (Model.Member.MemberFirstName != "")
+            </table>
+            @if (Model.ApplicationFound == true)
             {
                 <div class="appointment updatemember_container">
-                    <h2>Update - @Model.Member.MemberFirstName</h2>
-                    <input type="text" name="FirstName" value="@Model.Member.MemberFirstName" />
-                    <input type="text" name="LastName" value="@Model.Member.MemberLastName" />
-                    <select name="ApplicationStatus" class="SignUp_input">
-                        <option value="@Model.Member.MemberApplicationStatus">@Model.Member.MemberApplicationStatus</option>
-                        <option value="Approved">Approve</option>
-                        <option value="Rejected">Reject</option>
-                        <option value="Pending">Pending</option>
-                    </select>
-                    <select name="MemberShipType" class="SignUp_input">
-                        <option value="@Model.Member.MembershipType">@Model.Member.MembershipType</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Shareholder">ShareHolder</option>
-                        <option value="Asssociate">Asssociate</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Shareholder Spouse">Sharholder Spouse</option>
-                        <option value="Asssociate Spouse">Asssociate Spouse</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Pee Wee">Pee Wee</option>
-                        <option value="Junior">Junior</option>
-                        <option value="Intermidiate">Intermidiate</option>
-                        <option value="Copper">Copper</option>
-                    </select><br />
+                    <h2>Update - @Model.Application.ApplicantName</h2>
+                    @if (Model.Member.MemberID == Model.Application.Sponsor1ID)
+                    {
+                        <label for="Sponsor1Status" class="s-label">Sponsor 1 Status</label>
+                        <select name="Sponsor1Status" class="SignUp_input">
+                            <option value="@Model.Member.MemberSponsor1">@Model.Application.Sponsor1Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Reject">Reject</option>
+                        </select>
+
+                        <label for="Sponsor2Status" class="s-label">Sponsor 2 Status</label>
+                        <select name="Sponsor2Status" class="SignUp_input" disabled>
+                            <option value="@Model.Member.MemberSponsor1">@Model.Application.Sponsor2Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Reject">Reject</option>
+                        </select>
+                        <br />
+                    }
+                   @if (Model.Member.MemberID == Model.Application.Sponsor2ID)
+                   {
+                        <label for="Sponsor1Status" class="s-label">Sponsor 1 Status</label>
+                        <select name="Sponsor1Status" class="SignUp_input" disabled>
+                            <option value="@Model.Member.MemberSponsor1">@Model.Application.Sponsor1Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Reject">Reject</option>
+                        </select>
+
+                        <label for="Sponsor2Status" class="s-label">Sponsor 2 Status</label>
+                        <select name="Sponsor2Status" class="SignUp_input">
+                            <option value="@Model.Member.MemberSponsor1">@Model.Application.Sponsor2Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Reject">Reject</option>
+                        </select>
+                        <br />
+                   }              
                     <p>@Model.Message</p>
                     <input type="submit" name="Submit" value="UpdateMember" />
                 </div>
-            } *@
+            }
         </form>
-        @* <form name="UpdateMembers" method="post" class="teetimeForm">
-            <h2 class="heading_admin"> Club Members</h2>
-            <table border="1" class="admintable">
-                <tr>
-                    <th>Member ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Membership Type</th>
-                    <th>Application Status</th>
-                    <th>Date Applied</th>
-                    <th>Email</th>
-                    <th>Sponsor1 ID</th>
-                    <th>Sponsor2 ID</th>
-                </tr>
-                @foreach (var member in Model.Members)
-                {
-                    if (member.MemberApplicationStatus == "Approved")
-                    {
-                        <tr>
-                            <td>@member.MemberID</td>
-                            <td>@member.MemberFirstName</td>
-                            <td>@member.MemberLastName</td>
-                            <td>@member.MembershipType</td>
-                            <td>@member.MemberApplicationStatus</td>
-                            <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
-                            <td>@member.MemberEmail</td>
-                            <td>@member.MemberSponsor1</td>
-                            <td>@member.MemberSponsor2</td>
-                        </tr>
-                    }
-
-                }
-            </table>
-        </form> *@
     </div>
 </div>

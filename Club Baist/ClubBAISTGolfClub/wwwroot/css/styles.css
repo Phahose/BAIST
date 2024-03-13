@@ -850,3 +850,7 @@ h4 {
             background-color: #cccccc; /* Light gray background on hover */
         }
 }
+/*ShareHolder*/
+.s-label{
+    color: black;
+}

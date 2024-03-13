@@ -33,8 +33,8 @@ CREATE TABLE ClubMemberApplications (
     ApplicationDate DATE,
 	ApplicationFormFile VARBINARY(MAX)
 );
---ALTER TABLE ClubMemberApplications
---ADD ApplicantID INT FOREIGN KEY REFERENCES Members (MemberID)
+ALTER TABLE ClubMemberApplications
+ADD Shareholder2Status VARCHAR(20)
 
 -- TeeTimes Table
 CREATE TABLE TeeTimes (
@@ -220,7 +220,11 @@ AS
 		ApplicationDate,
 		ApplicationFormFile,
 		ApplicantName,
-		ApplicantID)
+		ApplicantID,
+		Shareholder1Status,
+		Shareholder2Status,
+		Sponsor1ID,
+		Sponsor2ID)
 
 		VALUES(
 		@Sponsor1Name,
@@ -229,7 +233,11 @@ AS
 		@DateJoined,
 		@ApplicationFile,
 		@FirstName + ' ' +@LastName,
-		@MemberID)
+		@MemberID,
+		'Pending',
+		'Pending',
+		@Sponsor1ID,
+		@Sponsor2ID)
 	END
 Drop Procedure CreateApplication
 

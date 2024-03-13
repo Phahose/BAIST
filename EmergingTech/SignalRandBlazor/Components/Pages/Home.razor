@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Blazor, Intro</h1>
+
+Welcome to your new appssss.
+
+@* <Counter IncrementAmount="5"></Counter> *@
+@code{
+    string date = "Jan 1, 2009";
+}
+<Weather WeatherParams="DateOnly.Parse(date)"></Weather>

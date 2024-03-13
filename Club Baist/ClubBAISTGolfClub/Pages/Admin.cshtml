@@ -41,6 +41,8 @@
                     <th>Sponsor2 Name</th>
                     <th>Application Status</th>
                     <th>Date Applied</th>
+                    <th>Shareholder 1 Status</th>
+                    <th>Shareholder 2 Status</th>
                     <th>Application File</th>
                 </tr>
                 @foreach (var memberapplication in Model.Applications)
@@ -56,6 +58,9 @@
                             <td>@memberapplication.Sponsor1Name</td>
                             <td>@memberapplication.Sponsor2Name</td>
                             <td>@memberapplication.ApplicationStatus</td>
+                            <td>@memberapplication.ApplicationDate</td>
+                            <td>@memberapplication.Sponsor1Status</td>
+                            <td>@memberapplication.Sponsor2Status</td>
                             <td>@memberapplication.ApplicationDate.ToString("yyyy-MM-dd")</td>
                             <td>
                                 <a href="data:application/octet-stream;base64,@base64Document" download="@memberapplication.ApplicantName Membership ApplicatonFile">

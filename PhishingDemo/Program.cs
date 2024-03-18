@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+
 namespace PhishingDemo
 {
     public class Program
@@ -5,10 +8,36 @@ namespace PhishingDemo
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container
+            builder.Services.AddRazorPages();
+            builder.Services.AddSession();
+
+            builder.Services.AddRazorPages().AddRazorPagesOptions(o =>
+            {
+                o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Login";
+            });
+            builder.Services.AddAuthorization();
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
-
+            //Configure the HTTP reqest pipeline
+            if (!app.Environment.IsDevelopment()) // check for any enviromnet that is not a development 
+            {
+                app.UseDeveloperExceptionPage(); // not for production, remove this line when all production testing is done 
+                                                 // app.UseExceptionHandler("/Error"); customised error page use for final release
+            }
+            app.UseStaticFiles(); // add for wwroot
+            app.UseRouting();
+            app.UseSession();
+            app.MapRazorPages();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.Run();
         }
     }

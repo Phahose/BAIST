@@ -17,13 +17,13 @@ namespace PhishingDemo.TechnicalService
         public bool AddUser(string email, string password)
         {
             bool success = false;
-            SqlConnection cnMaisonsConnection = new SqlConnection();
-            cnMaisonsConnection.ConnectionString = connectionString;
-            cnMaisonsConnection.Open();
+            SqlConnection phishingConnection = new SqlConnection();
+            phishingConnection.ConnectionString = connectionString;
+            phishingConnection.Open();
 
             SqlCommand AddUserCommand = new()
             {
-                Connection = cnMaisonsConnection,
+                Connection = phishingConnection,
                 CommandType = CommandType.StoredProcedure,
                 CommandText = "AddUser",
             };
@@ -46,7 +46,7 @@ namespace PhishingDemo.TechnicalService
             AddUserCommand.Parameters.Add(PasswordParameter);
 
             AddUserCommand.ExecuteNonQuery();
-            cnMaisonsConnection.Close();
+            phishingConnection.Close();
 
             return success;
         }

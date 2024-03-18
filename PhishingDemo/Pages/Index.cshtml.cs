@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PhishingDemo.Controller;
 
 namespace PhishingDemo.Pages
 {
@@ -14,7 +15,8 @@ namespace PhishingDemo.Pages
         }
         public void OnPost()
         {
-
+            BCS controlls = new BCS();
+            controlls.AddUser(Email, Password);
         }
     }
 }

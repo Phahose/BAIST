@@ -98,6 +98,16 @@ form {
 form a {
     text-decoration: none;
 }
+.sixe {
+    display: none;
+}
+.success-message {
+    display: revert;
+    background-color: #42b72a;
+    padding: 0.5rem;
+    color: white;
+    margin: 0.5rem auto;
+}
 
 .link .forgot {
     color: #1877f2;

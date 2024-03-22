@@ -1,21 +1,32 @@
-﻿@page "/"
+﻿<!-- Index.razor -->
+@page "/"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
 @implements IAsyncDisposable
 
-<PageTitle>Index</PageTitle>
+<h3>Chat</h3>
 
 <div class="form-group">
     <label>
-        User:
-        <input @bind="userInput" />
-    </label>
-</div>
-<div class="form-group">
+        FirstName:
+        <input @bind="firstNameInput" />
+    </label><br />
+    <label>
+        LastName:
+        <input @bind="lastNameInput" />
+    </label><br />
+    <label>
+        Category:
+        <input @bind="categoryInput" />
+    </label><br />
     <label>
         Message:
         <input @bind="messageInput" size="50" />
-    </label>
+    </label><br />
+    <label>
+        Date:
+        <input type="date" @bind="dateCreatedInput" />
+    </label> <!-- Add input for DateCreated -->
 </div>
 <button @onclick="Send" disabled="@(!IsConnected)">Send</button>
 
@@ -31,8 +42,11 @@
 @code {
     private HubConnection? hubConnection;
     private List<string> messages = new List<string>();
-    private string? userInput;
+    private string? firstNameInput;
+    private string? lastNameInput;
     private string? messageInput;
+    private string? categoryInput;
+    private DateOnly dateCreatedInput = DateOnly.FromDateTime(DateTime.Today); // Initialize DateCreated
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,9 +54,9 @@
             .WithUrl(Navigation.ToAbsoluteUri("/chathub"))
             .Build();
 
-        hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+        hubConnection.On<string, string, string, string, DateOnly>("ReceiveMessage", (firstname, lastname, category, message, dateCreated) =>
         {
-            var encodedMsg = $"{user}: {message}";
+            var encodedMsg = $"{firstname}: {lastname}: {category}: {message}: {dateCreated}";
             messages.Add(encodedMsg);
             StateHasChanged();
         });
@@ -54,7 +68,7 @@
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+            await hubConnection.SendAsync("SendMessage", firstNameInput, lastNameInput, categoryInput, messageInput, dateCreatedInput); // Pass DateCreated to SendMessage
         }
     }
 

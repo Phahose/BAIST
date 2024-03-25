@@ -668,4 +668,3 @@ BEGIN
         Shareholder2Status = @Shareholder2Status
     WHERE ApplicationID = @ApplicationID;
 END;
-

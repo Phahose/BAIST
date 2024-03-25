@@ -29,6 +29,8 @@ namespace ClubBAISTGolfClub.Pages
         public bool Delete { get; set; } = false;
         public string Message { get; set; } = string.Empty;
         public Member MemberHold { get; set; } = new();
+        public List<MemberApplications> Applications { get; set; } = new();
+        public MemberApplications MemberApplication { get; set; } = new();
 
         public MemberHomeModel(ILogger<MemberHomeModel> memberHome)
         {
@@ -38,26 +40,30 @@ namespace ClubBAISTGolfClub.Pages
         {
             MemberControlls memberControlls = new MemberControlls();
             Email = HttpContext.Session.GetString("Email");
+            Applications = memberControlls.GetAllMemberApplication();
             if (Email != null)
             {
                 Member = memberControlls.GetMember(Email);
                 MemberHold = memberControlls.GetMember(Email);
+                MemberApplication = Applications.Where(a => a.ApplicantID == Member.MemberID).FirstOrDefault();
                 return Page();
             }
             else
             {
                 return RedirectToPage("/Login");
-            }
-            
+            }          
         }
         public IActionResult OnPost()
         {
             MemberControlls memberControlls = new MemberControlls();
             Email = HttpContext.Session.GetString("Email");
+            Applications = memberControlls.GetAllMemberApplication();
+           
             if (Email != null)
             {
                 Member = memberControlls.GetMember(Email);
                 MemberHold = memberControlls.GetMember(Email);
+                MemberApplication = Applications.Where(a => a.ApplicantID == Member.MemberID).FirstOrDefault();
             }
             
             switch (Submit)
